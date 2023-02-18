@@ -1,12 +1,10 @@
 %******************************************************** -*-LaTeX-*- ******************************
 %                                                                                                  *
-% v4.0.4.2.4.3 (Master) Berechenbarkeit - Ackermannfunktion ist nicht primitiv rekursiv.tex        *
-%                                                                                                  *
-% webApplicationProgrammer.js: program a web application.                                          *
+% v5.0.1.0.3.5 (Höher) Kategorien - Kategorien von Homomorphismen.tex                              *
 %                                                                                                  *
 % Copyright (C) 2023 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
 %                                                                                                  *
-% v4.0.4.2.4.3 is part of kategoryMathematik.                                                      *
+% v5.0.1.0.3.5 is part of kategoryMathematik.                                                      *
 %                                                                                                  *
 % kategoryMathematik is free software: you can redistribute it and/or modify                       *
 % it under the terms of the GNU General Public License as published by                             *
@@ -51,7 +49,6 @@
 
 \usepackage{upgreek}
 
-
 % \usepackage{diagrams}
 
 \usepackage[german]{babel}
@@ -63,6 +60,10 @@
 \usepackage{lmodern}     % to avoid pixelation introduced by fontenc
 
 \usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
 
 %-----------------------------------------------------------------------------------------------------*
 % theorem:                                                                                            *
@@ -195,12 +196,12 @@
 % \vspace*{\fill}
 \centering
 {\huge
-Berechenbarkeit\\[1cm]
-\textbf{v4.0.4.2.4.3 (Master) Berechenbarkeit - Ackermannfunktion ist nicht primitiv rekursiv}
+(Höhere Grundlagen) Kategorien\\[1cm]
+\textbf{v5.0.1.0.3.5 Kategorien von Homomorphismen}
 }\\[1cm]
 
 \textbf{Kategory GmbH \& Co. KG}\\
-Pr\"asentiert von Jörg Kunze
+Präsentiert von Jörg Kunze
 
 \end{titlepage}
 
@@ -220,18 +221,11 @@ Pr\"asentiert von Jörg Kunze
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
-Die Ackermannfunktion ist nicht primitiv rekursiv. Wir haben aber schon gesehen, dass wir sie programmieren
-können. Das ergibt den Kern dieser Vorlesung: \imporant{der Begriff der primitiven Rekursion reicht 
-nicht aus, um
-den Begriff der Berechenbarkeit zu formalisieren}. Und das ist der Grund, warum wir die $\mu$-Rekursion
-eingeführt haben. Und es ist ein Grund, sich mit der Ackermannfunktion zu beschäftigen.
+Homomorphismen (oder kurz Morphismen) erfüllen die einzige Bedingung, die wir an die Objekte einer Kategorie stellen: es müssen mathematische Objekte sein, hier, wo wir in ZFC sind, müssen es Mengen sein. (In ZFC sind alles Mengen). Wir erzeugen nun aus vorhandenen Kategorien neue Kategorien, in denen die Klasse der Objekte aus den Morphismen der Ausgangskategorie besteht.
 
-Für den Beweis zeigen wir, dass die Ackermannfunktion jede primitiv-rekursive Funktion majorisiert. Da
-eine Funktion sich nicht selbst majorisieren kann, ist das gewünschte gezeigt. Wir tun dies induktiv
-über die Definition von "`primitiv rekursiv"'.
+Wir betrachten die Kategorie aller Morphismen, die der Morphismen über bzw. unter einem Objekt. Dabei fällt auf, dass es eigentlich bestimmte Figuren sind, die wir zur Kategorie machen.
 
-Durch den Beweis bekommen wir auch ein Mittel, um aus dem Aufbau einer primitiv-rekursiven Funktionsdefinition
-den Parameter $k$ zu errechnen, mit dem $A( k, \_ )$ größer ist als die definierte Funktion.
+Das greifen wir auf und bilden die Kategorie der Paare von Objekten auf die gleiche Weise. Wir erkennen, dass wir eigentlich mit Funktoren hantieren. Wir bilden also Morphismen zwischen Funktoren. Diese werden \textbf{natürliche Transformationen} genannt.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -241,13 +235,13 @@ Von Jörg Kunze
 %******************************************************************************************************
 \subsection*{Voraussetzungen}
 %******************************************************************************************************
-Primitiv rekursive Funktionen, Ackermannfunktion und ihre Eigenschaften.
+Kategorie, die Axiome von Kategorien, Homomorphismus, Funktor.
 
 %******************************************************************************************************
 \subsection*{Text}
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
-\url{https://github.com/kategory/kategoryMathematik/tree/main/v4%20Master/v4.0%20Berechenbarkeit/v4.0.4.2.4.3%20(Master)%20Berechenbarkeit%20-%20Ackermannfunktion%20ist%20nicht%20primitiv%20rekursiv}.
+\url{}.
 
 %******************************************************************************************************
 \subsection*{Meine Videos}
@@ -286,13 +280,31 @@ Springer-Verlag New York Inc. 2013\\
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Ackermannfunktion ist nicht primitiv rekursiv}
+\section{Kategorien von Homomorphismen}
 %                                                                                                     *
 %******************************************************************************************************
 
 %******************************************************************************************************
 \subsection{Eigenschaften}
 %******************************************************************************************************
+Diagramm
+
+\begin{equation*}
+\begin{tikzcd}
+    A   \arrow[rd]  \arrow[r, "w"] & B\\
+                              & C
+\end{tikzcd}
+\end{equation*}
+
+
+\begin{equation*}
+\begin{tikzcd}
+    A \arrow[rd, dotted] \arrow[r, red, "\phi"] & B \\
+    & \color{red}{C}
+\end{tikzcd}
+\end{equation*}
+
+
 Wir verwenden die in einem vorherigen Video gezeigten Definition und Eigenschaften er Ackermannfunktion
 (hierbei seien $k, n \in \N$):
 
