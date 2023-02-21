@@ -223,9 +223,11 @@ Präsentiert von Jörg Kunze
 %******************************************************************************************************
 Homomorphismen (oder kurz Morphismen) erfüllen die einzige Bedingung, die wir an die Objekte einer Kategorie stellen: es müssen mathematische Objekte sein, hier, wo wir in ZFC sind, müssen es Mengen sein. (In ZFC sind alles Mengen). Wir erzeugen nun aus vorhandenen Kategorien neue Kategorien, in denen die Klasse der Objekte aus den Morphismen der Ausgangskategorie besteht.
 
-Wir betrachten die Kategorie aller Morphismen, die der Morphismen über bzw. unter einem Objekt. Dabei fällt auf, dass es eigentlich bestimmte Figuren sind, die wir zur Kategorie machen.
+Wir betrachten zunächst die Kategorie aller Morphismen einer Kategorie. Diese wird Morphismenkategorie oder Pfeilkategorie genannt. Dann betrachten wir die Kategorie der Morphismen über bzw. unter einem Objekt. Dabei fällt auf, dass es eigentlich bestimmte Figuren sind, die wir zur Kategorie machen.
 
-Das greifen wir auf und bilden die Kategorie der Paare von Objekten auf die gleiche Weise. Wir erkennen, dass wir eigentlich mit Funktoren hantieren. Wir bilden also Morphismen zwischen Funktoren. Diese werden \textbf{natürliche Transformationen} genannt.
+Das greifen wir auf und bilden die Kategorie der Paare von Objekten auf die gleiche Weise. 
+
+Wir erkennen, dass wir eigentlich mit Funktoren hantieren. Wir bilden also Morphismen zwischen Funktoren. Diese werden \textbf{natürliche Transformationen} genannt.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -241,42 +243,51 @@ Kategorie, die Axiome von Kategorien, Homomorphismus, Funktor.
 \subsection*{Text}
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
-\url{}.
+\url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20(H%C3%B6her)%20Kategorien/v5.0.1.0.3.5%20(H%C3%B6her)%20Kategorien%20-%20Kategorien%20von%20Homomorphismen}.
 
 %******************************************************************************************************
 \subsection*{Meine Videos}
 %******************************************************************************************************
 Siehe auch in den folgenden Videos:\\
-v4.0.4.2.4.2 (Master) Berechenbarkeit - Ackermannfunktion Eigenschaften\\
- \url{https://youtu.be/MzDubMBlQ20}\\
+v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
+\url{https://youtu.be/Ojf5LQGeyOU}\\
+\\
+v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
+ \url{https://youtu.be/X8v5Kyly0KI}\\
  \\
-v4.0.4.2.4.1 (Master) Berechenbarkeit - Ackermannfunktion ist mu-rekursiv\\
- \url{https://youtu.be/cbZ8EJ4U-tg}\\
- \\
-v4.0.4.2.4 (Master) Berechenbarkeit - Ackermannfunktionen\\
- \url{https://youtu.be/XE-7YdHi2Vw}\\
- \\
-v4.0.4.2 (Master) Berechenbarkeit - Rekursive Funktionen\\
- \url{https://youtu.be/tFEn2GoLLEQ}
+v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
+ \url{https://youtu.be/sIaKt-Wxlog}
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Ackermannfunktion}\\
-\url{https://en.wikipedia.org/wiki/Ackermann\_function}\\
-\url{https://planetmath.org/ackermannfunctionisnotprimitiverecursive}\\
-\url{https://planetmath.org/PropertiesOfAckermannFunction}
+\url{https://de.wikipedia.org/wiki/Pfeilkategorie}\\
+\url{https://ncatlab.org/nlab/show/arrow+category}\\
+\url{https://ncatlab.org/nlab/show/under+category}\\
+\url{https://ncatlab.org/nlab/show/over+category}\\
+\url{https://de.wikipedia.org/wiki/Funktor_(Mathematik)}\\
+\url{https://en.wikipedia.org/wiki/Functor}\\
+\url{https://ncatlab.org/nlab/show/functor}
 
 %******************************************************************************************************
 \subsection*{Buch}
 %******************************************************************************************************
 Grundlage ist folgendes Buch:\\
-Computability\\
-A Mathematical Sketchbook\\
-Douglas S. Bridges\\
-Springer-Verlag New York Inc. 2013\\
-978-1-4612-6925-0 (ISBN)
+"`Categories for the Working Mathematician"'\\
+Saunders Mac Lane\\
+1998 | 2nd ed. 1978\\
+Springer-Verlag New York Inc.\\
+978-0-387-98403-2 (ISBN)\\
+\\
+\url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}\\
+\\
+"`Topology, A Categorical Approach"'\\
+Tai-Danae Bradley\\
+2020 MIT Press\\
+978-0-262-53935-7 (ISBN)\\ 
+\\
+\url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}
 
 %******************************************************************************************************
 %                                                                                                     *
@@ -285,263 +296,124 @@ Springer-Verlag New York Inc. 2013\\
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Eigenschaften}
+\subsection{Morphismenkategorie}
 %******************************************************************************************************
-Diagramm
-
-\begin{equation*}
-\begin{tikzcd}
-    A   \arrow[rd]  \arrow[r, "w"] & B\\
-                              & C
-\end{tikzcd}
-\end{equation*}
-
-
-\begin{equation*}
-\begin{tikzcd}
-    A \arrow[rd, dotted] \arrow[r, red, "\phi"] & B \\
-    & \color{red}{C}
-\end{tikzcd}
-\end{equation*}
-
-
-Wir verwenden die in einem vorherigen Video gezeigten Definition und Eigenschaften er Ackermannfunktion
-(hierbei seien $k, n \in \N$):
-
-\begin{align*}
-    &\text{(\textbf{D1})} && A( 0, n )                   &&:= n+1\\
-    &\text{(\textbf{D2})} && A( k+1, 0 )                 &&:= A( k, 1 )\\
-    &\text{(\textbf{D3})} && A( k+1, n+1 )               &&:= A( k, A(k+1, n) )\\
-    &\text{(\textbf{E1})} && A \colon \N^2 \to \N        &&\text{ ist total}\\
-    &\text{(\textbf{E2})} && A( 1, n )                   &&= n+2\\
-    &\text{(\textbf{E3})} && A( 2, n )                   &&= 2n+3\\
-    &\text{(\textbf{E4})} && A( k, n )                   &&> n\\
-    &\text{(\textbf{E5})} && A( k, n+1 )                 &&> A( k, n )\\
-    &\text{(\textbf{E6})} && A( k+1, n )                 &&> A( k, n )\\
-    &\text{(\textbf{E7})} && A( k+1, n )                 &&> A( k, n+1 )\\
-    &\text{(\textbf{E8})} && A( k+k'+2, n )              &&> A( k, A( k',n) )\\
-    &\text{(\textbf{E9})} && A( \max \{k, k' \} + 4, n ) &&> A( k, n ) + A( k, n )
-\end{align*}
-
-Aus den Eigenschaften \textbf{E5} und \textbf{E6} folgt die strenge Monotonie in beiden Parametern:
-\begin{align*}
-    &\text{(\textbf{E5'})} && n >  m &&\Rightarrow &&A( k, n )  > A( k, m )\\
-    &\text{(\textbf{E6'})} && l >  k &&\Rightarrow &&A( l, n )  > A( k, n )
-\end{align*}
-
-
-%******************************************************************************************************
-\subsection{Primitiv rekursiv}
-%******************************************************************************************************
+Die Wörter "`Homomorphismus"' und "`Morphismus"' sind synonym.
+Im folgenden schreiben wir als Lesehilfe \textcolor{red}{Morphismen} zwischen Morphismen in \textcolor{red}{Rot}, um die beiden Arten von Morphismen leichter unterscheiden zu können.
 
 %-----------------------------------------------------------------------------------------------------*
-\begin{Definition}{Primitiv rekursiv}
-    Wir definieren induktiv als \textbf{primitiv rekursiv}:
-    
-    \begin{itemize}
-        \item (\textbf{PR1}): $f \circ g$, falls $f,g$ primitiv rekursiv sind
-        \item (\textbf{PR2}): $h$, mit $h( 0, x_1, \cdots, x_s ) := f( x_1, \cdots, x_s )$ und
-            $h$, mit $h( n+1, x_1, \cdots, x_s ) := g(n, h( n, x_1, \cdots, x_s ), x_1, \cdots, x_s)$,
-             falls $f,g$ primitiv rekursiv sind 
-        \item (\textbf{PR3}): Die konstanten Funktionen $c(n) := c$ für alle $c \in \N$ 
-        \item (\textbf{PR4}): Die Projektionen $P_j(x_1, \cdots, x_s ) := x_j$
-        \item (\textbf{PR5}): Die Nachfolger-Funktion $s(n) := n+1$.
-    \end{itemize}
+\begin{Definition}{Morphismenkategorie}
+   Sei $\mathcal C$ eine Kategorie und $\operatorname{Hom}( \mathcal C )$ die Klasse ihrer Homomorphismen. Dann bilden wir eine neue Kategorie $\mathcal M ( \mathcal C)$, genannt \textbf{Pfeilkategorie} oder \textbf{Morphismenkategorie}, deren Objekte die Elemente von 
+   $\operatorname{Hom}( \mathcal C )$ sind. Die \textcolor{red}{Morphismen} in $\mathcal M ( \mathcal C)$ zwischen zwei Morphismen $f, g$ in $\mathcal C$ sind Paare $(r_1, r_2)$ von Morphismen in $\mathcal C$ mit
+   \begin{equation*}
+      r_2f=gr_1.
+   \end{equation*}
+   Mit anderen Worten $\color{red}(r_1,r_2) \colon f \to g$ ist per definitionem genau dann ein \textcolor{red}{Homomorphismus} in 
+   $\mathcal M ( \mathcal C)$, wenn folgendes Diagramm kommutiert:
+   \begin{equation*}
+      \begin{tikzcd}
+         A_1   \arrow[d, "f"]  \arrow[r, red, "r_1"] & B_1 \arrow[d, "g"]\\
+         A_2                   \arrow[r, red, "r_2"] & B_2
+      \end{tikzcd}
+   \end{equation*}
+   Hier sind die Pfeile nach unten die Objekte und \textcolor{red}{das Paar der Pfeile nach rechts} der \textcolor{red}{Homomorphismus}.
+   Die Verknüpfung und die Identitäten definieren wir wie folgt:
+   \begin{equation*}
+      (r_1, r_2)\circ (s_1, s_2) := (r_1 \circ s_1, r_2 \circ s_2 )
+   \end{equation*}
+   sowie für $f \colon A_1 \to A_2$
+   \begin{equation*}
+      id_f := ( id_{A_1}, id_{A_2} ).
+   \end{equation*}
 \end{Definition}
+Streng genommen müssten wir jetzt noch beweisen, dass es sich hierbei um einen Kategorie handelt.
 
 %******************************************************************************************************
-\subsection{Die Ackermannfunktion ist nicht primitiv rekursiv}
+\subsection{Über- und Unterkategorie}
 %******************************************************************************************************
-Im Folgenden ist $\bb{x} := (x_1, \cdots, x_s)$ und $|\bb{x}| := \max \{x_1, \cdots, x_s \}$.
+Nun beschränken wir die Homomorphismen aus $\mathcal C$ auf die mit Ziel bzw. Quelle ein festes Objekt.
 
 %-----------------------------------------------------------------------------------------------------*
-\begin{Definition}{majorisiert}
-    Seien $g \colon \N^m \to \N$ und $h \colon \N^2 \to \N$, dann sagen wir $h$ \textbf{majorisiert} $g$
-    und wir schreiben $h > g$,
-    falls
-    \begin{equation*}
-        \exists k_g \forall \bb{x} |\bb{x}| > 1 \Rightarrow h( k_g,  |\bb{x}| ) > g(  \bb{x} ).
-    \end{equation*}
+\begin{Definition}{Überkategorie}
+   Sei $\mathcal C$ eine Kategorie und $Y$ ein Objekt darin. Die \textbf{Überkategorie}
+   $\mathcal C / Y$ oder  $\mathcal C \downarrow Y$ hat per definitionem als Objekte Morphismen $f \colon A \to Y$ und als \textcolor{red}{Morphismen} zwischen $f \colon A \to Y$ und $g \colon B \to Y$ die Morphismen $\color{red}r \colon A \to B$ mit $gr = f$.
    
+   Mit anderen Worten $\color{red}r \colon f \to g$ ist per definitionem genau dann ein \textcolor{red}{Homomorphismus} in 
+   $\mathcal C \downarrow Y$, wenn folgendes Diagramm kommutiert:
+   \begin{equation*}
+      \begin{tikzcd}
+         A   \arrow[rd, "f"] \arrow[rr, red, "r"]  &   & B \arrow[ld, "g"]\\
+                              & Y
+      \end{tikzcd}
+   \end{equation*}
+   Die Verknüpfung und die Identitäten sind Verknüpfung und Identität aus $\mathcal C$.
 \end{Definition}
-Hier betrachten wir $h$ als Schar von Funktionen, parametrisiert über das erste Argument, und wir suchen
-das Element der Schar, das größer ist als die zu majorisierende Funktion.
 
 %-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{keine Selbstmajorisierung}
-    Sei $h \colon \N^2 \to \N$, dann gilt NICHT $h > h$.   
-\end{Theorem}
-\begin{proof}
-    Siehe "`v4.0.4.2.4.2 (Master) Berechenbarkeit - Ackermannfunktion Eigenschaften"'. 
-\end{proof}
+\begin{Definition}{Unterkategorie}
+   Sei $\mathcal C$ eine Kategorie und $X$ ein Objekt darin. Die \textbf{Unterkategorie}
+   $X / \mathcal C$ oder  $X \downarrow \mathcal C$ hat per definitionem als Objekte Morphismen $f \colon X \to A$ und als \textcolor{red}{Morphismen} zwischen $f \colon X \to A$ und $g \colon X \to B$ die Morphismen $\color{red}r \colon A \to B$ mit $rf = g$.
+   
+   Mit anderen Worten $\color{red}r \colon f \to g$ ist per definitionem genau dann ein \textcolor{red}{Homomorphismus} in 
+   $X \downarrow \mathcal C$, wenn folgendes Diagramm kommutiert:
+   \begin{equation*}
+      \begin{tikzcd}
+                                 & X \arrow[ld, "f"] \arrow[rd, "g"] \\
+         A \arrow[rr, red, "r"]  &                                     & B 
+      \end{tikzcd}
+   \end{equation*}
+   Die Verknüpfung und die Identitäten sind Verknüpfung und Identität aus $\mathcal C$.
+\end{Definition}
 
-%-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{Ackermann majorisiert primitiv rekursiv}
-    Sei $g \colon \N^s \to \N$ und $A$ die Ackermannfunktion, dann gilt $A > g$.   
-\end{Theorem}
-\begin{proof}
-    Siehe weiter unten. 
-\end{proof}
-
-%-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{Ackermann nicht primitiv rekursiv}
-    Die Ackermannfunktion $A$ ist NICHT primitiv rekursiv. 
-\end{Theorem}
-\begin{proof}
-    Wäre $A$ primitiv rekursiv so müsste nach \myRef{Theorem}{Ackermann majorisiert primitiv rekursiv} 
-    gelten $A > A$, was aber nach \myRef{Theorem}{keine Selbstmajorisierung} nicht möglich ist.
-\end{proof}
+Es gibt also pro Objekt in $\mathcal C$ eine Über- und eine Unterkategorie.
 
 %******************************************************************************************************
-\subsection{Beweis von \myRef{Theorem}{Ackermann majorisiert primitiv rekursiv} }
+\subsection{Die Kategorie $\mathcal C^2$}
 %******************************************************************************************************
-Wir beweisen den Satz per vollständiger Induktion über den Aufbau der primitiv rekursiven Funktionen.
+Die nächste Kategorie ist nicht wirklich eine von Morphismen, aber ihre Definition geht nach einem ganz ähnlichen Schema.
 
 %-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{PR1: Verknüpfung}
-    Sei $A( k_f, |\bb{x}| ) > f( \bb{x} )$ und $A( k_g, |\bb{x}| ) > g( \bb{x} )$. Setze
-    $\color{red}{k_{f \circ g} := k_f + k_g + 2}$. Dann gilt
-    \begin{equation*}
-        A( k_{f \circ g}, |\bb{x}| ) > f ( g (\bb{x})).
-    \end{equation*}
-\end{Theorem}
-\begin{proof}
-    \begin{align*}
-        &f(g(n)) & < &&& A(k_f, g(\bb{x}))          &&\text{ nach Definition von } k_f\\
-        &        & < &&& A(k_f, A(k_g, |\bb{x}|))   &&\text{ nach E5' und Definition von } k_g\\
-        &        & < &&& A(k_f + k_g + 2, |\bb{x}|) &&\text{ nach E8 }
-    \end{align*}
-\end{proof}
+\begin{Definition}{Quadratkategorie}
+   Sei $\mathcal C$ eine Kategorie. Dann bilden wir eine neue Kategorie $\mathcal C^2$, auch als $\mathcal C \times \mathcal C$ geschrieben und \textbf{Quadratkategorie} genannt wird, deren Objekte Paare $(A_1, A_2)$ von Objekten aus $\mathcal{C}$ sind.
+   Die \textcolor{red}{Morphismen} in $\mathcal C^2$ zwischen zwei Paaren $(A_1, A_2)$ und $(B_1, B_2)$ sind Paare $(r_1, r_2)$ von Morphismen in $\mathcal C$ mit
+   \begin{align*}
+      r_1 &\colon A_1 \to B1 \\
+      r_2 &\colon A_2 \to B2.
+   \end{align*}
+   Mit anderen Worten die \textcolor{red}{Morphismen} 
+   $\color{red}(r_1, r_2 ) \colon (A_1, A_2 ) \to (B_1, B_2 )$
+   sind genau die Diagramme folgender Form:
+   \begin{equation*}
+      \begin{tikzcd}
+         A_1   \arrow[r, red, "r_1"] & B_1 \\
+         A_2   \arrow[r, red, "r_2"] & B_2
+      \end{tikzcd}
+   \end{equation*}
+   Die Verknüpfung und die Identitäten definieren wir wie folgt:
+   \begin{equation*}
+      (r_1, r_2)\circ (s_1, s_2) := (r_1 \circ s_1, r_2 \circ s_2 )
+   \end{equation*}
+   sowie für $(A , B)$
+   \begin{equation*}
+      id_{(A, B)} := ( id_A, id_B ).
+   \end{equation*}
+\end{Definition}
 
-%-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{PR2: Rekursion}
-    Sei $A( k_f, |\bb{x}| ) > f( \bb{x} )$ und 
-    $A( k_g, \max \{ n, h( n,\bb{x} ), |\bb{x}|\} ) > g( n, h( n,\bb{x} ), \bb{x} )$. 
-    Dann gilt für die wie in PR2 rekursiv definierte
-    Funktion $h$ mit $\color{red}{k_{R(f,g)} := 5 + \max \{ k_f, k_g \}}$
-    \begin{equation*}
-        A( k_{R(f,g)}, |\bb{x}| ) > h( \bb{x}).
-    \end{equation*}
-\end{Theorem}
-\begin{proof}
-    Wir setzen $q := 1 + \max \{ k_f, k_g \}$ und beweisen zunächst, als Zwischenbehauptung, über vollständige Induktion
-    folgende Abschätzung:
-    \begin{equation}\label{zwischen}
-        \boxed{h( n, \bb{x}) < A( q, n+ |\bb{x}| )}.
-    \end{equation}
-    Für $n=0$ haben wir (unter Nutzung von E6')
-    \begin{equation*}
-        h( 0, \bb{x}) = f( \bb{x} ) < A( k_f, |\bb{x}| ) < A( q, 0+|\bb{x}| ).
-    \end{equation*}
-    Als Vorbereitung für den $n+1$-Fall: Es gelten folgende beide Ungleichungen
-    \begin{align*}
-        &\max \{ n, |\bb{x}|\} & < &&& n + |\bb{x}|  &&< A(q, n + |\bb{x}|) &&\text{ nach E4 }\\
-        &h( n,\bb{x} )         &   &&&               &&< A(q, n + |\bb{x}|) &&\text{ nach Induktionsvoraussetzung }
-    \end{align*}
-    Diese beiden Ungleichungen ergeben zusammen
-    \begin{equation}\label{max}
-        \boxed{\max \{ n, h( n,\bb{x} ), |\bb{x}|\} < A(q, n + |\bb{x}|)}.
-    \end{equation}
+%******************************************************************************************************
+\subsection{Morphismen von Funktoren}
+%******************************************************************************************************
+Eine andere Sicht ist, die Arten der Morphismen als Figuren anzusehen. Dies geht bei \myRef{Definition}{Morphismenkategorie} und by \myRef{Definition}{Quadratkategorie}. Da Formen Kategorien und Diagramme Funktoren sind, können wir in den Fällen auch von Morphismen zwischen Funktoren sprechen.
 
-    Für $n+1$ können wir nun wie folgt abschätzen:
-    \begin{align*}
-        &h(n+1,\bb{x}) & =   &&& g( n, h( n, \bb{x} ), \bb{x} )                 &&\text{ nach Definition von } h\\
-        &              & <   &&& A( k_g, \max \{ n, h( n,\bb{x} ), |\bb{x}|\} ) &&\text{ nach Definition von } k_g\\
-        &              & <   &&& A( k_g, A(q, n + |\bb{x}|) )                   &&\text{ nach \eqref{max} und E5' } \\
-        &              & \le &&& A( q-1, A(q, n + |\bb{x}|) )                   &&\text{ nach Definition von $q$ und E6' }\\
-        &              & =   &&& A( q, n + 1 + |\bb{x}|) )                      &&\text{ nach D3 },
-    \end{align*}
-    welches die Zwischenbehauptung beweist. Damit können wir nun beweisen:    
-    \begin{align*}
-        &h(n,\bb{x})   & <   &&& A( q, n+ |\bb{x}| )                                 &&\text{ nach Zwischenbehauptung \eqref{zwischen} }\\
-        &              & <   &&& A( q, 2 \cdot \max \{ n, |\bb{x}|\} + 3 )           &&\text{ zunächst hätte +1 auch gereicht}\\
-        &              & <   &&& A( k_g, A(2, \max \{ n, |\bb{x}|\} ))               &&\text{ nach E3 } \\
-        &              & <   &&& A( q+4, \max \{ n, |\bb{x}|\} )                     &&\text{ nach E8 }\\
-        &              & <   &&& A( 5 + \max \{ k_f, k_g \}, \max \{ n, |\bb{x}|\} ) &&\text{ nach Definition von } q
-    \end{align*}
- 
-\end{proof}
-
-%-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{PR3: Konstante}
-    Sei $c \in \N$ beliebig. Setze $\color{red}{k_c := c}$. Dann gilt
-    \begin{equation*}
-        A( k_c, n ) > c.
-    \end{equation*}
-\end{Theorem}
-\begin{proof}
-    Sei $c :=0$. Dann gilt
-    \begin{equation*}
-        A( 0, n ) = n+1 > 0 \text{ (die Gleichheit nach D1)}.
-    \end{equation*}
-    Sei nun $A( c, n ) > c$. Dann gilt
-    \begin{equation*}
-        A( c+1, n ) > A( c, n ) > c\text{ (nach E6 und Voraussetzung)}.
-    \end{equation*}
-    Da $A( c, n )$ mindestens $1$ größer ist als $c$, muss $A( c+1, n ) > c+1$ sein.
-\end{proof}
-
-%-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{PR4: Projektion}
-    Setze $\color{red}{k_{P_j} := 0}$. Dann gilt
-    \begin{equation*}
-        A( k_{P_j}, |\bb{x}| ) > P_j(\bb{x}).
-    \end{equation*}
-\end{Theorem}
-\begin{proof}
-    Sei $c :=0$. Dann gilt
-    \begin{equation*}
-       A( k_{P_j}, |\bb{x}| ) =  A( 0, |\bb{x}| ) = |\bb{x}| + 1 > x_j = P_j(\bb{x}).
-    \end{equation*}
-    Die zweite Gleichheit wegen D1.
-\end{proof}
-
-%-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{PR5: Nachfolger}
-    Setze $\color{red}{k_s := 1}$. Dann gilt
-    \begin{equation*}
-        A( k_s, n ) > s(n)).
-    \end{equation*}
-\end{Theorem}
-\begin{proof}
-    \begin{equation*}
-        A( k_s, n ) =  A( 1, n ) = n+2 > n+1 = s(n).
-    \end{equation*}
-    Die zweite Gleichheit wegen E2.
-\end{proof}
-
+Diese heißen natürliche Transformationen und werden in einem eigenen späteren Video vorgestellt.
 
 %******************************************************************************************************
 %                                                                                                     *
 \section{Schluss}
 %                                                                                                     *
 %******************************************************************************************************
-\textbf{Der Begriff der primitiv rekursiven Funktionen kann den Begriff der Berechenbarkeit nicht formalisieren.}
-Die Ackermannfunktion ist berechenbar. Dies "`wissen"' wir, da sie $\mu$-rekursiv ist und alle
-$\mu$-rekursiven Funktionen berechenbar sind. Wir wissen es auch, weil wir ein JavaScript-Programm
-zur Errechnung der Ackermannfunktion schreiben können, und dieses kann in eine Turing-Maschine 
-überführt werden.
+Homomorphismen können selbst Objekte von Kategorien sein. Die Morphismen zwischen diesen Morphismen müssen dann bestimmte Verträglichkeitseingenschaften erfüllen, die auf kommutative Diagramme hinauslaufen.
 
-Dies ist ein Grund, sich mit der Ackermannfunktion zu beschäftigen. Ihr sehr schnelles Wachstum
-und damit das der der Funktion $A(n) := A(n,n)$ ist ein weiterer Grund.
-
-Dies ist auch der Grund, warum wir in der Theorie der rekursiven Funktionen den Begriff der
-$\mu$-Rekursion benötigen.
-
-\textbf{Wir können anhand der rekursiven Definition einer primitiv rekursiven Funktion das $k$ für
-die Majorisierung durch $A(k,n)$ einfach berechnen.} Dafür müssen wir nur die entsprechenden 
-Formeln für das $k$ in den Beweisschritten oben verwenden.
-\begin{align*}
-    &k_{f \circ g} &&:= k_f + k_g + 2           &&\text{(PR1)}\\
-    &k_{R(f,g)}    &&:= 5 + \max \{ k_f, k_g \} &&\text{(PR2)}\\
-    &k_c           &&:= c                       &&\text{(PR3)}\\
-    &k_{P_j}       &&:= 0                       &&\text{(PR4)}\\
-    &k_s           &&:= 1                       &&\text{(PR5)}
-\end{align*}
-Wir wissen, dass die Ackermannfunktion für großes $k$ abstrus schnell wächst. Mit dem hier gewählten
-Ansatz benötigen wir z.B. für die konstante Funktion $f(n) := 100$ eine extrem schnell wachsende 
-Funktion, und ich habe den Eindruck, wir schießen hier mit Kanonen auf Spatzen.
-
+In bestimmten Fällen haben wir in Wirklichkeit Morphismen zwischen Funktoren, welches uns zu dem Thema der natürlichen Transformationen leitet.
 
 \begin{backup}
     (Zur Zeit nicht benötigter Inhalt)
@@ -553,10 +425,14 @@ Funktion, und ich habe den Eindruck, wir schießen hier mit Kanonen auf Spatzen.
 %                                                                                                     *
 %******************************************************************************************************
 
-   \bibitem[Douglas2013]{Douglas}
-      Douglas S. Bridges, \emph{Computability, A Mathematical Sketchbook},
-      Springer, Berlin Heidelberg New York 2013, ISBN 978-1-4612-6925-0 (ISBN).
-
+   \bibitem[MacLane1978]{MacLane}
+      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
+      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
+      
+   \bibitem[Bradley2020]{Bradley}
+      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
+      2020 MIT Press, 978-0-262-53935-7 (ISBN)
+      
 \end{thebibliography}
 
 %******************************************************************************************************
@@ -571,15 +447,12 @@ Funktion, und ich habe den Eindruck, wir schießen hier mit Kanonen auf Spatzen.
 \renewcommand*{\arraystretch}{1}
 
 \begin{tabular}{ll}
-    $\N$                    & Die Menge der natürlichen Zahlen (mit Null): $\{ 0, 1, 2, 3, \cdots \}$\\
-    $n, k, l, s, i, x_i, q$ & Natürliche Zahlen\\
-    $A( k, n )$             & Ackermannfunktion\\
-    $f, g, h$               & Funktionen\\
-    $s()$                   & Nachfolgerfunktion: $s(n) := n+1$\\
-    $\bb{x}$                & Vektor natürlicher Zahlen $(x_1, \cdots, x_s)$\\
-    $|\bb{x}|$              & $\max \{x_1, \cdots, x_s \}$\\
-    $g > f$                 & Die Funktion $g$ majorisiert die Funktion $f$\\
-    $P_j$                   & Die Projektionen $P_j(x_1, \cdots, x_s ) := x_j$
+    $A, B, C, \cdots$          & Objekte\\
+    $f, g, h, r, s, \cdots$   & Homomorphismen\\
+    $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
+    $\mathcal M ( \mathcal C)$ & Morphismenkategorie von $\mathcal C$\\
+    $\mathcal C / Y$ oder  $\mathcal C \downarrow Y$ & Überkategorie\\
+    $X / \mathcal C$ oder  $X \downarrow \mathcal C$ & Unterkategorie
 \end{tabular}
 
 \end{document}
