@@ -1,0 +1,458 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v5.0.1.0.3.5 (Höher) Kategorien - Kategorien von Homomorphismen.tex                              *
+%                                                                                                  *
+% Copyright (C) 2023 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v5.0.1.0.3.5 is part of kategoryMathematik.                                                      *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Theorem}
+\myTheorem{Example}
+\myTheorem{Remark}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Höhere Grundlagen) Kategorien\\[1cm]
+\textbf{v5.0.1.0.3.5 Kategorien von Homomorphismen}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Homomorphismen (oder kurz Morphismen) erfüllen die einzige Bedingung, die wir an die Objekte einer Kategorie stellen: es müssen mathematische Objekte sein, hier, wo wir in ZFC sind, müssen es Mengen sein. (In ZFC sind alles Mengen). Wir erzeugen nun aus vorhandenen Kategorien neue Kategorien, in denen die Klasse der Objekte aus den Morphismen der Ausgangskategorie besteht.
+
+Wir betrachten zunächst die Kategorie aller Morphismen einer Kategorie. Diese wird Morphismenkategorie oder Pfeilkategorie genannt. Dann betrachten wir die Kategorie der Morphismen über bzw. unter einem Objekt. Dabei fällt auf, dass es eigentlich bestimmte Figuren sind, die wir zur Kategorie machen.
+
+Das greifen wir auf und bilden die Kategorie der Paare von Objekten auf die gleiche Weise. 
+
+Wir erkennen, dass wir eigentlich mit Funktoren hantieren. Wir bilden also Morphismen zwischen Funktoren. Diese werden \textbf{natürliche Transformationen} genannt.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Kategorie, die Axiome von Kategorien, Homomorphismus, Funktor.
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+\url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20(H%C3%B6her)%20Kategorien/v5.0.1.0.3.5%20(H%C3%B6her)%20Kategorien%20-%20Kategorien%20von%20Homomorphismen}.
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\
+v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
+\url{https://youtu.be/Ojf5LQGeyOU}\\
+\\
+v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
+ \url{https://youtu.be/X8v5Kyly0KI}\\
+ \\
+v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
+ \url{https://youtu.be/sIaKt-Wxlog}
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Pfeilkategorie}\\
+\url{https://ncatlab.org/nlab/show/arrow+category}\\
+\url{https://ncatlab.org/nlab/show/under+category}\\
+\url{https://ncatlab.org/nlab/show/over+category}\\
+\url{https://de.wikipedia.org/wiki/Funktor_(Mathematik)}\\
+\url{https://en.wikipedia.org/wiki/Functor}\\
+\url{https://ncatlab.org/nlab/show/functor}
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+"`Categories for the Working Mathematician"'\\
+Saunders Mac Lane\\
+1998 | 2nd ed. 1978\\
+Springer-Verlag New York Inc.\\
+978-0-387-98403-2 (ISBN)\\
+\\
+\url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}\\
+\\
+"`Topology, A Categorical Approach"'\\
+Tai-Danae Bradley\\
+2020 MIT Press\\
+978-0-262-53935-7 (ISBN)\\ 
+\\
+\url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Kategorien von Homomorphismen}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{Morphismenkategorie}
+%******************************************************************************************************
+Die Wörter "`Homomorphismus"' und "`Morphismus"' sind synonym.
+Im folgenden schreiben wir als Lesehilfe \textcolor{red}{Morphismen} zwischen Morphismen in \textcolor{red}{Rot}, um die beiden Arten von Morphismen leichter unterscheiden zu können.
+
+%-----------------------------------------------------------------------------------------------------*
+\begin{Definition}{Morphismenkategorie}
+   Sei $\mathcal C$ eine Kategorie und $\operatorname{Hom}( \mathcal C )$ die Klasse ihrer Homomorphismen. Dann bilden wir eine neue Kategorie $\mathcal M ( \mathcal C)$, genannt \textbf{Pfeilkategorie} oder \textbf{Morphismenkategorie}, deren Objekte die Elemente von 
+   $\operatorname{Hom}( \mathcal C )$ sind. Die \textcolor{red}{Morphismen} in $\mathcal M ( \mathcal C)$ zwischen zwei Morphismen $f, g$ in $\mathcal C$ sind Paare $(r_1, r_2)$ von Morphismen in $\mathcal C$ mit
+   \begin{equation*}
+      r_2f=gr_1.
+   \end{equation*}
+   Mit anderen Worten $\color{red}(r_1,r_2) \colon f \to g$ ist per definitionem genau dann ein \textcolor{red}{Homomorphismus} in 
+   $\mathcal M ( \mathcal C)$, wenn folgendes Diagramm kommutiert:
+   \begin{equation*}
+      \begin{tikzcd}
+         A_1   \arrow[d, "f"]  \arrow[r, red, "r_1"] & B_1 \arrow[d, "g"]\\
+         A_2                   \arrow[r, red, "r_2"] & B_2
+      \end{tikzcd}
+   \end{equation*}
+   Hier sind die Pfeile nach unten die Objekte und \textcolor{red}{das Paar der Pfeile nach rechts} der \textcolor{red}{Homomorphismus}.
+   Die Verknüpfung und die Identitäten definieren wir wie folgt:
+   \begin{equation*}
+      (r_1, r_2)\circ (s_1, s_2) := (r_1 \circ s_1, r_2 \circ s_2 )
+   \end{equation*}
+   sowie für $f \colon A_1 \to A_2$
+   \begin{equation*}
+      id_f := ( id_{A_1}, id_{A_2} ).
+   \end{equation*}
+\end{Definition}
+Streng genommen müssten wir jetzt noch beweisen, dass es sich hierbei um einen Kategorie handelt.
+
+%******************************************************************************************************
+\subsection{Über- und Unterkategorie}
+%******************************************************************************************************
+Nun beschränken wir die Homomorphismen aus $\mathcal C$ auf die mit Ziel bzw. Quelle ein festes Objekt.
+
+%-----------------------------------------------------------------------------------------------------*
+\begin{Definition}{Überkategorie}
+   Sei $\mathcal C$ eine Kategorie und $Y$ ein Objekt darin. Die \textbf{Überkategorie}
+   $\mathcal C / Y$ oder  $\mathcal C \downarrow Y$ hat per definitionem als Objekte Morphismen $f \colon A \to Y$ und als \textcolor{red}{Morphismen} zwischen $f \colon A \to Y$ und $g \colon B \to Y$ die Morphismen $\color{red}r \colon A \to B$ mit $gr = f$.
+   
+   Mit anderen Worten $\color{red}r \colon f \to g$ ist per definitionem genau dann ein \textcolor{red}{Homomorphismus} in 
+   $\mathcal C \downarrow Y$, wenn folgendes Diagramm kommutiert:
+   \begin{equation*}
+      \begin{tikzcd}
+         A   \arrow[rd, "f"] \arrow[rr, red, "r"]  &   & B \arrow[ld, "g"]\\
+                              & Y
+      \end{tikzcd}
+   \end{equation*}
+   Die Verknüpfung und die Identitäten sind Verknüpfung und Identität aus $\mathcal C$.
+\end{Definition}
+
+%-----------------------------------------------------------------------------------------------------*
+\begin{Definition}{Unterkategorie}
+   Sei $\mathcal C$ eine Kategorie und $X$ ein Objekt darin. Die \textbf{Unterkategorie}
+   $X / \mathcal C$ oder  $X \downarrow \mathcal C$ hat per definitionem als Objekte Morphismen $f \colon X \to A$ und als \textcolor{red}{Morphismen} zwischen $f \colon X \to A$ und $g \colon X \to B$ die Morphismen $\color{red}r \colon A \to B$ mit $rf = g$.
+   
+   Mit anderen Worten $\color{red}r \colon f \to g$ ist per definitionem genau dann ein \textcolor{red}{Homomorphismus} in 
+   $X \downarrow \mathcal C$, wenn folgendes Diagramm kommutiert:
+   \begin{equation*}
+      \begin{tikzcd}
+                                 & X \arrow[ld, "f"] \arrow[rd, "g"] \\
+         A \arrow[rr, red, "r"]  &                                     & B 
+      \end{tikzcd}
+   \end{equation*}
+   Die Verknüpfung und die Identitäten sind Verknüpfung und Identität aus $\mathcal C$.
+\end{Definition}
+
+Es gibt also pro Objekt in $\mathcal C$ eine Über- und eine Unterkategorie.
+
+%******************************************************************************************************
+\subsection{Die Kategorie $\mathcal C^2$}
+%******************************************************************************************************
+Die nächste Kategorie ist nicht wirklich eine von Morphismen, aber ihre Definition geht nach einem ganz ähnlichen Schema.
+
+%-----------------------------------------------------------------------------------------------------*
+\begin{Definition}{Quadratkategorie}
+   Sei $\mathcal C$ eine Kategorie. Dann bilden wir eine neue Kategorie $\mathcal C^2$, auch als $\mathcal C \times \mathcal C$ geschrieben und \textbf{Quadratkategorie} genannt wird, deren Objekte Paare $(A_1, A_2)$ von Objekten aus $\mathcal{C}$ sind.
+   Die \textcolor{red}{Morphismen} in $\mathcal C^2$ zwischen zwei Paaren $(A_1, A_2)$ und $(B_1, B_2)$ sind Paare $(r_1, r_2)$ von Morphismen in $\mathcal C$ mit
+   \begin{align*}
+      r_1 &\colon A_1 \to B1 \\
+      r_2 &\colon A_2 \to B2.
+   \end{align*}
+   Mit anderen Worten die \textcolor{red}{Morphismen} 
+   $\color{red}(r_1, r_2 ) \colon (A_1, A_2 ) \to (B_1, B_2 )$
+   sind genau die Diagramme folgender Form:
+   \begin{equation*}
+      \begin{tikzcd}
+         A_1   \arrow[r, red, "r_1"] & B_1 \\
+         A_2   \arrow[r, red, "r_2"] & B_2
+      \end{tikzcd}
+   \end{equation*}
+   Die Verknüpfung und die Identitäten definieren wir wie folgt:
+   \begin{equation*}
+      (r_1, r_2)\circ (s_1, s_2) := (r_1 \circ s_1, r_2 \circ s_2 )
+   \end{equation*}
+   sowie für $(A , B)$
+   \begin{equation*}
+      id_{(A, B)} := ( id_A, id_B ).
+   \end{equation*}
+\end{Definition}
+
+%******************************************************************************************************
+\subsection{Morphismen von Funktoren}
+%******************************************************************************************************
+Eine andere Sicht ist, die Arten der Morphismen als Figuren anzusehen. Dies geht bei \myRef{Definition}{Morphismenkategorie} und by \myRef{Definition}{Quadratkategorie}. Da Formen Kategorien und Diagramme Funktoren sind, können wir in den Fällen auch von Morphismen zwischen Funktoren sprechen.
+
+Diese heißen natürliche Transformationen und werden in einem eigenen späteren Video vorgestellt.
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Schluss}
+%                                                                                                     *
+%******************************************************************************************************
+Homomorphismen können selbst Objekte von Kategorien sein. Die Morphismen zwischen diesen Morphismen müssen dann bestimmte Verträglichkeitseingenschaften erfüllen, die auf kommutative Diagramme hinauslaufen.
+
+In bestimmten Fällen haben wir in Wirklichkeit Morphismen zwischen Funktoren, welches uns zu dem Thema der natürlichen Transformationen leitet.
+
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+
+   \bibitem[MacLane1978]{MacLane}
+      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
+      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
+      
+   \bibitem[Bradley2020]{Bradley}
+      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
+      2020 MIT Press, 978-0-262-53935-7 (ISBN)
+      
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $A, B, C, \cdots$          & Objekte\\
+    $f, g, h, r, s, \cdots$   & Homomorphismen\\
+    $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
+    $\mathcal M ( \mathcal C)$ & Morphismenkategorie von $\mathcal C$\\
+    $\mathcal C / Y$ oder  $\mathcal C \downarrow Y$ & Überkategorie\\
+    $X / \mathcal C$ oder  $X \downarrow \mathcal C$ & Unterkategorie
+\end{tabular}
+
+\end{document}
