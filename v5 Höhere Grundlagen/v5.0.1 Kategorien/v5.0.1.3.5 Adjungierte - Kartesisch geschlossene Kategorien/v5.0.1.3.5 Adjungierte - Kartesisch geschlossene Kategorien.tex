@@ -1,0 +1,607 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v5.0.1.3.5 Adjungierte - Kartesisch geschlossene Kategorien.tex                                  *
+%                                                                                                  *
+% Copyright (C) 2023 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v5.0.1.3.5 is part of kategoryMathematik.                                                        *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Theorem}
+\myTheorem{Example}
+\myTheorem{Remark}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Höhere Grundlagen) Kategorien\\[1cm]
+\textbf{v5.0.1.3.5 Adjungierte - Kartesisch geschlossene Kategorien}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Bei dem Begriff der "`kartesisch geschlossenen Kategorien"' meint das Wort "`geschlossen"' die Existenz eines zum Produkt rechts-adjungierten Funktors, den wir Exponential nennen. 
+
+Etwas genauer: eine Kategorie ist kartesisch monoidal, wenn es alle endlichen Produkte gibt. Ein leeres Produkt, also ein terminales Objekt, übernimmt bei dieser Multiplikation von Objekten die Rolle des neutralen Elementes. Wir wählen zu je zwei Objekten $X, A$ ein Produkt aus, bezeichnen es als $X \times A$, und nennen es das cartesische Produkt. Dieses ist ein Funktor in jeder Komponente.
+
+Eine kartesisch monoidale Kategorie heißt "`geschlossen"' wenn die Funktoren $\_ \times A$ für jedes $A$ jeweils einen rechts adjungierten Funktor haben. Diesen nennen wir das Exponential und schreiben $\_ ^A$. Eine kartesisch geschlossene Kategorie ist eine kartesisch monoidale Kategorie, die geschlossen ist.
+
+Genau genommen müssten wir eine solche Kategorie "`kartesisch monoidal geschlossen"' nennen, da wir wegen der Mehrdeutigkeit auf den Begriff "`kartesische Kategorie"' verzichten.
+
+Aus der Adjunktion ergibt sich die Formel
+\begin{equation}\label{currying}
+    \Hom(X \times A, Y ) \cong \Hom(X, Y^A). 
+\end{equation}
+Diese wird im Falle der Kategorie der Mengen zu dem bekannten Currying 
+\begin{equation}\label{curryingForSet}
+   \Hom(X \times A, Y ) \cong \Hom(X, \Hom( A, Y)). 
+\end{equation}
+Deswegen nennen wir die Bijektion \eqref{currying} ebenfalls Currying.
+
+Die Gleichung \eqref{curryingForSet} zeigt, dass in der Kategorie der Mengen die Menge der Homomorphismen selbst ein Objekt der Kategorie ist. Deswegen ist hier der kovariante Hom-Funktor ein Exponential.
+
+Informell ist also $Y^A$ eine Annäherung der Hom-Menge $\Hom (A, Y)$ durch ein Objekt in der Kategorie. Deswegen wird das Exponetial auch interner Hom-Funktor genannt, welcher letztere Begriff allerdings auch in allgemeineren Zusammenhängen benutzt wird.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Kartesisch monoidale Kategorie, adjungierte Funktoren, Hom-Funktor, natürlicher Isomorphismus, Produkt, Currying, konkrete Kategorie, Einheit und Koeinheit.
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+\url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20(H%C3%B6her)%20Kategorien/v5.0.1.0.3.5%20(H%C3%B6her)%20Kategorien%20-%20Kategorien%20von%20Homomorphismen}.
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\
+v5.0.1.2.5 (Höher) Kategorien - Kartesisch monoidale Kategorien\\
+\url{https://youtu.be/uH-xVxwL5xY}\\
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Currying}\\
+\url{https://de.wikipedia.org/wiki/Kartesisch_abgeschlossene_Kategorie}\\
+\url{https://ncatlab.org/nlab/show/cartesian+closed+category}\\
+\url{https://ncatlab.org/nlab/show/natural+isomorphism}\\
+\url{https://de.wikipedia.org/wiki/Konkrete_Kategorie}\\
+\url{https://ncatlab.org/nlab/show/affine+space}\\
+\url{https://de.wikipedia.org/wiki/Adjunktion_(Kategorientheorie)}\\
+\url{https://de.wikipedia.org/wiki/Auswahlaxiom}
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+"`Categories for the Working Mathematician"'\\
+Saunders Mac Lane\\
+1998 | 2nd ed. 1978\\
+Springer-Verlag New York Inc.\\
+978-0-387-98403-2 (ISBN)\\
+\\
+\url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}\\
+\\
+"`Topology, A Categorical Approach"'\\
+Tai-Danae Bradley\\
+2020 MIT Press\\
+978-0-262-53935-7 (ISBN)\\ 
+\\
+\url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Kartesisch geschlossene Kategorien}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{Kartesisch monoidale Kategorien}
+%******************************************************************************************************
+Erinnerung:
+%-----------------------------------------------------------------------------------------------------*
+\begin{Definition}{kartesisch monoidale Kategorien}
+   Eine Kategorie $\mathcal C$ heißt \textbf{kartesisch monoidal}, wenn sie zum einen alle endlichen, einschließlich der leeren, Produkte hat und wenn wir eine Wahl eines leeren Produktes und zu je zwei Objekten $X, A$ eine Wahl eines Produktes dieser beiden Objekte haben. Das gewählte leere Produkt bezeichnen wir mit $1$ und das zu den Objekten $X, A$ gewählte Produkt mit $X \times A$. 
+\end{Definition}
+
+Die Existenz der geforderten Auswahl kann in ZFC im Allgemeinen nicht bewiesen werden, da das Auswahlaxiom nur für Mengen gilt. Ist die Klasse der Objekte eine Menge, so können wir das Auswahlaxiom bemühen. TODO: Beispiel für Mengen. Ist sie eine echte Klasse benötigen wir eine Alternative. Diese ist oft eine konkrete Konstruktion eines Produktes. So können wir z.B. bei der Kategorie der Gruppen, als leeres Produkt die Menge $1 := \{ \emptyset \}$ mit der Verknüpfung $\emptyset \cdot \emptyset = \emptyset$ nehmen. Als Produkt zweier Gruppen $X, A$ nehmen wir die Menge der Paare
+\begin{equation}
+   X \times A := \{ (x, a) | x \in X \land a \in A \}
+\end{equation}
+mit der komponentenweisen Verknüpfung. Oder wir erweitern unser Axiomensystem, sodass die Existenz einer solchen Wahl immer gegeben ist. Diesen Weg gehen wir hier nicht.
+
+%******************************************************************************************************
+\subsection{Adjungierte Funktoren}
+%******************************************************************************************************
+Erinnerung:
+%-----------------------------------------------------------------------------------------------------*
+\begin{Definition}{adjungierte Funktoren}
+   Sein $  \mathcal C, \mathcal D$ zwei Kategorien und $  L \colon   \mathcal C \to   \mathcal D$ sowie 
+   $R \colon   \mathcal D \to   \mathcal C$ zwei Funktoren. Diese heißen \textbf{adjungiert}, wobei $  L$ der links- und $  R$ der rechts-adjungierte ist, wenn es Isomorphismen
+   \begin{equation}
+      \Hom(  L( X ), Y ) \cong \Hom( X,   R( Y) ) 
+   \end{equation}
+   gibt, die natürlich in $X$ und $Y$ sind.
+\end{Definition}
+
+%******************************************************************************************************
+\subsection{Currying}
+%******************************************************************************************************
+Erinnerung:
+%-----------------------------------------------------------------------------------------------------*
+\begin{Definition}{Currying}
+   Für jede Menge $A$ sind die beiden Funktoren $\_ \times A )$ und 
+   $ \Hom( A, \_)$ adjungiert. Das heißt es gibt Mengen-Isomorphismen (also Bijektionen)
+   \begin{equation}\label{curryingForSet2}
+      \Hom(X \times A, Y ) \cong \Hom(X, \Hom( A, Y)),
+   \end{equation}
+   die natürlich in $X$ und $Y$ sind.
+\end{Definition}
+
+Dies ist die kategorische Aussage, das wir aus einer Funktion mit zwei Argumenten $f(\_, \_)$ durch Fixierung des ersten Parameters auf einen festen Wert $x$ eine Funktion mit einem Argument $f_x( \_ ) := f(x, \_)$ bekommen. Fixieren wir drei Mengen $A, X, Y$ und nennen den entsprechenden Isomorphismus $\phi$, so ordnet $\phi$ jeder Funktion mit zwei Argumenten aus $X$ und $A$ eine Funktion zu, die jedem Wert aus $X$ eine Funktion mit einem Argument aus $A$ zuordnet.
+\begin{equation*}
+   \begin{alignedat}[b]{2}
+   &\phi \colon &&\Hom(X \times A, Y ) \to \Hom(X, \Hom( A, Y))\\
+               &&&f( \_, \_ )          \mapsto f_{\_}( \_ )\\
+   &\text{mit}\\
+   &f \colon &&X \times A \to Y\\
+            &&&( x, a )  \mapsto f(x,a )\\
+&\text{und}\\
+   &\phi(f) \colon &&X \to \Hom( A, Y)\\
+   &&&x   \mapsto f_x\\
+&\text{mit}\\
+   &f_x \colon &&A \to Y\\
+   &&&a   \mapsto f_x(a) := f( x, a ).
+\end{alignedat}
+\end{equation*}
+
+Ein einfaches Beispiel ist, dass die Funktion $f(x, y) = x^2y^3$ durch $x:=4$ die Funktion $f_4(y) = 16y^3$ wird. Hier noch eine Implementierung in JavaScript:
+\begin{verbatim}
+const curry = function( f, x ) {
+   return function( a ) {
+      return f( x, a );
+   }
+}
+\end{verbatim}
+
+Kategorisch gesehen, und das macht Currying auch theoretisch interessant, ist der Witz nicht die Technik, wie wir sie in dem JavaScript-Code sehen, sondern die Tatsache, dass der Isomorphismus in \eqref{curryingForSet2} natürlich in $X$ und $Y$ ist. Das heißt der Funktor $\_ \times A$ ist links-adjungiert zum Hom-Funktor $\Hom( A, \_$ ).
+
+Hier haben wir eine Besonderheit der Kategorie der Mengen: die Hom-Mengen sind Mengen und damit Objekte der selben Kategorie. Dies geht normalerweise nicht. In einer beliebigen Kategorie ist $\Hom( A, Y)$ kein Objekt dieser Kategorie.
+
+%******************************************************************************************************
+\subsection{Kartesisch geschlossene Kategorien}
+%******************************************************************************************************
+
+%-----------------------------------------------------------------------------------------------------*
+\begin{Definition}{kartesisch geschlossene Kategorien}
+   Eine Kategorie $\mathcal C$ heißt \textbf{kartesisch geschlossene Kategorie}, wenn sie kartesisch monoidal ist und wenn es zu jedem Objekt $A$ ein zum Funktor $\_ \times A$ rechts-adjungierten Funktor gibt. Diesen nennen wir \textbf{Exponential} und schreiben ihn $\_ ^A$. Die zur Adjunktion gehörende Isomorphismen
+   \begin{equation}
+      \Hom( X \times A, Y ) \cong \Hom( X, Y^A )
+   \end{equation}
+\end{Definition}
+nennen wir \textbf{Currying}.
+
+Hinweise:
+\begin{itemize}
+   \item Die $Y^A$ müssen somit wie die $X \times A$ in der Ausgangskategorie liegen.
+   \item Wie das oben über das Currying gesagt zeigt, sind die $Y^A$ verwandt mit den $\Hom( A, Y)$. Deswegen auch die Schreibweise.
+   \item Ähnlich wie $X \times A$ der Repräsentant von $(X, A)$ aus der Kategorie $\mathcal C^2$ in der Kategorie $\mathcal C$ ist, ist $Y^A$ der Repräsentant von $\Hom( A, Y)$ aus der Kategorie \textbf{Set} in $\mathcal C$.
+   \item Die Konstruktion $\_ ^A$ ist ein Spezialfall des hier nicht weitere beschriebenen internen Hom-Funktors, dessen Bezeichnung hier aber auch schon gut passt.
+\end{itemize}
+
+%******************************************************************************************************
+\subsection{Beispiele}
+%******************************************************************************************************
+Die Kategorie \textbf{Set} mit $Y^A = \Hom( A, Y)$ haben wir oben schon als kartesisch geschlossen identifiziert. Eine wichtige Beobachtung ist hier, dass der Hom-Funktor selber auf die Objekte der Kategorie \textbf{Set} abbildet. 
+
+Tatsächlich ist es gar nicht so einfach, weitere zu finden, wie es zunächst den Anschein hat. 
+
+Eine Idee ist, wie in \textbf{Set}, die $\Hom( A, Y)$-Mengen als Objekte in der Kategorie aufzufassen. Das bietet sich insbesondere an, wenn wir eine konkrete Kategorie haben, wo die Objekte selber Mengen sind, wie zum Beispiel bei Mengen, Gruppen, Ringen oder topologischen Räumen mit stetigen Abbildungen. Dann müssen wir der Hom-Menge nur noch eine Struktur geben.
+
+%******************************************************************************************************
+\subsection{Das Programm}
+%******************************************************************************************************
+
+%-----------------------------------------------------------------------------------------------------*
+\subsubsection{Gegen-Beispiel Vektorräume}
+Die Menge der linearen Abbildungen zwischen zwei $\K$-Vektorräumen ist selber wieder ein  $\K$-Vektorraum. Jetzt müssen wir nur noch zeigen, was im Falle von Vektorräumen vergeblich sein wird, dass es zu jedem $A$ es einen
+Isomorphismus
+\begin{equation}
+	\Hom(X \times A, Y ) \cong \Hom(X, \Hom( A, Y)),
+\end{equation}
+gibt, der natürlich in $X$ und $Y$ ist. Es gibt also folgendes zu tun:
+\begin{itemize}
+   \item Definiere die Abbildung $\cong$.
+   \item Zeige, dass sie eine Bijektion ist.
+   \item Überlege, wie die beteiligten vier Funktoren auf Morphismen wirken. Jeweils für $X$ und $Y$. 
+   \item Damit zeigen, dass unsere Bijektion eine natürliche Transformation ist.
+\end{itemize}
+
+%-----------------------------------------------------------------------------------------------------*
+\subsubsection{Die Diagramme}
+Seien $f \colon X_1 \to X_2$ und $g \colon Y_1 \to Y_2$ Vektorraum-Homomorphismen (im Volksmund auch lineare Abbildungen genannt). In den folgenden beiden Diagrammen muss $\cong$ jeweils (für jede Wahl der Objekte $A, X, X_1, X_2, Y, Y_1, Y_2$ ein Isomorphismus sein und die Diagramme selbst müssen kommutativ sein, damit wir von einem natürlichen Isomorphismus sprechen können. Das sind die Anforderungen für "`adjungiert"'.
+
+\begin{equation}
+   \begin{tikzcd}
+      \Hom(X_2 \times A, Y ) \arrow[r, "\cong"]   
+      \arrow[d, "\Hom(f \times A {,} Y   )"] 
+                                                & \Hom(X_2, \Hom( A, Y)) 
+      \arrow[d, "\Hom(f{,} \Hom( A{,} X) )"]\\
+      \Hom(X_1 \times A, Y ) \arrow[r, "\cong"] & \Hom(X_1, \Hom( A, Y))
+   \end{tikzcd}
+\end{equation}
+(beachte, dass die vertikalen Pfeile von 2 nach 1 gehen, da Hom-Funktoren der Art $\Hom(\_, X)$ kontravariant sind) und
+\begin{equation}
+   \begin{tikzcd}
+      \Hom(X \times A, Y_1 ) \arrow[r, "\cong"]   
+      \arrow[d, "\Hom(X \times A {,} g   )"] 
+      & \Hom(X, \Hom( A, Y_1)) 
+      \arrow[d, "\Hom(X{,} \Hom( A{,} g) )"]\\
+      \Hom(X \times A, Y_2 ) \arrow[r, "\cong"] & \Hom(X, \Hom( A, Y_2))
+   \end{tikzcd}
+\end{equation}
+
+%-----------------------------------------------------------------------------------------------------*
+\subsubsection{Die Wirkung der vier Funktoren auf Morphismen}
+Wir werden alle vier der Reihe nach kurz beschreiben.
+
+\boldmath ${\Hom(f \times A {,} Y   )}$ \unboldmath: Zunächst ist (noch kovariant)
+\begin{align}
+   f \times A \colon X_1 \times A \to X_2 \times A\\
+   (x,a) \mapsto (f(x),a)
+\end{align}
+Wenden wir generell einen Hom-Funktor $(\Hom( \_, Y)$ auf einen Homomorphismus an, so ist der entstehende Homomorphismus (, der auf den Hom-Mengen wirkt,) gegeben durch Komposition von rechts:
+\begin{equation}
+   \Hom(f \times A {,} Y   ) = \_ \circ (f \times A)
+\end{equation}
+also
+\begin{align}
+   \Hom( f \times A, Y) \colon \Hom(X_2 \times A, Y ) \to \Hom(X_1 \times A, Y )\\
+   \big [ h \colon (x_2,a) \mapsto h(x_2,a) \big ] \mapsto \big [ h \circ (f \times A) \colon (x_1,a) \mapsto h(f(x_1),a) \big ].
+\end{align}
+
+\boldmath $\Hom(f{,} \Hom( A{,} Y) )$ \unboldmath: Dies ist einfach $\_ \circ f$ also
+\begin{align}
+   \Hom( f, \Hom(A , Y) ) \colon \Hom(X_2, \Hom(A , Y) ) \to \Hom(X_1, \Hom(A , Y) )\\
+   \big [ h \colon x_2 \mapsto h(x_2) \big ] \mapsto \big [ h \circ f \colon (x_1) \mapsto h(f(x_1)) \big ],
+\end{align}
+wobei $h(c_2)$ ein Homomorphismus $h(x_2) \colon A \to Y$ ist.
+
+\boldmath $\Hom(X \times A {,} g )$ \unboldmath: Dies ist einfach $g \circ \_$ (wir sind jetzt im kovarianten Fall) also
+\begin{align}
+   \Hom(X \times A {,} g ) \colon \Hom(X \times A, Y_1 ) \to \Hom(X \times A, Y_2 )\\
+   \big [ h \colon (x,a) \mapsto h(x,a) \big ] \mapsto \big [ g \circ h \colon (x,a) \mapsto g(h(x,a)) \big ].
+\end{align}
+wobei $h(x,a)$ ein Element in $Y_1$ ist.
+
+\boldmath $\Hom(X{,} \Hom( A{,} g) )$ \unboldmath: Zunächst ist
+\begin{align}
+   \Hom( A, g ) \colon \Hom( A, Y_1 ) \to \Hom( A, Y_2)\\
+   \big [ h \colon a \mapsto h(a) \big ] \mapsto \big [ g \circ h \colon (a) \mapsto g(h(a)) \big ]
+\end{align}
+Auf diesen Morphismus (zwischen Morphismen) wenden wir nun den $\Hom(X, \_)$-Funktor an.
+Also
+\begin{align}
+   \Hom(X, \Hom( A, g)) \colon \Hom(X, \Hom( A, Y_1)) \to \Hom(X, \Hom( A, Y_2))\\
+   \big [ h \colon x \mapsto h(x) \big ] \mapsto \big [ g \circ h \colon x \mapsto g \circ (h(x)) \big ],
+\end{align}
+wobei $h(x)$ ein Homomorphismus $h(x) \colon A \to Y_1$ ist. Anmerkung: das geht so nur, weil in dieser Kategorie die Morphismen Funktionen sind.
+
+%-----------------------------------------------------------------------------------------------------*
+\subsubsection{Vektorraum-Currying-Versuch}
+
+Für den Currying-Versuch für einen gesuchten Isomorphismus
+\begin{equation}
+   \begin{tikzcd}
+      \Hom(X \times A, Y ) \arrow[r, "\cong"]   
+      & \Hom(X, \Hom( A, Y)) 
+   \end{tikzcd}
+\end{equation} 
+starten wir mit einem beliebigen Homomorphismus (lineare Abbildung) 
+$ \colon X \times A \to Y$ mit $(x,a) \mapsto h(x,a)$. Um zu einem gegebenen $x_0 \in X$ einen Homomorphismus $A \to Y$ also ein Element aus $\Hom( A, Y )$ zu bekommen, halten wir $x_0$ fest, d.h. wir definieren
+\begin{align}
+   h_{x_0} \colon A \to Y\\
+   a \mapsto h( x_0, a ).
+\end{align}
+Dieses $h_{x_0}$ ist zwar eine Funktion aber im Allgemeinen nicht linear sondern affin und damit kein Morphismus unserer Kategorie.
+
+Wir könnten nun auf die Idee kommen, unsere Kategorie auszudehnen auf alle affinen Räume. Das klappt aber auch nicht, wie wir z.B. in dem Artikel \url{https://ncatlab.org/nlab/show/affine+space} nachschlagen können.
+
+Der bessere Versuch ist, ein zum Hom-Funktor links-adjungierten Funktor zu finden. Den gibt es in der Tat: das Tensor-Produkt. Das ist aber nicht das "`normale"' kategorische Produkt, und somit ist die entstehende Struktur keine cartesisch geschlossene sondern eine monoidal geschlossene, womit sie den Umfang dieses Videos verlässt.
+
+Dass der Tensor-Funktor links-adjungiert zum Hom-Funktor ist (das haben wir hier nicht gezeigt), ist dann auch ein Beweis dafür, dass die Kategorie der Vektorräume nicht cartesisch geschlossen ist, was wir oben nicht gezeigt haben. Wir haben ja nur gesehen, dass der naive Ansatz scheitert.
+
+%-----------------------------------------------------------------------------------------------------*
+\subsubsection{Topologische Funktionenräume}
+Die selbe Arbeit haben wir bei Funktionenräumen in der Topologie. Hier reicht es nicht die Menge der stetigen Abbildungen zwischen zwei Räumen mit einer Topologie zu versehen.
+
+%-----------------------------------------------------------------------------------------------------*
+\subsubsection{Beispiele}
+Echte Beispiele sind
+\begin{itemize}
+   \item Prä-Garben
+   \item G-Mengen
+   \item verschiedene sogenannte "`bequeme Kategorien von topologischen Räumen"'
+\end{itemize}
+
+%-----------------------------------------------------------------------------------------------------*
+\subsubsection{Auswertung}
+Informell repräsentiert das Objekt $Y^A$ die Menge $\Hom( A, Y )$ der Morphismen. Bei den Mengen können wir die Elemente von $\Hom( A, Y )$ an einer Stelle $a \in A$ auswerten (evaluate).
+\begin{align}
+   \epsilon \colon \Hom( A, Y ) \times A \to Y\\
+   (f, a) \mapsto f(a).
+\end{align}
+$\epsilon$ bekommt also eine Funktion und einen Wert und setzt den Wert in die Funktion ein.
+
+Da die Funktoren $\_ \times A$ und $\Hom( \_^A)$ adjungiert sind gibt es zu jedem $A$ die Koeinheit dieser Adjunktion, welche eine natürliche Transformation von
+\begin{equation}
+   (\Hom( \_^A)) \circ (\Hom( \_^A)) = (\_ ^A) \times A
+\end{equation}
+zum Identitätsfunktor auf $\mathcal{C}$ ist:
+\begin{equation}
+   \epsilon_{A} \colon (\_ ^A) \times A \to \id_{\mathcal{C}}
+\end{equation}
+Sie liefert damit Homomorphismen
+\begin{equation}
+   \epsilon_{A,Y} \colon (Y ^A) \times A \to Y, 
+\end{equation}
+welche die Verallgemeinerung der Auswertung auf beliebige kartesisch geschlossene Kategorien darstellt. Diese Existenz der Auswertungs-Morphismen macht die informelle Korrespondenz zwischen $Y^A$ und $\Hom( A, Y )$ etwas präziser.
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Schluss}
+%                                                                                                     *
+%******************************************************************************************************
+Wenn der Produktfunktor einen Rechts-Adjungierten hat, so nennen wir den Exponential und er repräsentiert die Hom-Mengen als Objekte in der Kategorie. So gibt es dann z.B. Auswertungs-Morphismen. Solche Kategorien nennen wir kartesisch geschlossen. Kartesisch, weil wir von dem normalen kategorischen Produkt reden und mit geschlossen meinen wir die Existenz des Rechts-Adjungierten zum Produkt.
+
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+
+   \bibitem[MacLane1978]{MacLane}
+      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
+      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
+      
+   \bibitem[Bradley2020]{Bradley}
+      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
+      2020 MIT Press, 978-0-262-53935-7 (ISBN)
+      
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $A, B, C, \cdots, X, Y, Z$          & Objekte\\
+    $F,G,L,R$ & Funktoren\\
+    $f, g, h, r, s, \cdots$   & Homomorphismen\\
+    $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
+    $\phi$         &Zur einer natürlichen Transformation gehörender Isomorphismus\\
+    $\epsilon$ &Koeinheit
+\end{tabular}
+
+\end{document}
