@@ -1,0 +1,485 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v1.7.6.4.3.2 Abstand Gerade vom Nullpunkt.tex                                                    *
+%                                                                                                  *
+% Copyright (C) 2023 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v1.7.6.4.3.2 is part of kategoryMathematik.                                                      *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Theorem}
+\myTheorem{Example}
+\myTheorem{Remark}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Mittel) Geometrie\\[1cm]
+\textbf{v1.7.6.4.3.2 Abstand Gerade vom Nullpunkt}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2023 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Der Abstand einer Geraden von einem Punkt muss zunächst mal definiert werden! Es ist beileibe nicht so, dass dieser Begriff logisch abgeleitet werden kann. Wir definieren ihn als den kleinsten Abstand eines Punktes auf der Geraden zu diesem Punkt.
+
+Den Abstand von einem Punkt zu einem anderen haben wir schon definiert. Über die Definition des Pythagoras. Die Formel enthält eine Wurzel. Damit ist das Finden des Minimums nicht ganz einfach. Wegen der Monotonie der Wurzel, die auf der der Quadratischen Funktion basiert, können wir aber auch den Term unterhalb der Wurzel minimieren. Das ist ein quadratischer Term.
+
+Also eine Parabel. Das Minimum nimmt eine Parabel an ihrem Scheitelpunkt ein. Die Formel dafür kennen wir, und sie ist überraschend einfach.
+
+Mit ihr berechnen wir neben dem oben definierten Abstand zu einem Punkt auch die Koordinaten des Punktes auf der Geraden, der das Minimum realisiert. 
+
+Abstand und Koordinaten berechnen wir dann auch noch in dem Spezialfall des Nullpunktes, da damit die Formeln nochmal erheblich einfacher werden.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Koordinaten-System, Geradengleichung, Abstand zwischen zwei Punkten, Parabel, Lösung der quadratischen Gleichung, Formel für den Scheitelpunkt einer Parabel.
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+{\tiny
+   \url{}
+}
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\
+v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
+\url{https://youtu.be/Ojf5LQGeyOU}\\
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Transponierte_Matrix#Duale_Abbildungen}\\
+\url{https://de.wikipedia.org/wiki/Dualraum}\\
+\url{https://de.wikipedia.org/wiki/Funktor_(Mathematik)}\\
+\url{https://ncatlab.org/nlab/show/dual+vector+space}\\
+\url{https://ncatlab.org/nlab/show/endofunctor}\\
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+"`Categories for the Working Mathematician"'\\
+Saunders Mac Lane\\
+1998 | 2nd ed. 1978\\
+Springer-Verlag New York Inc.\\
+978-0-387-98403-2 (ISBN)\\
+{\tiny
+   \url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}}\\
+\\
+"`Topology, A Categorical Approach"'\\
+Tai-Danae Bradley\\
+2020 MIT Press\\
+978-0-262-53935-7 (ISBN)\\ 
+{\tiny
+\url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}}\\
+\\
+Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von\\
+"`An Introduction to Homological Algebra"'\\
+Joseph J. Rotman\\
+2009 Springer-Verlag New York Inc.\\
+978-0-387-24527-0 (ISBN)\\ 
+{\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
+\\
+Grundlagen der lineare Algebra und insbesondere der Dualräume finden sich hier:\\
+"`Lineare Algebra"'\\
+Gerd Fischer, Boris Springborn\\
+2020 Springer Berlin\\
+978-3-662-61644-4 (ISBN)\\
+{\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/53880242-9783662616444-lineare-algebra}}
+
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der 
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben 
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird, 
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der 
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben 
+(zu finden im selben Git-Projekt). 
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter 
+{\tiny
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.3.6%20Dualraum%20ist%20Funktor}
+}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Dualraum ist kontravarianter Funktor}
+%                                                                                                     *
+%******************************************************************************************************
+Im ganzen folgenden Text ist $\K$ ein Körper, $V,W, \cdots$ sind $\K$-Vektorräume und $V^*,W^*, \cdots$ sind die zugehörigen dualen Räume.
+
+%******************************************************************************************************
+\subsection{Dualraum}
+%******************************************************************************************************
+Erinnerung: Der Dualraum zu $V$ ist als Menge die Menge der linearen Abbildungen von $V$ in den Grundkörper $\K$ (die sogenannten Linearformen).  Also
+\begin{equation}
+   V^* := \{ f \colon V \to \K | \text{f ist linear} \}.
+\end{equation}
+Da $\K$ selber (ein eindimensionaler) Vektorraum ist, und da die linearen Abbildungen genau die Homomorphismen der Kategorie der $\K$-Vektorräume sind, können wir auch sagen:
+\begin{equation}
+   V^* = \Hom( V, \K ).
+\end{equation}
+Diese Menge statten wir nun mit der Struktur eines Vektorraums aus vermöge folgender Definitionen mit 
+$f,g \in V^*, x \in V, \alpha \in \K$ :
+\begin{align}
+   &(f+g)(x) := f(x) + g(x)\\
+   &(0)(x) := 0\\
+   &(\alpha f)(x) := \alpha ( f(x) ).
+\end{align}
+Die so definierten Funktionen sind wieder lineare Abbildungen und $V^*$ erfüllt die Axiome eines 
+$\K$-Vektorraums.
+
+%******************************************************************************************************
+\subsection{Transponierte Abbildung}
+%******************************************************************************************************
+Erinnerung: Die zu einer linearen Abbildung $f \colon V \to W$ transponierte, auch dual genannte, Abbildung $f^*$ ist wie folgt definiert:
+\begin{align}
+   &f^* \colon W^* \to V^* \\
+   &h \mapsto h\circ f
+\end{align}
+Oder kürzer $f^* = \_ \circ f$. Als Diagramm
+\begin{equation}
+   \begin{tikzcd}
+      V \arrow[rd, "h \circ f"] \arrow[d, "f"] \\
+      W \arrow[r, "h"] & \K
+   \end{tikzcd}
+\end{equation}
+Hier werden Pfeile aufeinander abgebildet: der untere Pfeil $h$ auf den diagonalen Pfeil $h \circ f$.
+
+%******************************************************************************************************
+\subsection{Funktor}
+%******************************************************************************************************
+Erinnerung: Ein kontravarianter Funktor zwischen zwei Kategorien $\mathcal{C, D}$ ist ein Kategorien-Anti-Homomorphismus. Das heißt er erhält die Strukturen einer Kategorie, die da wären:
+\begin{itemize}
+	\item Objekte
+	\item Morphismen
+	\item Identitäten
+	\item Verknüpfung von Morphismen
+\end{itemize} 
+Ein Funktor $F$ bildet Objekte, Morphismen und Identitäten jeweils wieder in Objekte, Morphismen (in umgekehrter Richtung) und Identitäten ab und ist anti-verträglich zu Verknüpfungen in folgendem Sinne:
+\begin{equation}
+	F( f \circ g ) = F( g ) \circ F(  f ).
+\end{equation}
+
+\begin{equation}
+   \begin{tikzcd}
+      V \arrow[r, "F"] \arrow[d, "f"] & F(V)\\
+      W \arrow[r, "F"]                & F(W) \arrow[u, "F(f)"]
+   \end{tikzcd}
+\end{equation}
+
+Der kontravarianter Hom-Funktor $\Hom( _, A)$ ist für jedes $A \in \mathcal{C}$ ein Funktor nach \textbf{Set}:
+\begin{align}
+   \Hom( _, A) &\colon \mathcal{C} \to \text{\textbf{Set}}\\
+   &X \mapsto \Hom( X, A)\\
+   &(f \colon X \to Y ) \mapsto (\_ \circ f \colon \Hom( Y, A) \to \Hom( X, A))
+\end{align}
+
+%******************************************************************************************************
+\subsection{Beweis Dualraum ist kontravarianter Funktor}
+%******************************************************************************************************
+Male Diagramm mit V -> W und F(W') -> F(V') und eine Variante mit Hom(V,K)
+
+\begin{Theorem}{Dualraum ist kontravarianter Funktor}
+   Der Dualraum ist zusammen mit der transponierten Abbildung ein kontravarianter Endofunktor auf der Kategorie der $\K$-Vektorräume.   
+\end{Theorem}
+\begin{proof}
+   Der Dualraum ist zusammen mit der transponierten Abbildung ist der kontravariante Hom-Funktor 
+   $\Hom( \_, \K )$.
+   
+   Ein paar Details: Der Dualraum ist wieder ein $\K$-Vektorraum. Die transponierte Abbildung ist wieder eine $\K$-lineare Abbildung und sie geht in die entgegengesetzte Richtung. Die Verträglichkeit mit der Verknüpfung liegt an der Assoziativiät der Verknüpfung:
+   \begin{align}
+      F( f \circ g )( h ) &= F(g)(F(f )(h))\\
+      h \circ (f \circ g) &= (h \circ f) \circ g.
+   \end{align}
+   Die Identitätsabbildungen sind lineare Abbildungen und die transponierte einer Identität ist die Identität auf dem Dualraum, da $h \circ \id = h$.
+\end{proof}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Schluss}
+%                                                                                                     *
+%******************************************************************************************************
+Auf der einen Seite klingt das Wort kontravarianter Funktor vielleicht schlimmer als es ist: wird begegnen ihnen schon im Grundstudium im Bereich normaler handelsüblicher mathematischer Strukturen.
+
+Auf der anderen Seite erkennen wir nun, dass hinter dem Dualraum ein allgemeines Prinzip sich verbirgt, und es mehr ist als eine bloße Zuordnung von Vektorräumen.
+
+Oft erweisen sich die kategorischen Definitionen als die "`richtigen"' im Sinne der nützlicheren. Darüber hinaus erlauben sie die Anwendung des kategorischen Apparates. Dualraum ist zusammen mit der transponierten Abbildung erhalten hiermit das Abzeichen "`kategorisch"'.
+
+
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+
+   \bibitem[MacLane1978]{MacLane}
+      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
+      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
+      
+   \bibitem[Bradley2020]{Bradley}
+      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
+      2020 MIT Press, 978-0-262-53935-7 (ISBN)
+
+   \bibitem[Rotman2009]{Rotman}
+   	Joseph J. Rotman, \emph{An Introduction to Homological Algebra},
+   	2009 Springer-Verlag New York Inc., 978-0-387-24527-0 (ISBN)
+      
+   \bibitem[FischerSpringborn2020]{Fischer}
+     Gerd Fischer, Boris Springborn, \emph{Lineare Algebra},
+     2020 Springer Berlin, 978-3-662-61644-4 (ISBN)
+
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $A, B, C, \cdots, X, Y, Z$          & Objekte\\
+    $F,G,L,R$ & Funktoren\\
+    $f, g, h, r, s, \cdots$   & Homomorphismen\\
+    $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
+    \textbf{Set} & Die Kategorie der Mengen\\
+    $\Hom( X, Y)$ & Die Menge der Homomorphismen von $X$ nach $Y$\\
+    $\K$         &Ein Körper\\
+    $V, W, \cdots$ &$\K$-Vektorräume\\
+    $\alpha, \beta, \cdots$ & Skalare des Vektorraums also Elemente aus $\K$\\
+    $V^*, W^*, \cdots$ & Dualräume
+\end{tabular}
+
+\end{document}
