@@ -225,6 +225,8 @@ Copyright (C) 2023 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 Der Abstand einer Geraden von einem Punkt muss zunächst mal definiert werden! Es ist beileibe nicht so, dass dieser Begriff logisch abgeleitet werden kann. Wir definieren ihn als den kleinsten Abstand eines Punktes auf der Geraden zu diesem Punkt.
 
+Hier kümmern wir uns speziell um den Abstand einer Geraden vom Nullpunkt, weil dann die Rechnerei ein wenig übersichtlicher bleibt.
+
 Den Abstand von einem Punkt zu einem anderen haben wir schon definiert. Über die Definition des Pythagoras. Die Formel enthält eine Wurzel. Damit ist das Finden des Minimums nicht ganz einfach. Wegen der Monotonie der Wurzel, die auf der der Quadratischen Funktion basiert, können wir aber auch den Term unterhalb der Wurzel minimieren. Das ist ein quadratischer Term.
 
 Also eine Parabel. Das Minimum nimmt eine Parabel an ihrem Scheitelpunkt ein. Die Formel dafür kennen wir, und sie ist überraschend einfach.
@@ -248,59 +250,54 @@ Koordinaten-System, Geradengleichung, Abstand zwischen zwei Punkten, Parabel, L�
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v1.6%20Mittel/v1.7.6%20Geometrie/v1.7.6.4.3.2%20Abstand%20Gerade%20vom%20Nullpunkt}
 }
 
 %******************************************************************************************************
 \subsection*{Meine Videos}
 %******************************************************************************************************
 Siehe auch in den folgenden Videos:\\
-v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
-\url{https://youtu.be/Ojf5LQGeyOU}\\
+\\
+v1.7.6.4.2 (Mittel) Geometrie - Satz des Pythagoras\\
+\url{https://youtu.be/mTMOtXfUQzQ}\\
+\\
+v1.7.6.4.3 (Mittel) Geometrie - Abstand im Koordinatensystem\\
+\url{https://youtu.be/HEdolewfn78}\\
+\\
+v1.7.4.7 (Mittel) abc-Formel\\
+\url{https://youtu.be/tEXLpYN7O-0}
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Transponierte_Matrix#Duale_Abbildungen}\\
-\url{https://de.wikipedia.org/wiki/Dualraum}\\
-\url{https://de.wikipedia.org/wiki/Funktor_(Mathematik)}\\
-\url{https://ncatlab.org/nlab/show/dual+vector+space}\\
-\url{https://ncatlab.org/nlab/show/endofunctor}\\
+\\
+\url{https://de.wikipedia.org/wiki/Satz_des_Pythagoras}\\
+\url{https://de.wikipedia.org/wiki/Euklidischer_Abstand}\\
+\url{https://de.wikipedia.org/wiki/Geradengleichung}
 
 %******************************************************************************************************
 \subsection*{Buch}
 %******************************************************************************************************
 Grundlage ist folgendes Buch:\\
-"`Categories for the Working Mathematician"'\\
-Saunders Mac Lane\\
-1998 | 2nd ed. 1978\\
-Springer-Verlag New York Inc.\\
-978-0-387-98403-2 (ISBN)\\
-{\tiny
-   \url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}}\\
-\\
-"`Topology, A Categorical Approach"'\\
-Tai-Danae Bradley\\
-2020 MIT Press\\
-978-0-262-53935-7 (ISBN)\\ 
-{\tiny
-\url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}}\\
-\\
-Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von\\
-"`An Introduction to Homological Algebra"'\\
-Joseph J. Rotman\\
-2009 Springer-Verlag New York Inc.\\
-978-0-387-24527-0 (ISBN)\\ 
-{\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
-\\
-Grundlagen der lineare Algebra und insbesondere der Dualräume finden sich hier:\\
-"`Lineare Algebra"'\\
-Gerd Fischer, Boris Springborn\\
-2020 Springer Berlin\\
-978-3-662-61644-4 (ISBN)\\
-{\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/53880242-9783662616444-lineare-algebra}}
 
+"`KomplettWissen Mathematik Gymnasium Klasse 5-10"'\\
+Klett Lerntraining bei PONS\\
+978-3-12-926097-5 (ISBN)\\
+{\tiny
+   \url{https://www.lehmanns.de/shop/schulbuch-lexikon-woerterbuch/35031626-9783129260975-komplettwissen-mathematik-gymnasium-klasse-5-10
+   }
+}\\
+\\
+"`Grundlagen der ebenen Geometrie"'
+Hendrik Kasten, Denis Vogel\\
+Springer Berlin\\
+978-3-662-57620-5 (ISBN)\\
+{\tiny
+   \url{
+      https://www.lehmanns.de/shop/mathematik-informatik/43394438-9783662576205-grundlagen-der-ebenen-geometrie
+   }
+}
 
 %******************************************************************************************************
 \subsection*{Lizenz}
@@ -321,114 +318,226 @@ Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
 %******************************************************************************************************
 Das Video hierzu ist zu finden unter 
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.3.6%20Dualraum%20ist%20Funktor}
+   \url{}
 }
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Dualraum ist kontravarianter Funktor}
+\section{Abstand Gerade vom Nullpunkt}
 %                                                                                                     *
 %******************************************************************************************************
-Im ganzen folgenden Text ist $\K$ ein Körper, $V,W, \cdots$ sind $\K$-Vektorräume und $V^*,W^*, \cdots$ sind die zugehörigen dualen Räume.
 
 %******************************************************************************************************
-\subsection{Dualraum}
+\subsection{Abstand Punkt vom Nullpunkt}
 %******************************************************************************************************
-Erinnerung: Der Dualraum zu $V$ ist als Menge die Menge der linearen Abbildungen von $V$ in den Grundkörper $\K$ (die sogenannten Linearformen).  Also
-\begin{equation}
-   V^* := \{ f \colon V \to \K | \text{f ist linear} \}.
-\end{equation}
-Da $\K$ selber (ein eindimensionaler) Vektorraum ist, und da die linearen Abbildungen genau die Homomorphismen der Kategorie der $\K$-Vektorräume sind, können wir auch sagen:
-\begin{equation}
-   V^* = \Hom( V, \K ).
-\end{equation}
-Diese Menge statten wir nun mit der Struktur eines Vektorraums aus vermöge folgender Definitionen mit 
-$f,g \in V^*, x \in V, \alpha \in \K$ :
-\begin{align}
-   &(f+g)(x) := f(x) + g(x)\\
-   &(0)(x) := 0\\
-   &(\alpha f)(x) := \alpha ( f(x) ).
-\end{align}
-Die so definierten Funktionen sind wieder lineare Abbildungen und $V^*$ erfüllt die Axiome eines 
-$\K$-Vektorraums.
+Der Abstand eines Punktes $(x_0, y_0)$ vom Nullpunkt ist \emph{definiert} über den Pythagoras als
+$\sqrt{x_0^2 + y_0^2}$.
 
-%******************************************************************************************************
-\subsection{Transponierte Abbildung}
-%******************************************************************************************************
-Erinnerung: Die zu einer linearen Abbildung $f \colon V \to W$ transponierte, auch dual genannte, Abbildung $f^*$ ist wie folgt definiert:
-\begin{align}
-   &f^* \colon W^* \to V^* \\
-   &h \mapsto h\circ f
-\end{align}
-Oder kürzer $f^* = \_ \circ f$. Als Diagramm
-\begin{equation}
-   \begin{tikzcd}
-      V \arrow[rd, "h \circ f"] \arrow[d, "f"] \\
-      W \arrow[r, "h"] & \K
-   \end{tikzcd}
-\end{equation}
-Hier werden Pfeile aufeinander abgebildet: der untere Pfeil $h$ auf den diagonalen Pfeil $h \circ f$.
+\begin{tikzpicture}[scale=3]
+   \draw[->, thick] (0, -0.5) -- (0, 1.5) node(yaxis)[above]{$y$};
+   \draw[->, thick] (-0.5, 0) -- (2, 0) node(xaxis)[right]{$x$};
 
-%******************************************************************************************************
-\subsection{Funktor}
-%******************************************************************************************************
-Erinnerung: Ein kontravarianter Funktor zwischen zwei Kategorien $\mathcal{C, D}$ ist ein Kategorien-Anti-Homomorphismus. Das heißt er erhält die Strukturen einer Kategorie, die da wären:
-\begin{itemize}
-	\item Objekte
-	\item Morphismen
-	\item Identitäten
-	\item Verknüpfung von Morphismen
-\end{itemize} 
-Ein Funktor $F$ bildet Objekte, Morphismen und Identitäten jeweils wieder in Objekte, Morphismen (in umgekehrter Richtung) und Identitäten ab und ist anti-verträglich zu Verknüpfungen in folgendem Sinne:
-\begin{equation}
-	F( f \circ g ) = F( g ) \circ F(  f ).
-\end{equation}
-
-\begin{equation}
-   \begin{tikzcd}
-      V \arrow[r, "F"] \arrow[d, "f"] & F(V)\\
-      W \arrow[r, "F"]                & F(W) \arrow[u, "F(f)"]
-   \end{tikzcd}
-\end{equation}
-
-Der kontravarianter Hom-Funktor $\Hom( _, A)$ ist für jedes $A \in \mathcal{C}$ ein Funktor nach \textbf{Set}:
-\begin{align}
-   \Hom( _, A) &\colon \mathcal{C} \to \text{\textbf{Set}}\\
-   &X \mapsto \Hom( X, A)\\
-   &(f \colon X \to Y ) \mapsto (\_ \circ f \colon \Hom( Y, A) \to \Hom( X, A))
-\end{align}
-
-%******************************************************************************************************
-\subsection{Beweis Dualraum ist kontravarianter Funktor}
-%******************************************************************************************************
-Male Diagramm mit V -> W und F(W') -> F(V') und eine Variante mit Hom(V,K)
-
-\begin{Theorem}{Dualraum ist kontravarianter Funktor}
-   Der Dualraum ist zusammen mit der transponierten Abbildung ein kontravarianter Endofunktor auf der Kategorie der $\K$-Vektorräume.   
-\end{Theorem}
-\begin{proof}
-   Der Dualraum ist zusammen mit der transponierten Abbildung ist der kontravariante Hom-Funktor 
-   $\Hom( \_, \K )$.
+   \draw (1, -0.05) node[below]{$1$} -- (1, 0.05);
+   \draw (-0.05, 1) node[left]{$1$} -- (0.05, 1);
    
-   Ein paar Details: Der Dualraum ist wieder ein $\K$-Vektorraum. Die transponierte Abbildung ist wieder eine $\K$-lineare Abbildung und sie geht in die entgegengesetzte Richtung. Die Verträglichkeit mit der Verknüpfung liegt an der Assoziativiät der Verknüpfung:
-   \begin{align}
-      F( f \circ g )( h ) &= F(g)(F(f )(h))\\
-      h \circ (f \circ g) &= (h \circ f) \circ g.
-   \end{align}
-   Die Identitätsabbildungen sind lineare Abbildungen und die transponierte einer Identität ist die Identität auf dem Dualraum, da $h \circ \id = h$.
-\end{proof}
+   \fill (3/4,3/8) coordinate (c) circle (0.03);
+   \draw[dashed] (yaxis |- c) node[left]{$y_0 = \frac{3}{8} = 0.375$} -- (c);
+   \draw[dashed] (xaxis -| c) node[below,align=left]{$x_0 = \frac{3}{4}$\\$= 0.75$} -- (c);
+   
+   \node[red] at (1, 0.5) {$\sqrt{x_0^2 + y_0^2} = \sqrt{\frac{45}{64}} \approx 0.838525 \dots$};
+   
+   \draw[dashed, red] (c)  -- (0,0);
+\end{tikzpicture}
+
+%******************************************************************************************************
+\subsection{Abstand eines Punktes einer Geraden vom Nullpunkt}
+%******************************************************************************************************
+Liegt der Punkt auf der Geraden $y = mx + q$ so ist die y-Koordinate zum x-Wer $x_0$ gegeben durch  
+$mx_0 + q$.
+Der Abstand eines Punktes $(x_0, mx_0 + q)$ auf der Geraden vom Nullpunkt ist damit wieder \emph{definiert} über den Pythagoras als
+$\sqrt{x_0^2 + (mx_0 + q)^2} = \sqrt{(m^2+1)x_0^2 + 2mqx_0 + q^2}$. Den zweiten Term haben wir durch die binomische Formel und anschließendes Zusammenfassen erhalten.
+
+\begin{tikzpicture}[scale=3]
+   \draw[->, thick] (0, -0.5) -- (0, 1.5) node(yaxis)[above]{$y$};
+   \draw[->, thick] (-0.5, 0) -- (2, 0) node(xaxis)[right]{$x$};
+   
+   \draw (1, -0.05) node[below]{$1$} -- (1, 0.05);
+   \draw (-0.05, 1) node[left]{$1$} -- (0.05, 1);
+   
+   \fill (3/4,3/8) coordinate (c) circle (0.03);
+   \draw[dashed] (yaxis |- c) node[left]{$mx_0 + q$} -- (c);
+   \draw[dashed] (xaxis -| c) node[below,align=left]{$x_0$} -- (c);
+   
+   \node[red] at (1.3, 0.5) {$\sqrt{(m^2+1)x_0^2 + 2mqx_0 + q^2}$};
+   
+   \draw[blue] (-1/2,1) -- (2,-1/4);
+   
+   \draw[dashed] (yaxis |- c) node[left]{$mx_0+q$} -- (c);
+   \draw[dashed] (xaxis -| c) node[below]{$x_0$} -- (c);
+   
+   \draw[dashed, red] (c)  -- (0,0);
+\end{tikzpicture}
+
+Die blaue Gerade in der Zeichnung ist $y = -\frac{1}{2}x + \frac{3}{4}$, der Punkt ist wie oben $\left( \frac{3}{4}, \frac{3}{8}\right)$.
+
+%******************************************************************************************************
+\subsection{Abstand einer Geraden vom Nullpunkt}
+%******************************************************************************************************
+Den Abstand einer Geraden vom Nullpunkt können wir nicht ermitteln, solange wir diesen Begriff nicht definiert haben. 
+
+%------------------------------------------------------------------------------------------------------
+\begin{Definition}{Abstand einer Geraden vom Nullpunkt}
+   Der \textbf{Abstand einer Geraden vom Nullpunkt} ist das Minimum der Abstände aller Punkte auf der Geraden vom Nullpunkt. Also der Abstand des Punktes auf der Geraden, der dem Nullpunkt am nähesten kommt.
+\end{Definition}
+
+\begin{tikzpicture}[scale=3]
+   \draw[->, thick] (0, -0.5) -- (0, 1.5) node(yaxis)[above]{$y$};
+   \draw[->, thick] (-0.5, 0) -- (2, 0) node(xaxis)[right]{$x$};
+   
+   \draw (1, -0.05) node[below]{$1$} -- (1, 0.05);
+   \draw (-0.05, 1) node[left]{$1$} -- (0.05, 1);
+   
+   \fill (3/4,3/8) coordinate (c) circle (0.03);
+   \draw[dashed] (yaxis |- c) node[left]{$mx_0 + q$} -- (c);
+   \draw[dashed] (xaxis -| c) node[below,align=left]{$x_0$} -- (c);
+   \draw[dashed, blue] (c)  -- (0,0);
+   
+   \draw[blue] (-1/2,1) -- (2,-1/4);
+   
+   \draw[dashed] (yaxis |- c) node[left]{$mx_0+q$} -- (c);
+   \draw[dashed] (xaxis -| c) node[below]{$x_0$} -- (c);
+
+   \coordinate (minimum) at (3/10,3/5);
+   \fill[red] (minimum) circle (0.03); 
+   \node[right, red] at (0.4,0.7){
+      nähester Punkt $(\frac{3}{10}, \frac{3}{5}) = (0.3, 0.6)$; 
+   };
+   \node[right, red] at (0.4,0.9){
+      Abstand = $\sqrt{\frac{9}{20}} = \frac{3}{10}\sqrt{5} \approx 0,6708203932499369...$
+   };
+   \draw[dashed, red] (minimum)  -- (0,0);
+\end{tikzpicture}
+
+Um die $x$-Koordinate dieses Punktes zu finden, müssen wir den Abstand minimieren. Wir müssen also den Term $\sqrt{(m^2+1)x^2 + 2mqx + q^2}$ minimieren. Da die Wurzelfunktion streng monoton steigend ist, im Sinne von $x_1 < x_2 \Leftrightarrow \sqrt{x_1} > \sqrt{x_2}$ für alle $x_1, x_2 \ge 0$, reicht es den Term unter dem Wurzel zu minimieren, also
+\begin{equation}
+   (m^2+1)x^2 + 2mqx + q^2.
+\end{equation}
+
+Da $m,1,2,q$ Konstanten sind, handelt es sich hierbei um eine Parabel. Da immer gilt $m^2 \ge 0$, gilt auch immer $m^2 + 1 > 0$. Es handelt sich also um eine nach oben offene Parabel, welche ihr Minimum am Scheitelpunkt annimmt.
+
+\begin{tikzpicture}[scale=3]
+   \draw[->, thick] (0, -0.5) -- (0, 2.5) node(yaxis)[above]{$y$};
+   \draw[->, thick] (-1, 0) -- (2, 0) node(xaxis)[right]{$x$};
+   
+   \draw (1, -0.05) node[below]{$1$} -- (1, 0.05);
+   \draw (-0.05, 1) node[left]{$1$} -- (0.05, 1);
+   
+   \draw[blue] (-1,5/4) -- (2,-1/4);
+   
+   \coordinate (minimum) at (3/10,3/5);
+   \fill (minimum) circle (0.03); 
+   \draw[dashed] (minimum)  -- (0,0);
+
+	\draw[domain = -1:1.5, variable = \x, red] 
+      plot ({\x}, {1.25*\x*\x - 0.75*\x + 0.5625});
+   \node[right, red] at (1.5, 2.2) {$a x^2 + b x + c$};    
+
+	\draw[domain = -1:2, variable = \x, blue, dashed] 
+      plot ({\x}, {sqrt( 1.25*\x*\x - 0.75*\x + 0.5625 )});    
+   \node[right, blue] at (1.3, 1.2) {$\sqrt{a x^2 + b x + c}$};    
+
+    \coordinate (parabel) at (3/10,9/20);
+    \fill[red] (parabel) circle (0.03); 
+
+    \draw[dashed,red] (yaxis |- parabel) node[left]{Minimum: $\frac{q^2}{m^2+1}$} -- (parabel);
+
+    \draw[dashed,red] (xaxis -| minimum) node[below]{$-\frac{b}{2a}$} -- (3/10, 1.1);
+    
+    \draw[dashed,green] (-1,1) -- (2,1);
+\end{tikzpicture}
+
+In dem Bild oben ist die blau gestrichelte Linie der Abstand der Geraden vom Nullpunkt in Abhängigkeit von $x$:
+\begin{equation}
+   y = \sqrt{ \frac{5}{4}x^2 - \frac{3}{4}x + \frac{9}{16} }.
+\end{equation}
+Die rot gestrichelte Parabel ist dieser Abstand zum Quadrat:
+\begin{equation}
+   y = \frac{5}{4}x^2 - \frac{3}{4}x + \frac{9}{16}.
+\end{equation}
+Der Scheitelpunkt der Parabel ist bei:
+\begin{equation}
+   \left( \frac{9}{20}, \frac{3}{10} \right ).
+\end{equation}
+Diese beiden Kurven scheiden sich bei $y=1$ (grün gestrichelte Linie), da $1 = \sqrt 1$.
+
+Generell ist die $x$-Koordinate des Scheitelpunktes der Parabel $a x^2 + b x + c$ gegeben durch
+\begin{equation}
+   -\frac{b}{2a}.
+\end{equation}
+Erinnerung: das ist genau der Teil in der abc-Formel, der vor dem plus-minus-Wurzel steht:
+\begin{equation}
+   -\frac{b}{2a} \pm \sqrt{\left ( \frac{b}{2a} \right )^2 - \frac{c}{a} }.
+\end{equation}
+ 
+Hier haben wir
+\begin{align}
+   a &:= m^2 + 1\\
+   b &:= 2mq\\
+   c &:= q^2.
+\end{align}
+Also  ist die $x$-Koordinate des Scheitelpunktes unserer speziellen Parabel und damit die $x$-Koordinate des Punktes auf der Geraden mit minimalem Abstand gegeben durch:
+\begin{equation}
+   x_0 = -\frac{2mq}{2(m^2+1)} = \color{red}-\frac{mq}{m^2+1}.
+\end{equation}
+
+Der $y$-Wert ergibt sich durch Einsetzen in die Geradengleichung
+\begin{equation}
+   y_0 = m(-\frac{mq}{m^2+1}) + q = -\frac{m^2q}{m^2 + 1} + \frac{q(m^2 + 1)}{m^2 + 1}
+   = \color{red} \frac{q}{m^2+1}.
+\end{equation} 
+
+Der Abstand vom Nullpunkt, endlich, ist durch Einsetzen in $\sqrt{x_0^2 + y_0^2}$:
+\begin{equation}
+   \sqrt{\left(-\frac{mq}{m^2+1} \right)^2 + \left(\frac{q}{m^2+1} \right)^2} =
+   \sqrt{\frac{m^2q^2 + q^2}{(m^2+1)^2}} = 
+   \color{red} \sqrt{\frac{q^2}{m^2+1}}.
+\end{equation}
+
+Wir haben auch
+\begin{equation}
+   x_0 = -my_0,
+\end{equation}
+ein nach all den komplizierten Formeln erstaunlich einfacher Zusammenhang.
+
+In dem Beispiel $y = -\frac{1}{2}x + \frac{5}{2}$ in der Zeichnung oben ist der Abstand $\sqrt{5}$ und der näheste Punkt ist $(1,2)$.
 
 %******************************************************************************************************
 %                                                                                                     *
 \section{Schluss}
 %                                                                                                     *
 %******************************************************************************************************
-Auf der einen Seite klingt das Wort kontravarianter Funktor vielleicht schlimmer als es ist: wird begegnen ihnen schon im Grundstudium im Bereich normaler handelsüblicher mathematischer Strukturen.
+Der Abstand der Geraden $y=mx+q$ zum Nullpunkt ist 
+\begin{equation}
+	\sqrt{\frac{q^2}{m^2+1}}.
+\end{equation}
+Der näheste Punkt ist
+\begin{equation}
+	\left( -\frac{mq}{m^2+1}, \frac{q}{m^2+1} \right).
+\end{equation}
 
-Auf der anderen Seite erkennen wir nun, dass hinter dem Dualraum ein allgemeines Prinzip sich verbirgt, und es mehr ist als eine bloße Zuordnung von Vektorräumen.
+Es gibt einen einfachen Zusammenhang zwischen der $x$- und der $y$-Koordinate $x_0$ und $y_0$ des Punktes mit dem minimalen Abstand:
+\begin{equation}
+   x_0 = -my_0.
+\end{equation}
 
-Oft erweisen sich die kategorischen Definitionen als die "`richtigen"' im Sinne der nützlicheren. Darüber hinaus erlauben sie die Anwendung des kategorischen Apparates. Dualraum ist zusammen mit der transponierten Abbildung erhalten hiermit das Abzeichen "`kategorisch"'.
-
+%******************************************************************************************************
+%                                                                                                     *
+\section{TODO:}
+%                                                                                                     *
+%******************************************************************************************************
+\begin{itemize}
+   \item Tafelbild auf Blatt Papier
+\end{itemize}
 
 \begin{backup}
     (Zur Zeit nicht benötigter Inhalt)
@@ -448,14 +557,6 @@ Oft erweisen sich die kategorischen Definitionen als die "`richtigen"' im Sinne 
       Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
       2020 MIT Press, 978-0-262-53935-7 (ISBN)
 
-   \bibitem[Rotman2009]{Rotman}
-   	Joseph J. Rotman, \emph{An Introduction to Homological Algebra},
-   	2009 Springer-Verlag New York Inc., 978-0-387-24527-0 (ISBN)
-      
-   \bibitem[FischerSpringborn2020]{Fischer}
-     Gerd Fischer, Boris Springborn, \emph{Lineare Algebra},
-     2020 Springer Berlin, 978-3-662-61644-4 (ISBN)
-
 \end{thebibliography}
 
 %******************************************************************************************************
@@ -472,14 +573,7 @@ Oft erweisen sich die kategorischen Definitionen als die "`richtigen"' im Sinne 
 \begin{tabular}{ll}
     $A, B, C, \cdots, X, Y, Z$          & Objekte\\
     $F,G,L,R$ & Funktoren\\
-    $f, g, h, r, s, \cdots$   & Homomorphismen\\
-    $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
-    \textbf{Set} & Die Kategorie der Mengen\\
-    $\Hom( X, Y)$ & Die Menge der Homomorphismen von $X$ nach $Y$\\
-    $\K$         &Ein Körper\\
-    $V, W, \cdots$ &$\K$-Vektorräume\\
-    $\alpha, \beta, \cdots$ & Skalare des Vektorraums also Elemente aus $\K$\\
-    $V^*, W^*, \cdots$ & Dualräume
+
 \end{tabular}
 
 \end{document}
