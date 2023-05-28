@@ -225,6 +225,8 @@ Copyright (C) 2023 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 Natürliche Transformationen sind Morphismen zwischen Funktoren. Dabei wird der Quell-Funktor mit den Mitteln, nämlich Morphismen, der Ziel-Kategorie in den Ziel-Funktor überführt. Wir können also sagen, dass die beiden Funktoren "`innerhalb"' der Ziel-Kategorie vergleichbar sind.
 
+Diese sind uns bereits beim Thema Morphismen zwischen Morphismen aufgefallen als ein oft  (aber nicht immer) wiederkehrendes Prinzip.
+
 Ein Funktor ist das Finden der Form oder Figur der Quell-Kategorie in der Ziel-Kategorie. Zwei Funktoren der selben Quell-Kategorie entspricht also dem Finden von zwei Figuren der selben Form in der Ziel-Kategorie. Falls eine natürliche Transformation von dem einen Funktor in den andern existiert, dann können wir die eine Figur innerhalb der Ziel-Kategorie in die andere überführen.
 
 So wie wir zwei homotope Wege innerhalb des Trägerraumes ineinander überführen können. Natürliche Transformationen und Homotopien liegen also intuitiv sehr nahe bei einander.
@@ -252,7 +254,7 @@ Axiome der Kategorien, Funktor.
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.3.6%20Dualraum%20ist%20Funktor}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.4%20Nat%C3%BCrliche%20Transformationen}
 }
 
 %******************************************************************************************************
@@ -261,16 +263,21 @@ Der Begleittext als PDF und als LaTeX findet sich unter
 Siehe auch in den folgenden Videos:\\
 v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
 \url{https://youtu.be/Ojf5LQGeyOU}\\
+v5.0.1.0.3.5 (Höher) Kategorien - Kategorien von Homomorphismen\\
+\url{https://youtu.be/v1F5BFH8nbo}\\
+v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
+\url{https://youtu.be/Ojf5LQGeyOU}\\
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Transponierte_Matrix#Duale_Abbildungen}\\
-\url{https://de.wikipedia.org/wiki/Dualraum}\\
-\url{https://de.wikipedia.org/wiki/Funktor_(Mathematik)}\\
-\url{https://ncatlab.org/nlab/show/dual+vector+space}\\
-\url{https://ncatlab.org/nlab/show/endofunctor}\\
+\url{https://de.wikipedia.org/wiki/Nat%C3%BCrliche_Transformation}\\
+\url{https://ncatlab.org/nlab/show/natural+transformation}\\
+\url{https://en.wikipedia.org/wiki/Category_of_small_categories}\\
+\url{https://ncatlab.org/nlab/show/small+category}\\
+\url{https://de.wikipedia.org/wiki/Homotopie}\\
+\url{https://ncatlab.org/nlab/show/natural+isomorphism}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -322,18 +329,103 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Dualraum ist kontravarianter Funktor}
+\section{Natürliche Transformation}
 %                                                                                                     *
 %******************************************************************************************************
-Im ganzen folgenden Text ist $\K$ ein Körper, $V,W, \cdots$ sind $\K$-Vektorräume und $V^*,W^*, \cdots$ sind die zugehörigen dualen Räume.
+Seien im Folgenden $\mathcal{C,D}$ zwei Kategorien und $\mathcal F,\mathcal G \colon \mathcal C \to \mathcal D$ zwei Funktoren mit $\mathcal C$ als Quell- und $\mathcal D$ als Zeil-Kategorie.
 
 %******************************************************************************************************
-\subsection{Dualraum}
+\subsection{Definition einer natürlichen Transformation}
 %******************************************************************************************************
-Erinnerung: Der Dualraum zu $V$ ist als Menge die Menge der linearen Abbildungen von $V$ in den Grundkörper $\K$ (die sogenannten Linearformen).  Also
+\begin{Definition}{Natürliche Transformation}
+   Eine \textbf{natürliche Transformation} 
+   \begin{equation}
+      \alpha \colon \mathcal F \Rightarrow \mathcal G
+   \end{equation}
+   ist eine Schar von Homomorphismen in der Ziel-Kategorie $\mathcal{D}$ mit Index die Objekte der Quell-Kategorie $\mathcal C$:
+   \begin{equation}
+      \left (\alpha_X \colon \mathcal F(X) \to \mathcal G(X) \right )_{X \in \mathcal C}.
+   \end{equation}
+   mit denen jeweils die Bilder der Objekte der Quell-Kategorie verbunden werden. Diese müssen mit den Bildern der Morphismen in dem Sinne verträglich sein, dass alle Diagramme der folgenden Art, d.h. für alle $f \colon X \to Y$, mit $f \in \mathcal C$, kommutativ sind:
+   \begin{equation}\label{kommutativ}
+      \begin{tikzcd}
+         \mathcal F(X) \arrow[r, "\alpha_X"] \arrow[d, "\mathcal F(f)"]
+            & \mathcal  G(X) \arrow[d, "\mathcal G(f)"]\\
+         \mathcal F(Y) \arrow[r, "\alpha_Y"]  
+            & \mathcal  G(Y)\\
+      \end{tikzcd}
+   \end{equation}
+\end{Definition}
+
+Eine Schar ist nur ein anderes Wort für Familie oder Funktion. Hier müssen wir auch Klassen-Funktionen zulassen, da die Klasse der Objekte der Quell-Kategorie durchaus eine echte Klasse sein kann. In unseren Gemälden sagen wir das so:
+
 \begin{equation}
-   V^* := \{ f \colon V \to \K | \text{f ist linear} \}.
+   \begin{tikzcd}
+      \mathcal C 
+         \arrow[r, bend left, "\mathcal F"{name=0}] 
+         \arrow[r, bend right, swap, "\mathcal G"{name=1}] 
+         \arrow[Rightarrow, from=0, to=1,shorten >= 6pt, yshift = -3pt, "\alpha"{yshift=3pt}]
+      & \mathcal D
+   \end{tikzcd}
 \end{equation}
+Wir haben nun drei Arten von Pfeilen: die zwischen Objekten, die zwischen Kategorien und die zwischen Funktoren. Die Pfeile zwischen Funktoren sind dabei eigentlich Scharen von Pfeilen zwischen Objekten.
+
+%******************************************************************************************************
+\subsection{Zweimaliges Finden einer Form}
+%******************************************************************************************************
+Sei $\mathcal C$ die Quell-Kategorie der Funktoren $\mathcal F$ und $\mathcal G$, die die selbe Ziel-Kategorie $\mathcal D$ haben. Dies können wir so beschreiben, dass $\mathcal C$ eine Form oder Figur ist, die wir in $\mathcal D$ wiederfinden. Bei zwei Funktoren handelt es sich also um ein zweimaliges Finden einer Form.
+
+Sei z.B. $\mathcal C$ folgende Kategorie mit drei Objekten (wir lassen die Identitäten weg):
+\begin{equation}
+   \begin{tikzcd}
+      X \arrow[dd] \arrow[dr] \\ 
+                 & Y \arrow[dl]\\
+      Z   
+   \end{tikzcd}
+\end{equation}
+
+Die Ziel-Kategorie hat die Objekte $A,B,C,D,E,F$ und sei wie folgt. 
+\begin{equation}
+   \begin{tikzcd}
+     A \arrow[dd] \arrow[dr] \arrow[dddrr, bend right] \\ 
+      &B \arrow[dl] \arrow[ddr] &D \arrow[dd] \arrow[dr]\\
+      C &&& E \arrow[dl]\\
+     &&F
+   \end{tikzcd}
+\end{equation}
+
+Betrachten wir nun die folgenden zwei Funktoren $\color{blue} \mathcal F$ und $\color{red} \mathcal G$
+\begin{equation}
+   \begin{tikzcd}
+      X \arrow[dd] \arrow[dr] \arrow[rrr, blue, dashed, bend left, "\mathcal F"] \arrow[rrrrrd, red, dashed, bend right] &&& A \arrow[dd, blue] \arrow[dr, blue] \arrow[dddrr, bend right]\\ 
+      & Y \arrow[dl] \arrow[rrr, blue, dashed, bend left] \arrow[rrrrrd, red, dashed, bend right] &&&B \arrow[dl, blue] \arrow[ddr] &D \arrow[dd, red] \arrow[dr, red]\\
+      Z \arrow[rrr, blue, dashed, bend left] \arrow[rrrrrd, red, dashed, bend right, "\mathcal G"] &&&C &&& E \arrow[dl, red]\\
+      &&&&&F
+   \end{tikzcd}
+\end{equation}
+Diese finden beide die Dreiecksform als Teil der Ziel-Kategorie. Wir können aber keine natürliche Transformation finden, da Morphismen von $A \to D$, $B \to E$ und $C \to F$ fehlen. Es gibt ein Loch in der Ziel-Kategorie, welches das Überführen der einen gefundenen Form in die zweite innerhalb der Ziel-Kategorie verhindert.
+
+Neben den Lücken, weil es gar keinen Morphismus gibt, kann es auch noch das Problem geben, dass die entstehenden Diagramme \eqref{kommutativ} nicht kommutativ sind.
+
+Geben wir unserer Ziel-Kategorie wie im nächsten Gemälde gezeigt vier Morphismen, so existiert eine natürliche Transformation 
+$\color{green} \mathcal F \Rightarrow \mathcal G$. 
+\begin{equation}
+	\begin{tikzcd}
+		X \arrow[dd] \arrow[dr] \arrow[rrr, blue, dashed, bend left, "\mathcal F"{name=0}] \arrow[rrrrrd, red, dashed, bend right] &&& A \arrow[dd, blue] \arrow[dr, blue] \arrow[dddrr, bend right] \arrow[drr, green] \arrow[ddrrr, bend left]\\ 
+		& Y \arrow[dl] \arrow[rrr, blue, dashed, bend left] \arrow[rrrrrd, red, dashed, bend right] &&&B \arrow[dl, blue] \arrow[ddr] \arrow[drr, green] &D \arrow[dd, red] \arrow[dr, red]\\
+		Z \arrow[rrr, blue, dashed, bend left] \arrow[rrrrrd, red, dashed, bend right, "\mathcal G"{name=1}] &&&C  \arrow[drr, green] &&& E \arrow[dl, red]\\
+		&&&&&F
+		\arrow[Rightarrow, green, from=0, to=1,shorten >= 6pt, yshift = -3pt, "\alpha"{yshift=3pt}]
+	\end{tikzcd}
+\end{equation}
+
+TODO: Homotopie mit Kreisen in Ring
+
+TODO: Funktor Kategorie
+
+TODO: Ein paar Worte zum Wort natürlich
+
+TODO: 
 
 %******************************************************************************************************
 %                                                                                                     *
@@ -342,9 +434,8 @@ Erinnerung: Der Dualraum zu $V$ ist als Menge die Menge der linearen Abbildungen
 %******************************************************************************************************
 Noch zu erledigen sind
 \begin{itemize}
-   \item Welche Pfeilsorten für Nat Trans
-   \item Hom(...) in D^C schreiben wir Nat(...)
-   \item Wie schreiben wir D^C noch? Wenn es noch eine weitere Schreibweise gibt.
+   \item Hom(...) in $D^C$ schreiben wir Nat(...)
+   \item Wie schreiben wir $D^C$ noch? Wenn es noch eine weitere Schreibweise gibt.
    \item Beispiel homotope und nicht homotope Kreise
    \item Natürlichkeit ist ein kategorieller Begriff und erfordert eine präzise Angabe der vorliegenden Daten: Quell, Ziel, Funktor und Schar von Morphismen.
    \item Kategorien von Prägarben
