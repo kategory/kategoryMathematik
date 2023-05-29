@@ -277,8 +277,8 @@ Siehe auch in den folgenden Seiten:\\
 \url{https://en.wikipedia.org/wiki/Category_of_small_categories}\\
 \url{https://ncatlab.org/nlab/show/small+category}\\
 \url{https://de.wikipedia.org/wiki/Homotopie}\\
-\url{https://ncatlab.org/nlab/show/natural+isomorphism}
-
+\url{https://ncatlab.org/nlab/show/natural+isomorphism}\\
+\url{https://www.youtube.com/watch?v=Ir-DiecNUmA}
 %******************************************************************************************************
 \subsection*{Buch}
 %******************************************************************************************************
@@ -419,7 +419,23 @@ $\color{green} \mathcal F \Rightarrow \mathcal G$.
 	\end{tikzcd}
 \end{equation}
 
-TODO: Homotopie mit Kreisen in Ring
+%******************************************************************************************************
+\subsection{Das erinnert sehr an Homotopie}
+%******************************************************************************************************
+Das Loch oder die Lücke, die verhindert, dass wir eine Figur innerhalb des Ziels in die anderen überführen können, erinnert sehr an nicht homotope Kurven.
+
+\begin{tikzpicture}
+	\draw[fill=gray!30,even odd rule] (0,0) circle (3cm) (0,0) circle (1cm) 
+		node {L};
+
+	\draw[blue]  (0,2) circle (0.5 cm) node[shift={(  0:0.75)},blue ]{$A$};
+	\draw[green] (2,0) circle (0.5 cm) node[shift={( 90:0.75)},green]{$B$};
+	\draw[red]   (0,0) circle (1.25cm) node[shift={(180:1.50)},red  ]{$C$};
+\end{tikzpicture}
+
+In dieser Situation, in der der topologische Raum der Betrachtung der graue Bereich ist, kann der Quell-Kreis $\color{blue}A$ in den Ziel-Kreis $\color{green}B$ innerhalb der grauen Fläche deformiert werden. $\color{blue}A$ kann aber nicht in $\color{red}C$ überführt werden, da das Loch $L$ im Weg ist. $\color{blue}A$ und $\color{green}B$ sind homotop $\color{blue}A$ und $\color{red}C$ nicht.
+
+Der fehlende Raum im Loch $L$ entspricht den fehlenden Morphismen, falls es keine natürliche Transformation gibt.
 
 TODO: Funktor Kategorie
 
