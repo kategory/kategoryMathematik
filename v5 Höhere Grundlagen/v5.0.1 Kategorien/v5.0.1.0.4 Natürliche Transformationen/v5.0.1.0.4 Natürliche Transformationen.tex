@@ -437,11 +437,35 @@ In dieser Situation, in der der topologische Raum der Betrachtung der graue Bere
 
 Der fehlende Raum im Loch $L$ entspricht den fehlenden Morphismen, falls es keine natürliche Transformation gibt.
 
-TODO: Funktor Kategorie
+%******************************************************************************************************
+\subsection{Funktor Kategorie}
+%******************************************************************************************************
+Natürliche Transformationen laufen letztendlich auf Morphismen in der Ziel-Kategorie hinaus. Es vererben sich einige Eigenschaften der Morphismen auf die natürlichen Transformationen. Es ist recht leicht zu zeigen, dass
+\begin{itemize}
+	\item wir zwei nat. Trans. verknüpfen können, indem wir die Morphismen ihrer Scharen verknüpfen,
+	\item diese Verknüpfung die Assoziativität erbt
+	\item und dass die Schar mit Identitäten die Rolle der Identität bei dieser Verknüpfung von nat. Trans. spielt.
+\end{itemize}
+Wenn die Quell-Kategorie klein ist (eine Menge ist), ist eine nat. Trans. selber eine Menge und kann Element von Klassen sein. Dann bilden die Funktoren als Objekte mit den nat. Trans als Morphismen eine Kategorie: die Funktorkategorie. Die Kategorie aller Funktoren $\mathcal C \to \mathcal D$ bezeichnen wir mit
+\begin{equation*}
+	\mathcal D ^{\mathcal C}
+\end{equation*}
+und wir bezeichnen die Hom-Klasse mit Nat:
+\begin{equation*}
+	\operatorname{Nat}( \mathcal F, \mathcal G) := \operatorname{Hom}_{\mathcal D ^{\mathcal C}}( \mathcal F, \mathcal G).
+\end{equation*}
 
-TODO: Ein paar Worte zum Wort natürlich
-
-TODO: 
+%******************************************************************************************************
+\subsection{Ein paar Worte zum Wort natürlich}
+%******************************************************************************************************
+Wenn wir sagen, es gibt da und da einen \textbf{natürlichen} Homomorphismus, ist mit diesem unscheinbar daherkommenden Wort immer viel gemeint:
+\begin{itemize}
+	\item Es gibt zwei Kategorien,
+	\item es gibt zwei Funktoren zwischen denen,
+	\item "`der"' Homomorphismus ist eigentlich eine Schar von Homomorphismen und
+	\itme diese Schar verträgt sich (kommutiert) mit den Bildern der Homomorphismen unter den zwei Funktoren im Sinne von \eqref{kommutativ}.
+\end{itemize} 
+Natürlichkeit ist ein kategorischer Begriff und erfordert eine präzise Angabe der vorliegenden Daten: Quell- und Ziel-Kategorie, Quell- und Ziel-Funktor sowie eine Schar von Morphismen.
 
 %******************************************************************************************************
 %                                                                                                     *
@@ -450,10 +474,6 @@ TODO:
 %******************************************************************************************************
 Noch zu erledigen sind
 \begin{itemize}
-   \item Hom(...) in $D^C$ schreiben wir Nat(...)
-   \item Wie schreiben wir $D^C$ noch? Wenn es noch eine weitere Schreibweise gibt.
-   \item Beispiel homotope und nicht homotope Kreise
-   \item Natürlichkeit ist ein kategorieller Begriff und erfordert eine präzise Angabe der vorliegenden Daten: Quell, Ziel, Funktor und Schar von Morphismen.
    \item Kategorien von Prägarben
 \end{itemize}
 
