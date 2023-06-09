@@ -231,13 +231,13 @@ Ein Funktor ist das Finden der Form oder Figur der Quell-Kategorie in der Ziel-K
 
 So wie wir zwei homotope Wege innerhalb des Trägerraumes ineinander überführen können. Natürliche Transformationen und Homotopien liegen also intuitiv sehr nahe bei einander.
 
-Algebraisch ist eine natürliche Transformation eine Familie von Morphismen in der Ziel-Kategorie und zwar für jedes Objekt der Quell-Kategorie einer. Diese Morphismen müssen mit den Bilder der Morphismen der Quell-Kategorie in der Ziel-Kategorie kommutieren. 
+Algebraisch ist eine natürliche Transformation eine Familie von Morphismen in der Ziel-Kategorie und zwar für jedes Objekt der Quell-Kategorie ein Morphismus. Diese Morphismen müssen mit den Bilder der Morphismen der Quell-Kategorie in der Ziel-Kategorie kommutieren. 
 
-Das führt dazu, dass die Funktoren von C nach D als OBJEKTE und die natürlichen Transformationen als HOMOMORPHISMEN die Axiome einer Kategorie erfüllen. Wir nennen die Funktorkategorie D hoch C. 
+Das führt dazu, dass die Funktoren von $\mathcal C$ nach $\mathcal D$ als \emph{Objekte} und die natürlichen Transformationen als \emph{Homomorphismen} die Axiome einer Kategorie erfüllen. Wir nennen die Funktorkategorie $\mathcal D$ hoch $\mathcal C$ und schreiben $\mathcal D ^ {\mathcal C}$.
 
 Somit können wir uns natürliche Transformationen auch als Kategorien-Homomorphismen denken. Dies ist allerdings insofern problematisch, als dann einige Objekte keine Mengen (also mathematische Objekte) sind. Wollen wir diese Intuition präzisieren, so bilden wir eine Kategorie der kleiner Kategorien. Dann stimmt auch dieser Begriff ohne Probleme.
 
-Ein natürlicher Isomorphismus zwischen zwei Funktoren ist eine natürliche Transformation mit einer weiteren natürlichen Transformation, die das Inverse ist. Dem entspricht dann dem Finden von zwei identischen Figuren, die wir innerhalb der Kategorie ineinander überführen können.
+Ein natürlicher Isomorphismus zwischen zwei Funktoren ist eine natürliche Transformation mit einer weiteren natürlichen Transformation, die das Inverse ist. Das entspricht dann dem Finden von zwei identischen Figuren, die wir innerhalb der Kategorie ineinander überführen können.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -278,7 +278,11 @@ Siehe auch in den folgenden Seiten:\\
 \url{https://ncatlab.org/nlab/show/small+category}\\
 \url{https://de.wikipedia.org/wiki/Homotopie}\\
 \url{https://ncatlab.org/nlab/show/natural+isomorphism}\\
-\url{https://www.youtube.com/watch?v=Ir-DiecNUmA}
+\url{https://www.youtube.com/watch?v=Ir-DiecNUmA}\\
+\url{https://ncatlab.org/nlab/show/presheaf}\\
+\url{https://ncatlab.org/nlab/show/category+of+presheaves}\\
+\url{https://mathoverflow.net/questions/64365/natural-transformations-as-categorical-homotopies}
+
 %******************************************************************************************************
 \subsection*{Buch}
 %******************************************************************************************************
@@ -332,7 +336,7 @@ Das Video hierzu ist zu finden unter
 \section{Natürliche Transformation}
 %                                                                                                     *
 %******************************************************************************************************
-Seien im Folgenden $\mathcal{C,D}$ zwei Kategorien und $\mathcal F,\mathcal G \colon \mathcal C \to \mathcal D$ zwei Funktoren mit $\mathcal C$ als Quell- und $\mathcal D$ als Zeil-Kategorie.
+Seien im Folgenden $\mathcal{C,D}$ zwei Kategorien und $\mathcal F,\mathcal G \colon \mathcal C \to \mathcal D$ zwei Funktoren mit $\mathcal C$ als Quell- und $\mathcal D$ als Ziel-Kategorie.
 
 %******************************************************************************************************
 \subsection{Definition einer natürlichen Transformation}
@@ -357,7 +361,7 @@ Seien im Folgenden $\mathcal{C,D}$ zwei Kategorien und $\mathcal F,\mathcal G \c
    \end{equation}
 \end{Definition}
 
-Eine Schar ist nur ein anderes Wort für Familie oder Funktion. Hier müssen wir auch Klassen-Funktionen zulassen, da die Klasse der Objekte der Quell-Kategorie durchaus eine echte Klasse sein kann. In unseren Gemälden sagen wir das so:
+Eine Schar ist nur ein anderes Wort für Familie oder Funktion. Hier müssen wir auch Klassen-Funktionen zulassen, da die Klasse der Objekte der Quell-Kategorie durchaus eine echte Klasse sein kann. In unseren Gemälden stellen wir natürliche Transformationen oft so dar:
 
 \begin{equation}
    \begin{tikzcd}
@@ -405,9 +409,9 @@ Betrachten wir nun die folgenden zwei Funktoren $\color{blue} \mathcal F$ und $\
 \end{equation}
 Diese finden beide die Dreiecksform als Teil der Ziel-Kategorie. Wir können aber keine natürliche Transformation finden, da Morphismen von $A \to D$, $B \to E$ und $C \to F$ fehlen. Es gibt ein Loch in der Ziel-Kategorie, welches das Überführen der einen gefundenen Form in die zweite innerhalb der Ziel-Kategorie verhindert.
 
-Neben den Lücken, weil es gar keinen Morphismus gibt, kann es auch noch das Problem geben, dass die entstehenden Diagramme \eqref{kommutativ} nicht kommutativ sind.
+Neben den Lücken (es fehlen notwendige Morphismen) kann es auch noch das Problem geben, dass die entstehenden Diagramme \eqref{kommutativ} nicht kommutativ sind.
 
-Geben wir unserer Ziel-Kategorie wie im nächsten Gemälde gezeigt vier Morphismen, so existiert eine natürliche Transformation 
+Geben wir unserer Ziel-Kategorie die im nächsten Gemälde gezeigten vier Morphismen, so existiert eine natürliche Transformation 
 $\color{green} \mathcal F \Rightarrow \mathcal G$. 
 \begin{equation}
 	\begin{tikzcd}
@@ -433,9 +437,15 @@ Das Loch oder die Lücke, die verhindert, dass wir eine Figur innerhalb des Ziel
 	\draw[red]   (0,0) circle (1.25cm) node[shift={(180:1.50)},red  ]{$C$};
 \end{tikzpicture}
 
-In dieser Situation, in der der topologische Raum der Betrachtung der graue Bereich ist, kann der Quell-Kreis $\color{blue}A$ in den Ziel-Kreis $\color{green}B$ innerhalb der grauen Fläche deformiert werden. $\color{blue}A$ kann aber nicht in $\color{red}C$ überführt werden, da das Loch $L$ im Weg ist. $\color{blue}A$ und $\color{green}B$ sind homotop $\color{blue}A$ und $\color{red}C$ nicht.
+In dieser Situation, in der der topologische Raum der Betrachtung der graue Bereich ist, kann der Quell-Kreis $\color{blue}A$ in den Ziel-Kreis $\color{green}B$ innerhalb der grauen Fläche stetig deformiert werden. $\color{blue}A$ kann aber nicht in $\color{red}C$ steig überführt werden, da das Loch $L$ im Weg ist. $\color{blue}A$ und $\color{green}B$ sind homotop $\color{blue}A$ und $\color{red}C$ nicht.
 
-Der fehlende Raum im Loch $L$ entspricht den fehlenden Morphismen, falls es keine natürliche Transformation gibt.
+Der fehlende Raum im Loch $L$ entspricht den fehlenden Morphismen, falls es keine natürliche Transformation gibt. 
+
+Diese Ähnlichkeit wird in 
+{\tiny 
+   \url{https://mathoverflow.net/questions/64365/natural-transformations-as-categorical-homotopies}
+}
+präzisiert.
 
 %******************************************************************************************************
 \subsection{Funktor Kategorie}
@@ -463,21 +473,35 @@ Wenn wir sagen, es gibt da und da einen \textbf{natürlichen} Homomorphismus, is
 	\item Es gibt zwei Kategorien,
 	\item es gibt zwei Funktoren zwischen denen,
 	\item "`der"' Homomorphismus ist eigentlich eine Schar von Homomorphismen und
-	\itme diese Schar verträgt sich (kommutiert) mit den Bildern der Homomorphismen unter den zwei Funktoren im Sinne von \eqref{kommutativ}.
+	\item diese Schar verträgt sich (kommutiert) mit den Bildern der Homomorphismen unter den zwei Funktoren im Sinne von $\eqref{kommutativ}$.
 \end{itemize} 
 Natürlichkeit ist ein kategorischer Begriff und erfordert eine präzise Angabe der vorliegenden Daten: Quell- und Ziel-Kategorie, Quell- und Ziel-Funktor sowie eine Schar von Morphismen.
+
+%******************************************************************************************************
+\subsection{Kategorien von Prägarben}
+%******************************************************************************************************
+Das ganze funktioniert auch für kontravariante Funktoren.
+
+\begin{Definition}{Prägarbe}
+   Eine \textbf{Prägarbe} $\mathcal F$ ist ein kontravarianter Funktor nach Set:
+   \begin{equation}
+      \mathcal F \colon \mathcal C ^{\text{op}} \to \text{\textbf{Set}}.
+   \end{equation}
+\end{Definition}
+
+Falls $\mathcal C$ eine kleine Kategorie ist, dann ist $\text{\textbf{Set}} ^ {\mathcal C ^{\text{op}}}$ eine Funktor-Kategorie: die Kategorie der Prägarben auf $\mathcal C$, also die Kategorie der kontravarianten Funktoren von $\mathcal C$ nach Set. Diese Kategorien haben sehr gute Eigenschaften und bilden ein wichtiges Beispiel für Funktorkategorien.
 
 %******************************************************************************************************
 %                                                                                                     *
 \section{TODO}
 %                                                                                                     *
 %******************************************************************************************************
+\begin{backup}
 Noch zu erledigen sind
 \begin{itemize}
-   \item Kategorien von Prägarben
+   \item leer
 \end{itemize}
-
-
+\end{backup}
 
 \begin{backup}
     (Zur Zeit nicht benötigter Inhalt)
@@ -516,15 +540,13 @@ Noch zu erledigen sind
 
 \begin{tabular}{ll}
     $A, B, C, \cdots, X, Y, Z$          & Objekte\\
-    $F,G,L,R$ & Funktoren\\
-    $f, g, h, r, s, \cdots$   & Homomorphismen\\
+    $\mathcal F,\mathcal G$             & Funktoren\\
+    $f, g, h, r, s, \cdots$             & Homomorphismen\\
     $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
-    \textbf{Set} & Die Kategorie der Mengen\\
-    $\Hom( X, Y)$ & Die Menge der Homomorphismen von $X$ nach $Y$\\
-    $\K$         &Ein Körper\\
-    $V, W, \cdots$ &$\K$-Vektorräume\\
-    $\alpha, \beta, \cdots$ & Skalare des Vektorraums also Elemente aus $\K$\\
-    $V^*, W^*, \cdots$ & Dualräume
+    \textbf{Set}                        & Die Kategorie der Mengen\\
+    $\Hom( X, Y)$                       & Die Menge der Homomorphismen von $X$ nach $Y$\\
+    $\alpha, \beta, \cdots$             & natürliche Transformationen\\
+    $\mathcal C ^{\text{op}}$           & Duale Kategorie
 \end{tabular}
 
 \end{document}
