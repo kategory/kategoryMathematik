@@ -1,0 +1,438 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v5.0.1.0.4.4 Natürlicher Isomorphismus.tex                                                       *
+%                                                                                                  *
+% Copyright (C) 2023 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v5.0.1.0.4.4 Natürlicher Isomorphismus is part of kategoryMathematik.                            *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Theorem}
+\myTheorem{Example}
+\myTheorem{Remark}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Höhere Grundlagen) Kategorien\\[1cm]
+\textbf{v5.0.1.0.4.4 Natürlicher Isomorphismus}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2023 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Natürliche Isomorphismen werden oft beiläufig eingeführt. So sagen wir z.B. (im Beispiel reden wir von Mengen), dass es eine Bijektion zwischen den Morphismen des Produktes von $X$ und $Y$ nach $Z$ und den Morphismen von $X$ in die Morphismen von $Y$ nach $Z$ gibt. Wir sagen weiter salopp, dass dieser natürlich in $X$, $Y$ und $Z$ sei.
+
+Was heißt denn hier "`natürlich in"'? Es bedeutet, dass wir einen natürlichen Isomorphismus (weil Bijektion) zwischen $\Hom( X \times Y, Z )$ und $\Hom( X, \Hom( Y, Z ))$ haben. D.h. die oben genannte Bijektion ist verträglich mit Morphismen (hier Funktionen zwischen Mengen) zwischen den Objekten.
+
+Die Bijektion von oben ist nichts anderes als das Currying. Dessen Natürlichkeit ist ein oft verschwiegener Vorteil.
+
+TODO: Beispiel für Currying Vorteil weil Verträglich
+
+Wenn wir genauer hinsehen haben wir eine ganze Schar von Isomorphismen, nämlich für jede Wahl von $X$, $Y$ und $Z$ einen. Diese Schar sind die Komponenten der natürlichen Transformation.
+
+Eine natürlicher Isomorphismus findet zwischen zwei Funktoren statt. Sie ist eine Schar von Isomorphismen, die mit den Bildern der Morphismen verträgliche sind (kommutieren).
+
+Was wir also mit "`ist natürlich"' sagen ist, dass es zwei Kategorien gibt mit zwei Funktoren zwischen ihnen und dass die Schar der Isomorphismen Komponenten eines natürlichen Isomorphismuses sind, die somit verträglich mit den Bildern von Morphismen unter den beiden Funktoren sind.
+
+Aber was sind denn im obigen Beispiel die Funktoren? Das ist die Funktion des "`in"' von "`ist natürlich in"': Natürlich in $X$ bedeutet, dass, wenn wir $X$ als Variable ansehen, dann herhalten wir zwei Funktoren, so dass ...
+
+Im obigen Beispiel haben wir drei mal zwei Funktoren und zwar für jede Wahl der beiden anderen Variablen.
+
+Wir sagen also in Wirklichkeit:
+1. Wir haben zwei Kategorien
+2. In jeder der drei Variablen erhalten wir bei fester Wahl der anderen beiden zwei Funktoren.
+3. Dieser Funktor bildet auch Morphismen ab, und das so, dass Identitäten und Verknüpfungen erhalten bleiben.
+4. Die Isomorphismen sind Isomorphismen in der Zielkategorie.
+5. Die Verträglichkeitsbedingung für natürliche Transformationen ist für diese Isomorphismen und deren Inverse erfüllt.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Axiome der Kategorien, Funktor, natürliche Transformation.
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+{\tiny
+   \url{}
+}
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\
+v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
+\url{https://youtu.be/Ojf5LQGeyOU}\\
+v5.0.1.0.3.5 (Höher) Kategorien - Kategorien von Homomorphismen\\
+\url{https://youtu.be/v1F5BFH8nbo}\\
+
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Nat%C3%BCrliche_Transformation}\\
+\url{https://ncatlab.org/nlab/show/natural+transformation}\\
+\url{https://ncatlab.org/nlab/show/natural+isomorphism}\\
+\url{https://de.wikipedia.org/wiki/Currying}\\
+\url{https://en.wikipedia.org/wiki/Currying#Category_theory}\\
+\url{}\\
+\url{}\\
+\url{}\\
+\url{}\\
+
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+"`Categories for the Working Mathematician"'\\
+Saunders Mac Lane\\
+1998 | 2nd ed. 1978\\
+Springer-Verlag New York Inc.\\
+978-0-387-98403-2 (ISBN)\\
+{\tiny
+   \url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}}\\
+\\
+"`Topology, A Categorical Approach"'\\
+Tai-Danae Bradley\\
+2020 MIT Press\\
+978-0-262-53935-7 (ISBN)\\ 
+{\tiny
+\url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}}\\
+\\
+Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von\\
+"`An Introduction to Homological Algebra"'\\
+Joseph J. Rotman\\
+2009 Springer-Verlag New York Inc.\\
+978-0-387-24527-0 (ISBN)\\ 
+{\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der 
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben 
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird, 
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der 
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben 
+(zu finden im selben Git-Projekt). 
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter 
+{\tiny
+   \url{huhu}
+}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Natürliche Transformation}
+%                                                                                                     *
+%******************************************************************************************************
+Seien im Folgenden $\mathcal{C,D}$ zwei Kategorien und $\mathcal F,\mathcal G \colon \mathcal C \to \mathcal D$ zwei Funktoren mit $\mathcal C$ als Quell- und $\mathcal D$ als Ziel-Kategorie.
+
+%******************************************************************************************************
+\subsection{Definition einer natürlichen Transformation}
+%******************************************************************************************************
+
+
+%******************************************************************************************************
+\subsection{Ein paar Worte zum Wort natürlich}
+%******************************************************************************************************
+Wenn wir sagen, es gibt da und da einen \textbf{natürlichen} Homomorphismus, ist mit diesem unscheinbar daherkommenden Wort immer viel gemeint:
+\begin{itemize}
+	\item Es gibt zwei Kategorien,
+	\item es gibt zwei Funktoren zwischen denen,
+	\item "`der"' Homomorphismus ist eigentlich eine Schar von Homomorphismen und
+	\item diese Schar verträgt sich (kommutiert) mit den Bildern der Homomorphismen unter den zwei Funktoren im Sinne von $\eqref{kommutativ}$.
+\end{itemize} 
+Natürlichkeit ist ein kategorischer Begriff und erfordert eine präzise Angabe der vorliegenden Daten: Quell- und Ziel-Kategorie, Quell- und Ziel-Funktor sowie eine Schar von Morphismen.
+
+%******************************************************************************************************
+\subsection{Kategorien von Prägarben}
+%******************************************************************************************************
+Das ganze funktioniert auch für kontravariante Funktoren.
+
+\begin{Definition}{Prägarbe}
+   Eine \textbf{Prägarbe} $\mathcal F$ ist ein kontravarianter Funktor nach Set:
+   \begin{equation}
+      \mathcal F \colon \mathcal C ^{\text{op}} \to \text{\textbf{Set}}.
+   \end{equation}
+\end{Definition}
+
+Falls $\mathcal C$ eine kleine Kategorie ist, dann ist $\text{\textbf{Set}} ^ {\mathcal C ^{\text{op}}}$ eine Funktor-Kategorie: die Kategorie der Prägarben auf $\mathcal C$, also die Kategorie der kontravarianten Funktoren von $\mathcal C$ nach Set. Diese Kategorien haben sehr gute Eigenschaften und bilden ein wichtiges Beispiel für Funktorkategorien.
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{TODO}
+%                                                                                                     *
+%******************************************************************************************************
+\begin{backup}
+Noch zu erledigen sind
+\begin{itemize}
+   \item leer
+\end{itemize}
+\end{backup}
+
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+
+   \bibitem[MacLane1978]{MacLane}
+      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
+      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
+      
+   \bibitem[Bradley2020]{Bradley}
+      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
+      2020 MIT Press, 978-0-262-53935-7 (ISBN)
+
+   \bibitem[Rotman2009]{Rotman}
+   	Joseph J. Rotman, \emph{An Introduction to Homological Algebra},
+   	2009 Springer-Verlag New York Inc., 978-0-387-24527-0 (ISBN)
+      
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $A, B, C, \cdots, X, Y, Z$          & Objekte\\
+    $\mathcal F,\mathcal G$             & Funktoren\\
+    $f, g, h, r, s, \cdots$             & Homomorphismen\\
+    $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
+    \textbf{Set}                        & Die Kategorie der Mengen\\
+    $\Hom( X, Y)$                       & Die Menge der Homomorphismen von $X$ nach $Y$\\
+    $\alpha, \beta, \cdots$             & natürliche Transformationen\\
+    $\mathcal C ^{\text{op}}$           & Duale Kategorie
+\end{tabular}
+
+\end{document}
