@@ -116,6 +116,7 @@
 \DeclareMathOperator{\red}{red}
 \DeclareMathOperator{\supp}{supp}
 \DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Urbild}{Urbild}
 \DeclareMathOperator{\Rang}{Rang}
 \DeclareMathOperator{\Det}{Det}
 \DeclareMathOperator{\Hom}{Hom}
@@ -231,7 +232,7 @@ Bei der zweiten Darstellung haben wir zwei Ellipsen und Pfeile zwischen den Elem
 
 In der dritten Darstellung, die für homogene Relationen gilt, haben wir einen gerichteten Graphen.
 
-Homogene Relationen könnten wir auch Endo-Relationen nennen: hier sind $X$ und $Y$ die selbe Menge.
+Homogene Relationen könnten wir auch Endo-Relationen nennen: hier sind $X$ und $Y$ die selbe Menge. Diese entpuppen sich als gerichtete Graphen.
 
 
 %******************************************************************************************************
@@ -249,37 +250,37 @@ Relation, Funktion, injektiv, surjektiv, bijektiv.
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v3%20Bachelor/v3.0%20Anfang/v3.0.2.0.2%20Relationen%20und%20Funktionen%20-%20Geometrisches%20Bild}
 }
 
 %******************************************************************************************************
 \subsection*{Meine Videos}
 %******************************************************************************************************
 Siehe auch in den folgenden Videos:\\
-v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
-\url{https://youtu.be/Ojf5LQGeyOU}\\
-
+v3.0.2.0.1 (Bachelor) Relationen und Funktionen - Surjektiv, injektiv, bijektiv\\
+\url{https://youtu.be/8YFNEWZBpWc}\\
+v3.0.2 (Bachelor) Relationen und Funktionen\\
+\url{https://youtu.be/qjhNZXFAYEM}
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{}\\
-
+\url{https://de.wikipedia.org/wiki/Relation_(Mathematik)}\\
+\url{https://jcsites.juniata.edu/faculty/rhodes/ida/relations.html}
 
 %******************************************************************************************************
 \subsection*{Buch}
 %******************************************************************************************************
 Grundlage ist folgendes Buch:\\
-"`Categories for the Working Mathematician"'\\
-Saunders Mac Lane\\
-1998 | 2nd ed. 1978\\
-Springer-Verlag New York Inc.\\
-978-0-387-98403-2 (ISBN)\\
+"`Grundwissen Mathematikstudium"'\\
+Tilo Arens, Rolf Busam, Frank Hettlich, Christian Karpfinger, Hellmuth Stachel \\
+2022\\
+Springer-Verlag\\
+978-3-662-63312-0 (ISBN)\\
 {\tiny
-   \url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}}\\
+   \url{https://www.lehmanns.de/shop/mathematik-informatik/56427740-9783662633120-grundwissen-mathematikstudium}}\\
 \\
-
 
 %******************************************************************************************************
 \subsection*{Lizenz}
@@ -305,30 +306,95 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Natürliche Transformation}
+\section{Geometrisches Bild von Relationen und Funktionen}
 %                                                                                                     *
 %******************************************************************************************************
-Seien im Folgenden $\mathcal{C,D}$ zwei Kategorien und $\mathcal F,\mathcal G \colon \mathcal C \to \mathcal D$ zwei Funktoren mit $\mathcal C$ als Quell- und $\mathcal D$ als Ziel-Kategorie.
+
+Zur Förderung der Intuition und um verschiedene Aspekte von Relationen und damit auch Funktionen zu visualisieren, stellen wir diese hier graphisch in drei Weisen dar. Die Nummern beziehen sich auf die händischen Skizzen auf den beiden eingefügten Bildern.
 
 %******************************************************************************************************
-\subsection{Definition einer natürlichen Transformation}
+\subsection{Teilmenge des kartesischen Produktes}
 %******************************************************************************************************
+In der Ersten Darstellung einer Relation zwischen $X$ und $Y$, zeigen wir sie als Teilmenge (die schraffierte Fläche, oder Linien oder einzelne Punkte) des Produktes, wobei wir die beiden Mengen als Strecken im $\R^2$ andeuten.
+
+\textbf{(0)} $X \times Y$ ist ein Rechteck, und eine Relation ist eine Teilmenge dieses Rechtecks, ohne weitere Bedingungen.
+
+\textbf{(1)} Die Relation ist links-vollständig (links-surjektiv): jedes Element von $X$ kommt in der Relation vor. Zu einem $X$-Wert muss es mindestens einen Wert aus $Y$ geben, es dürfen aber auch mehr sein. Solche Relationen heißen auch links-total. Sie werden auch "`Multifunktion"' genannt, da wie in einer Funktion jedem Ausgangselement etwas zugeordnet wird, allerdings sind hier auch mehrere Werte, wir könnten auch sagen ein Multiwert, möglich. Multifunktionen haben eine der beinden definierenden Eigenschaften von Funktionen.
+
+\textbf{(2)} Die Relation ist rechts-eindeutig (rechts-injektiv): jedem Element aus $X$ wird höchsten eins zugeordnet. Diese Relationen werden auch "`partielle Funktion"' genannte, da sie nur auf einem Teilbereich von $X$ definiert sind, sie sind also nur partiell definiert. Die Menge aller Elemente von $X$, die einem $Y$-Wert zugeordnet werden, wird der Definitionsbereich von $X$ genannt.
+
+\textbf{(3)} Die Relation ist links-vollständig und rechts-eindeutig. Diese nennen wir "`Funktion"'. Eine Relation, die Multifunktion und partielle Funktion zugleich ist, ist eine Funktion. Es müssen nicht notwendig alle Elemente von $Y$ erreicht werden. Jeder $X$-Wert hat genau einen $Y$-Wert. $Y$-Werte dürfen mehrmals vorkommen.
+
+\textbf{(4)} Die Relation ist links-vollständig, rechts-vollständig und rechts-eindeutig. Eine surjektive Funktion. Jeder $Y$-Wert kommt vor.
+
 \begin{figure}
    \centering
    \includegraphics{v3.0.2.0.2 Relationen und Funktionen - Geometrisches Bild Grafik Links.png}
 \end{figure}
+
+\textbf{(5)} Die Relation ist links-vollständig, rechts-eindeutig und links-eindeutig. Eine injektive Funktion. Jeder $X$-Wert kommt genau einmal vor.
+
+\textbf{(6)} Die Relation ist links-vollständig, rechts-vollständig, rechts-eindeutig und links-eindeutig. Eine bijektive Funktion. $X$- und $Y$-Werte stehen in einer 1:1 Beziehung.
+
+\textbf{(7)} Angenommen $X$ und $Y$ sind tatsächlich Teilmengen des $\R^2$. Dann ist die schraffierte Fläche inklusive der Diagonalen die Relation $\le$. Da Relationen Teilmengen des kartesischen Produktes sind können wir schreiben
+\begin{equation}
+   \le \subseteq X \times Y.
+\end{equation}
+
+\textbf{(8)} Eine Relation $R \colon X - Y$ heißt \textbf{homogen}, falls $X=Y$. Es ist also eine Relation zwischen den Elementen einer Menge. Eine Relation ist symmetrisch, genau dann wenn
+\begin{equation}
+   x_1Rx_2 \Leftrightarrow x_2Rx_1.
+\end{equation}
+Die Grafik ist dann spiegelsymmetrisch bezüglich der Diagonalen.
+
+\textbf{(9)} Die \textbf{Identität} $\id_X$ ist die Relation definiert durch
+\begin{equation}
+   x_1\id_Xx_2 \colon \Leftrightarrow x_1 = x_2.
+\end{equation}
+Intuitiv könnten wir also sagen, $\id_X$ ist das gleiche wie "`$=$"'. Formal ist das aber nicht so. $\id_X$ ist ein mathematischen Objekt, während "`$=$"' ein Zeichen unserer Sprache ist, welches nicht ein mathematisches Objekt bezeichnet.
+Wir können durchaus sagen, dass $\id_X$ das mathematische Zeichen "`$=$"' als Objekt in das mathematische Universum inkarniert.
 
 \begin{figure}
    \centering
    \includegraphics{v3.0.2.0.2 Relationen und Funktionen - Geometrisches Bild Grafik Rechts.png}
 \end{figure}
 
+\textbf{(10)} Sei $R$ eine Relation. Dann sind \textbf{Bild} und \textbf{Urbild} definiert als
+\begin{align}
+   \Bild R := \{ y \in Y &| \exists x \in X \colon xRy\}\\
+   \Urbild R := \{ x \in X &| \exists y \in Y \colon xRy\}.
+\end{align}
+
+\textbf{(11)} Die \textbf{allgemeine Relation} ist einfach das kartesische Produkt $X \times Y$ selber.
+Mit $R = X \times Y$ gilt somit gilt für alle $x \in X, y \in Y \colon xRy$.
+
+\textbf{(12)} Die \textbf{leere Relation} oder \textbf{Null-Relation} ist die leere Menge (aufgefasst als Teilmenge von $X \times Y$).
+Mit $R = \emptyset \subseteq X \times Y$ gilt somit gilt für kein $x \in X, y \in Y \colon xRy$.
+
+\textbf{(13)} Eine homogene Relation $R \subseteq X \times X$ heisst \textbf{reflexiv}, wenn für alle $x\in X$ gilt $xRx$. In der Veranschaulichung heißt dies, dass die Diagonale in der Teilmenge liegt, die die Relation darstellt (die schraffierte Fläche).
+
+%******************************************************************************************************
+\subsection{Ellipsen und Pfeile zwischen den Elementen}
+%******************************************************************************************************
+\textbf{(14)} Die linke Ellipse entspricht $X$, die rechte $Y$. Die Elemente werde durch Punkte repräsentiert. Zwei solche Punkte $x \in X$ und $y \in Y$, für die $xRy$ werden durch einen Pfeil $x \mapsto y$ dargestellt. Ist die Relation links-vollständig, so hat jeder Punkt in $X$ einen Pfeil. Ist sie rechts-eindeutig, so hat jeder Punkt in $X$ nur einen Pfeil. Dargestellt ist eine Funktion, die beide Eigenschaften hat. Die dargestellte Funktion ist nicht injektiv, da zwei Pfeile auf das selbe Ziel-Objekt kommen. Sie ist nicht surjektiv, da es Punkte in $Y$ gibt, die keinen Pfeil abbekommen.
+ 
+%******************************************************************************************************
+\subsection{Gerichteten Graphen}
+%******************************************************************************************************
+Homogene Relationen könnten wir auch Endo-Relationen nennen: hier sind $X$ und $Y$ die selbe Menge.
+
+\textbf{(15)} Homogene Relationen sind nichts anderes als gerichtete Graphen mit der Eingenschaft, dass es nur einen Pfeil von $x_1$ nach $x_2$ geben kann. Also \textbf{Endo-Relation = Nichtmulti-Digraph}. Ein wunderschönes Beispiel von zwei völlig verschiedenen Aspekten des selben Konzeptes.
+
+\textbf{(16)} Bei einer homogenen reflexiven Relation (für alle $x\in X$ gilt $xRx$) haben dann alle Knoten einen Pfeil zu sich selbst (kleine Ohren).
+
+\textbf{(17)} Bei einer homogenen symmetrischen Relation, $x_1Rx_2 \Leftrightarrow x_2Rx_1$, gibt es zu zwei Knoten entweder Pfeile in beiden Richtungen oder gar keinen. Damit ist das gleichbedeutend mit einem nicht-gerichteten Nichtmulti-Graph (idem wir aus jedem Hinundher-Paar eine einfache ungerichtete Kante machen).
+
+\begin{backup}
 %******************************************************************************************************
 %                                                                                                     *
 \section{TODO}
 %                                                                                                     *
 %******************************************************************************************************
-\begin{backup}
 Noch zu erledigen sind
 \begin{itemize}
    \item leer
@@ -345,11 +411,9 @@ Noch zu erledigen sind
 %                                                                                                     *
 %******************************************************************************************************
 
-   \bibitem[MacLane1978]{MacLane}
-      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
-      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
-      
-   
+   \bibitem[ArensBusamHettlichKarpfingerStachel2022]{Grundwissen}
+      Tilo Arens, Rolf Busam, Frank Hettlich, Christian Karpfinger, Hellmuth Stachel, \emph{Grundwissen Mathematikstudium},
+      Springer, 978-3-662-63312-0 (ISBN)
       
 \end{thebibliography}
 
@@ -365,9 +429,9 @@ Noch zu erledigen sind
 \renewcommand*{\arraystretch}{1}
 
 \begin{tabular}{ll}
-    $A, B, C, \cdots, X, Y, Z$          & Objekte\\
-    $\mathcal F,\mathcal G$             & Funktoren\\
-    $f, g, h, r, s, \cdots$             & Homomorphismen\\
+    $X, Y, \cdots$          & Mengen\\
+    $x, y, \cdots$             & Elemente\\
+    $R$             & Eine Relation
    
 \end{tabular}
 
