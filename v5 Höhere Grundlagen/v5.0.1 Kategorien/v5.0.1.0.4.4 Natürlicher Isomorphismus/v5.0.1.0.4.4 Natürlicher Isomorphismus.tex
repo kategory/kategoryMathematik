@@ -182,6 +182,7 @@
 \newcommand{\z}[1]{\Z_{#1}}
 \newcommand{\e}[1]{\z{#1}^*}
 \newcommand{\q}[1]{(\e{#1})^2}
+\newcommand{\m}{\mathcal}
 
 \excludecomment{book}
 \excludecomment{example}
@@ -223,13 +224,11 @@ Copyright (C) 2023 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
-Natürliche Isomorphismen werden oft beiläufig eingeführt. So sagen wir z.B. (im Beispiel reden wir von Mengen), dass es eine Bijektion zwischen den Morphismen des Produktes von $X$ und $Y$ nach $Z$ und den Morphismen von $X$ in die Morphismen von $Y$ nach $Z$ gibt. Wir sagen weiter salopp, dass dieser natürlich in $X$, $Y$ und $Z$ sei.
+Natürliche Isomorphismen werden oft beiläufig eingeführt. So sagen wir z.B. in der Kategorie der Mengen, dass es eine Bijektion zwischen den Morphismen des Produktes von $X$ und $Y$ nach $Z$ und den Morphismen von $X$ in die Morphismen von $Y$ nach $Z$ gibt. Wir sagen weiter salopp, dass dieser natürlich in $X$, $Y$ und $Z$ sei.
 
-Was heißt denn hier "`natürlich in"'? Es bedeutet, dass wir einen natürlichen Isomorphismus (weil Bijektion) zwischen $\Hom( X \times Y, Z )$ und $\Hom( X, \Hom( Y, Z ))$ haben. D.h. die oben genannte Bijektion ist verträglich mit Morphismen (hier Funktionen zwischen Mengen) zwischen den Objekten.
+Was heißt denn hier "`natürlich in"'? Es bedeutet, dass wir einen natürlichen Isomorphismus (weil Bijektion) zwischen $\Hom( X \times Y, Z )$ und $\Hom( X, \Hom( Y, Z ))$ haben. D.h. die oben genannte Bijektion ist verträglich mit Morphismen (hier Funktionen) zwischen den Objekten.
 
 Die Bijektion von oben ist nichts anderes als das Currying. Dessen Natürlichkeit ist ein oft verschwiegener Vorteil.
-
-TODO: Beispiel für Currying Vorteil weil Verträglich
 
 Wenn wir genauer hinsehen haben wir eine ganze Schar von Isomorphismen, nämlich für jede Wahl von $X$, $Y$ und $Z$ einen. Diese Schar sind die Komponenten der natürlichen Transformation.
 
@@ -237,14 +236,14 @@ Eine natürlicher Isomorphismus findet zwischen zwei Funktoren statt. Sie ist ei
 
 Was wir also mit "`ist natürlich"' sagen ist, dass es zwei Kategorien gibt mit zwei Funktoren zwischen ihnen und dass die Schar der Isomorphismen Komponenten eines natürlichen Isomorphismuses sind, die somit verträglich mit den Bildern von Morphismen unter den beiden Funktoren sind.
 
-Aber was sind denn im obigen Beispiel die Funktoren? Das ist die Funktion des "`in"' von "`ist natürlich in"': Natürlich in $X$ bedeutet, dass, wenn wir $X$ als Variable ansehen, dann herhalten wir zwei Funktoren, so dass ...
+Aber was sind denn im obigen Beispiel die Funktoren? Das ist die Funktion des "`in"' von "`ist natürlich in"': Natürlich in $X$ bedeutet, dass, wenn wir $X$ als Variable ansehen, dann erhalten wir zwei Funktoren, so dass ...
 
 Im obigen Beispiel haben wir drei mal zwei Funktoren und zwar für jede Wahl der beiden anderen Variablen.
 
 Wir sagen also in Wirklichkeit:
 1. Wir haben zwei Kategorien
 2. In jeder der drei Variablen erhalten wir bei fester Wahl der anderen beiden zwei Funktoren.
-3. Dieser Funktor bildet auch Morphismen ab, und das so, dass Identitäten und Verknüpfungen erhalten bleiben.
+3. Diese Funktoren bilden auch Morphismen ab, und das so, dass Identitäten und Verknüpfungen erhalten bleiben.
 4. Die Isomorphismen sind Isomorphismen in der Zielkategorie.
 5. Die Verträglichkeitsbedingung für natürliche Transformationen ist für diese Isomorphismen und deren Inverse erfüllt.
 
@@ -263,7 +262,7 @@ Axiome der Kategorien, Funktor, natürliche Transformation.
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.4.4%20Nat%C3%BCrlicher%20Isomorphismus}
 }
 
 %******************************************************************************************************
@@ -272,8 +271,8 @@ Der Begleittext als PDF und als LaTeX findet sich unter
 Siehe auch in den folgenden Videos:\\
 v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
 \url{https://youtu.be/Ojf5LQGeyOU}\\
-v5.0.1.0.3.5 (Höher) Kategorien - Kategorien von Homomorphismen\\
-\url{https://youtu.be/v1F5BFH8nbo}\\
+v5.0.1.0.4 (Höher) Kategorien - Natürliche Transformationen\\
+\url{https://youtu.be/IN7Qa-SwlD0}\\
 
 
 %******************************************************************************************************
@@ -290,7 +289,6 @@ Siehe auch in den folgenden Seiten:\\
 \url{}\\
 \url{}\\
 
-
 %******************************************************************************************************
 \subsection*{Buch}
 %******************************************************************************************************
@@ -302,20 +300,35 @@ Springer-Verlag New York Inc.\\
 978-0-387-98403-2 (ISBN)\\
 {\tiny
    \url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}}\\
-\\
+
+Gut für die kategorische Sichtweise ist:\\
 "`Topology, A Categorical Approach"'\\
 Tai-Danae Bradley\\
 2020 MIT Press\\
 978-0-262-53935-7 (ISBN)\\ 
 {\tiny
 \url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}}\\
-\\
-Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von\\
+
+Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von:\\
 "`An Introduction to Homological Algebra"'\\
 Joseph J. Rotman\\
 2009 Springer-Verlag New York Inc.\\
 978-0-387-24527-0 (ISBN)\\ 
 {\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
+
+Etwas weniger umfangreich und weniger tiefgehend aber gut motivierend ist:
+"`Category Theory"'\\
+Steve Awodey\\
+2010 Oxford University Press\\
+978-0-19-923718-0 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/9478288-9780199237180-category-theory}}\\
+
+Mit noch weniger Mathematik und die Konzepte motivierend ist:
+"`Conceptual Mathematics: a First Introduction to Categories"'\\
+F. William Lawvere, Stephen H. Schanuel\\
+2009 Cambridge University Press\\
+978-0-521-71916-2 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/8643555-9780521719162-conceptual-mathematics}}
 
 %******************************************************************************************************
 \subsection*{Lizenz}
@@ -341,41 +354,165 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Natürliche Transformation}
+\section{Natürlicher Isomorphismus}
 %                                                                                                     *
 %******************************************************************************************************
-Seien im Folgenden $\mathcal{C,D}$ zwei Kategorien und $\mathcal F,\mathcal G \colon \mathcal C \to \mathcal D$ zwei Funktoren mit $\mathcal C$ als Quell- und $\mathcal D$ als Ziel-Kategorie.
+Als Beispiel nehmen wir das Currying in der Kategorie \textbf{Set}. Es besagt, dass es (pro $A, B, C$) einen Mengen-Isomorphismus (also eine Bijektion) folgender Art gibt.
+\begin{equation}
+   \Hom( A \times B, C ) \cong \Hom( A, \Hom( B, C)).
+\end{equation}
+Dieser Isomorphismus ist natürlich in $A, B, C$.
 
 %******************************************************************************************************
 \subsection{Definition einer natürlichen Transformation}
 %******************************************************************************************************
+Seien im Folgenden $\mathcal{C,D}$ zwei Kategorien und $\mathcal F,\mathcal G \colon \mathcal C \to \mathcal D$ zwei Funktoren mit $\mathcal C$ als Quell- und $\mathcal D$ als Ziel-Kategorie.
 
+\begin{Definition}{Natürliche Transformation}
+   Eine \textbf{natürliche Transformation} 
+   \begin{equation}
+      \alpha \colon \mathcal F \Rightarrow \mathcal G
+   \end{equation}
+   ist eine Schar von Homomorphismen in der Ziel-Kategorie $\mathcal{D}$ indiziert durch die Objekte der Quell-Kategorie $\mathcal C$:
+   \begin{equation}
+      \left (\alpha_X \colon \mathcal F(X) \to \mathcal G(X) \right )_{X \in \mathcal C}.
+   \end{equation}
+   mit denen jeweils die Bilder der Objekte der Quell-Kategorie verbunden werden. Diese müssen mit den Bildern der Morphismen in dem Sinne verträglich sein, dass alle Diagramme der folgenden Art, d.h. für alle $f \colon X \to Y$, mit $f \in \mathcal C$, kommutativ sind:
+   \begin{equation}\label{kommutativ}
+      \begin{tikzcd}
+         \mathcal F(X) \arrow[r, "\alpha_X"] \arrow[d, "\mathcal F(f)"]
+         & \mathcal  G(X) \arrow[d, "\mathcal G(f)"]\\
+         \mathcal F(Y) \arrow[r, "\alpha_Y"]  
+         & \mathcal  G(Y)\\
+      \end{tikzcd}
+   \end{equation}
+\end{Definition}
+
+\begin{Definition}{Natürlicher Isomorphismus}
+   Ein \textbf{natürlicher Isomorphismus} ist eins der folgenden äquivalenten Dinge:
+   \begin{itemize}
+      \item Eine natürliche Transformation mit einem beidseitigen Inversen.
+      \item Eine natürliche Transformation, deren Komponenten sämtlich Isomorphismen sind
+      \item Ein Isomorphismus in der Funktorkategorie.
+   \end{itemize}
+\end{Definition}
+
+%******************************************************************************************************
+\subsection{Natürlich in $A, B, C$ ergibt 6 Funktoren}
+%******************************************************************************************************
+Natürlich in $A, B, C$ bedeutet, dass wir jede der drei Variablen als Argument eines Funktors auffassen und die jeweils anderen beiden fest lassen. In Wirklichkeit erhalten wir also eine Schar von Funktoren und das für die linke und die rechte Seite. Das macht folgende 6 Scharen von Funktoren die insgesamt 3 natürliche Isomorphismen ergeben. 
+\begin{align}
+   \alpha \colon \Hom( \_ \times B, C ) &\cong \Hom( \_, \Hom( B, C))\\
+   \beta \colon \Hom( A \times \_, C ) &\cong \Hom( A, \Hom( \_, C))\\
+   \gamma \colon Hom( A \times B, \_ ) &\cong \Hom( A, \Hom( B, \_)).
+\end{align}
+Hier stehen die $\_$ für die Variable des Funktors, während die $A, B, C$ für die Parameter der Schar stehen.
+
+%******************************************************************************************************
+\subsection{Zwei Kategorien}
+%******************************************************************************************************
+Was sind in unserem Beispiel die beiden Kategorien $\mathcal{C,D}$? Das Quell-Objekt ist, salopp gesagt, $A, B$ oder $C$. Damit ist Quell-Kategorie \textbf{Set}. Die Ziel-Kategorie ist die, in die $\Hom( ... )$ abbilden. Da $\Hom$-Mengen Mengen sind, ist die Ziel-Kategorie ebenfalls \textbf{Set}.
+
+Beachte: Es ist etwas besonderes, dass wir $\Hom$-Mengen selber als Objekte einer Kategorie ansehen. Hierdurch erhaschen wir einen ersten Blick auf angereicherte Kategorien, bei denen die Hom's Objekte von (monoidalen) Kategorien sind.
+
+%******************************************************************************************************
+\subsection{Die Funktoren wirken auch auf Morphismen}
+%******************************************************************************************************
+Die oben aufgesagten 6 Funktoren wirken auch auf Morphismen. Wir werden uns die zwei des natürlichen Isomorphismus $\alpha$ stellvertretend für alle anderen genauer ansehen.
+
+Sei
+\begin{equation}
+   f \colon X \to Y
+\end{equation}
+ein Morphismus in \textbf{Set}, also eine Funktion. Wir wollen nun wissen, was $\Hom( f \times B, C )$ ist. Dabei stellt sich zunächst die Frage, was $f \times B$ ist. Es ist der Funktor $\_ \times B$ angewandt auf $f$. (Dass  $\_ \times B$ ein Funktor ist, besprechen wir in einem anderen Video.)
+\begin{align}
+   f \times B \colon X \times B &\to Y \times B\\
+   (x,b) &\mapsto (f(x), b).
+\end{align}
+Das müssen wir nun in den kontravarianten Hom-Funktor $\Hom( \_, C)$ einsetzen. Dieser wirkt auf Morphismen vermittels Prä-Komposition, hier zunächst mal auf $f$ angewandt:
+\begin{align}
+   \Hom(f, C) \colon \Hom( Y, C ) &\to \Hom( X, C)\\
+   (h \colon Y \to C) &\mapsto (h \circ f \colon X \to C).
+\end{align}
+Jetzt wenden wir ihn auf $f \times B$ an:
+\begin{align}
+   \Hom(f \times B, C) \colon \Hom( Y \times B, C ) &\to \Hom( X \times B, C)\\
+   (h \colon Y \times B \to C) &\mapsto (h \circ (f \times B) \colon X \times B \to C)\\
+   ((y,b) \mapsto h(y, b)) &\mapsto ((x,b) \mapsto h(f(x),b)).
+\end{align}
+
+Nun kommen wir zu $\Hom( \_, \Hom( B, C))$.
+\begin{align}
+   \Hom( f, \Hom( B, C)) \colon \Hom(Y, \Hom( B, C)) &\to \Hom(X, \Hom( B, C))\\
+   (h \colon Y \to \Hom( B, C) ) &\mapsto (h \circ f \colon X \to \Hom( B, C)).
+\end{align}
+
+Damit es wirklich Funktoren sind, müssen diese Abbildungen die Identitäten auf Identitäten abbilden und verträglich mit der Verknüpfung von Morphismen sein.
+
+%******************************************************************************************************
+\subsection{3 kommutative Diagramme}
+%******************************************************************************************************
+Das macht 3 kommutative Diagramme:
+\begin{equation}
+   \begin{tikzcd}
+      \Hom( Y \times B, C ) \arrow[r, "\alpha_Y"] \arrow[d, "{\Hom( f \times B, C )}"]
+      & \Hom( Y, \Hom( B, C)) \arrow[d, "{\Hom( f, \Hom( B, C))}"]\\
+      \Hom( X \times B, C ) \arrow[r, "\alpha_X"]  
+      & \Hom( X, \Hom( B, C))\\
+   \end{tikzcd}
+\end{equation}
+\begin{equation}
+   \begin{tikzcd}
+      \Hom( A \times Y, C ) \arrow[r, "\beta_Y"] \arrow[d, "{\Hom( A \times f, C )}"]
+      & \Hom( A, \Hom( Y, C)) \arrow[d, "{\Hom( A, \Hom( f, C))}"]\\
+      \Hom( A \times X, C ) \arrow[r, "\beta_X"]  
+      & \Hom( A, \Hom( X, C))\\
+   \end{tikzcd}
+\end{equation}
+\begin{equation}
+   \begin{tikzcd}
+      \Hom( A \times B, X ) \arrow[r, "\gamma_X"] \arrow[d, "{\Hom( A \times B, f )}"]
+      & \Hom( A, \Hom( B, X)) \arrow[d, "{\Hom( A, \Hom( B, f))}"]\\
+      \Hom( A \times B, Y ) \arrow[r, "\gamma_Y"]  
+      & \Hom( A, \Hom( B, Y))\\
+   \end{tikzcd}.
+\end{equation}
 
 %******************************************************************************************************
 \subsection{Ein paar Worte zum Wort natürlich}
 %******************************************************************************************************
-Wenn wir sagen, es gibt da und da einen \textbf{natürlichen} Homomorphismus, ist mit diesem unscheinbar daherkommenden Wort immer viel gemeint:
+Wir sagen also in Wirklichkeit:
 \begin{itemize}
-	\item Es gibt zwei Kategorien,
-	\item es gibt zwei Funktoren zwischen denen,
-	\item "`der"' Homomorphismus ist eigentlich eine Schar von Homomorphismen und
-	\item diese Schar verträgt sich (kommutiert) mit den Bildern der Homomorphismen unter den zwei Funktoren im Sinne von $\eqref{kommutativ}$.
-\end{itemize} 
-Natürlichkeit ist ein kategorischer Begriff und erfordert eine präzise Angabe der vorliegenden Daten: Quell- und Ziel-Kategorie, Quell- und Ziel-Funktor sowie eine Schar von Morphismen.
+   \item Wir haben zwei Kategorien
+   \item In jeder der drei Variablen erhalten wir, bei fester Wahl der anderen beiden, zwei Funktoren (also insgesamt 6 und eigentlich sind es ganze Scharen von Funktoren)
+   \item Dieser Funktor bildet auch Morphismen ab, und das so, dass Identitäten und Verknüpfungen erhalten bleiben
+   \item Die Isomorphismen sind Isomorphismen in der Zielkategorie
+   \item Die Verträglichkeitsbedingung für natürliche Transformationen ist für diese Isomorphismen und deren Inverse erfüllt
+\end{itemize}
+
+"`Natürlich"' ist ein kategorischer Begriff und erfordert eine präzise Angabe der vorliegenden Daten: Quell- und Ziel-Kategorie, Quell- und Ziel-Funktor sowie eine Schar von Morphismen.
+
+Das harmlos daher kommende Wort sagt also ganz schön viel!
 
 %******************************************************************************************************
-\subsection{Kategorien von Prägarben}
+\subsection{Und wozu ist das alles gut?}
 %******************************************************************************************************
-Das ganze funktioniert auch für kontravariante Funktoren.
+Seien $\m F, \m G \colon \m C \to \mathcal  D$ zwei Funktoren und $\alpha \m F \Rightarrow \m G$ eine natürliche Transformation sowie $(f \colon X \to Y) \in \mathcal C$ ein Morphismus in $\mathcal  C$. Dann können wir das kommutative Quadrat algebraisch als
 
-\begin{Definition}{Prägarbe}
-   Eine \textbf{Prägarbe} $\mathcal F$ ist ein kontravarianter Funktor nach Set:
-   \begin{equation}
-      \mathcal F \colon \mathcal C ^{\text{op}} \to \text{\textbf{Set}}.
-   \end{equation}
-\end{Definition}
+\begin{equation}
+   \alpha_Y \circ \m F(f) = \m G(f) \circ \alpha_X
+\end{equation}
+schreiben. Da ja $\m G = \alpha \m F$ ist können wir das knapper schreiben als
+\begin{equation}
+   \alpha( \m F(f) ) = (\alpha \m F)(f) \circ \alpha.
+\end{equation}
+Das heißt wir können die Bilder der Morphismen von $\mathcal C$ mit den Morphismen der natürlichen Transformation vertauschen.
 
-Falls $\mathcal C$ eine kleine Kategorie ist, dann ist $\text{\textbf{Set}} ^ {\mathcal C ^{\text{op}}}$ eine Funktor-Kategorie: die Kategorie der Prägarben auf $\mathcal C$, also die Kategorie der kontravarianten Funktoren von $\mathcal C$ nach Set. Diese Kategorien haben sehr gute Eigenschaften und bilden ein wichtiges Beispiel für Funktorkategorien.
+Ähnlich können wir das Distributiv-Gesetz $a(x+y) = ax + ay$ schreiben als
+\begin{equation}
+   a \cdot ( +(x,y)) = +(a \cdot (x,y)).
+\end{equation}
+Vertauschbarkeit zeigt zum einen eine Verträglichkeit der zwei Operationen (irgendwie scheinen sie zusammen zu gehören) zum anderen erleichtert es das praktische Rechnen.
 
 %******************************************************************************************************
 %                                                                                                     *
@@ -398,14 +535,22 @@ Noch zu erledigen sind
 \begin{thebibliography}{9}
 %                                                                                                     *
 %******************************************************************************************************
+   \bibitem[Awodey2010]{Awodey}
+      Steve Awode, \emph{Category Theory},
+      2010 Oxford University Press, 978-0-19-923718-0 (ISBN)
+
+   \bibitem[Bradley2020]{Bradley}
+      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
+      2020 MIT Press, 978-0-262-53935-7 (ISBN)
+
+   \bibitem[LawvereSchanuel2009]{Lawvere}
+      F. William Lawvere, Stephen H. Schanuel, \emph{Conceptual Mathematics: a First Introduction to Categories},
+      2009 Cambridge University Press, 978-0-521-71916-2 (ISBN)
+
 
    \bibitem[MacLane1978]{MacLane}
       Saunders Mac Lane, \emph{Categories for the Working Mathematician},
       Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
-      
-   \bibitem[Bradley2020]{Bradley}
-      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
-      2020 MIT Press, 978-0-262-53935-7 (ISBN)
 
    \bibitem[Rotman2009]{Rotman}
    	Joseph J. Rotman, \emph{An Introduction to Homological Algebra},
