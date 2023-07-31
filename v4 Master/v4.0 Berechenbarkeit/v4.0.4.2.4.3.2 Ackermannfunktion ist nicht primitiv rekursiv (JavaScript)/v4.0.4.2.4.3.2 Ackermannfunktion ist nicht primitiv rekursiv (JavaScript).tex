@@ -4,7 +4,7 @@
 %                                                                                                  *
 % Copyright (C) 2023 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
 %                                                                                                  *
-% v4.0.4.2.4.3.2 is part of kategoryMathematik.                                                      *
+% v4.0.4.2.4.3.2 is part of kategoryMathematik.                                                    *
 %                                                                                                  *
 % kategoryMathematik is free software: you can redistribute it and/or modify                       *
 % it under the terms of the GNU General Public License as published by                             *
@@ -115,6 +115,7 @@
 \DeclareMathOperator{\Bild}{Bild}
 \DeclareMathOperator{\Rang}{Rang}
 \DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
 
 \DeclareMathOperator{\sub}{sub}
 \DeclareMathOperator{\blk}{blk}
@@ -240,7 +241,7 @@ Primitiv rekursive Funktionen, Ackermann-Funktion und ihre Eigenschaften, Ackerm
 \subsection*{Text}
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
-\url{}.
+\url{https://github.com/kategory/kategoryMathematik/tree/main/v4%20Master/v4.0%20Berechenbarkeit/v4.0.4.2.4.3.2%20Ackermannfunktion%20ist%20nicht%20primitiv%20rekursiv%20(JavaScript)}.
 
 %******************************************************************************************************
 \subsection*{Meine Videos}
@@ -287,32 +288,35 @@ Springer-Verlag New York Inc. 2013\\
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Eigenschaften}
+\subsection{Ackermann-Funktion}
 %******************************************************************************************************
-Wir verwenden die in einem vorherigen Video gezeigten Definition und Eigenschaften er Ackermannfunktion
-(hierbei seien $k, n \in \N$):
+%-----------------------------------------------------------------------------------------------------*
+\begin{Definition}{Ackermann-Funktion}
+   Die Ackermann-Funktion $A(k,n) \colon \N^2 \to \N$, mit $\N = \{ 0, 1, 2, 3, \cdot \}$, ist definiert durch
+   \begin{alignat}{2}
+      &A( 0, n ) &&:= n+1\\
+      &A( k+1, 0 ) &&:= A( k, 1 )\\
+      &A( k+1, n+1 ) &&:= A( k, A( k+1, n )).
+   \end{alignat}
+\end{Definition}
 
-\begin{align*}
-    &\text{(\textbf{D1})} && A( 0, n )                   &&:= n+1\\
-    &\text{(\textbf{D2})} && A( k+1, 0 )                 &&:= A( k, 1 )\\
-    &\text{(\textbf{D3})} && A( k+1, n+1 )               &&:= A( k, A(k+1, n) )\\
-    &\text{(\textbf{E1})} && A \colon \N^2 \to \N        &&\text{ ist total}\\
-    &\text{(\textbf{E2})} && A( 1, n )                   &&= n+2\\
-    &\text{(\textbf{E3})} && A( 2, n )                   &&= 2n+3\\
-    &\text{(\textbf{E4})} && A( k, n )                   &&> n\\
-    &\text{(\textbf{E5})} && A( k, n+1 )                 &&> A( k, n )\\
-    &\text{(\textbf{E6})} && A( k+1, n )                 &&> A( k, n )\\
-    &\text{(\textbf{E7})} && A( k+1, n )                 &&> A( k, n+1 )\\
-    &\text{(\textbf{E8})} && A( k+k'+2, n )              &&> A( k, A( k',n) )\\
-    &\text{(\textbf{E9})} && A( \max \{k, k' \} + 4, n ) &&> A( k, n ) + A( k, n )
-\end{align*}
-
-Aus den Eigenschaften \textbf{E5} und \textbf{E6} folgt die strenge Monotonie in beiden Parametern:
-\begin{align*}
-    &\text{(\textbf{E5'})} && n >  m &&\Rightarrow &&A( k, n )  > A( k, m )\\
-    &\text{(\textbf{E6'})} && l >  k &&\Rightarrow &&A( l, n )  > A( k, n )
-\end{align*}
-
+%******************************************************************************************************
+\subsection{Currying}
+%******************************************************************************************************
+Wir machen aus der Funktion $A(k,n) \colon \N^2 \to \N$ für jedes $k$ eine Funktion:
+\begin{alignat}{2}
+   A(k, \_) \colon &\N \to &&\N\\
+                   & n \mapsto &&A(k,n).
+\end{alignat}
+Dieses Vorgehen nennen wir Currying. Dass Currying liefert eine Bijektion:
+\begin{alignat}{2}
+   &\Hom( A \times B, C )       &&\cong \Hom( A, \Hom( B, C ))\\
+   &[f \colon A \times B \to C] &&\mapsto [ f^* \colon A \to \Hom( B, C )]\\
+   &[(a,b) \mapsto f(a,b)]      &&\mapsto \begin{bmatrix}
+                             f^*(a) \colon &B &\to     &C\\
+                                           &b &\mapsto &f(a,b)
+   \end{bmatrix}.
+\end{alignat}
 
 %******************************************************************************************************
 \subsection{Primitiv rekursiv}
@@ -320,216 +324,30 @@ Aus den Eigenschaften \textbf{E5} und \textbf{E6} folgt die strenge Monotonie in
 
 %-----------------------------------------------------------------------------------------------------*
 \begin{Definition}{Primitiv rekursiv}
-    Wir definieren induktiv als \textbf{primitiv rekursiv}:
-    
-    \begin{itemize}
-        \item (\textbf{PR1}): $f \circ g$, falls $f,g$ primitiv rekursiv sind
-        \item (\textbf{PR2}): $h$, mit $h( 0, x_1, \cdots, x_s ) := f( x_1, \cdots, x_s )$ und
-            $h$, mit $h( n+1, x_1, \cdots, x_s ) := g(n, h( n, x_1, \cdots, x_s ), x_1, \cdots, x_s)$,
-             falls $f,g$ primitiv rekursiv sind 
-        \item (\textbf{PR3}): Die konstanten Funktionen $c(n) := c$ für alle $c \in \N$ 
-        \item (\textbf{PR4}): Die Projektionen $P_j(x_1, \cdots, x_s ) := x_j$
-        \item (\textbf{PR5}): Die Nachfolger-Funktion $s(n) := n+1$.
-    \end{itemize}
+    Wir definieren induktiv als primitiv rekursiv:
+	\begin{itemize}
+		\item (\textbf{PR1}): $f \circ g$, falls $f,g$ primitiv rekursiv sind
+		\item (\textbf{PR2}): $h$, mit $h( 0, x_1, \cdots, x_s ) := f( x_1, \cdots, x_s )$ und
+			$h$, mit $h( n+1, x_1, \cdots, x_s ) := g(n, h( n, x_1, \cdots, x_s ), x_1, \cdots, x_s)$,
+		falls $f,g$ primitiv rekursiv sind 
+		\item (\textbf{PR3}): Die konstanten Funktionen $c(n) := c$ für alle $c \in \N$ 
+		\item (\textbf{PR4}): Die Projektionen $P_j(x_1, \cdots, x_s ) := x_j$
+		\item (\textbf{PR5}): Die Nachfolger-Funktion $s(n) := n+1$.
+	\end{itemize}
 \end{Definition}
 
 %******************************************************************************************************
-\subsection{Die Ackermannfunktion ist nicht primitiv rekursiv}
+\subsection{Der Parameter}
 %******************************************************************************************************
-Im Folgenden ist $\bb{x} := (x_1, \cdots, x_s)$ und $|\bb{x}| := \max \{x_1, \cdots, x_s \}$.
+Gemäß des Beweises im Video "`v4.0.4.2.4.3 (Master) Berechenbarkeit - Ackermannfunktion ist nicht primitiv rekursiv"' haben wir folgende Tabelle für den Parameter $k$.
 
-%-----------------------------------------------------------------------------------------------------*
-\begin{Definition}{majorisiert}
-    Seien $g \colon \N^m \to \N$ und $h \colon \N^2 \to \N$, dann sagen wir $h$ \textbf{majorisiert} $g$
-    und wir schreiben $h > g$,
-    falls
-    \begin{equation*}
-        \exists k_g \forall \bb{x} |\bb{x}| > 1 \Rightarrow h( k_g,  |\bb{x}| ) > g(  \bb{x} ).
-    \end{equation*}
-   
-\end{Definition}
-Hier betrachten wir $h$ als Schar von Funktionen, parametrisiert über das erste Argument, und wir suchen
-das Element der Schar, das größer ist als die zu majorisierende Funktion.
-
-%-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{keine Selbstmajorisierung}
-    Sei $h \colon \N^2 \to \N$, dann gilt NICHT $h > h$.   
-\end{Theorem}
-\begin{proof}
-    Siehe "`v4.0.4.2.4.2 (Master) Berechenbarkeit - Ackermannfunktion Eigenschaften"'. 
-\end{proof}
-
-%-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{Ackermann majorisiert primitiv rekursiv}
-    Sei $g \colon \N^s \to \N$ und $A$ die Ackermannfunktion, dann gilt $A > g$.   
-\end{Theorem}
-\begin{proof}
-    Siehe weiter unten. 
-\end{proof}
-
-%-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{Ackermann nicht primitiv rekursiv}
-    Die Ackermannfunktion $A$ ist NICHT primitiv rekursiv. 
-\end{Theorem}
-\begin{proof}
-    Wäre $A$ primitiv rekursiv so müsste nach \myRef{Theorem}{Ackermann majorisiert primitiv rekursiv} 
-    gelten $A > A$, was aber nach \myRef{Theorem}{keine Selbstmajorisierung} nicht möglich ist.
-\end{proof}
-
-%******************************************************************************************************
-\subsection{Beweis von \myRef{Theorem}{Ackermann majorisiert primitiv rekursiv} }
-%******************************************************************************************************
-Wir beweisen den Satz per vollständiger Induktion über den Aufbau der primitiv rekursiven Funktionen.
-
-%-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{PR1: Verknüpfung}
-    Sei $A( k_f, |\bb{x}| ) > f( \bb{x} )$ und $A( k_g, |\bb{x}| ) > g( \bb{x} )$. Setze
-    $\color{red}{k_{f \circ g} := k_f + k_g + 2}$. Dann gilt
-    \begin{equation*}
-        A( k_{f \circ g}, |\bb{x}| ) > f ( g (\bb{x})).
-    \end{equation*}
-\end{Theorem}
-\begin{proof}
-    \begin{align*}
-        &f(g(n)) & < &&& A(k_f, g(\bb{x}))          &&\text{ nach Definition von } k_f\\
-        &        & < &&& A(k_f, A(k_g, |\bb{x}|))   &&\text{ nach E5' und Definition von } k_g\\
-        &        & < &&& A(k_f + k_g + 2, |\bb{x}|) &&\text{ nach E8 }
-    \end{align*}
-\end{proof}
-
-%-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{PR2: Rekursion}
-    Sei $A( k_f, |\bb{x}| ) > f( \bb{x} )$ und 
-    $A( k_g, \max \{ n, h( n,\bb{x} ), |\bb{x}|\} ) > g( n, h( n,\bb{x} ), \bb{x} )$. 
-    Dann gilt für die wie in PR2 rekursiv definierte
-    Funktion $h$ mit $\color{red}{k_{R(f,g)} := 5 + \max \{ k_f, k_g \}}$
-    \begin{equation*}
-        A( k_{R(f,g)}, |\bb{x}| ) > h( \bb{x}).
-    \end{equation*}
-\end{Theorem}
-\begin{proof}
-    Wir setzen $q := 1 + \max \{ k_f, k_g \}$ und beweisen zunächst, als Zwischenbehauptung, über vollständige Induktion
-    folgende Abschätzung:
-    \begin{equation}\label{zwischen}
-        \boxed{h( n, \bb{x}) < A( q, n+ |\bb{x}| )}.
-    \end{equation}
-    Für $n=0$ haben wir (unter Nutzung von E6')
-    \begin{equation*}
-        h( 0, \bb{x}) = f( \bb{x} ) < A( k_f, |\bb{x}| ) < A( q, 0+|\bb{x}| ).
-    \end{equation*}
-    Als Vorbereitung für den $n+1$-Fall: Es gelten folgende beide Ungleichungen
-    \begin{align*}
-        &\max \{ n, |\bb{x}|\} & < &&& n + |\bb{x}|  &&< A(q, n + |\bb{x}|) &&\text{ nach E4 }\\
-        &h( n,\bb{x} )         &   &&&               &&< A(q, n + |\bb{x}|) &&\text{ nach Induktionsvoraussetzung }
-    \end{align*}
-    Diese beiden Ungleichungen ergeben zusammen
-    \begin{equation}\label{max}
-        \boxed{\max \{ n, h( n,\bb{x} ), |\bb{x}|\} < A(q, n + |\bb{x}|)}.
-    \end{equation}
-
-    Für $n+1$ können wir nun wie folgt abschätzen:
-    \begin{align*}
-        &h(n+1,\bb{x}) & =   &&& g( n, h( n, \bb{x} ), \bb{x} )                 &&\text{ nach Definition von } h\\
-        &              & <   &&& A( k_g, \max \{ n, h( n,\bb{x} ), |\bb{x}|\} ) &&\text{ nach Definition von } k_g\\
-        &              & <   &&& A( k_g, A(q, n + |\bb{x}|) )                   &&\text{ nach \eqref{max} und E5' } \\
-        &              & \le &&& A( q-1, A(q, n + |\bb{x}|) )                   &&\text{ nach Definition von $q$ und E6' }\\
-        &              & =   &&& A( q, n + 1 + |\bb{x}|) )                      &&\text{ nach D3 },
-    \end{align*}
-    welches die Zwischenbehauptung beweist. Damit können wir nun beweisen:    
-    \begin{align*}
-        &h(n,\bb{x})   & <   &&& A( q, n+ |\bb{x}| )                                 &&\text{ nach Zwischenbehauptung \eqref{zwischen} }\\
-        &              & <   &&& A( q, 2 \cdot \max \{ n, |\bb{x}|\} + 3 )           &&\text{ zunächst hätte +1 auch gereicht}\\
-        &              & <   &&& A( k_g, A(2, \max \{ n, |\bb{x}|\} ))               &&\text{ nach E3 } \\
-        &              & <   &&& A( q+4, \max \{ n, |\bb{x}|\} )                     &&\text{ nach E8 }\\
-        &              & <   &&& A( 5 + \max \{ k_f, k_g \}, \max \{ n, |\bb{x}|\} ) &&\text{ nach Definition von } q
-    \end{align*}
- 
-\end{proof}
-
-%-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{PR3: Konstante}
-    Sei $c \in \N$ beliebig. Setze $\color{red}{k_c := c}$. Dann gilt
-    \begin{equation*}
-        A( k_c, n ) > c.
-    \end{equation*}
-\end{Theorem}
-\begin{proof}
-    Sei $c :=0$. Dann gilt
-    \begin{equation*}
-        A( 0, n ) = n+1 > 0 \text{ (die Gleichheit nach D1)}.
-    \end{equation*}
-    Sei nun $A( c, n ) > c$. Dann gilt
-    \begin{equation*}
-        A( c+1, n ) > A( c, n ) > c\text{ (nach E6 und Voraussetzung)}.
-    \end{equation*}
-    Da $A( c, n )$ mindestens $1$ größer ist als $c$, muss $A( c+1, n ) > c+1$ sein.
-\end{proof}
-
-%-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{PR4: Projektion}
-    Setze $\color{red}{k_{P_j} := 0}$. Dann gilt
-    \begin{equation*}
-        A( k_{P_j}, |\bb{x}| ) > P_j(\bb{x}).
-    \end{equation*}
-\end{Theorem}
-\begin{proof}
-    Sei $c :=0$. Dann gilt
-    \begin{equation*}
-       A( k_{P_j}, |\bb{x}| ) =  A( 0, |\bb{x}| ) = |\bb{x}| + 1 > x_j = P_j(\bb{x}).
-    \end{equation*}
-    Die zweite Gleichheit wegen D1.
-\end{proof}
-
-%-----------------------------------------------------------------------------------------------------*
-\begin{Theorem}{PR5: Nachfolger}
-    Setze $\color{red}{k_s := 1}$. Dann gilt
-    \begin{equation*}
-        A( k_s, n ) > s(n)).
-    \end{equation*}
-\end{Theorem}
-\begin{proof}
-    \begin{equation*}
-        A( k_s, n ) =  A( 1, n ) = n+2 > n+1 = s(n).
-    \end{equation*}
-    Die zweite Gleichheit wegen E2.
-\end{proof}
-
-
-%******************************************************************************************************
-%                                                                                                     *
-\section{Schluss}
-%                                                                                                     *
-%******************************************************************************************************
-\textbf{Der Begriff der primitiv rekursiven Funktionen kann den Begriff der Berechenbarkeit nicht formalisieren.}
-Die Ackermannfunktion ist berechenbar. Dies "`wissen"' wir, da sie $\mu$-rekursiv ist und alle
-$\mu$-rekursiven Funktionen berechenbar sind. Wir wissen es auch, weil wir ein JavaScript-Programm
-zur Errechnung der Ackermannfunktion schreiben können, und dieses kann in eine Turing-Maschine 
-überführt werden.
-
-Dies ist ein Grund, sich mit der Ackermannfunktion zu beschäftigen. Ihr sehr schnelles Wachstum
-und damit das der der Funktion $A(n) := A(n,n)$ ist ein weiterer Grund.
-
-Dies ist auch der Grund, warum wir in der Theorie der rekursiven Funktionen den Begriff der
-$\mu$-Rekursion benötigen.
-
-\textbf{Wir können anhand der rekursiven Definition einer primitiv rekursiven Funktion das $k$ für
-die Majorisierung durch $A(k,n)$ einfach berechnen.} Dafür müssen wir nur die entsprechenden 
-Formeln für das $k$ in den Beweisschritten oben verwenden.
-\begin{align*}
-    &k_{f \circ g} &&:= k_f + k_g + 2           &&\text{(PR1)}\\
-    &k_{R(f,g)}    &&:= 5 + \max \{ k_f, k_g \} &&\text{(PR2)}\\
-    &k_c           &&:= c                       &&\text{(PR3)}\\
-    &k_{P_j}       &&:= 0                       &&\text{(PR4)}\\
-    &k_s           &&:= 1                       &&\text{(PR5)}
-\end{align*}
-Wir wissen, dass die Ackermannfunktion für großes $k$ abstrus schnell wächst. Mit dem hier gewählten
-Ansatz benötigen wir z.B. für die konstante Funktion $f(n) := 100$ eine extrem schnell wachsende 
-Funktion, und ich habe den Eindruck, wir schießen hier mit Kanonen auf Spatzen.
-
-
-\begin{backup}
-    (Zur Zeit nicht benötigter Inhalt)
-\end{backup}
+\begin{itemize}
+	\item (\textbf{PR1}): $k_{f \circ g} := k_f + k_g + 2$
+	\item (\textbf{PR2}): $k_{R(f,g)} := 5 + \max \{ k_f, k_g \}$ 
+	\item (\textbf{PR3}): $k_c := c$
+	\item (\textbf{PR4}): $k_{P_j} := 0$
+	\item (\textbf{PR5}): $k_s := 1$
+\end{itemize}
 
 %******************************************************************************************************
 %                                                                                                     *
