@@ -119,6 +119,7 @@
 \DeclareMathOperator{\Rang}{Rang}
 \DeclareMathOperator{\Det}{Det}
 \DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\GL}{GL}
 
 \DeclareMathOperator{\sub}{sub}
 \DeclareMathOperator{\blk}{blk}
@@ -224,6 +225,17 @@ Copyright (C) 2023 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
+Die n-dimensionale Determinante ist eine natürliche Transformation.
+
+Zunächst sind die allgemeinen linearen Gruppe und Einheiten-Gruppe zwei Funktoren, was diesen Definitionen jede Beliebigkeit nimmt. Wir haben also zwei Funktoren von der Kategorie der Ringe in die der Gruppen. Anders ausgedrückt: Die Struktur der Ringe untereinander wird zweimal in der Struktur der Gruppen gefunden (als Diagramm).
+
+Darüber hinaus entpuppt sich die Determinante, die jedem Element der allgemeinen linearen Gruppe über einem kommutativen Ring mittels der bekannten Formel ein Element aus dem Ring zuordnet, als Gruppen-Homomorphismus in die Einheiten-Gruppe des Ringes. Das an sich ist schon ein struktureller Erkenntnisgewinn.
+
+Es stellt sich drittens zusätzlich heraus, dass die Determinanten die Komponenten einer natürlichen Transformation vom Allgemeinen-linearen-Gruppen-Funktor zum Einheiten-Gruppen-Funktor sind.
+
+Dies zeigt, wie angemessen die kategorischen Definitionen sind, dass wir sie unter anderem Namen unerkannt oft schon im Bereich unserer Aufmerksamkeit hatten und dass Kategorien-Theorie hilft die Welt zu verstehen.
+
+Es zeigt auch, dass zumindest einige mathematische Strukturen sehr gut zusammen passen und es enthüllt übergreifende Struktur- und Kompatibilitäts-Eigenschaften.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -233,14 +245,14 @@ Von Jörg Kunze
 %******************************************************************************************************
 \subsection*{Voraussetzungen}
 %******************************************************************************************************
-Axiome der Kategorien, Funktor, natürliche Transformation.
+Axiome der Kategorien, Funktor, natürliche Transformation, Ringe, Determinanten, Einheiten-Gruppe.
 
 %******************************************************************************************************
 \subsection*{Text}
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.4.4.5%20Determinante%20als%20Nat%C3%BCrliche%20Transformationen}
 }
 
 %******************************************************************************************************
@@ -252,20 +264,17 @@ v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
 v5.0.1.0.4 (Höher) Kategorien - Natürliche Transformationen\\
 \url{https://youtu.be/IN7Qa-SwlD0}\\
 
-
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
 \url{https://de.wikipedia.org/wiki/Nat%C3%BCrliche_Transformation}\\
 \url{https://ncatlab.org/nlab/show/natural+transformation}\\
-\url{https://ncatlab.org/nlab/show/natural+isomorphism}\\
-\url{https://de.wikipedia.org/wiki/Currying}\\
-\url{https://en.wikipedia.org/wiki/Currying#Category_theory}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
+\url{https://de.wikipedia.org/wiki/Funktor_(Mathematik)}\\
+\url{https://de.wikipedia.org/wiki/Ring_(Algebra)}\\
+\url{https://de.wikipedia.org/wiki/Determinante}\\
+\url{https://de.wikipedia.org/wiki/Determinante#Determinantenproduktsatz}\\
+\url{https://de.wikipedia.org/wiki/Einheitengruppe}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -332,19 +341,119 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Natürlicher Isomorphismus}
+\section{Determinante ist natürliche Transformation}
 %                                                                                                     *
 %******************************************************************************************************
-Als Beispiel nehmen wir das Currying in der Kategorie \textbf{Set}. Es besagt, dass es (pro $A, B, C$) einen Mengen-Isomorphismus (also eine Bijektion) folgender Art gibt.
-\begin{equation}
-   \Hom( A \times B, C ) \cong \Hom( A, \Hom( B, C)).
-\end{equation}
-Dieser Isomorphismus ist natürlich in $A, B, C$.
+Allgemein seine im folgenden $R, S$ kommutative Ringe mit $1$.
 
 %******************************************************************************************************
-\subsection{Definition einer natürlichen Transformation}
+\subsection{Allgemeine lineare Gruppe ist Funktor}
 %******************************************************************************************************
-Seien im Folgenden $\mathcal{C,D}$ zwei Kategorien und $\mathcal F,\mathcal G \colon \mathcal C \to \mathcal D$ zwei Funktoren mit $\mathcal C$ als Quell- und $\mathcal D$ als Ziel-Kategorie.
+Die allgemeine lineare Gruppe ist die Zuordnung
+\begin{align}
+   \GL_n \colon \text{\textbf{Ring}} \to \text{\textbf{Gruppe}}\\
+   R \mapsto \GL_n(R),
+\end{align}
+Wobei $\GL_n(R)$ die Gruppe der invertierbaren $n \times n$-Matrizen mit Koeffizienten in $R$ ist.
+Damit das ein Funktor sein kann, müssen wir die Abbildung auf Morphismen erweitern und zeigen, dass die Axiome für Funktoren erfüllt sind.
+
+Sei $f \colon R \to S$ ein Ring-Homomorphismus. Dann definieren wir eine Abbildung 
+\begin{align}
+   \GL_n(f) \colon \GL_n( R ) \to \GL_n( S )\\
+   (a_{ij}) \mapsto (f( a_{ij} )).
+\end{align}
+Da die Matrix-Multiplikation auf die Grundrechenarten zurückzuführen sind, und diese Grundrechenarten mit $f$ vertauschen, ist der Nachweis, dass es sich bei $\GL_n(f)$ um einen Gruppen-Homomorphismus handelt, leicht.
+
+Die Axiome eines Funktors
+\begin{align}
+   \GL_n(\id_R) &= \id_{\GL_n( R )}\\
+   \GL_n(f \circ g) &= \GL_n(f) \circ \GL_n(g)
+\end{align}
+sind noch einfacher nachzuweisen.
+
+%******************************************************************************************************
+\subsection{Einheiten-Gruppe ist Funktor}
+%******************************************************************************************************
+Wir definieren die Einheiten-Gruppe als
+\begin{equation}
+   R^* := \{r \in R \mid \exists r' \in R \colon rr' = r'r = 1 \},
+\end{equation}
+also als die Menge der multiplikativ invertierbaren Elemente von $R$. Dabei vergessen wir noch die Addition und erhalten eine Gruppe mit der Multiplikation als Verknüpfung. Wir definieren weiter $f^*(r) :=  f(r)$ und benutzen die Tatsache, dass das Bild einer Einheit eine Einheit ist, um die Funktor-Axiome für $\_^*$ nachzuweisen.
+
+%******************************************************************************************************
+\subsection{Determinante ist Gruppen-Homomorphismus}
+%******************************************************************************************************
+Die Aussage, dass Abbildung
+\begin{align}
+   \Det_n^R \colon &\GL_n(R) \to R^*\\
+                   &M \mapsto \Det_n^R 
+\end{align}
+ist ein Gruppenhomomorphismus ist, ist die selbe wie der Determinantenproduktsatz:
+\begin{equation}
+   \Det_n^R(MN) = \Det_n^R(M) \Det_n^R(N).
+\end{equation} 
+
+%******************************************************************************************************
+\subsection{Determinante ist natürliche Transformation}
+%******************************************************************************************************
+Genauer: für jedes $n$ ist die $n$-dimensionale Determinante $\Det_n$ eine natürliche Transformation mit den Komponenten $\Det_n^R$ mit $R \in \text{\textbf{Ring}}$.
+
+Wir wissen schon:
+\begin{itemize}
+   \item Allgemeine lineare Gruppe ist Funktor von \textbf{Ring} nach \textbf{Gruppe},
+   \item Einheiten-Gruppe ist Funktor von \textbf{Ring} nach \textbf{Gruppe},
+   \item Determinante ist Gruppen-Homomorphismus.
+\end{itemize}
+Um nachzuweisen, dass die Determinante eine natürliche Transformation genügt es somit, die Vertauschbarkeit mit den beiden involvierten Funktoren nachzuweisen.
+
+Sei dazu $f \colon R \to S$ ein Ring-Homomorphismus. Es muss also die Kommutativität des folgenden Diagramms gezeigt werden:
+\begin{equation}\label{kommutativ}
+   \begin{tikzcd}
+      \mathcal \GL_n(R) \arrow[r, "\Det_n^R"] \arrow[d, "\GL_n(f)"]
+      &R^* \arrow[d, "f^*"]\\
+      \GL_n(S) \arrow[r, "\Det_n^S"]  
+      & S^*\\
+   \end{tikzcd}
+\end{equation}
+\begin{proof}
+   Sei dazu $(a_{ij}) \in \GL_n(R)$. Wir bezeichnen mit $D( X_1, \cdots, X_n)$ das Polynom in $n$ Variablen, welches die Determinante als Funktion der Koeffizienten ausrechnet. Dann gilt:
+   \begin{align}
+      &&&\Det_n^S( \GL_n(f) )( (a_{ij}) )\\
+      &=&&\Det_n^S( ( f(a_{ij}) ) )       &&\text{ $\GL_n(f)$ ist Anwendung von $f$ auf Koeffizienten}\\
+      &=&&D( ( f(a_{ij}) ) )              &&\text{ Determinante als Polynom ausgerechnet}\\
+      &=&&f( D( (a_{ij}) ) )            &&\text{ da $f$ Ring-Homomorphismus}\\
+      &=&&f^*D( ( a_{ij}) ) )            &&\text{ da $f^*$ die Einschränkung von $f$ auf die Einheiten ist}\\
+      &=&&f^*( \Det_n^R( (a_{ij}) ) )     &&\text{ Determinante als Polynom ausgerechnet}
+   \end{align}
+\end{proof}
+
+%******************************************************************************************************
+\subsection{Graphische Veranschaulichung}
+%******************************************************************************************************
+\begin{figure}[h]
+   \centering
+   \includegraphics[width=\textwidth]{v5.0.1.0.4.4.5 Determinante als Natürliche Transformationen Bild.pdf}
+\end{figure}
+
+Wir finden den Graph der Kategorie der Ringe mehrmals als Diagramme im Graph der Kategorie der Gruppen. Die natürliche Transformation überführt diese ähnlichen Diagramme ineinander, ud das kompatible zu den Bildern der Homomorphismen.
+
+%******************************************************************************************************
+\subsection{Liste der Tatsachen, die in der Aussage "`Det ist Nat"' enthalten sind}
+%******************************************************************************************************
+Wieder ein Beispiel dafür, wie viel in einem Satz wie "`Determinante ist natürliche Transformation"' enthalten ist:
+\begin{itemize}
+   \item Lineare Gruppe ist Funktor: kann auf Morphismen erweitert werden und es gelten die Funktoraxiome
+   \item Einheitengruppe ist Funktor: kann auf Morphismen erweitert werden und es gelten die Funktoraxiome
+   \item Determinate ist Gruppenhomomorphismus
+\end{itemize}
+
+In den Satz "`Determinante ist natürliche Transformation"' fließen folgende Tatsachen ein: 
+\begin{itemize}
+   \item Matrix-Multiplikation ist auf die Grundrechenarten zurückzuführen
+   \item Bild einer Einheit ist Einheit
+   \item Determinantenproduktsatz
+   \item Determinante ist als Polynom mit Ring-Homomorphismen verträglich
+\end{itemize}
 
 %******************************************************************************************************
 %                                                                                                     *
@@ -379,7 +488,6 @@ Noch zu erledigen sind
       F. William Lawvere, Stephen H. Schanuel, \emph{Conceptual Mathematics: a First Introduction to Categories},
       2009 Cambridge University Press, 978-0-521-71916-2 (ISBN)
 
-
    \bibitem[MacLane1978]{MacLane}
       Saunders Mac Lane, \emph{Categories for the Working Mathematician},
       Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
@@ -409,7 +517,12 @@ Noch zu erledigen sind
     \textbf{Set}                        & Die Kategorie der Mengen\\
     $\Hom( X, Y)$                       & Die Menge der Homomorphismen von $X$ nach $Y$\\
     $\alpha, \beta, \cdots$             & natürliche Transformationen\\
-    $\mathcal C ^{\text{op}}$           & Duale Kategorie
+    $\mathcal C ^{\text{op}}$           & Duale Kategorie\\
+    \textbf{Ring} nach \textbf{Gruppe}  & Kategorie der Ringe und der Gruppen\\
+    $\GL_n(R)$                          & Allgemeine lineare Gruppe über dem Ring $R$\\
+    $R^*$                               & Einheitengruppe des Rings $R$\\
+    $\Det_n^R$                          & $n$-dimensionale Determinante für Matrizen mit Koeffizienten in $R$. 
+    
 \end{tabular}
 
 \end{document}
