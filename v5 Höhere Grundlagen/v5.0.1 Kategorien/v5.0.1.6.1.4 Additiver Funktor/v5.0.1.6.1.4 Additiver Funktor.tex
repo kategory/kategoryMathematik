@@ -82,9 +82,10 @@
 
 \myTheorem{Definition}
 \myTheorem{Proposition}
+\myTheorem{Satz}
 \myTheorem{Theorem}
-\myTheorem{Example}
-\myTheorem{Remark}
+\myTheorem{Beispiel}
+\myTheorem{Anmerkung}
 
 \definecollection{jkjkFrage}
 \newtheorem{jkFrage}[theorem]{Frage}
@@ -165,7 +166,9 @@
 \newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
 \newcommand{\BB}{\ensuremath{\mathcal{ B }}}
 \newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\DD}{\ensuremath{\mathcal{ D }}}
 \newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\FF}{\ensuremath{\mathcal{ F }}}
 \newcommand{\KK}{\ensuremath{\mathcal{ K }}}
 \newcommand{\MM}{\ensuremath{\mathcal{ M }}}
 \newcommand{\PP}{\ensuremath{\mathcal{ P }}}
@@ -225,9 +228,15 @@ Copyright (C) 2023 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
-Die n-dimensionale Determinante ist eine natürliche Transformation.
+Additive Funktoren auf Kategorien, deren Hom-Mengen abelsche Gruppen, also Objekte in \textbf{Ab}, sind, sind definiert als verträglich mit den Gruppenstrukturen. Das will sagen, dass die induzierten Abbildungen \textbf{Ab}-Hom's, also abelsche Gruppen-Homomorphismen sind.
 
+Wir könnten sie vielleicht besser gruppen-homomorphe Funktoren nennen. Allerdings folgt die Gruppen-Homomorphie schon aus der Additivität, daher der Name.
 
+\textbf{Ab}-Kategorien sind über zwei Eigenschaften definiert: 1. Hom-Mengen sind Objekte in \textbf{Ab} und zusätzlich sind die Hom-Funktoren additiv also Gruppen-Homomorphismen.
+
+\textbf{Ab}-Kategorien sind nicht zu verwechseln mit der Kategorie \textbf{Ab}. Letztere ist die eine Kategorie der abelschen Gruppen. \textbf{Ab}-Kategorien sind all die Kategorien, deren Hom-Mengen Objekte in \textbf{Ab} sind (und deren Hom-Funktoren struktur-verträglich sind). Allerdings ist \textbf{Ab} selbst auch eine \textbf{Ab}-Kategorie.
+
+Generell sind zu bestimmten Kategorien V die V-Kategorien definiert als solche, deren Hom-Mengen Objekte in V sind, so dass eine Batterie weiterer Verträglichkeitseingenschaften gelten.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -237,36 +246,42 @@ Von Jörg Kunze
 %******************************************************************************************************
 \subsection*{Voraussetzungen}
 %******************************************************************************************************
-Axiome der Kategorien, Funktor, natürliche Transformation, Ringe, Determinanten, Einheiten-Gruppe.
+Axiome der Kategorien, Funktor, Hom-Funktor, abelsche Gruppen.
 
 %******************************************************************************************************
 \subsection*{Text}
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.4.4.5%20Determinante%20als%20Nat%C3%BCrliche%20Transformationen}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.6.1.4%20Additiver%20Funktor}
 }
 
 %******************************************************************************************************
 \subsection*{Meine Videos}
 %******************************************************************************************************
-Siehe auch in den folgenden Videos:\\
+Siehe auch in den folgenden Videos:\\ \\
+v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
+\url{https://youtu.be/X8v5Kyly0KI}\\
+\\
+v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
+\url{https://youtu.be/sIaKt-Wxlog}\\
+\\
 v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
-\url{https://youtu.be/Ojf5LQGeyOU}\\
-v5.0.1.0.4 (Höher) Kategorien - Natürliche Transformationen\\
-\url{https://youtu.be/IN7Qa-SwlD0}\\
+\url{https://youtu.be/Ojf5LQGeyOU}
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Nat%C3%BCrliche_Transformation}\\
-\url{https://ncatlab.org/nlab/show/natural+transformation}\\
+\url{https://de.wikipedia.org/wiki/Kategorientheorie}\\
 \url{https://de.wikipedia.org/wiki/Funktor_(Mathematik)}\\
-\url{https://de.wikipedia.org/wiki/Ring_(Algebra)}\\
-\url{https://de.wikipedia.org/wiki/Determinante}\\
-\url{https://de.wikipedia.org/wiki/Determinante#Determinantenproduktsatz}\\
-\url{https://de.wikipedia.org/wiki/Einheitengruppe}
+\url{https://de.wikipedia.org/wiki/Hom-Funktor}\\
+\url{https://de.wikipedia.org/wiki/Gruppe_(Mathematik)}\\
+\url{https://de.wikipedia.org/wiki/Abelsche_Gruppe}\\
+\url{https://de.wikipedia.org/wiki/Gruppenhomomorphismus}\\
+\url{https://ncatlab.org/nlab/show/Ab-enriched+category}\\
+\url{https://en.wikipedia.org/wiki/Preadditive_category}\\
+\url{https://de.wikipedia.org/wiki/Angereicherte_Kategorie}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -333,30 +348,140 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Determinante ist natürliche Transformation}
+\section{Additiver Funktor}
 %                                                                                                     *
 %******************************************************************************************************
-Allgemein seine im folgenden $R, S$ kommutative Ringe mit $1$.
+Seien im Folgenden $G, H$ abelsche Gruppen.
+\begin{Definition}{Additive Funktion}
+   Eine Funktion $f \colon G \to H$ zwischen zwei Gruppen heißt \textbf{additiv}, wenn für alle Elemente $x,y \in G$ gilt:
+   \begin{equation}
+      f(x+y) = f(x) + f(y).
+   \end{equation}
+\end{Definition} 
+
+\begin{Definition}{Gruppen-Homomorphismus}
+   Eine Funktion $f \colon G \to H$ zwischen zwei abelschen Gruppen heißt \textbf{Gruppen-Homomorphismus}, wenn die Abbildung die Gruppenstruktur respektiert, präziser, wenn für alle Elemente $x,y \in G$ gilt:
+   \begin{alignat}{3}
+      &f(x+y) &&= f(x) + f(y) && \quad \text{(Ga), additiv}\\
+      &f(0)   &&= 0           && \quad \text{(Gn), neutrales Element}\\
+      &f(-x)  &&= -f(x)       && \quad \text{(Gi), inverses}.
+   \end{alignat}
+   Ein Gruppen-Homomorphismus zwischen abelschen Gruppen ist nicht anderes als ein Morphismus in \textbf{Ab}, also ein \textbf{Ab}-Hom.
+\end{Definition} 
+
+
+\begin{Satz}{Additive Funktion ist Gruppen-Homomorphismus}
+   Eine additive Funktion $f \colon G \to H$ zwischen zwei Gruppen ist ein \textbf{Ab}-Hom.
+\end{Satz}
+\begin{proof}
+   Mit Hilfe der Rechenregeln in Gruppen können wir wie folgt ausrechnen:
+
+   \begin{alignat}{6}
+      &f(0) &&= f(0)+f(0)-f(0)&&=f(0+0)-f(0)&&=f(0)-f(0) &&= 0.\\
+      &f(-x) &&= f(-x) + f(x) -f(x) &&= f(-x + x) - f(x) &&= f(0) -f(x) &&= 0-f(x) &&= f(x).
+   \end{alignat}   
+   Hier nutzen wir die Additivität und in der zweiten Zeile zusätzlich das in der ersten bewiesene $f(0) = 0$.
+\end{proof}
+
+\begin{Anmerkung}{Alternative Definition von Gruppen-Homomorphismus}
+   Der \myRef{Satz}{Additive Funktion ist Gruppen-Homomorphismus} ist der Grund, dass oft die Additivität als Definition von Gruppen-Homomorphismus genommen wird. Der Witz ist aber, dass wir sämtliche Gruppenstruktur respektiert haben wollen, und wir würden in anderen Umständen die Definition immer so weit ausdehnen, dass sie äquivalent wird zu der hier gegebenen.
+\end{Anmerkung}
 
 %******************************************************************************************************
-\subsection{Allgemeine lineare Gruppe ist Funktor}
+\subsection{Additiver Funktor}
 %******************************************************************************************************
-Die allgemeine lineare Gruppe ist die Zuordnung
-\begin{align}
-   \GL_n \colon \text{\textbf{Ring}} \to \text{\textbf{Gruppe}}\\
-   R \mapsto \GL_n(R),
-\end{align}
-Wobei $\GL_n(R)$ die Gruppe der invertierbaren $n \times n$-Matrizen mit Koeffizienten in $R$ ist.
-Damit das ein Funktor sein kann, müssen wir die Abbildung auf Morphismen erweitern und zeigen, dass die Axiome für Funktoren erfüllt sind.
+Allgemein seine im folgenden $\CC, \DD$ Kategorien deren Hom-Mengen Gruppen also Objekte in \textbf{Ab} sind.
+
+Da ein Funktor $\FF \colon \CC \to \DD$ neben den Objekten der Kategorie  $\CC$ auch deren Morphismen abbildet, induziert dieser für jeweils zwei Objekte $X, Y \in \CC$ auch einen Funktion
+\begin{alignat}{3}
+   &\FF_{X,Y} \colon &&\Hom( X, Y ) &&\to \Hom( \FF(X), \FF(Y) )\\
+   &                 &&f            &&\mapsto \FF(f) 
+\end{alignat} 
+
+\begin{Definition}{Additiver Funktor}
+   Ein Funktor $\FF \colon \CC \to \DD$ heißt \textbf{additiv}, wenn die auf den Hom-Mengen $\Hom( X, Y )$ induzierten Funktionen $\FF_{X,Y}$ jeweils additiv im Sinne von \myRef{Definition}{Additive Funktion} sind.
+\end{Definition} 
+
+\begin{Satz}{Rechenregeln für additive Funktoren}
+   Seien $\FF \colon \CC \to \DD$ ein additiver Funktor und $X,Y$ Objekte aus $\CC$. Dann gilt für alle $f,g \in \Hom( X, Y )$:
+   \begin{alignat}{3}
+      &\FF(f+g) &&= \FF(f) + \FF(g) && \quad \text{(Fa), additiv}\\
+      &\FF(0)   &&= 0           && \quad \text{(Fn), neutrales Element}\\
+      &\FF(-f)  &&= -\FF(f)       && \quad \text{(Fi), inverses}.
+   \end{alignat}
+   Ein additiver Funktor induziert Gruppen-Homomorphismen zwischen den Hom-Gruppen.
+\end{Satz}
+\begin{proof}
+   \myRef{Satz}{Additive Funktion ist Gruppen-Homomorphismus}
+\end{proof}
+
+\begin{Anmerkung}{Richtige Definition von Funktor mit Hom-Gruppen}
+   \myRef{Satz}{Rechenregeln für additive Funktoren} zeigt, dass additive Funktoren die Gruppenstruktur auf den Hom-Mengen respektieren. Damit ist es die "`richtige"' Definition für Funktore in Kategorien mit der Extra-Struktur von abelschen Gruppen auf den Hom-Mengen. Die $0$ in (Fn) ist übrigens der Null-Morphismus $0 \in \Hom( X, Y )$, den es immer gibt, da $\Hom( X, Y )$ eine Gruppe ist.
+\end{Anmerkung}
+
+%******************************************************************************************************
+\subsection{\textbf{Ab}-Kategorien}
+%******************************************************************************************************
+\begin{Definition}{Ab Kategorie}
+   Eine Kategorie $\CC$, deren Hom-Mengen abelsche Gruppen also Objekte in \textbf{Ab} sind, heißt \textbf{Ab-Kategorie}, wenn für alle Objekte $X, Y \in \CC$ die Hom-Funktoren
+   \begin{alignat}{2}
+      &\Hom( X, \_ ) \colon \CC &&\to \text{ \textbf{Ab}}\\
+      &\Hom( \_, Y ) \colon \CC &&\to \text{ \textbf{Ab}}
+   \end{alignat}
+   additive Funktoren sind. Diese Kategorien werden auch "`präadditive Kategorien"' oder "`\textbf{Ab}-angereicherte Kategorien"' genannt.
+\end{Definition} 
+
+Hier eine graphische Veranschaulichung der Objekte und Homomorphismen des folgenden Satzes:
+\begin{equation}
+   \begin{tikzcd}
+      W \arrow[d, "f"] \arrow[dr, dashed, "g \circ f"]\\
+      X                \arrow[dr, dashed, "k \circ g"] \arrow[r, "g{,} h"]  &Y \arrow[d, "k"]\\ 
+                                                                            &Z   
+   \end{tikzcd}
+\end{equation}
+
+\begin{Satz}{Rechenregeln für Ab Kategorien}
+   Sei $\CC$ eine \textbf{Ab}-Kategorie und $W,X,Y,Z$ Objekte aus $\CC$. Dann gilt für alle $f \in \Hom( W, X )$ und alle $g, h \in \Hom( X, Y )$ und alle $k \in \Hom( Y, Z )$:
+   \begin{alignat}{3}
+      &(g+h) \circ f &&= (g \circ f) + (h \circ f) && \quad \text{(Aa), additiv}\\
+      &0 \circ f     &&= 0                         && \quad \text{(An), neutrales Element}\\
+      &(-g) \circ f  &&= -(g \circ f)              && \quad \text{(Ai), inverses}.
+   \end{alignat}
+   Und:
+   \begin{alignat}{3}
+      &k \circ (g+h) &&= (k \circ g) + (k \circ h) && \quad \text{(Aa), additiv}\\
+      &k \circ 0     &&= 0                         && \quad \text{(An), neutrales Element}\\
+      &k \circ (-g)  &&= -(k \circ g)              && \quad \text{(Ai), inverses}.
+   \end{alignat}
+\end{Satz}
+\begin{proof}
+   Der \myRef{Satz}{Additive Funktion ist Gruppen-Homomorphismus} verbunden mit
+   \begin{alignat}{3}
+      &\Hom( f, Y ) = \_ \circ f \colon &&\Hom( X, Y ) &&\to     \Hom( W, Y )\\
+      &                                &&g            &&\mapsto f \circ g.
+   \end{alignat} 
+   sowie 
+   \begin{alignat}{3}
+      &\Hom( X, k ) = k \circ \_ \colon &&\Hom( X, Y ) &&\to     \Hom( X, Z )\\
+      &                                &&g            &&\mapsto k \circ g.
+   \end{alignat}
+\end{proof}
+
+Das prototypische Beispiel einer \textbf{Ab}-Kategorie ist die Kategorie aller $R$-Moduln über einem  Ring $R$. Die Gruppenstruktur auf den Hom-Mengen ergibt sich hier aus der punktweisen Addition der zugrunde liegenden Funktionen:
+\begin{equation}
+   (f+g)(x) := f(x) + g(x).
+\end{equation}  
+
+TODO: Normales Distributiv-Gesetzt als Teil eines größeren Bildes: Mal ist Ab-Hom.
 
 
+\begin{backup}
+Noch zu erledigen sind
 %******************************************************************************************************
 %                                                                                                     *
 \section{TODO}
 %                                                                                                     *
 %******************************************************************************************************
-\begin{backup}
-Noch zu erledigen sind
 \begin{itemize}
    \item leer
 \end{itemize}
