@@ -1,0 +1,540 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v5.0.1.6.2.1 Nullen in additiven Kategorien.tex                                                  *
+%                                                                                                  *
+% Copyright (C) 2023 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v5.0.1.6.2.1 Nullen in additiven Kategorien is part of kategoryMathematik.                       *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Satz}
+\myTheorem{Theorem}
+\myTheorem{Beispiel}
+\myTheorem{Anmerkung}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\GL}{GL}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\DD}{\ensuremath{\mathcal{ D }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\FF}{\ensuremath{\mathcal{ F }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+\newcommand{\m}{\mathcal}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Höhere Grundlagen) Kategorien\\[1cm]
+\textbf{v5.0.1.6.2.1 Nullen in additiven Kategorien}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2023 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Additive 
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Additiver Funktor, \textbf{Ab}-Kategorien, Null-Objekt.
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+{\tiny
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.6.1.4%20Additiver%20Funktor}
+}
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\ \\
+v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
+\url{https://youtu.be/X8v5Kyly0KI}\\
+\\
+v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
+\url{https://youtu.be/sIaKt-Wxlog}\\
+\\
+v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
+\url{https://youtu.be/Ojf5LQGeyOU}
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Kategorientheorie}\\
+\url{https://de.wikipedia.org/wiki/Funktor_(Mathematik)}\\
+\url{https://de.wikipedia.org/wiki/Hom-Funktor}\\
+\url{https://de.wikipedia.org/wiki/Gruppe_(Mathematik)}\\
+\url{https://de.wikipedia.org/wiki/Abelsche_Gruppe}\\
+\url{https://de.wikipedia.org/wiki/Gruppenhomomorphismus}\\
+\url{https://ncatlab.org/nlab/show/Ab-enriched+category}\\
+\url{https://en.wikipedia.org/wiki/Preadditive_category}\\
+\url{https://de.wikipedia.org/wiki/Angereicherte_Kategorie}
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+"`Categories for the Working Mathematician"'\\
+Saunders Mac Lane\\
+1998 | 2nd ed. 1978\\
+Springer-Verlag New York Inc.\\
+978-0-387-98403-2 (ISBN)\\
+{\tiny
+   \url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}}\\
+
+Gut für die kategorische Sichtweise ist:\\
+"`Topology, A Categorical Approach"'\\
+Tai-Danae Bradley\\
+2020 MIT Press\\
+978-0-262-53935-7 (ISBN)\\ 
+{\tiny
+\url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}}\\
+
+Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von:\\
+"`An Introduction to Homological Algebra"'\\
+Joseph J. Rotman\\
+2009 Springer-Verlag New York Inc.\\
+978-0-387-24527-0 (ISBN)\\ 
+{\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
+
+Etwas weniger umfangreich und weniger tiefgehend aber gut motivierend ist:
+"`Category Theory"'\\
+Steve Awodey\\
+2010 Oxford University Press\\
+978-0-19-923718-0 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/9478288-9780199237180-category-theory}}\\
+
+Mit noch weniger Mathematik und die Konzepte motivierend ist:
+"`Conceptual Mathematics: a First Introduction to Categories"'\\
+F. William Lawvere, Stephen H. Schanuel\\
+2009 Cambridge University Press\\
+978-0-521-71916-2 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/8643555-9780521719162-conceptual-mathematics}}
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der 
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben 
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird, 
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der 
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben 
+(zu finden im selben Git-Projekt). 
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter 
+{\tiny
+   \url{https://youtu.be/zSP_a2RvoYE}
+}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Additiver Funktor}
+%                                                                                                     *
+%******************************************************************************************************
+Seien im Folgenden $G, H$ abelsche Gruppen.
+\begin{Definition}{Additive Funktion}
+   Eine Funktion $f \colon G \to H$ zwischen zwei Gruppen heißt \textbf{additiv}, wenn für alle Elemente $x,y \in G$ gilt:
+   \begin{equation}
+      f(x+y) = f(x) + f(y).
+   \end{equation}
+\end{Definition} 
+
+\begin{Definition}{Gruppen-Homomorphismus}
+   Eine Funktion $f \colon G \to H$ zwischen zwei abelschen Gruppen heißt \textbf{Gruppen-Homomorphismus}, wenn die Abbildung die Gruppenstruktur respektiert, präziser, wenn für alle Elemente $x,y \in G$ gilt:
+   \begin{alignat}{3}
+      &f(x+y) &&= f(x) + f(y) && \quad \text{(Ga), additiv}\\
+      &f(0)   &&= 0           && \quad \text{(Gn), neutrales Element}\\
+      &f(-x)  &&= -f(x)       && \quad \text{(Gi), inverses}.
+   \end{alignat}
+   Ein Gruppen-Homomorphismus zwischen abelschen Gruppen ist nicht anderes als ein Morphismus in \textbf{Ab}, also ein \textbf{Ab}-Hom.
+\end{Definition} 
+
+
+\begin{Satz}{Additive Funktion ist Gruppen-Homomorphismus}
+   Eine additive Funktion $f \colon G \to H$ zwischen zwei Gruppen ist ein \textbf{Ab}-Hom.
+\end{Satz}
+\begin{proof}
+   Mit Hilfe der Rechenregeln in Gruppen können wir wie folgt ausrechnen:
+
+   \begin{alignat}{6}
+      &f(0) &&= f(0)+f(0)-f(0)&&=f(0+0)-f(0)&&=f(0)-f(0) &&= 0.\\
+      &f(-x) &&= f(-x) + f(x) -f(x) &&= f(-x + x) - f(x) &&= f(0) -f(x) &&= 0-f(x) &&= f(x).
+   \end{alignat}   
+   Hier nutzen wir die Additivität und in der zweiten Zeile zusätzlich das in der ersten bewiesene $f(0) = 0$.
+\end{proof}
+
+\begin{Anmerkung}{Alternative Definition von Gruppen-Homomorphismus}
+   Der \myRef{Satz}{Additive Funktion ist Gruppen-Homomorphismus} ist der Grund, dass oft die Additivität als Definition von Gruppen-Homomorphismus genommen wird. Der Witz ist aber, dass wir sämtliche Gruppenstruktur respektiert haben wollen, und wir würden in anderen Umständen die Definition immer so weit ausdehnen, dass sie äquivalent wird zu der hier gegebenen.
+\end{Anmerkung}
+
+%******************************************************************************************************
+\subsection{Additiver Funktor}
+%******************************************************************************************************
+Allgemein seine im folgenden $\CC, \DD$ Kategorien deren Hom-Mengen Gruppen also Objekte in \textbf{Ab} sind.
+
+Da ein Funktor $\FF \colon \CC \to \DD$ neben den Objekten der Kategorie  $\CC$ auch deren Morphismen abbildet, induziert dieser für jeweils zwei Objekte $X, Y \in \CC$ auch einen Funktion
+\begin{alignat}{3}
+   &\FF_{X,Y} \colon &&\Hom( X, Y ) &&\to \Hom( \FF(X), \FF(Y) )\\
+   &                 &&f            &&\mapsto \FF(f) 
+\end{alignat} 
+
+\begin{Definition}{Additiver Funktor}
+   Ein Funktor $\FF \colon \CC \to \DD$ heißt \textbf{additiv}, wenn die auf den Hom-Mengen $\Hom( X, Y )$ induzierten Funktionen $\FF_{X,Y}$ jeweils additiv im Sinne von \myRef{Definition}{Additive Funktion} sind.
+\end{Definition} 
+
+\begin{Satz}{Rechenregeln für additive Funktoren}
+   Seien $\FF \colon \CC \to \DD$ ein additiver Funktor und $X,Y$ Objekte aus $\CC$. Dann gilt für alle $f,g \in \Hom( X, Y )$:
+   \begin{alignat}{3}
+      &\FF(f+g) &&= \FF(f) + \FF(g) && \quad \text{(Fa), additiv}\\
+      &\FF(0)   &&= 0           && \quad \text{(Fn), neutrales Element}\\
+      &\FF(-f)  &&= -\FF(f)       && \quad \text{(Fi), inverses}.
+   \end{alignat}
+   Ein additiver Funktor induziert Gruppen-Homomorphismen zwischen den Hom-Gruppen.
+\end{Satz}
+\begin{proof}
+   \myRef{Satz}{Additive Funktion ist Gruppen-Homomorphismus}
+\end{proof}
+
+\begin{Anmerkung}{Richtige Definition von Funktor mit Hom-Gruppen}
+   \myRef{Satz}{Rechenregeln für additive Funktoren} zeigt, dass additive Funktoren die Gruppenstruktur auf den Hom-Mengen respektieren. Damit ist es die "`richtige"' Definition für Funktore in Kategorien mit der Extra-Struktur von abelschen Gruppen auf den Hom-Mengen. Die $0$ in (Fn) ist übrigens der Null-Morphismus $0 \in \Hom( X, Y )$, den es immer gibt, da $\Hom( X, Y )$ eine Gruppe ist.
+\end{Anmerkung}
+
+%******************************************************************************************************
+\subsection{\textbf{Ab}-Kategorien}
+%******************************************************************************************************
+\begin{Definition}{Ab Kategorie}
+   Eine Kategorie $\CC$, deren Hom-Mengen abelsche Gruppen also Objekte in \textbf{Ab} sind, heißt \textbf{Ab-Kategorie}, wenn für alle Objekte $X, Y \in \CC$ die Hom-Funktoren
+   \begin{alignat}{2}
+      &\Hom( X, \_ ) \colon \CC &&\to \text{ \textbf{Ab}}\\
+      &\Hom( \_, Y ) \colon \CC &&\to \text{ \textbf{Ab}}
+   \end{alignat}
+   additive Funktoren sind. Diese Kategorien werden auch "`präadditive Kategorien"' oder "`\textbf{Ab}-angereicherte Kategorien"' genannt.
+\end{Definition} 
+
+Hier eine graphische Veranschaulichung der Objekte und Homomorphismen des folgenden Satzes:
+\begin{equation}
+   \begin{tikzcd}
+      W \arrow[d, "f"] \arrow[dr, dashed, "g \circ f"]\\
+      X                \arrow[dr, dashed, "k \circ g"] \arrow[r, "g{,} h"]  &Y \arrow[d, "k"]\\ 
+                                                                            &Z   
+   \end{tikzcd}
+\end{equation}
+
+\begin{Satz}{Rechenregeln für Ab Kategorien}
+   Sei $\CC$ eine \textbf{Ab}-Kategorie und $W,X,Y,Z$ Objekte aus $\CC$. Dann gilt für alle $f \in \Hom( W, X )$ und alle $g, h \in \Hom( X, Y )$ und alle $k \in \Hom( Y, Z )$:
+   \begin{alignat}{3}
+      &(g+h) \circ f &&= (g \circ f) + (h \circ f) && \quad \text{(Aa), additiv}\\
+      &0 \circ f     &&= 0                         && \quad \text{(An), neutrales Element}\\
+      &(-g) \circ f  &&= -(g \circ f)              && \quad \text{(Ai), inverses}.
+   \end{alignat}
+   Und:
+   \begin{alignat}{3}
+      &k \circ (g+h) &&= (k \circ g) + (k \circ h) && \quad \text{(Aa), additiv}\\
+      &k \circ 0     &&= 0                         && \quad \text{(An), neutrales Element}\\
+      &k \circ (-g)  &&= -(k \circ g)              && \quad \text{(Ai), inverses}.
+   \end{alignat}
+\end{Satz}
+\begin{proof}
+   Der \myRef{Satz}{Additive Funktion ist Gruppen-Homomorphismus} verbunden mit
+   \begin{alignat}{3}
+      &\Hom( f, Y ) = \_ \circ f \colon &&\Hom( X, Y ) &&\to     \Hom( W, Y )\\
+      &                                &&g            &&\mapsto f \circ g.
+   \end{alignat} 
+   sowie 
+   \begin{alignat}{3}
+      &\Hom( X, k ) = k \circ \_ \colon &&\Hom( X, Y ) &&\to     \Hom( X, Z )\\
+      &                                &&g            &&\mapsto k \circ g.
+   \end{alignat}
+\end{proof}
+
+Das prototypische Beispiel einer \textbf{Ab}-Kategorie ist die Kategorie aller $R$-Moduln über einem  Ring $R$. Die Gruppenstruktur auf den Hom-Mengen ergibt sich hier aus der punktweisen Addition der zugrunde liegenden Funktionen:
+\begin{equation}
+   (f+g)(x) := f(x) + g(x).
+\end{equation}  
+
+TODO: Normales Distributiv-Gesetzt als Teil eines größeren Bildes: Mal ist Ab-Hom.
+
+
+\begin{backup}
+Noch zu erledigen sind
+%******************************************************************************************************
+%                                                                                                     *
+\section{TODO}
+%                                                                                                     *
+%******************************************************************************************************
+\begin{itemize}
+   \item leer
+\end{itemize}
+\end{backup}
+
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+   \bibitem[Awodey2010]{Awodey}
+      Steve Awode, \emph{Category Theory},
+      2010 Oxford University Press, 978-0-19-923718-0 (ISBN)
+
+   \bibitem[Bradley2020]{Bradley}
+      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
+      2020 MIT Press, 978-0-262-53935-7 (ISBN)
+
+   \bibitem[LawvereSchanuel2009]{Lawvere}
+      F. William Lawvere, Stephen H. Schanuel, \emph{Conceptual Mathematics: a First Introduction to Categories},
+      2009 Cambridge University Press, 978-0-521-71916-2 (ISBN)
+
+   \bibitem[MacLane1978]{MacLane}
+      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
+      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
+
+   \bibitem[Rotman2009]{Rotman}
+   	Joseph J. Rotman, \emph{An Introduction to Homological Algebra},
+   	2009 Springer-Verlag New York Inc., 978-0-387-24527-0 (ISBN)
+      
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $A, B, C, \cdots, X, Y, Z$          & Objekte\\
+    $\mathcal F,\mathcal G$             & Funktoren\\
+    $f, g, h, r, s, \cdots$             & Homomorphismen\\
+    $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
+    \textbf{Set}                        & Die Kategorie der Mengen\\
+    $\Hom( X, Y)$                       & Die Menge der Homomorphismen von $X$ nach $Y$\\
+    $\alpha, \beta, \cdots$             & natürliche Transformationen\\
+    $\mathcal C ^{\text{op}}$           & Duale Kategorie\\
+    \textbf{Ring} nach \textbf{Gruppe}  & Kategorie der Ringe und der Gruppen\\
+    $\GL_n(R)$                          & Allgemeine lineare Gruppe über dem Ring $R$\\
+    $R^*$                               & Einheitengruppe des Rings $R$\\
+    $\Det_n^R$                          & $n$-dimensionale Determinante für Matrizen mit Koeffizienten in $R$. 
+    
+\end{tabular}
+
+\end{document}
