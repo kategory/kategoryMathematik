@@ -228,7 +228,15 @@ Copyright (C) 2023 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
-Additive 
+Additive Kategorien sind \textbf{Ab}-Kategorien mit allen endlichen Limites und Kolimites einschließlich der leeren also einschließlich End- und Anfangs-Objekt. Letztere zwei sind in Additiven Kategorien immer Null-Objekte.
+
+Damit haben wir neben den gruppen-theoretischen Null-Morphismen (die neutralen Elemente der Hom-Gruppen) auch die Null-Objekt-ausgelösten Null-Morphismen. Zum Glück sind das die selben!
+
+Wie in allen \textbf{Ab}-Kategorien erhält ein additiver Funktor auch in additiven Kategorien die gruppen-theoretischen und, wie wir jetzt wissen, damit auch die Null-Objekt-ausgelösten Null-Morphismen. Wieder zum Glück erhält er auch Null-Objekte selber. F(0)=0 in jedem Sinne.
+
+Additiver Funktoren in additiven Kategorien erhalten aber auch alle anderen endlichen Limites und Kolimites. Da übliche Funktoren wie Projektionen, Produkte, Adjungierte und Tensorprodukte additive Funktoren sind, können wir sagen:
+
+Additive Funktore sind die richtigen Morphismen in der Kategorie der additiven Kategorien.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -245,35 +253,31 @@ Additiver Funktor, \textbf{Ab}-Kategorien, Null-Objekt.
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.6.1.4%20Additiver%20Funktor}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.6.2.1%20Nullen%20in%20additiven%20Kategorien}
 }
 
 %******************************************************************************************************
 \subsection*{Meine Videos}
 %******************************************************************************************************
-Siehe auch in den folgenden Videos:\\ \\
-v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
-\url{https://youtu.be/X8v5Kyly0KI}\\
+Siehe auch in den folgenden Videos:\\ 
 \\
-v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
-\url{https://youtu.be/sIaKt-Wxlog}\\
+v5.0.1.6.1 (Höher) Kategorien - Abelsche - Nullobjekt\\
+\url{https://youtu.be/XbOf-nVZ1t0}\\
 \\
-v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
-\url{https://youtu.be/Ojf5LQGeyOU}
+v5.0.1.6.1.4 (Höher) Kategorien - Abelsche - Additiver Funktor\\
+\url{https://youtu.be/zSP_a2RvoYE}
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Kategorientheorie}\\
-\url{https://de.wikipedia.org/wiki/Funktor_(Mathematik)}\\
-\url{https://de.wikipedia.org/wiki/Hom-Funktor}\\
-\url{https://de.wikipedia.org/wiki/Gruppe_(Mathematik)}\\
-\url{https://de.wikipedia.org/wiki/Abelsche_Gruppe}\\
-\url{https://de.wikipedia.org/wiki/Gruppenhomomorphismus}\\
 \url{https://ncatlab.org/nlab/show/Ab-enriched+category}\\
 \url{https://en.wikipedia.org/wiki/Preadditive_category}\\
-\url{https://de.wikipedia.org/wiki/Angereicherte_Kategorie}
+\url{https://en.wikipedia.org/wiki/Additive_category}\\
+\url{https://ncatlab.org/nlab/show/additive+category}\\
+\url{https://ncatlab.org/nlab/show/zero+object}\\
+\url{https://en.wikipedia.org/wiki/Initial_and_terminal_objects}\\
+\url{https://de.wikipedia.org/wiki/Anfangsobjekt,_Endobjekt_und_Nullobjekt}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -335,137 +339,182 @@ Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
 %******************************************************************************************************
 Das Video hierzu ist zu finden unter 
 {\tiny
-   \url{https://youtu.be/zSP_a2RvoYE}
+   \url{huch!}
 }
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Additiver Funktor}
+\section{Nullen in additiven Kategorien}
 %                                                                                                     *
 %******************************************************************************************************
-Seien im Folgenden $G, H$ abelsche Gruppen.
-\begin{Definition}{Additive Funktion}
-   Eine Funktion $f \colon G \to H$ zwischen zwei Gruppen heißt \textbf{additiv}, wenn für alle Elemente $x,y \in G$ gilt:
-   \begin{equation}
-      f(x+y) = f(x) + f(y).
-   \end{equation}
-\end{Definition} 
-
-\begin{Definition}{Gruppen-Homomorphismus}
-   Eine Funktion $f \colon G \to H$ zwischen zwei abelschen Gruppen heißt \textbf{Gruppen-Homomorphismus}, wenn die Abbildung die Gruppenstruktur respektiert, präziser, wenn für alle Elemente $x,y \in G$ gilt:
-   \begin{alignat}{3}
-      &f(x+y) &&= f(x) + f(y) && \quad \text{(Ga), additiv}\\
-      &f(0)   &&= 0           && \quad \text{(Gn), neutrales Element}\\
-      &f(-x)  &&= -f(x)       && \quad \text{(Gi), inverses}.
-   \end{alignat}
-   Ein Gruppen-Homomorphismus zwischen abelschen Gruppen ist nicht anderes als ein Morphismus in \textbf{Ab}, also ein \textbf{Ab}-Hom.
-\end{Definition} 
-
-
-\begin{Satz}{Additive Funktion ist Gruppen-Homomorphismus}
-   Eine additive Funktion $f \colon G \to H$ zwischen zwei Gruppen ist ein \textbf{Ab}-Hom.
-\end{Satz}
-\begin{proof}
-   Mit Hilfe der Rechenregeln in Gruppen können wir wie folgt ausrechnen:
-
-   \begin{alignat}{6}
-      &f(0) &&= f(0)+f(0)-f(0)&&=f(0+0)-f(0)&&=f(0)-f(0) &&= 0.\\
-      &f(-x) &&= f(-x) + f(x) -f(x) &&= f(-x + x) - f(x) &&= f(0) -f(x) &&= 0-f(x) &&= f(x).
-   \end{alignat}   
-   Hier nutzen wir die Additivität und in der zweiten Zeile zusätzlich das in der ersten bewiesene $f(0) = 0$.
-\end{proof}
-
-\begin{Anmerkung}{Alternative Definition von Gruppen-Homomorphismus}
-   Der \myRef{Satz}{Additive Funktion ist Gruppen-Homomorphismus} ist der Grund, dass oft die Additivität als Definition von Gruppen-Homomorphismus genommen wird. Der Witz ist aber, dass wir sämtliche Gruppenstruktur respektiert haben wollen, und wir würden in anderen Umständen die Definition immer so weit ausdehnen, dass sie äquivalent wird zu der hier gegebenen.
-\end{Anmerkung}
 
 %******************************************************************************************************
-\subsection{Additiver Funktor}
+\subsection{Sorten von Nullen}
 %******************************************************************************************************
-Allgemein seine im folgenden $\CC, \DD$ Kategorien deren Hom-Mengen Gruppen also Objekte in \textbf{Ab} sind.
-
-Da ein Funktor $\FF \colon \CC \to \DD$ neben den Objekten der Kategorie  $\CC$ auch deren Morphismen abbildet, induziert dieser für jeweils zwei Objekte $X, Y \in \CC$ auch einen Funktion
-\begin{alignat}{3}
-   &\FF_{X,Y} \colon &&\Hom( X, Y ) &&\to \Hom( \FF(X), \FF(Y) )\\
-   &                 &&f            &&\mapsto \FF(f) 
-\end{alignat} 
-
-\begin{Definition}{Additiver Funktor}
-   Ein Funktor $\FF \colon \CC \to \DD$ heißt \textbf{additiv}, wenn die auf den Hom-Mengen $\Hom( X, Y )$ induzierten Funktionen $\FF_{X,Y}$ jeweils additiv im Sinne von \myRef{Definition}{Additive Funktion} sind.
-\end{Definition} 
-
-\begin{Satz}{Rechenregeln für additive Funktoren}
-   Seien $\FF \colon \CC \to \DD$ ein additiver Funktor und $X,Y$ Objekte aus $\CC$. Dann gilt für alle $f,g \in \Hom( X, Y )$:
-   \begin{alignat}{3}
-      &\FF(f+g) &&= \FF(f) + \FF(g) && \quad \text{(Fa), additiv}\\
-      &\FF(0)   &&= 0           && \quad \text{(Fn), neutrales Element}\\
-      &\FF(-f)  &&= -\FF(f)       && \quad \text{(Fi), inverses}.
-   \end{alignat}
-   Ein additiver Funktor induziert Gruppen-Homomorphismen zwischen den Hom-Gruppen.
-\end{Satz}
-\begin{proof}
-   \myRef{Satz}{Additive Funktion ist Gruppen-Homomorphismus}
-\end{proof}
-
-\begin{Anmerkung}{Richtige Definition von Funktor mit Hom-Gruppen}
-   \myRef{Satz}{Rechenregeln für additive Funktoren} zeigt, dass additive Funktoren die Gruppenstruktur auf den Hom-Mengen respektieren. Damit ist es die "`richtige"' Definition für Funktore in Kategorien mit der Extra-Struktur von abelschen Gruppen auf den Hom-Mengen. Die $0$ in (Fn) ist übrigens der Null-Morphismus $0 \in \Hom( X, Y )$, den es immer gibt, da $\Hom( X, Y )$ eine Gruppe ist.
-\end{Anmerkung}
+Wir unterscheiden folgende Nullen. Außerhalb dieses Textes werden wir sie alle mit $0$ bezeichnen.
+\begin{alignat}{2}
+   &0^G         &&\quad \text{Eine triviale abelsche Gruppe (auch Null-Gruppe genannt)}\\
+   &\vec 0^G    &&\quad \text{Das neutrale Element einer abelschen Hom-Gruppe}\\
+   &0^K         &&\quad \text{Ein Null-Objekt der Kategorie}\\
+   &\vec0^K   &&\quad \text{Ein Null-Morphismus in der Kategorie}
+\end{alignat}
+Der Pfeil über der Null soll andeuten, dass es sich um einen Homomorphismus handelt.
+Wenn wir die beteiligten Objekte notieren wollen, so schreiben wir sie unten dran:
+\begin{alignat}{2}
+   &\vec 0^G_{X,Y}      &&\in \Hom( X,Y)\\
+   &\vec 0^K_{X,Y}      &&\in \Hom( X,Y)\\
+   &\id_X                &&\in \Hom( X,X)
+\end{alignat}
 
 %******************************************************************************************************
-\subsection{\textbf{Ab}-Kategorien}
+\subsection{Additive Kategorien}
 %******************************************************************************************************
 \begin{Definition}{Ab Kategorie}
-   Eine Kategorie $\CC$, deren Hom-Mengen abelsche Gruppen also Objekte in \textbf{Ab} sind, heißt \textbf{Ab-Kategorie}, wenn für alle Objekte $X, Y \in \CC$ die Hom-Funktoren
+   Eine Kategorie $\CC$, deren Hom-Mengen abelsche Gruppen also Objekte in \textbf{Ab} sind (\textbf{AB1}), heißt \textbf{Ab-Kategorie}, wenn für alle Objekte $X, Y \in \CC$ die Hom-Funktoren
    \begin{alignat}{2}
       &\Hom( X, \_ ) \colon \CC &&\to \text{ \textbf{Ab}}\\
       &\Hom( \_, Y ) \colon \CC &&\to \text{ \textbf{Ab}}
    \end{alignat}
-   additive Funktoren sind. Diese Kategorien werden auch "`präadditive Kategorien"' oder "`\textbf{Ab}-angereicherte Kategorien"' genannt.
+   additive Funktoren sind (\textbf{AB2}). Diese Kategorien werden auch "`präadditive Kategorien"' oder "`\textbf{Ab}-angereicherte Kategorien"' genannt.
 \end{Definition} 
-
-Hier eine graphische Veranschaulichung der Objekte und Homomorphismen des folgenden Satzes:
-\begin{equation}
-   \begin{tikzcd}
-      W \arrow[d, "f"] \arrow[dr, dashed, "g \circ f"]\\
-      X                \arrow[dr, dashed, "k \circ g"] \arrow[r, "g{,} h"]  &Y \arrow[d, "k"]\\ 
-                                                                            &Z   
-   \end{tikzcd}
-\end{equation}
 
 \begin{Satz}{Rechenregeln für Ab Kategorien}
    Sei $\CC$ eine \textbf{Ab}-Kategorie und $W,X,Y,Z$ Objekte aus $\CC$. Dann gilt für alle $f \in \Hom( W, X )$ und alle $g, h \in \Hom( X, Y )$ und alle $k \in \Hom( Y, Z )$:
    \begin{alignat}{3}
       &(g+h) \circ f &&= (g \circ f) + (h \circ f) && \quad \text{(Aa), additiv}\\
-      &0 \circ f     &&= 0                         && \quad \text{(An), neutrales Element}\\
+      &\vec{0}^G \circ f     &&= \vec{0}^G         && \quad \text{(An), neutrales Element}\\
       &(-g) \circ f  &&= -(g \circ f)              && \quad \text{(Ai), inverses}.
    \end{alignat}
    Und:
    \begin{alignat}{3}
       &k \circ (g+h) &&= (k \circ g) + (k \circ h) && \quad \text{(Aa), additiv}\\
-      &k \circ 0     &&= 0                         && \quad \text{(An), neutrales Element}\\
+      &k \circ \vec{0}^G     &&= \vec{0}^G         && \quad \text{(An), neutrales Element}\\
       &k \circ (-g)  &&= -(k \circ g)              && \quad \text{(Ai), inverses}.
    \end{alignat}
 \end{Satz}
+
+\begin{Definition}{Additive Kategorie}
+   Eine Kategorie $\CC$ heißt \textbf{additiv}, wenn sie eine \textbf{Ab}-Kategorie ist und es alle endlichen (auch leeren) Produkte und Koprodukte gibt (\textbf{AB3}). Insbesondere gibt es Anfangs- und End-Objekte (initiale und terminale Objekte).
+\end{Definition} 
+
+Das prototypische Beispiel einer additiven Kategorie ist die Kategorie aller $R$-Moduln über einem  Ring $R$.
+
+\begin{Satz}{Additive Kategorie hat Null-Objekt}
+   Jede additive Kategorie hat Null-Objekte.
+\end{Satz}
 \begin{proof}
-   Der \myRef{Satz}{Additive Funktion ist Gruppen-Homomorphismus} verbunden mit
-   \begin{alignat}{3}
-      &\Hom( f, Y ) = \_ \circ f \colon &&\Hom( X, Y ) &&\to     \Hom( W, Y )\\
-      &                                &&g            &&\mapsto f \circ g.
-   \end{alignat} 
-   sowie 
-   \begin{alignat}{3}
-      &\Hom( X, k ) = k \circ \_ \colon &&\Hom( X, Y ) &&\to     \Hom( X, Z )\\
-      &                                &&g            &&\mapsto k \circ g.
-   \end{alignat}
+   Sei $\CC$ eine additive Kategorie. Nach Definition hat sie ein End-Objekt $E$ (leeres Produkt). Aufgrund der universellen Eigenschaften von End-Objekt enthält $\Hom( E, E)$ genau ein Element. Nach \textbf{AB1} ist $\vec 0^G_E \in \Hom( E, E)$. Nach den Axiomen einer Kategorie ist $\id_E \in \Hom( E, E)$ also gilt
+   \begin{equation}
+      \id_E = \vec 0^G_E.
+   \end{equation}
+   Sei $A \in \CC$ ein beliebiges Objekt. $\Hom( E, A)$ ist, weil es eine Gruppe ist nicht leer. Sei nun $f \in \Hom( E, A)$ ein beliebiger Morphismus. Es gilt
+   \begin{equation}
+      f = f \circ \id_E  = f \circ \vec 0^G_E = \vec 0^G_{E, A}
+   \end{equation}
+   Das erste $=$ gilt wegen der Axiome der Kategorien, das zweite wegen der eben gezeigten Identität und das dritte wegen der Rechenregel (An) aus \myRef{Satz}{Rechenregeln für Ab Kategorien}. Also gibt es genau einen Morphismus von $E$ nach $A$ und, da $A$ beliebig war, ist $E$ auch ein Anfangs-Objekt. Die Definition von Null-Objekt ist, gleichzeitig Anfangs- und End-Objekt zu sein.
 \end{proof}
 
-Das prototypische Beispiel einer \textbf{Ab}-Kategorie ist die Kategorie aller $R$-Moduln über einem  Ring $R$. Die Gruppenstruktur auf den Hom-Mengen ergibt sich hier aus der punktweisen Addition der zugrunde liegenden Funktionen:
+%******************************************************************************************************
+\subsection{Null-Morphismen}
+%******************************************************************************************************
+\begin{Satz}{Null-Morphismus im Gruppen- und im Kategorie-Sinn ist das selbe}
+   Sei $\CC$ eine additive Kategorie. Ein Morphismus in der Gruppe $\Hom( X, Y)$ ist genau das neutrale Element dieser Gruppe, wenn er ein Null-Morphismus im Sinne der Null-Objekte ist.
+   \begin{equation}
+      \vec 0^G = \vec 0^K.
+   \end{equation}
+\end{Satz}
+\begin{proof}
+   Sei $\CC$ eine additive Kategorie. Sei $N$ ein Null-Objekt. $\Hom(N,N)$ hat wie im Beweis oben genau ein Element, was direkt aus der Definition von Null-Objekt folgt. $\Hom(N,N)$ enthält immer die Identität und immer das neutrale Element. Der eindeutige Morphismus von oder zu $N$ ist aber auch der kategoriale Null-Morphismus. Somit: 
+   \begin{equation}
+      \id_N = \vec 0^G_N = \vec 0^K_N.
+   \end{equation}
+
+   Sei $A \in \CC$ ein beliebiges Objekt. $\Hom( N, A)$ und $\Hom( N, A)$ enthalten, weil $N$ Null-Objekt ist, genau einen Morphismus, der damit gleich dem neutralen Element sein muss:
+   \begin{alignat}{2}
+      &\vec 0^G_{N,A} &&= \vec 0^K_{N,A}\\
+      &\vec 0^G_{A,N} &&= \vec 0^K_{A,N}.
+   \end{alignat}
+   
+   Sei schließlich $\vec 0^K_{A,B}$ der Null-Morphismus zwischen $A$ und $B$, dann gilt
+   \begin{equation}
+      \vec 0^K_{A,B} = \vec 0^K_{N,B} \circ \vec 0^K_{A,N} = \vec 0^G_{N,B} \circ \vec 0^G_{A,N} = \vec 0^G_{A,B}
+   \end{equation}
+   Das erste $=$ gilt wegen der Definition von Null-Morphismus, das zweite wegen der eben gezeigten Identität und das dritte wegen der Rechenregel (An) aus \myRef{Satz}{Rechenregeln für Ab Kategorien}.
+\end{proof}
+
+Wegen dieses Satzes lassen wir bei Null-Morphismen ab hier das hochgestellte $G$ oder $K$ weg.
+
+%******************************************************************************************************
+\subsection{Null-Objekte}
+%******************************************************************************************************
+\begin{Satz}{Null-Objekte haben triviale Hom-Mengen}
+   Sei $\CC$ eine additive Kategorie und $N$ ein Objekt in $\CC$. Dann sind folgende Aussagen äquivalent:
+   \begin{alignat}{3}
+      &N            && \text{ist Null-Objekt}  &&\quad \text{\textbf{(N-Null)}}\\
+      &\Hom( N, N ) && = 0^G := \{ \vec 0   \} &&\quad \text{\textbf{(N-Hom)}}\\
+      &\id_N        && = \vec 0                &&\quad \text{\textbf{(N-id)}}
+   \end{alignat}
+\end{Satz}
+\begin{proof}
+   \textbf{(N-Null) $\Rightarrow$ (N-Hom)}: Da $N$ Null-Objekt ist, enthält $\Hom(N,N)$ wie jedes $\Hom(N,X)$ genau ein Element und da $\Hom(N,N)$ eine Gruppe ist, muss dies das neutrale Element sein.
+   
+   \textbf{(N-Hom) $\Rightarrow$ (N-id)}: Nach den Kategorie-Axiomen ist $\id_N \in \Hom(N,N)$ und da dies wiederum einelementig ist und $\vec 0$ enthält, folgt die Behauptung.
+   
+   \textbf{(N-id) $\Rightarrow$ (N-Null)}: Sei $X$ ein beliebiges Element aus $\CC$ und seien $f \colon X \to N$ und $g \colon N \to X$ beliebige Homomorphismen. Sie existieren, da $\Hom( X, N)$ und $\Hom( N, X)$ Gruppen also insbesondere nicht leer sind. Im Folgenden gilt das erste = wegen der Rechenregeln für $\id$ (der Kategorie-Axiome), das zweite wegen \textbf{(N-id)} und das dritte wegen \textbf{(An)}:
+   \begin{alignat}{4}
+      &f &&= \id_N \circ f  &&= \vec 0_N \circ f &&= \vec 0_{X,N} \\
+      &g &&= g \circ \id_N  &&= g \circ \vec 0_N &&= \vec 0_{N,X}.
+   \end{alignat}
+   Somit gibt es genau einen Morphismus $X \to N$ und genau einen $N \to X$, welches die Definition von Null-Objekt ist.
+\end{proof}
+
+%******************************************************************************************************
+\subsection{Bild von Null-Objekten}
+%******************************************************************************************************
+Ein additiver Funktor $\FF \colon \CC \to \DD$ definiert sich über die gruppentheoretische Eigenschaft bei der Abbildung von Morphismen $f, g$ über $\FF( f+g ) = \FF(f) + \FF(g)$. Für solche Funktoren haben wir bereits gezeigt, dass
 \begin{equation}
-   (f+g)(x) := f(x) + g(x).
-\end{equation}  
+   \FF( \vec 0 ) = \vec 0.
+\end{equation}
+Hier wird $\vec 0$ in seiner Rolle als neutrales Element der Hom-Gruppen bemüht.
 
-TODO: Normales Distributiv-Gesetzt als Teil eines größeren Bildes: Mal ist Ab-Hom.
+Die Definition von Null-Objekt hat zunächst nichts mit Gruppen zu tun. Dennoch sind sie nicht völlig losgelöst von der Gruppenstruktur auf den Hom-Mengen, wie wir oben gesehen haben. Es ergibt sich dennoch folgender
+\begin{Satz}{Bild von Null-Objekt unter Funktor ist wieder Null-Objekt }
+   Sei $\CC, \DD$ additive Kategorien und $\FF \colon \CC \to \DD$ ein additiver Funktor. Dann gilt:
+   \begin{equation}
+      \FF( 0 ) = 0.
+   \end{equation}
+\end{Satz}
+\begin{proof}
+   Im Folgenden gilt das erste = wegen der Funktor-Axiome, das zweite wegen \myRef{Satz}{Null-Morphismus im Gruppen- und im Kategorie-Sinn ist das selbe} und das dritte wegen $\FF( \vec 0 ) = \vec 0$.
+   \begin{equation}
+   \id_0 = \FF( \id_0 ) = \FF( \vec 0 ) = \vec 0.
+   \end{equation}
+   Damit folgt dann aus \myRef{Satz}{Null-Objekte haben triviale Hom-Mengen} und dort \textbf{(N-id)} die Behauptung.
+\end{proof}
 
+Da wir in der Regel die Pfeile bei den Null-Morphismen weglassen, können wir uns einfach $\FF( 0 ) = 0$ im doppelten Sinne (Null-Objekte und Null-Morphismen) merken.
+
+%******************************************************************************************************
+\subsection{Additiver Funktor ist die richtige Definition von Homomorphismus zwischen additiven Kategorien}
+%******************************************************************************************************
+Additive Funktoren sind also verträglich mit ...
+\begin{itemize}
+   \item der kategorischen Struktur, da es Funktoren sind
+   \item der Gruppen-Struktur der Hom-Gruppen, da sie additiv sind
+   \item (zumindest zum Teil) der additiven Struktur der additiven Kategorie, da sie Null-Objekte erhalten.
+\end{itemize}
+
+Es bleibt die Frage, ob ein additiver Funktor auch die übrigen endlichen Limites und Kolimites erhält. Dies ist der Fall, was wir aber hier nicht zeigen (siehe \cite{MacLane} VIII Abelian Categories, 2. Additive Categories Proposition 4 (zusammen mit Theorem 2 ebendort)).
+
+Sind zwei Categorien $\\C, \DD$ additive so auch ihr Produkt $\CC \times \DD$. Viele "`übliche"' Funktoren sind bei den additiven Kategorien additiv:
+\begin{itemize}
+   \item Die Hom-Funktoren (ko- und kontravariant)
+   \item Die Projekionen $\CC \times \DD \to \CC$ und $\CC \times \DD \to \DD$
+   \item Das Tensorprodukt abelscher Gruppen
+   \item Adjungierte Funktoren und damit jede Menge weiter Beispiele wie z.B. der Produkt-Funktor und der Diagonal-Funktor.
+\end{itemize}
+
+Deswegen können wir sagen, dass additiver Funktoren die richtige Wahl für die Definition von Homomorphismen zwischen additiven Kategorien sind.
 
 \begin{backup}
 Noch zu erledigen sind
