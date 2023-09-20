@@ -1,0 +1,587 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v5.0.1.0.4.4.8 Äquivalenz von Kategorien.tex                                                     *
+%                                                                                                  *
+% Copyright (C) 2023 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v5.0.1.0.4.4.8 Äquivalenz von Kategorien is part of kategoryMathematik.                          *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Satz}
+\myTheorem{Theorem}
+\myTheorem{Beispiel}
+\myTheorem{Anmerkung}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\GL}{GL}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\DD}{\ensuremath{\mathcal{ D }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\FF}{\ensuremath{\mathcal{ F }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+\newcommand{\m}{\mathcal}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Höhere Grundlagen) Kategorien\\[1cm]
+\textbf{v5.0.1.0.4.4.8 Äquivalenz von Kategorien}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2023 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Äquivalente Kategorien können mit den Mitteln der Kategorien-Theorie kaum unterschieden werden. Viele Tatsachen übe eine Kategorie gelten automatisch immer auch für alle zu ihr äquivalenten.
+
+Intuitiv unterscheiden sie sich ausschließlich in den Mächtigkeiten ihrer Äquivalenzklassen isomorpher Objekte. Isomorphe Objekte, also solche zwischen denen es einen Isomorphismus gibt, können mit den Mitteln der Kategorien-Theorie gar nicht unterschieden werden.
+
+Im Extremfall gibt es in einer Kategorie zu jedem Objekt kein weiteres isomorphes, jedes Objekt ist also das einzige seiner Art. Wählen wir aus einer Kategorie zu jeder Klasse isomorpher Objekte jeweils genau eins aus, erhalten wir das Skelett der Kategorie. Das Skelett ist äquivalent zur Ausgangskategorie. Zwei Kategorien sind äquivalent genau dann, wenn deren Skelette isomorph sind.
+
+Äquivalente Kategorien können gegenseitig ineinander funktoriel abgebildet werden. Diese beiden Einbettungen hintereinandergeschaltet ergibt eine Einbettung in sich selbst. Diese ist natürlich isomorph zur Identität.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Kategorie, Funktor, natürliche Transformation, Isomorphismus
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+{\tiny
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.6.2.1%20Nullen%20in%20additiven%20Kategorien}
+}
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\ 
+\\
+v5.0.1.6.1 (Höher) Kategorien - Abelsche - Nullobjekt\\
+\url{https://youtu.be/XbOf-nVZ1t0}\\
+\\
+v5.0.1.6.1.4 (Höher) Kategorien - Abelsche - Additiver Funktor\\
+\url{https://youtu.be/zSP_a2RvoYE}
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://ncatlab.org/nlab/show/Ab-enriched+category}\\
+\url{https://en.wikipedia.org/wiki/Preadditive_category}\\
+\url{https://en.wikipedia.org/wiki/Additive_category}\\
+\url{https://ncatlab.org/nlab/show/additive+category}\\
+\url{https://ncatlab.org/nlab/show/zero+object}\\
+\url{https://en.wikipedia.org/wiki/Initial_and_terminal_objects}\\
+\url{https://de.wikipedia.org/wiki/Anfangsobjekt,_Endobjekt_und_Nullobjekt}
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+"`Categories for the Working Mathematician"'\\
+Saunders Mac Lane\\
+1998 | 2nd ed. 1978\\
+Springer-Verlag New York Inc.\\
+978-0-387-98403-2 (ISBN)\\
+{\tiny
+   \url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}}\\
+
+Gut für die kategorische Sichtweise ist:\\
+"`Topology, A Categorical Approach"'\\
+Tai-Danae Bradley\\
+2020 MIT Press\\
+978-0-262-53935-7 (ISBN)\\ 
+{\tiny
+\url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}}\\
+
+Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von:\\
+"`An Introduction to Homological Algebra"'\\
+Joseph J. Rotman\\
+2009 Springer-Verlag New York Inc.\\
+978-0-387-24527-0 (ISBN)\\ 
+{\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
+
+Etwas weniger umfangreich und weniger tiefgehend aber gut motivierend ist:
+"`Category Theory"'\\
+Steve Awodey\\
+2010 Oxford University Press\\
+978-0-19-923718-0 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/9478288-9780199237180-category-theory}}\\
+
+Mit noch weniger Mathematik und die Konzepte motivierend ist:
+"`Conceptual Mathematics: a First Introduction to Categories"'\\
+F. William Lawvere, Stephen H. Schanuel\\
+2009 Cambridge University Press\\
+978-0-521-71916-2 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/8643555-9780521719162-conceptual-mathematics}}
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der 
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben 
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird, 
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der 
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben 
+(zu finden im selben Git-Projekt). 
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter 
+{\tiny
+   \url{huch!}
+}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Nullen in additiven Kategorien}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{Sorten von Nullen}
+%******************************************************************************************************
+Wir unterscheiden folgende Nullen. Außerhalb dieses Textes werden wir sie alle mit $0$ bezeichnen.
+\begin{alignat}{2}
+   &0^G         &&\quad \text{Eine triviale abelsche Gruppe (auch Null-Gruppe genannt)}\\
+   &\vec 0^G    &&\quad \text{Das neutrale Element einer abelschen Hom-Gruppe}\\
+   &0^K         &&\quad \text{Ein Null-Objekt der Kategorie}\\
+   &\vec0^K   &&\quad \text{Ein Null-Morphismus in der Kategorie}
+\end{alignat}
+Der Pfeil über der Null soll andeuten, dass es sich um einen Homomorphismus handelt.
+Wenn wir die beteiligten Objekte notieren wollen, so schreiben wir sie unten dran:
+\begin{alignat}{2}
+   &\vec 0^G_{X,Y}      &&\in \Hom( X,Y)\\
+   &\vec 0^K_{X,Y}      &&\in \Hom( X,Y)\\
+   &\id_X                &&\in \Hom( X,X)
+\end{alignat}
+
+%******************************************************************************************************
+\subsection{Additive Kategorien}
+%******************************************************************************************************
+\begin{Definition}{Ab Kategorie}
+   Eine Kategorie $\CC$, deren Hom-Mengen abelsche Gruppen also Objekte in \textbf{Ab} sind (\textbf{AB1}), heißt \textbf{Ab-Kategorie}, wenn für alle Objekte $X, Y \in \CC$ die Hom-Funktoren
+   \begin{alignat}{2}
+      &\Hom( X, \_ ) \colon \CC &&\to \text{ \textbf{Ab}}\\
+      &\Hom( \_, Y ) \colon \CC &&\to \text{ \textbf{Ab}}
+   \end{alignat}
+   additive Funktoren sind (\textbf{AB2}). Diese Kategorien werden auch "`präadditive Kategorien"' oder "`\textbf{Ab}-angereicherte Kategorien"' genannt.
+\end{Definition} 
+
+\begin{Satz}{Rechenregeln für Ab Kategorien}
+   Sei $\CC$ eine \textbf{Ab}-Kategorie und $W,X,Y,Z$ Objekte aus $\CC$. Dann gilt für alle $f \in \Hom( W, X )$ und alle $g, h \in \Hom( X, Y )$ und alle $k \in \Hom( Y, Z )$:
+   \begin{alignat}{3}
+      &(g+h) \circ f &&= (g \circ f) + (h \circ f) && \quad \text{(Aa), additiv}\\
+      &\vec{0}^G \circ f     &&= \vec{0}^G         && \quad \text{(An), neutrales Element}\\
+      &(-g) \circ f  &&= -(g \circ f)              && \quad \text{(Ai), inverses}.
+   \end{alignat}
+   Und:
+   \begin{alignat}{3}
+      &k \circ (g+h) &&= (k \circ g) + (k \circ h) && \quad \text{(Aa), additiv}\\
+      &k \circ \vec{0}^G     &&= \vec{0}^G         && \quad \text{(An), neutrales Element}\\
+      &k \circ (-g)  &&= -(k \circ g)              && \quad \text{(Ai), inverses}.
+   \end{alignat}
+\end{Satz}
+
+\begin{Definition}{Additive Kategorie}
+   Eine Kategorie $\CC$ heißt \textbf{additiv}, wenn sie eine \textbf{Ab}-Kategorie ist und es alle endlichen (auch leeren) Produkte und Koprodukte gibt (\textbf{AB3}). Insbesondere gibt es Anfangs- und End-Objekte (initiale und terminale Objekte).
+\end{Definition} 
+
+Das prototypische Beispiel einer additiven Kategorie ist die Kategorie aller $R$-Moduln über einem  Ring $R$.
+
+\begin{Satz}{Additive Kategorie hat Null-Objekt}
+   Jede additive Kategorie hat Null-Objekte.
+\end{Satz}
+\begin{proof}
+   Sei $\CC$ eine additive Kategorie. Nach Definition hat sie ein End-Objekt $E$ (leeres Produkt). Aufgrund der universellen Eigenschaften von End-Objekt enthält $\Hom( E, E)$ genau ein Element. Nach \textbf{AB1} ist $\vec 0^G_E \in \Hom( E, E)$. Nach den Axiomen einer Kategorie ist $\id_E \in \Hom( E, E)$ also gilt
+   \begin{equation}
+      \id_E = \vec 0^G_E.
+   \end{equation}
+   Sei $A \in \CC$ ein beliebiges Objekt. $\Hom( E, A)$ ist, weil es eine Gruppe ist nicht leer. Sei nun $f \in \Hom( E, A)$ ein beliebiger Morphismus. Es gilt
+   \begin{equation}
+      f = f \circ \id_E  = f \circ \vec 0^G_E = \vec 0^G_{E, A}
+   \end{equation}
+   Das erste $=$ gilt wegen der Axiome der Kategorien, das zweite wegen der eben gezeigten Identität und das dritte wegen der Rechenregel (An) aus \myRef{Satz}{Rechenregeln für Ab Kategorien}. Also gibt es genau einen Morphismus von $E$ nach $A$ und, da $A$ beliebig war, ist $E$ auch ein Anfangs-Objekt. Die Definition von Null-Objekt ist, gleichzeitig Anfangs- und End-Objekt zu sein.
+\end{proof}
+
+%******************************************************************************************************
+\subsection{Null-Morphismen}
+%******************************************************************************************************
+\begin{Satz}{Null-Morphismus im Gruppen- und im Kategorie-Sinn ist das selbe}
+   Sei $\CC$ eine additive Kategorie. Ein Morphismus in der Gruppe $\Hom( X, Y)$ ist genau das neutrale Element dieser Gruppe, wenn er ein Null-Morphismus im Sinne der Null-Objekte ist.
+   \begin{equation}
+      \vec 0^G = \vec 0^K.
+   \end{equation}
+\end{Satz}
+\begin{proof}
+   Sei $\CC$ eine additive Kategorie. Sei $N$ ein Null-Objekt. $\Hom(N,N)$ hat wie im Beweis oben genau ein Element, was direkt aus der Definition von Null-Objekt folgt. $\Hom(N,N)$ enthält immer die Identität und immer das neutrale Element. Der eindeutige Morphismus von oder zu $N$ ist aber auch der kategoriale Null-Morphismus. Somit: 
+   \begin{equation}
+      \id_N = \vec 0^G_N = \vec 0^K_N.
+   \end{equation}
+
+   Sei $A \in \CC$ ein beliebiges Objekt. $\Hom( N, A)$ und $\Hom( N, A)$ enthalten, weil $N$ Null-Objekt ist, genau einen Morphismus, der damit gleich dem neutralen Element sein muss:
+   \begin{alignat}{2}
+      &\vec 0^G_{N,A} &&= \vec 0^K_{N,A}\\
+      &\vec 0^G_{A,N} &&= \vec 0^K_{A,N}.
+   \end{alignat}
+   
+   Sei schließlich $\vec 0^K_{A,B}$ der Null-Morphismus zwischen $A$ und $B$, dann gilt
+   \begin{equation}
+      \vec 0^K_{A,B} = \vec 0^K_{N,B} \circ \vec 0^K_{A,N} = \vec 0^G_{N,B} \circ \vec 0^G_{A,N} = \vec 0^G_{A,B}
+   \end{equation}
+   Das erste $=$ gilt wegen der Definition von Null-Morphismus, das zweite wegen der eben gezeigten Identität und das dritte wegen der Rechenregel (An) aus \myRef{Satz}{Rechenregeln für Ab Kategorien}.
+\end{proof}
+
+Wegen dieses Satzes lassen wir bei Null-Morphismen ab hier das hochgestellte $G$ oder $K$ weg.
+
+%******************************************************************************************************
+\subsection{Null-Objekte}
+%******************************************************************************************************
+\begin{Satz}{Null-Objekte haben triviale Hom-Mengen}
+   Sei $\CC$ eine additive Kategorie und $N$ ein Objekt in $\CC$. Dann sind folgende Aussagen äquivalent:
+   \begin{alignat}{3}
+      &N            && \text{ist Null-Objekt}  &&\quad \text{\textbf{(N-Null)}}\\
+      &\Hom( N, N ) && = 0^G := \{ \vec 0   \} &&\quad \text{\textbf{(N-Hom)}}\\
+      &\id_N        && = \vec 0                &&\quad \text{\textbf{(N-id)}}
+   \end{alignat}
+\end{Satz}
+\begin{proof}
+   \textbf{(N-Null) $\Rightarrow$ (N-Hom)}: Da $N$ Null-Objekt ist, enthält $\Hom(N,N)$ wie jedes $\Hom(N,X)$ genau ein Element und da $\Hom(N,N)$ eine Gruppe ist, muss dies das neutrale Element sein.
+   
+   \textbf{(N-Hom) $\Rightarrow$ (N-id)}: Nach den Kategorie-Axiomen ist $\id_N \in \Hom(N,N)$ und da dies wiederum einelementig ist und $\vec 0$ enthält, folgt die Behauptung.
+   
+   \textbf{(N-id) $\Rightarrow$ (N-Null)}: Sei $X$ ein beliebiges Element aus $\CC$ und seien $f \colon X \to N$ und $g \colon N \to X$ beliebige Homomorphismen. Sie existieren, da $\Hom( X, N)$ und $\Hom( N, X)$ Gruppen also insbesondere nicht leer sind. Im Folgenden gilt das erste = wegen der Rechenregeln für $\id$ (der Kategorie-Axiome), das zweite wegen \textbf{(N-id)} und das dritte wegen \textbf{(An)}:
+   \begin{alignat}{4}
+      &f &&= \id_N \circ f  &&= \vec 0_N \circ f &&= \vec 0_{X,N} \\
+      &g &&= g \circ \id_N  &&= g \circ \vec 0_N &&= \vec 0_{N,X}.
+   \end{alignat}
+   Somit gibt es genau einen Morphismus $X \to N$ und genau einen $N \to X$, welches die Definition von Null-Objekt ist.
+\end{proof}
+
+%******************************************************************************************************
+\subsection{Bild von Null-Objekten}
+%******************************************************************************************************
+Ein additiver Funktor $\FF \colon \CC \to \DD$ definiert sich über die gruppentheoretische Eigenschaft bei der Abbildung von Morphismen $f, g$ über $\FF( f+g ) = \FF(f) + \FF(g)$. Für solche Funktoren haben wir bereits gezeigt, dass
+\begin{equation}
+   \FF( \vec 0 ) = \vec 0.
+\end{equation}
+Hier wird $\vec 0$ in seiner Rolle als neutrales Element der Hom-Gruppen bemüht.
+
+Die Definition von Null-Objekt hat zunächst nichts mit Gruppen zu tun. Dennoch sind sie nicht völlig losgelöst von der Gruppenstruktur auf den Hom-Mengen, wie wir oben gesehen haben. Es ergibt sich dennoch folgender
+\begin{Satz}{Bild von Null-Objekt unter Funktor ist wieder Null-Objekt }
+   Sei $\CC, \DD$ additive Kategorien und $\FF \colon \CC \to \DD$ ein additiver Funktor. Dann gilt:
+   \begin{equation}
+      \FF( 0 ) = 0.
+   \end{equation}
+\end{Satz}
+\begin{proof}
+   Im Folgenden gilt das erste = wegen der Funktor-Axiome, das zweite wegen \myRef{Satz}{Null-Morphismus im Gruppen- und im Kategorie-Sinn ist das selbe} und das dritte wegen $\FF( \vec 0 ) = \vec 0$.
+   \begin{equation}
+   \id_0 = \FF( \id_0 ) = \FF( \vec 0 ) = \vec 0.
+   \end{equation}
+   Damit folgt dann aus \myRef{Satz}{Null-Objekte haben triviale Hom-Mengen} und dort \textbf{(N-id)} die Behauptung.
+\end{proof}
+
+Da wir in der Regel die Pfeile bei den Null-Morphismen weglassen, können wir uns einfach $\FF( 0 ) = 0$ im doppelten Sinne (Null-Objekte und Null-Morphismen) merken.
+
+%******************************************************************************************************
+\subsection{Additiver Funktor ist die richtige Definition von Homomorphismus zwischen additiven Kategorien}
+%******************************************************************************************************
+Additive Funktoren sind also verträglich mit ...
+\begin{itemize}
+   \item der kategorischen Struktur, da es Funktoren sind
+   \item der Gruppen-Struktur der Hom-Gruppen, da sie additiv sind
+   \item (zumindest zum Teil) der additiven Struktur der additiven Kategorie, da sie Null-Objekte erhalten.
+\end{itemize}
+
+Es bleibt die Frage, ob ein additiver Funktor auch die übrigen endlichen Limites und Kolimites erhält. Dies ist der Fall, was wir aber hier nicht zeigen (siehe \cite{MacLane} VIII Abelian Categories, 2. Additive Categories Proposition 4 (zusammen mit Theorem 2 ebendort)).
+
+Sind zwei Categorien $\\C, \DD$ additive so auch ihr Produkt $\CC \times \DD$. Viele "`übliche"' Funktoren sind bei den additiven Kategorien additiv:
+\begin{itemize}
+   \item Die Hom-Funktoren (ko- und kontravariant)
+   \item Die Projekionen $\CC \times \DD \to \CC$ und $\CC \times \DD \to \DD$
+   \item Das Tensorprodukt abelscher Gruppen
+   \item Adjungierte Funktoren und damit jede Menge weiter Beispiele wie z.B. der Produkt-Funktor und der Diagonal-Funktor.
+\end{itemize}
+
+Deswegen können wir sagen, dass additiver Funktoren die richtige Wahl für die Definition von Homomorphismen zwischen additiven Kategorien sind.
+
+\begin{backup}
+Noch zu erledigen sind
+%******************************************************************************************************
+%                                                                                                     *
+\section{TODO}
+%                                                                                                     *
+%******************************************************************************************************
+\begin{itemize}
+   \item leer
+\end{itemize}
+\end{backup}
+
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+   \bibitem[Awodey2010]{Awodey}
+      Steve Awode, \emph{Category Theory},
+      2010 Oxford University Press, 978-0-19-923718-0 (ISBN)
+
+   \bibitem[Bradley2020]{Bradley}
+      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
+      2020 MIT Press, 978-0-262-53935-7 (ISBN)
+
+   \bibitem[LawvereSchanuel2009]{Lawvere}
+      F. William Lawvere, Stephen H. Schanuel, \emph{Conceptual Mathematics: a First Introduction to Categories},
+      2009 Cambridge University Press, 978-0-521-71916-2 (ISBN)
+
+   \bibitem[MacLane1978]{MacLane}
+      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
+      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
+
+   \bibitem[Rotman2009]{Rotman}
+   	Joseph J. Rotman, \emph{An Introduction to Homological Algebra},
+   	2009 Springer-Verlag New York Inc., 978-0-387-24527-0 (ISBN)
+      
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $A, B, C, \cdots, X, Y, Z$          & Objekte\\
+    $\mathcal F,\mathcal G$             & Funktoren\\
+    $f, g, h, r, s, \cdots$             & Homomorphismen\\
+    $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
+    \textbf{Set}                        & Die Kategorie der Mengen\\
+    $\Hom( X, Y)$                       & Die Menge der Homomorphismen von $X$ nach $Y$\\
+    $\alpha, \beta, \cdots$             & natürliche Transformationen\\
+    $\mathcal C ^{\text{op}}$           & Duale Kategorie\\
+    \textbf{Ring} nach \textbf{Gruppe}  & Kategorie der Ringe und der Gruppen\\
+    $\GL_n(R)$                          & Allgemeine lineare Gruppe über dem Ring $R$\\
+    $R^*$                               & Einheitengruppe des Rings $R$\\
+    $\Det_n^R$                          & $n$-dimensionale Determinante für Matrizen mit Koeffizienten in $R$. 
+    
+\end{tabular}
+
+\end{document}
