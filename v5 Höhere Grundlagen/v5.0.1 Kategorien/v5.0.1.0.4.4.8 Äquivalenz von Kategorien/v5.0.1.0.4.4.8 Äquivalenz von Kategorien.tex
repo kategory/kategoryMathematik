@@ -234,7 +234,11 @@ Intuitiv unterscheiden sie sich ausschließlich in den Mächtigkeiten ihrer Äqu
 
 Im Extremfall gibt es in einer Kategorie zu jedem Objekt kein weiteres isomorphes, jedes Objekt ist also das einzige seiner Art. Wählen wir aus einer Kategorie zu jeder Klasse isomorpher Objekte jeweils genau eins aus, erhalten wir das Skelett der Kategorie. Das Skelett ist äquivalent zur Ausgangskategorie. Zwei Kategorien sind äquivalent genau dann, wenn deren Skelette isomorph sind.
 
-Äquivalente Kategorien können gegenseitig ineinander funktoriel abgebildet werden. Diese beiden Einbettungen hintereinandergeschaltet ergibt eine Einbettung in sich selbst. Diese ist natürlich isomorph zur Identität.
+Äquivalente Kategorien können gegenseitig ineinander funktoriel abgebildet werden und zwar so, dass diese beiden Einbettungen hintereinandergeschaltet eine Einbettung in sich selbst ergeben, die  natürlich isomorph zur Identität ist.
+
+Äquivalenzen sind nicht immer mit bloßem Auge zu erkennen, was das folgende Beispiel auch zeigt.
+
+Als Beispiel nehmen wir einen Satz von Gelfand-Neumark, der sagt, dass die Kategorie der kompakten Hausdorffräume zu der der kommutativen $C^*$-Algebren mit Einselement äquivalent ist. Also zwei völlig verschiedene Gebilde sind kategorisch fast gleich. Diese Korrespondenz kann dazu genutzt werden topologische Eigenschaften algebraisch zu kodieren und dann auf den nicht-kommutativen Fall zu erweitern: nicht-kommutative Topologie.  
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -251,7 +255,7 @@ Kategorie, Funktor, natürliche Transformation, Isomorphismus
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.6.2.1%20Nullen%20in%20additiven%20Kategorien}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.4.4.8%20%C3%84quivalenz%20von%20Kategorien}
 }
 
 %******************************************************************************************************
@@ -269,13 +273,12 @@ v5.0.1.6.1.4 (Höher) Kategorien - Abelsche - Additiver Funktor\\
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://ncatlab.org/nlab/show/Ab-enriched+category}\\
-\url{https://en.wikipedia.org/wiki/Preadditive_category}\\
-\url{https://en.wikipedia.org/wiki/Additive_category}\\
-\url{https://ncatlab.org/nlab/show/additive+category}\\
-\url{https://ncatlab.org/nlab/show/zero+object}\\
-\url{https://en.wikipedia.org/wiki/Initial_and_terminal_objects}\\
-\url{https://de.wikipedia.org/wiki/Anfangsobjekt,_Endobjekt_und_Nullobjekt}
+\url{https://de.wikipedia.org/wiki/%C3%84quivalenz_(Kategorientheorie)}\\
+\url{https://ncatlab.org/nlab/show/equivalence+of+categories}\\
+\url{https://de.wikipedia.org/wiki/Nat%C3%BCrliche_Transformation}\\
+\url{https://ncatlab.org/nlab/show/natural+isomorphism}\\
+\url{https://de.wikipedia.org/wiki/Skelett_(Kategorientheorie)}\\
+\url{https://de.wikipedia.org/wiki/Satz_von_Gelfand-Neumark}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -342,177 +345,102 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Nullen in additiven Kategorien}
+\section{Äquivalente Kategorien}
 %                                                                                                     *
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Sorten von Nullen}
+\subsection{Ein endliches Beispiel}
 %******************************************************************************************************
-Wir unterscheiden folgende Nullen. Außerhalb dieses Textes werden wir sie alle mit $0$ bezeichnen.
-\begin{alignat}{2}
-   &0^G         &&\quad \text{Eine triviale abelsche Gruppe (auch Null-Gruppe genannt)}\\
-   &\vec 0^G    &&\quad \text{Das neutrale Element einer abelschen Hom-Gruppe}\\
-   &0^K         &&\quad \text{Ein Null-Objekt der Kategorie}\\
-   &\vec0^K   &&\quad \text{Ein Null-Morphismus in der Kategorie}
-\end{alignat}
-Der Pfeil über der Null soll andeuten, dass es sich um einen Homomorphismus handelt.
-Wenn wir die beteiligten Objekte notieren wollen, so schreiben wir sie unten dran:
-\begin{alignat}{2}
-   &\vec 0^G_{X,Y}      &&\in \Hom( X,Y)\\
-   &\vec 0^K_{X,Y}      &&\in \Hom( X,Y)\\
-   &\id_X                &&\in \Hom( X,X)
-\end{alignat}
-
-%******************************************************************************************************
-\subsection{Additive Kategorien}
-%******************************************************************************************************
-\begin{Definition}{Ab Kategorie}
-   Eine Kategorie $\CC$, deren Hom-Mengen abelsche Gruppen also Objekte in \textbf{Ab} sind (\textbf{AB1}), heißt \textbf{Ab-Kategorie}, wenn für alle Objekte $X, Y \in \CC$ die Hom-Funktoren
-   \begin{alignat}{2}
-      &\Hom( X, \_ ) \colon \CC &&\to \text{ \textbf{Ab}}\\
-      &\Hom( \_, Y ) \colon \CC &&\to \text{ \textbf{Ab}}
-   \end{alignat}
-   additive Funktoren sind (\textbf{AB2}). Diese Kategorien werden auch "`präadditive Kategorien"' oder "`\textbf{Ab}-angereicherte Kategorien"' genannt.
-\end{Definition} 
-
-\begin{Satz}{Rechenregeln für Ab Kategorien}
-   Sei $\CC$ eine \textbf{Ab}-Kategorie und $W,X,Y,Z$ Objekte aus $\CC$. Dann gilt für alle $f \in \Hom( W, X )$ und alle $g, h \in \Hom( X, Y )$ und alle $k \in \Hom( Y, Z )$:
-   \begin{alignat}{3}
-      &(g+h) \circ f &&= (g \circ f) + (h \circ f) && \quad \text{(Aa), additiv}\\
-      &\vec{0}^G \circ f     &&= \vec{0}^G         && \quad \text{(An), neutrales Element}\\
-      &(-g) \circ f  &&= -(g \circ f)              && \quad \text{(Ai), inverses}.
-   \end{alignat}
-   Und:
-   \begin{alignat}{3}
-      &k \circ (g+h) &&= (k \circ g) + (k \circ h) && \quad \text{(Aa), additiv}\\
-      &k \circ \vec{0}^G     &&= \vec{0}^G         && \quad \text{(An), neutrales Element}\\
-      &k \circ (-g)  &&= -(k \circ g)              && \quad \text{(Ai), inverses}.
-   \end{alignat}
-\end{Satz}
-
-\begin{Definition}{Additive Kategorie}
-   Eine Kategorie $\CC$ heißt \textbf{additiv}, wenn sie eine \textbf{Ab}-Kategorie ist und es alle endlichen (auch leeren) Produkte und Koprodukte gibt (\textbf{AB3}). Insbesondere gibt es Anfangs- und End-Objekte (initiale und terminale Objekte).
-\end{Definition} 
-
-Das prototypische Beispiel einer additiven Kategorie ist die Kategorie aller $R$-Moduln über einem  Ring $R$.
-
-\begin{Satz}{Additive Kategorie hat Null-Objekt}
-   Jede additive Kategorie hat Null-Objekte.
-\end{Satz}
-\begin{proof}
-   Sei $\CC$ eine additive Kategorie. Nach Definition hat sie ein End-Objekt $E$ (leeres Produkt). Aufgrund der universellen Eigenschaften von End-Objekt enthält $\Hom( E, E)$ genau ein Element. Nach \textbf{AB1} ist $\vec 0^G_E \in \Hom( E, E)$. Nach den Axiomen einer Kategorie ist $\id_E \in \Hom( E, E)$ also gilt
-   \begin{equation}
-      \id_E = \vec 0^G_E.
-   \end{equation}
-   Sei $A \in \CC$ ein beliebiges Objekt. $\Hom( E, A)$ ist, weil es eine Gruppe ist nicht leer. Sei nun $f \in \Hom( E, A)$ ein beliebiger Morphismus. Es gilt
-   \begin{equation}
-      f = f \circ \id_E  = f \circ \vec 0^G_E = \vec 0^G_{E, A}
-   \end{equation}
-   Das erste $=$ gilt wegen der Axiome der Kategorien, das zweite wegen der eben gezeigten Identität und das dritte wegen der Rechenregel (An) aus \myRef{Satz}{Rechenregeln für Ab Kategorien}. Also gibt es genau einen Morphismus von $E$ nach $A$ und, da $A$ beliebig war, ist $E$ auch ein Anfangs-Objekt. Die Definition von Null-Objekt ist, gleichzeitig Anfangs- und End-Objekt zu sein.
-\end{proof}
-
-%******************************************************************************************************
-\subsection{Null-Morphismen}
-%******************************************************************************************************
-\begin{Satz}{Null-Morphismus im Gruppen- und im Kategorie-Sinn ist das selbe}
-   Sei $\CC$ eine additive Kategorie. Ein Morphismus in der Gruppe $\Hom( X, Y)$ ist genau das neutrale Element dieser Gruppe, wenn er ein Null-Morphismus im Sinne der Null-Objekte ist.
-   \begin{equation}
-      \vec 0^G = \vec 0^K.
-   \end{equation}
-\end{Satz}
-\begin{proof}
-   Sei $\CC$ eine additive Kategorie. Sei $N$ ein Null-Objekt. $\Hom(N,N)$ hat wie im Beweis oben genau ein Element, was direkt aus der Definition von Null-Objekt folgt. $\Hom(N,N)$ enthält immer die Identität und immer das neutrale Element. Der eindeutige Morphismus von oder zu $N$ ist aber auch der kategoriale Null-Morphismus. Somit: 
-   \begin{equation}
-      \id_N = \vec 0^G_N = \vec 0^K_N.
-   \end{equation}
-
-   Sei $A \in \CC$ ein beliebiges Objekt. $\Hom( N, A)$ und $\Hom( N, A)$ enthalten, weil $N$ Null-Objekt ist, genau einen Morphismus, der damit gleich dem neutralen Element sein muss:
-   \begin{alignat}{2}
-      &\vec 0^G_{N,A} &&= \vec 0^K_{N,A}\\
-      &\vec 0^G_{A,N} &&= \vec 0^K_{A,N}.
-   \end{alignat}
-   
-   Sei schließlich $\vec 0^K_{A,B}$ der Null-Morphismus zwischen $A$ und $B$, dann gilt
-   \begin{equation}
-      \vec 0^K_{A,B} = \vec 0^K_{N,B} \circ \vec 0^K_{A,N} = \vec 0^G_{N,B} \circ \vec 0^G_{A,N} = \vec 0^G_{A,B}
-   \end{equation}
-   Das erste $=$ gilt wegen der Definition von Null-Morphismus, das zweite wegen der eben gezeigten Identität und das dritte wegen der Rechenregel (An) aus \myRef{Satz}{Rechenregeln für Ab Kategorien}.
-\end{proof}
-
-Wegen dieses Satzes lassen wir bei Null-Morphismen ab hier das hochgestellte $G$ oder $K$ weg.
-
-%******************************************************************************************************
-\subsection{Null-Objekte}
-%******************************************************************************************************
-\begin{Satz}{Null-Objekte haben triviale Hom-Mengen}
-   Sei $\CC$ eine additive Kategorie und $N$ ein Objekt in $\CC$. Dann sind folgende Aussagen äquivalent:
-   \begin{alignat}{3}
-      &N            && \text{ist Null-Objekt}  &&\quad \text{\textbf{(N-Null)}}\\
-      &\Hom( N, N ) && = 0^G := \{ \vec 0   \} &&\quad \text{\textbf{(N-Hom)}}\\
-      &\id_N        && = \vec 0                &&\quad \text{\textbf{(N-id)}}
-   \end{alignat}
-\end{Satz}
-\begin{proof}
-   \textbf{(N-Null) $\Rightarrow$ (N-Hom)}: Da $N$ Null-Objekt ist, enthält $\Hom(N,N)$ wie jedes $\Hom(N,X)$ genau ein Element und da $\Hom(N,N)$ eine Gruppe ist, muss dies das neutrale Element sein.
-   
-   \textbf{(N-Hom) $\Rightarrow$ (N-id)}: Nach den Kategorie-Axiomen ist $\id_N \in \Hom(N,N)$ und da dies wiederum einelementig ist und $\vec 0$ enthält, folgt die Behauptung.
-   
-   \textbf{(N-id) $\Rightarrow$ (N-Null)}: Sei $X$ ein beliebiges Element aus $\CC$ und seien $f \colon X \to N$ und $g \colon N \to X$ beliebige Homomorphismen. Sie existieren, da $\Hom( X, N)$ und $\Hom( N, X)$ Gruppen also insbesondere nicht leer sind. Im Folgenden gilt das erste = wegen der Rechenregeln für $\id$ (der Kategorie-Axiome), das zweite wegen \textbf{(N-id)} und das dritte wegen \textbf{(An)}:
-   \begin{alignat}{4}
-      &f &&= \id_N \circ f  &&= \vec 0_N \circ f &&= \vec 0_{X,N} \\
-      &g &&= g \circ \id_N  &&= g \circ \vec 0_N &&= \vec 0_{N,X}.
-   \end{alignat}
-   Somit gibt es genau einen Morphismus $X \to N$ und genau einen $N \to X$, welches die Definition von Null-Objekt ist.
-\end{proof}
-
-%******************************************************************************************************
-\subsection{Bild von Null-Objekten}
-%******************************************************************************************************
-Ein additiver Funktor $\FF \colon \CC \to \DD$ definiert sich über die gruppentheoretische Eigenschaft bei der Abbildung von Morphismen $f, g$ über $\FF( f+g ) = \FF(f) + \FF(g)$. Für solche Funktoren haben wir bereits gezeigt, dass
 \begin{equation}
-   \FF( \vec 0 ) = \vec 0.
+	\begin{tikzcd}
+		\bullet \arrow[leftrightarrow,d] \arrow[dr] \arrow[Rightarrow,rrr, bend left, green, "F"]&&& 
+		   \color{green}\bullet \arrow[leftrightarrow,green,d] \arrow[green,r] \arrow[dr] & \color{green}\bullet \arrow[leftrightarrow,d]\\
+		\color{red}\bullet \arrow[leftrightarrow,red,d] \arrow[red,r] & \color{red}\bullet && 
+		   \color{green}\bullet                          \arrow[r] \arrow[green,ur] \arrow[Rightarrow,red,llld, bend left, "G"] & \bullet \\
+		\color{red}\bullet           \arrow[red,ur]
+	\end{tikzcd}
 \end{equation}
-Hier wird $\vec 0$ in seiner Rolle als neutrales Element der Hom-Gruppen bemüht.
-
-Die Definition von Null-Objekt hat zunächst nichts mit Gruppen zu tun. Dennoch sind sie nicht völlig losgelöst von der Gruppenstruktur auf den Hom-Mengen, wie wir oben gesehen haben. Es ergibt sich dennoch folgender
-\begin{Satz}{Bild von Null-Objekt unter Funktor ist wieder Null-Objekt }
-   Sei $\CC, \DD$ additive Kategorien und $\FF \colon \CC \to \DD$ ein additiver Funktor. Dann gilt:
-   \begin{equation}
-      \FF( 0 ) = 0.
-   \end{equation}
-\end{Satz}
-\begin{proof}
-   Im Folgenden gilt das erste = wegen der Funktor-Axiome, das zweite wegen \myRef{Satz}{Null-Morphismus im Gruppen- und im Kategorie-Sinn ist das selbe} und das dritte wegen $\FF( \vec 0 ) = \vec 0$.
-   \begin{equation}
-   \id_0 = \FF( \id_0 ) = \FF( \vec 0 ) = \vec 0.
-   \end{equation}
-   Damit folgt dann aus \myRef{Satz}{Null-Objekte haben triviale Hom-Mengen} und dort \textbf{(N-id)} die Behauptung.
-\end{proof}
-
-Da wir in der Regel die Pfeile bei den Null-Morphismen weglassen, können wir uns einfach $\FF( 0 ) = 0$ im doppelten Sinne (Null-Objekte und Null-Morphismen) merken.
 
 %******************************************************************************************************
-\subsection{Additiver Funktor ist die richtige Definition von Homomorphismus zwischen additiven Kategorien}
+\subsection{Definition der Äquivalenz von Kategorien }
 %******************************************************************************************************
-Additive Funktoren sind also verträglich mit ...
+\begin{Definition}{Äquivalenz von Kategorien}
+	Zwei Kategorien $\CC, \DD$ heißen \textbf{äquivalent}, wenn es zwei Funktoren
+	\begin{alignat}{3}
+		&F &&\colon \CC && \to \DD \\
+		&G &&\colon \DD && \to \CC
+	\end{alignat}
+	und zwei natürliche Isomorphismen
+	\begin{alignat}{3}
+		&\alpha &&\colon FG && \to 1_\CC \\
+		&\beta  &&\colon GF && \to 1_\DD
+	\end{alignat}
+	gibt.
+\end{Definition}
+
+%******************************************************************************************************
+\subsection{Endo-Funktoren}
+%******************************************************************************************************
+\usetikzlibrary{shapes.geometric,fit}
+\tikzset{
+	dashellipse/.style={ellipse,draw,dashed,inner sep=0pt,blue,fit={#1}}
+}
+\begin{equation}
+	\begin{tikzcd}[
+		execute at end picture={
+			\node[dashellipse=(tikz@f@1-1-1)(tikz@f@1-1-1)]{};
+		}
+	]
+		X \arrow[dd] \arrow[dr] \arrow[rrr, blue, dashed, bend left, "\mathcal F"{name=0}] \arrow[rrrrrd, red, dashed, bend right] &&& A \arrow[dd, blue] \arrow[dr, blue] \arrow[dddrr, bend right] \arrow[drr, green] \arrow[ddrrr, bend left]\\ 
+		& Y \arrow[dl] \arrow[rrr, blue, dashed, bend left] \arrow[rrrrrd, red, dashed, bend right] &&&B \arrow[dl, blue] \arrow[ddr] \arrow[drr, green] &D \arrow[dd, red] \arrow[dr, red]\\
+		Z \arrow[rrr, blue, dashed, bend left] \arrow[rrrrrd, red, dashed, bend right, "\mathcal G"{name=1}] &&&C  \arrow[drr, green] &&& E \arrow[dl, red]\\
+		&&&&&F
+		\arrow[Rightarrow, green, from=0, to=1,shorten >= 6pt, yshift = -3pt, "\alpha"{yshift=3pt}]
+	\end{tikzcd}
+\end{equation}
+
+
+
+TODO: drei Bilder: Nat zwischen 1. Funktoren 2. Endo-Funktoren 3. 1 und Endo-Funktor
+
+
+%******************************************************************************************************
+\subsection{Das Skelett einer Kategorie}
+%******************************************************************************************************
+\begin{Definition}{Skelett einer Kategorie}
+   Ein \textbf{Skelett} einer Kategorie $\CC$ ist eine Unter-Kategorie bestehend aus genau einem Objekt von $\CC$ pro Isomorphie-Klassen von Objekten und zwischen zwei Objekten im Skelett bestehen alle Homomorphismen wie in $\CC$.
+\end{Definition}
+
 \begin{itemize}
-   \item der kategorischen Struktur, da es Funktoren sind
-   \item der Gruppen-Struktur der Hom-Gruppen, da sie additiv sind
-   \item (zumindest zum Teil) der additiven Struktur der additiven Kategorie, da sie Null-Objekte erhalten.
+   \item Zu jedem Objekt in $\CC$ gibt es genau ein zum ihm isomorphes Objekt im Skelett.
+   \item Je zwei Objekte im Skelett sind nicht isomorph.
+   \item Die Ausgangskategorie ist äquivalent im Sinne von \myRef{Definition}{Äquivalenz von Kategorien}.
+   \item Zwei Kategorien sind genau dann äquivalent, wenn sie isomorphe Skelette besitzen.
 \end{itemize}
 
-Es bleibt die Frage, ob ein additiver Funktor auch die übrigen endlichen Limites und Kolimites erhält. Dies ist der Fall, was wir aber hier nicht zeigen (siehe \cite{MacLane} VIII Abelian Categories, 2. Additive Categories Proposition 4 (zusammen mit Theorem 2 ebendort)).
+TODO: Male in Skelett
 
-Sind zwei Categorien $\\C, \DD$ additive so auch ihr Produkt $\CC \times \DD$. Viele "`übliche"' Funktoren sind bei den additiven Kategorien additiv:
-\begin{itemize}
-   \item Die Hom-Funktoren (ko- und kontravariant)
-   \item Die Projekionen $\CC \times \DD \to \CC$ und $\CC \times \DD \to \DD$
-   \item Das Tensorprodukt abelscher Gruppen
-   \item Adjungierte Funktoren und damit jede Menge weiter Beispiele wie z.B. der Produkt-Funktor und der Diagonal-Funktor.
-\end{itemize}
+Grundlegend ist, dass jede Kategorie ein Skelett besitzt. (Diese Aussage ist zum Auswahlaxiom für Klassen äquivalent, wie es etwa die Neumann-Bernays-Gödel-Mengenlehre bereitstellt.) Wenn auch eine Kategorie mehrere verschiedene Skelette besitzen kann, sind sie jedoch als Kategorien isomorph. Also besitzt jede Kategorie bis auf Isomorphie ein eindeutiges Skelett.
 
-Deswegen können wir sagen, dass additiver Funktoren die richtige Wahl für die Definition von Homomorphismen zwischen additiven Kategorien sind.
+Die Bedeutung von Skeletten rührt daher, dass sie (bis auf Isomorphie) kanonische Vertreter der Äquivalenzklassen bezüglich der Äquivalenz von Kategorien sind. Das ergibt sich daraus, dass jede Kategorie zu einem Skelett äquivalent ist, und dass zwei Kategorien genau dann äquivalent sind, wenn sie isomorphe Skelette besitzen. (Die letzten beiden Absätze sind dem Wikipedia-Eintrag über Skelette entnommen.)
+
+In der folgenden Skizze ist jeweils die Kategorie
+\begin{equation}
+   \begin{tikzcd}
+      \color{blue}\bullet \arrow[blue,r] & \color{blue}\bullet
+   \end{tikzcd}
+\end{equation}
+als Skelett blau hervorgehoben:
+\begin{equation}
+   \begin{tikzcd}
+      \bullet \arrow[leftrightarrow,d] \arrow[dr] \arrow[Rightarrow,rrr, bend left, "F"]&&& 
+      \bullet \arrow[leftrightarrow,d] \arrow[r] \arrow[dr] & \bullet \arrow[leftrightarrow,d]\\
+      \color{blue}\bullet \arrow[leftrightarrow,d] \arrow[blue,r] & \color{blue}\bullet && 
+      \color{blue}\bullet                          \arrow[r,blue] \arrow[ur] \arrow[Rightarrow,llld, bend left, "G"] & \color{blue}\bullet \\
+      \bullet           \arrow[ur]
+   \end{tikzcd}
+\end{equation}
 
 \begin{backup}
 Noch zu erledigen sind
@@ -570,7 +498,7 @@ Noch zu erledigen sind
 
 \begin{tabular}{ll}
     $A, B, C, \cdots, X, Y, Z$          & Objekte\\
-    $\mathcal F,\mathcal G$             & Funktoren\\
+    $F,G$                               & Funktoren\\
     $f, g, h, r, s, \cdots$             & Homomorphismen\\
     $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
     \textbf{Set}                        & Die Kategorie der Mengen\\
