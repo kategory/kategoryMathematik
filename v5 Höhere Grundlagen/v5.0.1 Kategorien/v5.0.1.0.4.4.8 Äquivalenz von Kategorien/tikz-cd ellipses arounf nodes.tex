@@ -1,0 +1,36 @@
+\documentclass[a4paper]{amsart}
+
+% https://tex.stackexchange.com/questions/394922/draw-an-ellipse-in-tikz-cd-around-diagram
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+
+\begin{document}
+\usetikzlibrary{shapes.geometric,fit}
+\tikzset{
+	dashellipse/.style={ellipse,draw,dashed,inner sep=0pt,blue,fit={#1}}
+}
+
+\begin{equation}
+	\begin{tikzcd}[
+		name=jk,
+		execute at end picture={
+				\node[dashellipse=(tikz@f@1-1-1)(tikz@f@1-1-3)]{};
+		}
+		]
+		X && Y
+	\end{tikzcd}
+\end{equation}
+
+\begin{equation}
+	\begin{tikzcd}[
+		name=mycustommatrix,
+		execute at end picture={
+			\node[dashellipse=(tikz@f@1-1-1)]{};
+		}
+		]
+		X
+	\end{tikzcd}
+\end{equation}
+
+\end{document}
