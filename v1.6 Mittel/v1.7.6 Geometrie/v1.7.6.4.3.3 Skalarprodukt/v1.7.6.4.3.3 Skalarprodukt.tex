@@ -1,0 +1,486 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v1.7.6.4.3.3 Skalarprodukt.tex                                                                   *
+%                                                                                                  *
+% Copyright (C) 2023 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v1.7.6.4.3.3 Skalarprodukt is part of kategoryMathematik.                                        *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Theorem}
+\myTheorem{Example}
+\myTheorem{Remark}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Mittel) Geometrie\\[1cm]
+\textbf{v1.7.6.4.3.3 Skalarprodukt}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2023 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Das Skalarprodukt ist bei Dreiecken im Koordinatensystem das Hindernis (Obstruktion) gegen die oder der Fehler bei der Anwendung des Pythagoras.
+
+Das Skalarprodukt als Summe der Produkte der Koordinaten-Versätze der Seiten mit einer recht einfachen Formel zu berechnen. Die Koordinaten-Versätze einer Strecke sind die Differenzen zwischen jeweils den beiden x- und y-Koordinaten des Anfangs- und End-Punktes der Seite. Wegen des Vorzeichens betrachten wir hier gerichtete Seiten.
+
+Das Skalarprodukt ist der nummerische Fehler bei der Anwendung der Formel von Pythagoras in beliebigen Dreiecken. Anders gesagt ist es ein weiterer Term in einer verallgemeinerten Formel des Pythagoras, die in allen Dreiecken gilt.
+
+Wieder anders gesagt, ist es Indikator für die Gültigkeit der Formel des Pythagoras: genau dann, wenn das Skalarprodukt Null ist, gilt der Satz des Pythagoras.
+
+Die beiden äquivalenten Aussagen "`das Skalarprodukt ist Null"' und "`der Satz des Pythagoras ist gültig"' sind damit zwei gleichwertige Definitionen von "`senkrecht"'.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Koordinaten-System, Satz des Pythagoras, Abstand im Koordinatensystem, Rechnen mit Buchstaben.
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+{\tiny
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v1.6%20Mittel/v1.7.6%20Geometrie/v1.7.6.4.3.2%20Abstand%20Gerade%20vom%20Nullpunkt}
+}
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\
+\\
+v1.7.6.4.2 (Mittel) Geometrie - Satz des Pythagoras\\
+\url{https://youtu.be/mTMOtXfUQzQ}\\
+\\
+v1.7.6.4.3 (Mittel) Geometrie - Abstand im Koordinatensystem\\
+\url{https://youtu.be/HEdolewfn78}\\
+\\
+v1.7.4.7 (Mittel) abc-Formel\\
+\url{https://youtu.be/tEXLpYN7O-0}
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\\
+\url{https://de.wikipedia.org/wiki/Satz_des_Pythagoras}\\
+\url{https://de.wikipedia.org/wiki/Euklidischer_Abstand}\\
+\url{https://de.wikipedia.org/wiki/Geradengleichung}
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+
+"`KomplettWissen Mathematik Gymnasium Klasse 5-10"'\\
+Klett Lerntraining bei PONS\\
+978-3-12-926097-5 (ISBN)\\
+{\tiny
+   \url{https://www.lehmanns.de/shop/schulbuch-lexikon-woerterbuch/35031626-9783129260975-komplettwissen-mathematik-gymnasium-klasse-5-10
+   }
+}\\
+\\
+"`Grundlagen der ebenen Geometrie"'
+Hendrik Kasten, Denis Vogel\\
+Springer Berlin\\
+978-3-662-57620-5 (ISBN)\\
+{\tiny
+   \url{
+      https://www.lehmanns.de/shop/mathematik-informatik/43394438-9783662576205-grundlagen-der-ebenen-geometrie
+   }
+}
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der 
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben 
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird, 
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der 
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben 
+(zu finden im selben Git-Projekt). 
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter 
+{\tiny
+   \url{}
+}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Abstand Gerade vom Nullpunkt}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{Abstand Punkt vom Nullpunkt}
+%******************************************************************************************************
+Der Abstand eines Punktes $(x_0, y_0)$ vom Nullpunkt ist \emph{definiert} über den Pythagoras als
+$\sqrt{x_0^2 + y_0^2}$.
+
+\begin{tikzpicture}[scale=3]
+   \draw[->, thick] (0, -0.5) -- (0, 1.5) node(yaxis)[above]{$y$};
+   \draw[->, thick] (-0.5, 0) -- (2, 0) node(xaxis)[right]{$x$};
+
+   \draw (1, -0.05) node[below]{$1$} -- (1, 0.05);
+   \draw (-0.05, 1) node[left]{$1$} -- (0.05, 1);
+   
+   \fill (3/4,3/8) coordinate (c) circle (0.03);
+   \draw[dashed] (yaxis |- c) node[left]{$y_0 = \frac{3}{8} = 0.375$} -- (c);
+   \draw[dashed] (xaxis -| c) node[below,align=left]{$x_0 = \frac{3}{4}$\\$= 0.75$} -- (c);
+   
+   \node[red] at (1, 0.5) {$\sqrt{x_0^2 + y_0^2} = \sqrt{\frac{45}{64}} \approx 0.838525 \dots$};
+   
+   \draw[dashed, red] (c)  -- (0,0);
+\end{tikzpicture}
+
+%******************************************************************************************************
+\subsection{Abstand eines Punktes einer Geraden vom Nullpunkt}
+%******************************************************************************************************
+Liegt der Punkt auf der Geraden $y = mx + q$ so ist die y-Koordinate zum x-Wer $x_0$ gegeben durch  
+$mx_0 + q$.
+Der Abstand eines Punktes $(x_0, mx_0 + q)$ auf der Geraden vom Nullpunkt ist damit wieder \emph{definiert} über den Pythagoras als
+$\sqrt{x_0^2 + (mx_0 + q)^2} = \sqrt{(m^2+1)x_0^2 + 2mqx_0 + q^2}$. Den zweiten Term haben wir durch die binomische Formel und anschließendes Zusammenfassen erhalten.
+
+\begin{tikzpicture}[scale=3]
+   \draw[->, thick] (0, -0.5) -- (0, 1.5) node(yaxis)[above]{$y$};
+   \draw[->, thick] (-0.5, 0) -- (2, 0) node(xaxis)[right]{$x$};
+   
+   \draw (1, -0.05) node[below]{$1$} -- (1, 0.05);
+   \draw (-0.05, 1) node[left]{$1$} -- (0.05, 1);
+   
+   \fill (3/4,3/8) coordinate (c) circle (0.03);
+   \draw[dashed] (yaxis |- c) node[left]{$mx_0 + q$} -- (c);
+   \draw[dashed] (xaxis -| c) node[below,align=left]{$x_0$} -- (c);
+   
+   \node[red] at (1.3, 0.5) {$\sqrt{(m^2+1)x_0^2 + 2mqx_0 + q^2}$};
+   
+   \draw[blue] (-1/2,1) -- (2,-1/4);
+   
+   \draw[dashed] (yaxis |- c) node[left]{$mx_0+q$} -- (c);
+   \draw[dashed] (xaxis -| c) node[below]{$x_0$} -- (c);
+   
+   \draw[dashed, red] (c)  -- (0,0);
+\end{tikzpicture}
+
+Die blaue Gerade in der Zeichnung ist $y = -\frac{1}{2}x + \frac{3}{4}$, der Punkt ist wie oben $\left( \frac{3}{4}, \frac{3}{8}\right)$.
+
+%******************************************************************************************************
+\subsection{Abstand einer Geraden vom Nullpunkt}
+%******************************************************************************************************
+Den Abstand einer Geraden vom Nullpunkt können wir nicht ermitteln, solange wir diesen Begriff nicht definiert haben. 
+
+%------------------------------------------------------------------------------------------------------
+\begin{Definition}{Abstand einer Geraden vom Nullpunkt}
+   Der \textbf{Abstand einer Geraden vom Nullpunkt} ist das Minimum der Abstände aller Punkte auf der Geraden vom Nullpunkt. Also der Abstand des Punktes auf der Geraden, der dem Nullpunkt am nähesten kommt.
+\end{Definition}
+
+\begin{tikzpicture}[scale=3]
+   \draw[->, thick] (0, -0.5) -- (0, 1.5) node(yaxis)[above]{$y$};
+   \draw[->, thick] (-0.5, 0) -- (2, 0) node(xaxis)[right]{$x$};
+   
+   \draw (1, -0.05) node[below]{$1$} -- (1, 0.05);
+   \draw (-0.05, 1) node[left]{$1$} -- (0.05, 1);
+   
+   \fill (3/4,3/8) coordinate (c) circle (0.03);
+   \draw[dashed] (yaxis |- c) node[left]{$mx_0 + q$} -- (c);
+   \draw[dashed] (xaxis -| c) node[below,align=left]{$x_0$} -- (c);
+   \draw[dashed, blue] (c)  -- (0,0);
+   
+   \draw[blue] (-1/2,1) -- (2,-1/4);
+   
+   \draw[dashed] (yaxis |- c) node[left]{$mx_0+q$} -- (c);
+   \draw[dashed] (xaxis -| c) node[below]{$x_0$} -- (c);
+
+   \coordinate (minimum) at (3/10,3/5);
+   \fill[red] (minimum) circle (0.03); 
+   \node[right, red] at (0.4,0.7){
+      nähester Punkt $(\frac{3}{10}, \frac{3}{5}) = (0.3, 0.6)$; 
+   };
+   \node[right, red] at (0.4,0.9){
+      Abstand = $\sqrt{\frac{9}{20}} = \frac{3}{10}\sqrt{5} \approx 0,6708203932499369...$
+   };
+   \draw[dashed, red] (minimum)  -- (0,0);
+\end{tikzpicture}
+
+
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Schluss}
+%                                                                                                     *
+%******************************************************************************************************
+Der Abstand der Geraden $y=mx+q$ zum Nullpunkt ist 
+\begin{equation}
+	\sqrt{\frac{q^2}{m^2+1}}.
+\end{equation}
+Der näheste Punkt ist
+\begin{equation}
+	\left( -\frac{mq}{m^2+1}, \frac{q}{m^2+1} \right).
+\end{equation}
+
+Es gibt einen einfachen Zusammenhang zwischen der $x$- und der $y$-Koordinate $x_0$ und $y_0$ des Punktes mit dem minimalen Abstand:
+\begin{equation}
+   x_0 = -my_0.
+\end{equation}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{TODO:}
+%                                                                                                     *
+%******************************************************************************************************
+\begin{itemize}
+   \item Tafelbild auf Blatt Papier
+\end{itemize}
+
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+
+   \bibitem[MacLane1978]{MacLane}
+      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
+      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
+      
+   \bibitem[Bradley2020]{Bradley}
+      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
+      2020 MIT Press, 978-0-262-53935-7 (ISBN)
+
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $A, B, C, \cdots, X, Y, Z$          & Objekte\\
+    $F,G,L,R$ & Funktoren\\
+
+\end{tabular}
+
+\end{document}
