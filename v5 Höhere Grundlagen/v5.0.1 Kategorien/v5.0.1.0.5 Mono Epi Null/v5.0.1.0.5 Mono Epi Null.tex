@@ -1,0 +1,524 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v5.0.1.0.5 Mono Epi Null.tex                                                                     *
+%                                                                                                  *
+% Copyright (C) 2023 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v5.0.1.0.5 Mono Epi Null is part of kategoryMathematik.                                          *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Satz}
+\myTheorem{Theorem}
+\myTheorem{Beispiel}
+\myTheorem{Anmerkung}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\GL}{GL}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\DD}{\ensuremath{\mathcal{ D }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\FF}{\ensuremath{\mathcal{ F }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+\newcommand{\m}{\mathcal}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Höhere Grundlagen) Kategorien\\[1cm]
+\textbf{v5.0.1.0.5 Mono Epi Null}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2023 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Monomorphismen und Epimorphismen sind die kategorialen Verallgemeinerungen von Injektionen und Surjektionen. Bei diesen Verallgemeinerungen betrachten wir keine Elemente. Stattdessen nutzen wir andere Eigenschaften: nämlich die Kürzbarkeit. Monomorphismen sind links-kürzbare, Epimorphismen rechts-kürzbare Homomorphismen.
+
+Die stärkere Eigenschaft der Existenz von einseitigen Inversen hätten wir auch nehmen können. Morphismen mit Links-Inversen heißen Koretraktion oder Schnitt (englisch split mono) und sind immer mono. Die mit Rechts-Inversen heißen Retraktion (englisch split epi) und sind immer epi. 
+
+Morphismen die ein zweiseitiges Inverses haben sind Isomorphismen oder iso. Diese sind immer mono und epi.
+
+Die Einbettung Z→Q ist in der Kategorie der abelschen Gruppen mono und epi aber nicht iso.
+In Ab ist Z→Q ist noch nicht einmal Schnitt. Es ist gleichzeitig epi aber nicht surjektiv.
+
+Ein Objekt heißt Anfangs-Objekt oder initial, falls es zu jedem Objekt der Kategorie genau einen Morphismus von dem Objekt gibt. Genauso heißt ein Objekt End-Objekt oder terminal, falls es von jedem Objekt der Kategorie genau einen Morphismus zu dem Objekt gibt.
+
+Ein Objekt, welches zugleich Anfangs- und End-Objekt ist heißt Null-Objekt. IN den Kategorien der Vektorräume, in Ab oder der Moduln sind Null-Objekte die trivialen, die nur ein Element, nämlich die Null enthalten.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Kategorie, Homomorphismus, abelsche Gruppen
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+{\tiny
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.4.4.8%20%C3%84quivalenz%20von%20Kategorien}
+}
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\ 
+\\
+v5.0.1.6.1 (Höher) Kategorien - Abelsche - Nullobjekt\\
+\url{https://youtu.be/XbOf-nVZ1t0}\\
+\\
+v5.0.1.6.1.4 (Höher) Kategorien - Abelsche - Additiver Funktor\\
+\url{https://youtu.be/zSP_a2RvoYE}
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Monomorphismus}\\
+\url{https://de.wikipedia.org/wiki/Epimorphismus}\\
+\url{https://de.wikipedia.org/wiki/Retraktion_und_Koretraktion}\\
+\url{https://de.wikipedia.org/wiki/Anfangsobjekt,_Endobjekt_und_Nullobjekt}\\
+\url{}\\
+\url{}\\
+\url{}\\
+\url{}\\
+\url{}\\
+\url{}\\
+\url{}\\
+\url{}\\
+\url{}\\
+
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+"`Categories for the Working Mathematician"'\\
+Saunders Mac Lane\\
+1998 | 2nd ed. 1978\\
+Springer-Verlag New York Inc.\\
+978-0-387-98403-2 (ISBN)\\
+{\tiny
+   \url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}}\\
+
+Gut für die kategorische Sichtweise ist:\\
+"`Topology, A Categorical Approach"'\\
+Tai-Danae Bradley\\
+2020 MIT Press\\
+978-0-262-53935-7 (ISBN)\\ 
+{\tiny
+\url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}}\\
+
+Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von:\\
+"`An Introduction to Homological Algebra"'\\
+Joseph J. Rotman\\
+2009 Springer-Verlag New York Inc.\\
+978-0-387-24527-0 (ISBN)\\ 
+{\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
+
+Etwas weniger umfangreich und weniger tiefgehend aber gut motivierend ist:
+"`Category Theory"'\\
+Steve Awodey\\
+2010 Oxford University Press\\
+978-0-19-923718-0 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/9478288-9780199237180-category-theory}}\\
+
+Mit noch weniger Mathematik und die Konzepte motivierend ist:
+"`Conceptual Mathematics: a First Introduction to Categories"'\\
+F. William Lawvere, Stephen H. Schanuel\\
+2009 Cambridge University Press\\
+978-0-521-71916-2 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/8643555-9780521719162-conceptual-mathematics}}
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der 
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben 
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird, 
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der 
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben 
+(zu finden im selben Git-Projekt). 
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter 
+{\tiny
+   \url{huch!}
+}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Äquivalente Kategorien}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{Ein endliches Beispiel}
+%******************************************************************************************************
+\begin{equation}
+	\begin{tikzcd}
+		\bullet \arrow[leftrightarrow,d] \arrow[dr] \arrow[Rightarrow,rrr, bend left, green, "F"]&&& 
+		   \color{green}\bullet \arrow[leftrightarrow,green,d] \arrow[green,r] \arrow[dr] & \color{green}\bullet \arrow[leftrightarrow,d]\\
+		\color{red}\bullet \arrow[leftrightarrow,red,d] \arrow[red,r] & \color{red}\bullet && 
+		   \color{green}\bullet                          \arrow[r] \arrow[green,ur] \arrow[Rightarrow,red,llld, bend left, "G"] & \bullet \\
+		\color{red}\bullet           \arrow[red,ur]
+	\end{tikzcd}
+\end{equation}
+
+%******************************************************************************************************
+\subsection{Definition der Äquivalenz von Kategorien }
+%******************************************************************************************************
+\begin{Definition}{Äquivalenz von Kategorien}
+	Zwei Kategorien $\CC, \DD$ heißen \textbf{äquivalent}, wenn es zwei Funktoren
+	\begin{alignat}{3}
+		&F &&\colon \CC && \to \DD \\
+		&G &&\colon \DD && \to \CC
+	\end{alignat}
+	und zwei natürliche Isomorphismen
+	\begin{alignat}{3}
+		&\alpha &&\colon FG && \to 1_\CC \\
+		&\beta  &&\colon GF && \to 1_\DD
+	\end{alignat}
+	gibt.
+\end{Definition}
+
+%******************************************************************************************************
+\subsection{Endo-Funktoren}
+%******************************************************************************************************
+\usetikzlibrary{shapes.geometric,fit}
+\tikzset{
+	dashellipse/.style={ellipse,draw,dashed,inner sep=0pt,blue,fit={#1}}
+}
+\begin{equation}
+	\begin{tikzcd}[
+		execute at end picture={
+			\node[dashellipse=(tikz@f@1-1-1)(tikz@f@1-1-1)]{};
+		}
+	]
+		X \arrow[dd] \arrow[dr] \arrow[rrr, blue, dashed, bend left, "\mathcal F"{name=0}] \arrow[rrrrrd, red, dashed, bend right] &&& A \arrow[dd, blue] \arrow[dr, blue] \arrow[dddrr, bend right] \arrow[drr, green] \arrow[ddrrr, bend left]\\ 
+		& Y \arrow[dl] \arrow[rrr, blue, dashed, bend left] \arrow[rrrrrd, red, dashed, bend right] &&&B \arrow[dl, blue] \arrow[ddr] \arrow[drr, green] &D \arrow[dd, red] \arrow[dr, red]\\
+		Z \arrow[rrr, blue, dashed, bend left] \arrow[rrrrrd, red, dashed, bend right, "\mathcal G"{name=1}] &&&C  \arrow[drr, green] &&& E \arrow[dl, red]\\
+		&&&&&F
+		\arrow[Rightarrow, green, from=0, to=1,shorten >= 6pt, yshift = -3pt, "\alpha"{yshift=3pt}]
+	\end{tikzcd}
+\end{equation}
+
+
+
+TODO: drei Bilder: Nat zwischen 1. Funktoren 2. Endo-Funktoren 3. 1 und Endo-Funktor
+
+
+%******************************************************************************************************
+\subsection{Das Skelett einer Kategorie}
+%******************************************************************************************************
+\begin{Definition}{Skelett einer Kategorie}
+   Ein \textbf{Skelett} einer Kategorie $\CC$ ist eine Unter-Kategorie bestehend aus genau einem Objekt von $\CC$ pro Isomorphie-Klassen von Objekten und zwischen zwei Objekten im Skelett bestehen alle Homomorphismen wie in $\CC$.
+\end{Definition}
+
+\begin{itemize}
+   \item Zu jedem Objekt in $\CC$ gibt es genau ein zum ihm isomorphes Objekt im Skelett.
+   \item Je zwei Objekte im Skelett sind nicht isomorph.
+   \item Die Ausgangskategorie ist äquivalent im Sinne von \myRef{Definition}{Äquivalenz von Kategorien}.
+   \item Zwei Kategorien sind genau dann äquivalent, wenn sie isomorphe Skelette besitzen.
+\end{itemize}
+
+TODO: Male in Skelett
+
+Grundlegend ist, dass jede Kategorie ein Skelett besitzt. (Diese Aussage ist zum Auswahlaxiom für Klassen äquivalent, wie es etwa die Neumann-Bernays-Gödel-Mengenlehre bereitstellt.) Wenn auch eine Kategorie mehrere verschiedene Skelette besitzen kann, sind sie jedoch als Kategorien isomorph. Also besitzt jede Kategorie bis auf Isomorphie ein eindeutiges Skelett.
+
+Die Bedeutung von Skeletten rührt daher, dass sie (bis auf Isomorphie) kanonische Vertreter der Äquivalenzklassen bezüglich der Äquivalenz von Kategorien sind. Das ergibt sich daraus, dass jede Kategorie zu einem Skelett äquivalent ist, und dass zwei Kategorien genau dann äquivalent sind, wenn sie isomorphe Skelette besitzen. (Die letzten beiden Absätze sind dem Wikipedia-Eintrag über Skelette entnommen.)
+
+In der folgenden Skizze ist jeweils die Kategorie
+\begin{equation}
+   \begin{tikzcd}
+      \color{blue}\bullet \arrow[blue,r] & \color{blue}\bullet
+   \end{tikzcd}
+\end{equation}
+als Skelett blau hervorgehoben:
+\begin{equation}
+   \begin{tikzcd}
+      \bullet \arrow[leftrightarrow,d] \arrow[dr] \arrow[Rightarrow,rrr, bend left, "F"]&&& 
+      \bullet \arrow[leftrightarrow,d] \arrow[r] \arrow[dr] & \bullet \arrow[leftrightarrow,d]\\
+      \color{blue}\bullet \arrow[leftrightarrow,d] \arrow[blue,r] & \color{blue}\bullet && 
+      \color{blue}\bullet                          \arrow[r,blue] \arrow[ur] \arrow[Rightarrow,llld, bend left, "G"] & \color{blue}\bullet \\
+      \bullet           \arrow[ur]
+   \end{tikzcd}
+\end{equation}
+
+\begin{backup}
+Noch zu erledigen sind
+%******************************************************************************************************
+%                                                                                                     *
+\section{TODO}
+%                                                                                                     *
+%******************************************************************************************************
+\begin{itemize}
+   \item leer
+\end{itemize}
+\end{backup}
+
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+   \bibitem[Awodey2010]{Awodey}
+      Steve Awode, \emph{Category Theory},
+      2010 Oxford University Press, 978-0-19-923718-0 (ISBN)
+
+   \bibitem[Bradley2020]{Bradley}
+      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
+      2020 MIT Press, 978-0-262-53935-7 (ISBN)
+
+   \bibitem[LawvereSchanuel2009]{Lawvere}
+      F. William Lawvere, Stephen H. Schanuel, \emph{Conceptual Mathematics: a First Introduction to Categories},
+      2009 Cambridge University Press, 978-0-521-71916-2 (ISBN)
+
+   \bibitem[MacLane1978]{MacLane}
+      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
+      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
+
+   \bibitem[Rotman2009]{Rotman}
+   	Joseph J. Rotman, \emph{An Introduction to Homological Algebra},
+   	2009 Springer-Verlag New York Inc., 978-0-387-24527-0 (ISBN)
+      
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $A, B, C, \cdots, X, Y, Z$          & Objekte\\
+    $F,G$                               & Funktoren\\
+    $f, g, h, r, s, \cdots$             & Homomorphismen\\
+    $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
+    \textbf{Set}                        & Die Kategorie der Mengen\\
+    $\Hom( X, Y)$                       & Die Menge der Homomorphismen von $X$ nach $Y$\\
+    $\alpha, \beta, \cdots$             & natürliche Transformationen\\
+    $\mathcal C ^{\text{op}}$           & Duale Kategorie\\
+    \textbf{Ring} nach \textbf{Gruppe}  & Kategorie der Ringe und der Gruppen\\
+    $\GL_n(R)$                          & Allgemeine lineare Gruppe über dem Ring $R$\\
+    $R^*$                               & Einheitengruppe des Rings $R$\\
+    $\Det_n^R$                          & $n$-dimensionale Determinante für Matrizen mit Koeffizienten in $R$. 
+    
+\end{tabular}
+
+\end{document}
