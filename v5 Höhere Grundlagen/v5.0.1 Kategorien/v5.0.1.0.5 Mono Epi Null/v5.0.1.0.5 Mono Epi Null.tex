@@ -234,12 +234,12 @@ Die stärkere Eigenschaft der Existenz von einseitigen Inversen hätten wir auch
 
 Morphismen die ein zweiseitiges Inverses haben sind Isomorphismen oder iso. Diese sind immer mono und epi.
 
-Die Einbettung Z→Q ist in der Kategorie der abelschen Gruppen mono und epi aber nicht iso.
-In Ab ist Z→Q ist noch nicht einmal Schnitt. Es ist gleichzeitig epi aber nicht surjektiv.
+Die Einbettung Z→Q ist in der Kategorie der kommutativen Ringe mit Eins (\textbf{Ring}) mono und epi aber nicht iso.
+In \textbf{Ring} ist Z→Q ist noch nicht einmal Schnitt. Es ist gleichzeitig epi aber nicht surjektiv.
 
 Ein Objekt heißt Anfangs-Objekt oder initial, falls es zu jedem Objekt der Kategorie genau einen Morphismus von dem Objekt gibt. Genauso heißt ein Objekt End-Objekt oder terminal, falls es von jedem Objekt der Kategorie genau einen Morphismus zu dem Objekt gibt.
 
-Ein Objekt, welches zugleich Anfangs- und End-Objekt ist heißt Null-Objekt. IN den Kategorien der Vektorräume, in Ab oder der Moduln sind Null-Objekte die trivialen, die nur ein Element, nämlich die Null enthalten.
+Ein Objekt, welches zugleich Anfangs- und End-Objekt ist, heißt Null-Objekt. In den Kategorien der Vektorräume, in Ab oder der $R$-Moduln sind Null-Objekte die trivialen, die nur ein Element, nämlich die Null enthalten.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -256,7 +256,7 @@ Kategorie, Homomorphismus, abelsche Gruppen
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.4.4.8%20%C3%84quivalenz%20von%20Kategorien}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.5%20Mono%20Epi%20Null}
 }
 
 %******************************************************************************************************
@@ -264,11 +264,14 @@ Der Begleittext als PDF und als LaTeX findet sich unter
 %******************************************************************************************************
 Siehe auch in den folgenden Videos:\\ 
 \\
+v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
+\url{https://youtu.be/X8v5Kyly0KI}\\
+\\
+v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
+\url{https://youtu.be/sIaKt-Wxlog}\\
+\\
 v5.0.1.6.1 (Höher) Kategorien - Abelsche - Nullobjekt\\
 \url{https://youtu.be/XbOf-nVZ1t0}\\
-\\
-v5.0.1.6.1.4 (Höher) Kategorien - Abelsche - Additiver Funktor\\
-\url{https://youtu.be/zSP_a2RvoYE}
 
 %******************************************************************************************************
 \subsection*{Quellen}
@@ -278,16 +281,6 @@ Siehe auch in den folgenden Seiten:\\
 \url{https://de.wikipedia.org/wiki/Epimorphismus}\\
 \url{https://de.wikipedia.org/wiki/Retraktion_und_Koretraktion}\\
 \url{https://de.wikipedia.org/wiki/Anfangsobjekt,_Endobjekt_und_Nullobjekt}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -354,102 +347,102 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Äquivalente Kategorien}
+\section{Mono, Epi, Null}
 %                                                                                                     *
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Ein endliches Beispiel}
+\subsection{Mono, Epi, injektiv und surjektiv}
 %******************************************************************************************************
-\begin{equation}
-	\begin{tikzcd}
-		\bullet \arrow[leftrightarrow,d] \arrow[dr] \arrow[Rightarrow,rrr, bend left, green, "F"]&&& 
-		   \color{green}\bullet \arrow[leftrightarrow,green,d] \arrow[green,r] \arrow[dr] & \color{green}\bullet \arrow[leftrightarrow,d]\\
-		\color{red}\bullet \arrow[leftrightarrow,red,d] \arrow[red,r] & \color{red}\bullet && 
-		   \color{green}\bullet                          \arrow[r] \arrow[green,ur] \arrow[Rightarrow,red,llld, bend left, "G"] & \bullet \\
-		\color{red}\bullet           \arrow[red,ur]
-	\end{tikzcd}
-\end{equation}
+Mono und Epi sind einerseits Verallgemeinerungen der Begriffe injektiv und surjektiv auf Kategorien, deren Morphismen keine Funktionen sind. Es sind aber auch Abschwächungen in dem Sinne, dass es Monos gibt, die nicht injektiv sind, und Epis, die nicht surjektiv sind.
 
 %******************************************************************************************************
-\subsection{Definition der Äquivalenz von Kategorien }
+\subsection{Mono}
 %******************************************************************************************************
-\begin{Definition}{Äquivalenz von Kategorien}
-	Zwei Kategorien $\CC, \DD$ heißen \textbf{äquivalent}, wenn es zwei Funktoren
-	\begin{alignat}{3}
-		&F &&\colon \CC && \to \DD \\
-		&G &&\colon \DD && \to \CC
-	\end{alignat}
-	und zwei natürliche Isomorphismen
-	\begin{alignat}{3}
-		&\alpha &&\colon FG && \to 1_\CC \\
-		&\beta  &&\colon GF && \to 1_\DD
-	\end{alignat}
-	gibt.
+
+\begin{Definition}{Monomorphismus}
+   Ein Homomorphismus $f \colon X \to Y$ zwischen zwei beliebigen Objekten einer Kategorie $\CC$ ist ein \textbf{Monomorphismus} oder ein \textbf{Mono} oder ist \textbf{mono}, wenn er \textbf{links-kürzbar} ist. D.h. für alle Objekte $W$ und alle Morphismen $g,h \colon W \to X$ gilt
+	\begin{equation}
+      fg = fh \Rightarrow g = h.
+	\end{equation}
+\end{Definition}
+Das ist wie bei der Multiplikation in $\Z$. Und wie dort heißt dies nicht, dass es auch ein Links-Inverses geben muss. $3 \in \Z$ ist zwar links-kürzbar (aus $3x = 3y$ folgt $x=y$) hat aber in $\Z$ kein multiplikativ Inverses.
+
+In der Kategorie \textbf{Set} ist mono dasselbe wie injektiv.
+
+Betrachten wir als Beispiel folgende Inklusion als Morphismus kommutativer Ringe mit Eins, also als Ring-Homomorphismus.
+\begin{alignat}{4}
+   &i \colon &&\Z &&\to     &&\Q\\
+            &&&n &&\mapsto &&n = \frac{n}{1}
+\end{alignat}
+
+Seien $g,h \colon X \to \Z$ zwei Ring-Homomorphismen mit $ig = ih$ und sei $x \in X$ beliebig. Wegen $g(x) = i(g(x)) = i(h(x)) = h(x)$ gilt $g=h$. Also ist $i$ mono.
+
+%******************************************************************************************************
+\subsection{Epi}
+%******************************************************************************************************
+
+\begin{Definition}{Epimorphismus}
+   Ein Homomorphismus $f \colon X \to Y$ zwischen zwei beliebigen Objekten einer Kategorie $\CC$ ist ein \textbf{Epimorphismus} oder ein \textbf{Epi} oder ist \textbf{epi}, wenn er \textbf{rechts-kürzbar} ist. D.h. für alle Objekte $Z$ und alle Morphismen $g,h \colon Y \to Z$ gilt
+   \begin{equation}
+      gf = hf \Rightarrow g = h.
+   \end{equation}
+\end{Definition}
+Das ist wie bei der Multiplikation in $\Z$. Und wie dort heißt dies nicht, dass es auch ein Rechts-Inverses geben muss. $3 \in \Z$ ist zwar rechts-kürzbar (aus $x\cdot 3 = y \cdot 3$ folgt $x=y$) hat aber in $\Z$ kein multiplikativ Inverses.
+
+In der Kategorie \textbf{Set} ist epi dasselbe wie surjektiv.
+
+Betrachten wir als Beispiel wieder das $i$ von oben. Es ist klar nicht surjektiv ($\frac{13}{666}$ ist nicht im Bild) aber dennoch epi, was wir im folgenden zeigen.
+Seien $g,h \colon \Q \to R$ mit $gi = hi$. Sei $y = \frac{p}{q}$ ein beliebiges Element aus $\Q$. Aus $q \cdot 1/q = 1$ folgt $g(q) \cdot g(1/q) = 1$ und $h(q) \cdot h(1/q) = 1$. Da $g$ und $h$ auf dem Bild von $i$ übereinstimmen, also da $g(q) = h(q)$ und da das multiplikativ Inversen in einem Ring, falls es denn existiert, eindeutig ist, gilt  $g(1/q) = h(1/q)$ und damit auch $g(p/q) = h(p/q)$
+
+Mit anderen Worten ist ein Ring-Morphismus $g,h \colon \Q \to R$ durch seine Werte auf $\Z$ schon vollständig festgelegt, wie ein Polynom $n$-ten Grades durch die Werte an $n-1$ Stellen bereits festgelegt ist. 
+
+Die Ortsangaben bei den Wörtern links- und rechts-kürzbar beziehen sich auf die Schreibweise mt Buchstaben. Wenn wir die Morphismen als Pfeile von Links nach Rechts malen, wird der links-kürzbare Morphismus rechts gekürzt!
+
+%******************************************************************************************************
+\subsection{Retraktion, Schnitt, split}
+%******************************************************************************************************
+\begin{Definition}{Epimorphismus}
+   Ein Homomorphismus $f \colon X \to Y$ zwischen zwei beliebigen Objekten einer Kategorie $\CC$ ist eine \textbf{Retraktion} bzw. ein \textbf{Schnitt} wenn er ein Rechts- bzw. Links-Inverses hat. Statt Schnitt sagen wir auch \textbf{Koretraktion} und wir sagen auch \textbf{split epi} bzw.  \textbf{split mono}
 \end{Definition}
 
-%******************************************************************************************************
-\subsection{Endo-Funktoren}
-%******************************************************************************************************
-\usetikzlibrary{shapes.geometric,fit}
-\tikzset{
-	dashellipse/.style={ellipse,draw,dashed,inner sep=0pt,blue,fit={#1}}
-}
-\begin{equation}
-	\begin{tikzcd}[
-		execute at end picture={
-			\node[dashellipse=(tikz@f@1-1-1)(tikz@f@1-1-1)]{};
-		}
-	]
-		X \arrow[dd] \arrow[dr] \arrow[rrr, blue, dashed, bend left, "\mathcal F"{name=0}] \arrow[rrrrrd, red, dashed, bend right] &&& A \arrow[dd, blue] \arrow[dr, blue] \arrow[dddrr, bend right] \arrow[drr, green] \arrow[ddrrr, bend left]\\ 
-		& Y \arrow[dl] \arrow[rrr, blue, dashed, bend left] \arrow[rrrrrd, red, dashed, bend right] &&&B \arrow[dl, blue] \arrow[ddr] \arrow[drr, green] &D \arrow[dd, red] \arrow[dr, red]\\
-		Z \arrow[rrr, blue, dashed, bend left] \arrow[rrrrrd, red, dashed, bend right, "\mathcal G"{name=1}] &&&C  \arrow[drr, green] &&& E \arrow[dl, red]\\
-		&&&&&F
-		\arrow[Rightarrow, green, from=0, to=1,shorten >= 6pt, yshift = -3pt, "\alpha"{yshift=3pt}]
-	\end{tikzcd}
-\end{equation}
+Es ist leicht zu sehen, dass Retraktionen Epis und Schnitte Monos sind. Es handelt sich also um stärkere Eigenschaften, die auch kategoriale Verallgemeinerungen von surjektiv bzw. injektiv sind.
 
+Die Tatsache, dass unser obiger Momo $i \colon \Z \to \Q$ kein Schnitt (es hat kein Links-Inverses in \textbf{Ring}) aber injektiv ist, zeigt dass das Wort "`Verallgemeinerung"' mit Vorsicht zu genießen ist. Dieses Beispiel zeigt auch, dass "`Schnitt"' echt stärker ist als "`mono"'.
 
+Ein Beispiel in der Kategorie der topologischen Räume mit stetigen Funktionen als Homomorphismen ist die Funktion $[0,1] \to [0,1]^2$ mit $x \mapsto 1.25 x^2 + 0.75 x + 0.25$. Das Links-Inverse ist die Projektion $(x,y) \mapsto x$. Dieses Bild ist auch eine Motivation für das Wort Schnitt. 
 
-TODO: drei Bilder: Nat zwischen 1. Funktoren 2. Endo-Funktoren 3. 1 und Endo-Funktor
+\begin{tikzpicture}[scale=3]
+   \draw[->, thick] (0, -0.5) -- (0, 1.5) node(yaxis)[above]{$y$};
+   \draw[->, thick] (-0.5, 0) -- (2, 0) node(xaxis)[right]{$x$};
+   
+   \draw (1, -0.05) node[below]{$1$} -- (1, 1);
+   \draw (-0.05, 1) node[left]{$1$} -- (1, 1);
+   
+   \draw[domain = 0:1, variable = \x, red] 
+      plot ({\x}, {1.25*\x*\x - 0.75*\x + 0.25});
+   \node[right] at (1.2, 1.2) {$1.25 x^2 + 0.75 x + 0.25$};  
+\end{tikzpicture}
+
+Da das Rechts-Inverse eines Morphismus ein Links-Inverses hat und umgekehrt, treten Retraktion und Schnitt immer als Paar auf.
+
 
 
 %******************************************************************************************************
-\subsection{Das Skelett einer Kategorie}
+\subsection{Anfangs-, End- und Null-Objekt}
 %******************************************************************************************************
-\begin{Definition}{Skelett einer Kategorie}
-   Ein \textbf{Skelett} einer Kategorie $\CC$ ist eine Unter-Kategorie bestehend aus genau einem Objekt von $\CC$ pro Isomorphie-Klassen von Objekten und zwischen zwei Objekten im Skelett bestehen alle Homomorphismen wie in $\CC$.
+\begin{Definition}{Anfangs-, End- und Null-Objekt}
+   Ein Objekt $A$ einer Kategorie $\CC$ ist ein \textbf{Anfangs-Objekt}, wenn es zu jedem Objekt $X \in \CC$ genau einen Morphismus $A \to X$ von $A$ zu dem Objekt gibt. Ein Objekt $E$ einer Kategorie $\CC$ ist ein \textbf{End-Objekt}, wenn es von jedem Objekt $X \in \CC$ genau einen Morphismus $X \to E$ von dem Objekt zu $E$ gibt. Ein Objekt $N$ einer Kategorie $\CC$ ist ein \textbf{Null-Objekt}, wenn es zugleich Anfangs- wie End-Objekt ist. 
 \end{Definition}
 
-\begin{itemize}
-   \item Zu jedem Objekt in $\CC$ gibt es genau ein zum ihm isomorphes Objekt im Skelett.
-   \item Je zwei Objekte im Skelett sind nicht isomorph.
-   \item Die Ausgangskategorie ist äquivalent im Sinne von \myRef{Definition}{Äquivalenz von Kategorien}.
-   \item Zwei Kategorien sind genau dann äquivalent, wenn sie isomorphe Skelette besitzen.
-\end{itemize}
+\begin{Satz}{Morphismen von bzw. zu Null-Objekt ist immer mono bzw. epi}
+   Sei $N$ ein Null-Objekt in einer Kategorie $\CC$. Seien $X, Y$ zwei beliebige Objekte in $\CC$. Dann ist der eindeutige Morphismus $m \colon N \to Y$ mono, der ebenfalls eindeutige $e \colon X \to N$ epi. 
+\end{Satz}
+\begin{proof}
+   Seien $g, h \colon W \to N$ zwei Morphismen mit $mg = mh$, dann gilt $g = h$. Dies liegt nicht an den Eigenschaften von $m$, sondern weil $N$ als End-Objekt nur einen Morphismus von $W$ nach $N$ erlaubt. Also ist $m$ mono. Der Beweis für epi geht genauso.
+\end{proof}
 
-TODO: Male in Skelett
-
-Grundlegend ist, dass jede Kategorie ein Skelett besitzt. (Diese Aussage ist zum Auswahlaxiom für Klassen äquivalent, wie es etwa die Neumann-Bernays-Gödel-Mengenlehre bereitstellt.) Wenn auch eine Kategorie mehrere verschiedene Skelette besitzen kann, sind sie jedoch als Kategorien isomorph. Also besitzt jede Kategorie bis auf Isomorphie ein eindeutiges Skelett.
-
-Die Bedeutung von Skeletten rührt daher, dass sie (bis auf Isomorphie) kanonische Vertreter der Äquivalenzklassen bezüglich der Äquivalenz von Kategorien sind. Das ergibt sich daraus, dass jede Kategorie zu einem Skelett äquivalent ist, und dass zwei Kategorien genau dann äquivalent sind, wenn sie isomorphe Skelette besitzen. (Die letzten beiden Absätze sind dem Wikipedia-Eintrag über Skelette entnommen.)
-
-In der folgenden Skizze ist jeweils die Kategorie
-\begin{equation}
-   \begin{tikzcd}
-      \color{blue}\bullet \arrow[blue,r] & \color{blue}\bullet
-   \end{tikzcd}
-\end{equation}
-als Skelett blau hervorgehoben:
-\begin{equation}
-   \begin{tikzcd}
-      \bullet \arrow[leftrightarrow,d] \arrow[dr] \arrow[Rightarrow,rrr, bend left, "F"]&&& 
-      \bullet \arrow[leftrightarrow,d] \arrow[r] \arrow[dr] & \bullet \arrow[leftrightarrow,d]\\
-      \color{blue}\bullet \arrow[leftrightarrow,d] \arrow[blue,r] & \color{blue}\bullet && 
-      \color{blue}\bullet                          \arrow[r,blue] \arrow[ur] \arrow[Rightarrow,llld, bend left, "G"] & \color{blue}\bullet \\
-      \bullet           \arrow[ur]
-   \end{tikzcd}
-\end{equation}
+Ein Beispiel für ein Null-Objekt ist der Null-Vektorraum $\{ 0 \}$ in der Kategorie der $\K$-Vektorräume.
 
 \begin{backup}
 Noch zu erledigen sind
@@ -459,7 +452,7 @@ Noch zu erledigen sind
 %                                                                                                     *
 %******************************************************************************************************
 \begin{itemize}
-   \item leer
+   \item xxx
 \end{itemize}
 \end{backup}
 
@@ -514,7 +507,7 @@ Noch zu erledigen sind
     $\Hom( X, Y)$                       & Die Menge der Homomorphismen von $X$ nach $Y$\\
     $\alpha, \beta, \cdots$             & natürliche Transformationen\\
     $\mathcal C ^{\text{op}}$           & Duale Kategorie\\
-    \textbf{Ring} nach \textbf{Gruppe}  & Kategorie der Ringe und der Gruppen\\
+    \textbf{Ring}, \textbf{Gruppe}      & Kategorie der Ringe und der Gruppen\\
     $\GL_n(R)$                          & Allgemeine lineare Gruppe über dem Ring $R$\\
     $R^*$                               & Einheitengruppe des Rings $R$\\
     $\Det_n^R$                          & $n$-dimensionale Determinante für Matrizen mit Koeffizienten in $R$. 
