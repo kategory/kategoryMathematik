@@ -230,7 +230,9 @@ Das erste Phänomen dieser Art ist die Implikation mit falschem Antezedens. So g
 
 Wir finden diese Art der Definition der Implikation (materielle Implikation) gut, weil wir einen Satz wie "`wenn n durch 4 teilbar ist, dann ist n durch 2 teilbar"' auch dann wahr haben wollen, wenn wir für n die Zahl 5 einsetzen.
 
-Sachdienliche Hinweise gegen eine Implikation liegen immer nur dann vor, wenn der Antezedens wahr ist: wenn es nicht regnet, kann ich Sätze, die mit "`wenn es regnet, dann"' beginnen nicht beurteilen. Sie können an solchen Tagen nicht als falsch erwiesen werden.
+Der Satz "`Wenn es regnet, wird die Erde nass"' muss eigentlich als "`Für alle Zeitpunkte $t$ gilt, dass, wenn es zum Zeitpunkte $t$ regnet, wird die Erde zum Zeitpunkte $t$ nass"' gelesen werden.
+
+Sachdienliche Hinweise gegen eine Implikation liegen immer nur dann vor, wenn der Antezedens wahr ist. Wenn es zum Zeitpunkte $t$ nicht regnet, kann ich Sätze, die mit "`wenn es zum Zeitpunkte $t$ regnet, dann"' beginnen nicht beurteilen. Sie können an solchen Tagen nicht als falsch erwiesen werden.
 
 Genauso verhält es sich mit der leeren Menge. Für alle x aus der leeren Menge gilt jede beliebige Aussage. Das wird leere Wahrheit im engeren Sinne genannt. Denn das ist ja äquivalent zu, wenn x in 0, dann ..., und hier ist der Antezedens immer falsch.
 
@@ -257,25 +259,21 @@ Boolesche Logik, Quantoren, materielle Implikation, Mengen, leere Menge
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v3%20Bachelor/v3.0%20Anfang/v3.0.1.3.1%20Mengen%20-%20Leere%20Wahrheit}
 }
 
 %******************************************************************************************************
 \subsection*{Meine Videos}
 %******************************************************************************************************
 Siehe auch in den folgenden Videos:\\
-\\v3.0.1.1.3.2 (Bachelor) Die Axiome - Boolesche Logik - Implikation
-\url{https://youtu.be/JLY7O1kq6mk?si=LSaqY4UHeU3o1aCM}\\
-\\
-\url{}\\
-\\
-\url{}\\
-\\
-\url{}\\
-\\
-\url{}\\
-\\
-\url{}\\
+\\v3.0.1.1.3.2 (Bachelor) Die Axiome - Boolesche Logik - Implikation\\
+\url{https://youtu.be/JLY7O1kq6mk}\\
+v3.0.1.1.4 (Bachelor) Die Axiome - Quantoren\\
+\url{https://youtu.be/tjLDq6uYEsc}\\
+v3.0.1.2.2 (Bachelor) Die Axiome - Klassen\\
+\url{https://youtu.be/DTEyQhlYDaE}\\
+v3.0.1.2.3 (Bachelor) Die Axiome - Klassen Lehre\\
+\url{https://youtu.be/2heuG7w-rnQ}\\
 
 %******************************************************************************************************
 \subsection*{Quellen}
@@ -283,18 +281,7 @@ Siehe auch in den folgenden Videos:\\
 Siehe auch in den folgenden Seiten:\\
 \url{https://de.wikipedia.org/wiki/Leere_Wahrheit}\\
 \url{https://en.wikipedia.org/wiki/Vacuous_truth}\\
-\url{}\\
 \url{https://de.wikipedia.org/wiki/Subjunktion}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -328,17 +315,163 @@ Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
 %******************************************************************************************************
 Das Video hierzu ist zu finden unter 
 {\tiny
-   \url{huhu}
+   \url{https://youtu.be/MImsrTFa2DA}
 }
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Geometrisches Bild von Relationen und Funktionen}
+\section{Leere Wahrheiten}
 %                                                                                                     *
 %******************************************************************************************************
 
-Zur Förderung der Intuition und um verschiedene Aspekte von Relationen und damit auch Funktionen zu visualisieren, stellen wir diese hier graphisch in drei Weisen dar. Die Nummern beziehen sich auf die händischen Skizzen auf den beiden eingefügten Bildern.
+%******************************************************************************************************
+\subsection{Implikation}
+%******************************************************************************************************
+Wenn wir wissen, dass $P$ falsch ist folgt aus $P$ alles, also jede beliebige Aussage $T$:
+\begin{equation}
+   \neg P \Rightarrow (P  \Rightarrow T)
+\end{equation} 
+Hier ist wichtig, dass \textbf{die Implikation wahr ist, wir aber über die Gültigkeit von $T$ keine Aussage machen}.
+Wenn wir wissen das $P$ falsch ist und dennoch die Gültigkeit von $P$ annehmen, können wir dies als $\neg P \land P$ schreiben, also
+\begin{equation}
+   \neg P \land P  \Rightarrow T
+\end{equation} 
+Mit anderen Worten: aus einem Widerspruch folgt alles.
 
+Genauso:
+Wenn wir wissen, dass $Q$ wahr ist folgt aus $\neg Q$ alles, also jede beliebige Aussage $T$:
+\begin{equation}
+   Q \Rightarrow (\neg Q  \Rightarrow T)
+\end{equation} 
+Wenn wir wissen das $Q$ wahr ist und dennoch die Falschheit von $Q$ annehmen, können wir dies als $Q \land \neg Q$ schreiben, also
+\begin{equation}
+   Q \land \neg Q  \Rightarrow T
+\end{equation} 
+Mit anderen Worten: aus einem Widerspruch folgt alles.
+
+Diesen Umstand können wir plakativ als
+\begin{equation}
+   \text{falsch} \Rightarrow \text{alles}
+\end{equation}
+schreiben. Er ist auch eine Motivation für eine mögliche Definition von "`falsch"':
+\begin{equation}
+   \text{falsch} := \neg P \land P
+\end{equation}
+
+Wir haben z.B. für alle $x \in \R$, dass $x^2 < 0 \Rightarrow x$ ist gleichzeitig prim und nicht prim.
+
+\textbf{Bei den folgenden leeren Wahrheiten handelt es sich eigentlich immer wieder um dieses Thema in einem neuen Gewandt}.
+
+Die Wahrheit von $\neg P \Rightarrow (P  \Rightarrow T)$ liefert keine neue Erkenntnis (leere Erkenntnis), sie benötigt keine Beweisarbeit (leerer Beweis) und es besteht kein Zusammenhang zwischen $P$ und $T$ (leerer Zusammenhang). Deswegen können wir die eine \textbf{leere Wahrheit} nennen.
+
+Dies macht Sinn, weil wir möchten
+\begin{equation}
+   \forall n \Z \colon 4 | n \Rightarrow 2 | n
+\end{equation}
+Damit haben wir dann z.B. folgende Konstellationen:
+\begin{alignat}{3}
+   &n = 12 &&\colon 4 \mid 12 &&\land 2 \mid 12\\
+   &n = 6  &&\colon 4 \nmid 6 &&\land 2 \mid 6\\
+   &n = 5  &&\colon 4 \nmid 5 &&\land 2 \nmid 5
+\end{alignat}
+Nur die Konstellation
+\begin{alignat}{3}
+   &n = x  &&\colon 4 \mid x &&\land 2 \nmid x
+\end{alignat}
+haben wir nicht. Das erklärt die Äquivalenz
+\begin{equation}
+   (P \Rightarrow Q) \Leftrightarrow (\neg (P \land \neg Q)) \Leftrightarrow (\neg P \lor Q).
+\end{equation}
+
+Nochmal anderes: $P \Rightarrow Q$ heißt ja, "`Wenn $P$, ..."', womit wir bereits andeuten, dass es auch anderes sein kann.
+
+%******************************************************************************************************
+\subsection{Quantoren}
+%******************************************************************************************************
+Falls $Q( x )$ für alle $x$ falsch ist, gilt
+\begin{equation}
+   \forall x \colon Q(x) \Rightarrow  T(x).
+\end{equation} 
+
+So haben wir z.B.
+\begin{equation}
+   \forall x \in \R \colon x^2 < 0 \Rightarrow  x \text{ ist Primzahl}.
+\end{equation} 
+
+Vernünftiger klingt folgendes Beispiel:
+\begin{equation}
+   \forall n \in \Z \colon 4 | n \Rightarrow  2 | n.
+\end{equation} 
+\textbf{Dies ist einer der Gründe, warum wir die materielle Implikation als die richtige wählen}. Da es für alle $n$ gilt, gilt es auch für $n=5$:
+\begin{equation}
+   4 | 5 \Rightarrow  2 | 5.
+\end{equation} 
+
+Kritik: wir haben den Eindruck, dass aus der Teilbarkeit durch 4 die durch 2 "`kausal"' folgt. Bei dem ebenfalls richten Satz
+\begin{equation}
+   4 | 5 \Rightarrow  5 < 0
+\end{equation} 
+haben wir eher das Gefühl, dass dort kein Zusammenhang besteht. Die Intuition, die Implikation als wahr anzusehen, wenn der Antezedens falsch ist, weil wir die Implikation in dem Fall nicht als falsch zu sein bewiesen haben, könnte wir auch durch einen dritten Wahrheitswert "`weiß nicht"' begegnen. Nennen wir ihn "`unbekannt"'. Dann könnten wir aus $4|5$ nicht schließen, dass $5<0$. Aber das können wir jetzt auch nicht, da eine Implikation nur dann "`angewendet"' werden kann, wenn der Antezedenz wahr ist:
+\begin{equation}
+   (P \land (P \Rightarrow  Q)) \Rightarrow Q
+\end{equation}
+Wir hätten also außer Komplexität und eine Fülle neuer Fragen nichts gewonnen.
+
+%******************************************************************************************************
+\subsection{Mengen}
+%******************************************************************************************************
+Wenn folgender Satz wahr ist
+\begin{equation}
+   \forall x \in M \colon P(x),
+\end{equation}
+dann gilt insbesondere auch für die $x$, die gar nicht in $M$ sind:
+\begin{equation}
+   x \notin M \Rightarrow (x \in M \Rightarrow P(x)).
+\end{equation}
+
+%******************************************************************************************************
+\subsection{Leere Menge}
+%******************************************************************************************************
+Falls $M$ leer ist, ist $x \in M$ immer falsch, und damit $x \in M \Rightarrow P(x)$ immer wahr. Also gilt \textbf{für beliebige} $P$
+\begin{equation}
+   \forall x \in \emptyset \colon P(x).
+\end{equation}
+
+Zum Beispiel gilt folgender Satz:
+
+Sei $M \subseteq \Z$ eine beliebige Menge ganzer Zahlen. Sei $M_4$ die Teilmenge der Zahlen aus $M$, die durch $4$ teilbar sind.
+\begin{equation}
+   M_4 := \{ n \in M \mid 4 |n \}.
+\end{equation}
+Dann gilt
+\begin{equation}
+  \forall x \in M_4 \colon 2 | n.
+\end{equation}
+
+Dieser Satz ist insbesondere auch dann wahr, wenn $M$ zufällig gar keine durch $4$ teilbaren Zahlen enthält (wie $M := \{ 1, 3, -61 \}$).
+
+So wie eine Regelung "`Eine Reisegruppe bekommt für alle Teilnehmer unter 23 Jahren einen Rabat von 10 Mark"' auch für die Reisegruppen richtig ist, die keine Teilnehmer unter 23 Jahren haben.
+
+Beachte aber folgenden Satz:
+\begin{equation}
+   \neg \left( \exists x \in \emptyset \colon P(x) \right).
+\end{equation}
+
+%******************************************************************************************************
+\subsection{Fallunterscheidungen}
+%******************************************************************************************************
+Dass all unsere (Booleschen) Formeln auch für falsche Aussagen, leere Mengen und leere Wahrheiten gelten hat, ähnlich wie die Nutzung der Null oder der negativen Zahlen, auch den Vorteil, dass viele sonst notwendigen Fallunterscheidungen wegfallen. So müssen wir sonst immer formulieren: "`falls die Menge durch 4 teilbare Zahlen enthält, sind diese alle auch druch 2 teilbar."'
+
+Es ist aber auch eine Erkenntnis über die leere Menge oder die Wahrheit.
+
+Auf der anderen Seite können wir die leere Wahrheit manchmal für Fallunterscheidungen bei Beweisen nutzen: Satz: Sei $M$ eine Menge ..., mit ..., dann gilt $\forall x \in M \colon ...$. Beweis: 1. Fall: $M$ ist leer. Fertig. 2. Fall: $M$ ist nicht leer. Jetzt wissen wir es gibt ein $X \in M$. Sei $x$ ein Element von $M$, dann ...
+
+%******************************************************************************************************
+\subsection{Wer ist stärker}
+%******************************************************************************************************
+Vorsicht: wenn wir einen Satz haben $\forall x \in M \colon P(x)$, wissen wir nicht, ob es ein $x$ gibt, welches $P(x)$ erfüllt. Denn $M$ könnte ja auch leer sein.
+
+Wenn wir aber den Satz haben $\exists x \in M \colon P(x)$, dann wissen wir, dass $M$ nicht leer ist und dass es mindestens ein solches $x$ gibt.
 
 
 \begin{backup}
@@ -381,10 +514,12 @@ Noch zu erledigen sind
 \renewcommand*{\arraystretch}{1}
 
 \begin{tabular}{ll}
-    $X, Y, \cdots$          & Mengen\\
-    $x, y, \cdots$             & Elemente\\
-    $R$             & Eine Relation
-   
+    $P, Q, T$               & Aussagen\\
+    $P(x), Q(x), T(x)$      & Aussagen, die von $x$ abhängen\\
+    $M, M_i$                & Mengen\\
+    $x, y, \cdots$          & Elemente\\
+    $n$                     & eine ganze Zahl\\
+    $n|m$                   & $m$ teilt $n$
 \end{tabular}
 
 \end{document}
