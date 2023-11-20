@@ -1,0 +1,517 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v5.0.1.0.5 Mono Epi Null.tex                                                                     *
+%                                                                                                  *
+% Copyright (C) 2023 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v5.0.1.0.5 Mono Epi Null is part of kategoryMathematik.                                          *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Satz}
+\myTheorem{Theorem}
+\myTheorem{Beispiel}
+\myTheorem{Anmerkung}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\GL}{GL}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\DD}{\ensuremath{\mathcal{ D }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\FF}{\ensuremath{\mathcal{ F }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+\newcommand{\m}{\mathcal}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Höhere Grundlagen) Kategorien\\[1cm]
+\textbf{v5.0.1.0.5 Mono Epi Null}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2023 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Monomorphismen und Epimorphismen sind die kategorialen Verallgemeinerungen von Injektionen und Surjektionen. Bei diesen Verallgemeinerungen betrachten wir keine Elemente. Stattdessen nutzen wir andere Eigenschaften: nämlich die Kürzbarkeit. Monomorphismen sind links-kürzbare, Epimorphismen rechts-kürzbare Homomorphismen.
+
+Die stärkere Eigenschaft der Existenz von einseitigen Inversen hätten wir auch nehmen können. Morphismen mit Links-Inversen heißen Koretraktion oder Schnitt (englisch split mono) und sind immer mono. Die mit Rechts-Inversen heißen Retraktion (englisch split epi) und sind immer epi. 
+
+Morphismen die ein zweiseitiges Inverses haben sind Isomorphismen oder iso. Diese sind immer mono und epi.
+
+Die Einbettung Z→Q ist in der Kategorie der kommutativen Ringe mit Eins (\textbf{Ring}) mono und epi aber nicht iso.
+In \textbf{Ring} ist Z→Q ist noch nicht einmal Schnitt. Es ist gleichzeitig epi aber nicht surjektiv.
+
+Ein Objekt heißt Anfangs-Objekt oder initial, falls es zu jedem Objekt der Kategorie genau einen Morphismus von dem Objekt gibt. Genauso heißt ein Objekt End-Objekt oder terminal, falls es von jedem Objekt der Kategorie genau einen Morphismus zu dem Objekt gibt.
+
+Ein Objekt, welches zugleich Anfangs- und End-Objekt ist, heißt Null-Objekt. In den Kategorien der Vektorräume, in Ab oder der $R$-Moduln sind Null-Objekte die trivialen, die nur ein Element, nämlich die Null enthalten.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Kategorie, Homomorphismus
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+{\tiny
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.5%20Mono%20Epi%20Null}
+}
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\ 
+\\
+v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
+\url{https://youtu.be/X8v5Kyly0KI}\\
+\\
+v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
+\url{https://youtu.be/sIaKt-Wxlog}\\
+\\
+v5.0.1.6.1 (Höher) Kategorien - Abelsche - Nullobjekt\\
+\url{https://youtu.be/XbOf-nVZ1t0}\\
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Monomorphismus}\\
+\url{https://de.wikipedia.org/wiki/Epimorphismus}\\
+\url{https://de.wikipedia.org/wiki/Retraktion_und_Koretraktion}\\
+\url{https://de.wikipedia.org/wiki/Anfangsobjekt,_Endobjekt_und_Nullobjekt}\\
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+"`Categories for the Working Mathematician"'\\
+Saunders Mac Lane\\
+1998 | 2nd ed. 1978\\
+Springer-Verlag New York Inc.\\
+978-0-387-98403-2 (ISBN)\\
+{\tiny
+   \url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}}\\
+
+Gut für die kategorische Sichtweise ist:\\
+"`Topology, A Categorical Approach"'\\
+Tai-Danae Bradley\\
+2020 MIT Press\\
+978-0-262-53935-7 (ISBN)\\ 
+{\tiny
+\url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}}\\
+
+Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von:\\
+"`An Introduction to Homological Algebra"'\\
+Joseph J. Rotman\\
+2009 Springer-Verlag New York Inc.\\
+978-0-387-24527-0 (ISBN)\\ 
+{\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
+
+Etwas weniger umfangreich und weniger tiefgehend aber gut motivierend ist:
+"`Category Theory"'\\
+Steve Awodey\\
+2010 Oxford University Press\\
+978-0-19-923718-0 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/9478288-9780199237180-category-theory}}\\
+
+Mit noch weniger Mathematik und die Konzepte motivierend ist:
+"`Conceptual Mathematics: a First Introduction to Categories"'\\
+F. William Lawvere, Stephen H. Schanuel\\
+2009 Cambridge University Press\\
+978-0-521-71916-2 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/8643555-9780521719162-conceptual-mathematics}}
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der 
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben 
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird, 
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der 
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben 
+(zu finden im selben Git-Projekt). 
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter 
+{\tiny
+   \url{huch!}
+}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Mono, Epi, Null}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{Mono, Epi, injektiv und surjektiv}
+%******************************************************************************************************
+Mono und Epi sind einerseits Verallgemeinerungen der Begriffe injektiv und surjektiv auf Kategorien, deren Morphismen keine Funktionen sind. Es sind aber auch Abschwächungen in dem Sinne, dass es Monos gibt, die nicht injektiv sind, und Epis, die nicht surjektiv sind.
+
+%******************************************************************************************************
+\subsection{Mono}
+%******************************************************************************************************
+
+\begin{Definition}{Monomorphismus}
+   Ein Homomorphismus $f \colon X \to Y$ zwischen zwei beliebigen Objekten einer Kategorie $\CC$ ist ein \textbf{Monomorphismus} oder ein \textbf{Mono} oder ist \textbf{mono}, wenn er \textbf{links-kürzbar} ist. D.h. für alle Objekte $W$ und alle Morphismen $g,h \colon W \to X$ gilt
+	\begin{equation}
+      fg = fh \Rightarrow g = h.
+	\end{equation}
+\end{Definition}
+Das ist wie bei der Multiplikation in $\Z$. Und wie dort heißt dies nicht, dass es auch ein Links-Inverses geben muss. $3 \in \Z$ ist zwar links-kürzbar (aus $3x = 3y$ folgt $x=y$) hat aber in $\Z$ kein multiplikativ Inverses.
+
+In der Kategorie \textbf{Set} ist mono dasselbe wie injektiv.
+
+Betrachten wir als Beispiel folgende Inklusion als Morphismus kommutativer Ringe mit Eins, also als Ring-Homomorphismus.
+\begin{alignat}{4}
+   &i \colon &&\Z &&\to     &&\Q\\
+            &&&n &&\mapsto &&n = \frac{n}{1}
+\end{alignat}
+
+Seien $g,h \colon X \to \Z$ zwei Ring-Homomorphismen mit $ig = ih$ und sei $x \in X$ beliebig. Wegen $g(x) = i(g(x)) = i(h(x)) = h(x)$ gilt $g=h$. Also ist $i$ mono.
+
+%******************************************************************************************************
+\subsection{Epi}
+%******************************************************************************************************
+
+\begin{Definition}{Epimorphismus}
+   Ein Homomorphismus $f \colon X \to Y$ zwischen zwei beliebigen Objekten einer Kategorie $\CC$ ist ein \textbf{Epimorphismus} oder ein \textbf{Epi} oder ist \textbf{epi}, wenn er \textbf{rechts-kürzbar} ist. D.h. für alle Objekte $Z$ und alle Morphismen $g,h \colon Y \to Z$ gilt
+   \begin{equation}
+      gf = hf \Rightarrow g = h.
+   \end{equation}
+\end{Definition}
+Das ist wie bei der Multiplikation in $\Z$. Und wie dort heißt dies nicht, dass es auch ein Rechts-Inverses geben muss. $3 \in \Z$ ist zwar rechts-kürzbar (aus $x\cdot 3 = y \cdot 3$ folgt $x=y$) hat aber in $\Z$ kein multiplikativ Inverses.
+
+In der Kategorie \textbf{Set} ist epi dasselbe wie surjektiv.
+
+Betrachten wir als Beispiel wieder das $i$ von oben. Es ist klar nicht surjektiv ($\frac{13}{666}$ ist nicht im Bild) aber dennoch epi, was wir im folgenden zeigen.
+Seien $g,h \colon \Q \to R$ mit $gi = hi$. Sei $y = \frac{p}{q}$ ein beliebiges Element aus $\Q$. Aus $q \cdot 1/q = 1$ folgt $g(q) \cdot g(1/q) = 1$ und $h(q) \cdot h(1/q) = 1$. Da $g$ und $h$ auf dem Bild von $i$ übereinstimmen, also da $g(q) = h(q)$ und da das multiplikativ Inversen in einem Ring, falls es denn existiert, eindeutig ist, gilt  $g(1/q) = h(1/q)$ und damit auch $g(p/q) = h(p/q)$
+
+Mit anderen Worten ist ein Ring-Morphismus $g,h \colon \Q \to R$ durch seine Werte auf $\Z$ schon vollständig festgelegt, wie ein Polynom $n$-ten Grades durch die Werte an $n-1$ Stellen bereits festgelegt ist. 
+
+Die Ortsangaben bei den Wörtern links- und rechts-kürzbar beziehen sich auf die Schreibweise mt Buchstaben. Wenn wir die Morphismen als Pfeile von Links nach Rechts malen, wird der links-kürzbare Morphismus rechts gekürzt!
+
+%******************************************************************************************************
+\subsection{Retraktion, Schnitt, split}
+%******************************************************************************************************
+\begin{Definition}{Epimorphismus}
+   Ein Homomorphismus $f \colon X \to Y$ zwischen zwei beliebigen Objekten einer Kategorie $\CC$ ist eine \textbf{Retraktion} bzw. ein \textbf{Schnitt} wenn er ein Rechts- bzw. Links-Inverses hat. Statt Schnitt sagen wir auch \textbf{Koretraktion} und wir sagen auch \textbf{split epi} bzw.  \textbf{split mono}
+\end{Definition}
+
+Es ist leicht zu sehen, dass Retraktionen Epis und Schnitte Monos sind. Es handelt sich also um stärkere Eigenschaften, die auch kategoriale Verallgemeinerungen von surjektiv bzw. injektiv sind.
+
+Die Tatsache, dass unser obiger Momo $i \colon \Z \to \Q$ kein Schnitt (es hat kein Links-Inverses in \textbf{Ring}) aber injektiv ist, zeigt dass das Wort "`Verallgemeinerung"' mit Vorsicht zu genießen ist. Dieses Beispiel zeigt auch, dass "`Schnitt"' echt stärker ist als "`mono"'.
+
+Ein Beispiel in der Kategorie der topologischen Räume mit stetigen Funktionen als Homomorphismen ist die Funktion $[0,1] \to [0,1]^2$ mit $x \mapsto 1.25 x^2 + 0.75 x + 0.25$. Das Links-Inverse ist die Projektion $(x,y) \mapsto x$. Dieses Bild ist auch eine Motivation für das Wort Schnitt. 
+
+\begin{tikzpicture}[scale=3]
+   \draw[->, thick] (0, -0.5) -- (0, 1.5) node(yaxis)[above]{$y$};
+   \draw[->, thick] (-0.5, 0) -- (2, 0) node(xaxis)[right]{$x$};
+   
+   \draw (1, -0.05) node[below]{$1$} -- (1, 1);
+   \draw (-0.05, 1) node[left]{$1$} -- (1, 1);
+   
+   \draw[domain = 0:1, variable = \x, red] 
+      plot ({\x}, {1.25*\x*\x - 0.75*\x + 0.25});
+   \node[right] at (1.2, 1.2) {$1.25 x^2 + 0.75 x + 0.25$};  
+\end{tikzpicture}
+
+Da das Rechts-Inverse eines Morphismus ein Links-Inverses hat und umgekehrt, treten Retraktion und Schnitt immer als Paar auf.
+
+
+
+%******************************************************************************************************
+\subsection{Anfangs-, End- und Null-Objekt}
+%******************************************************************************************************
+\begin{Definition}{Anfangs-, End- und Null-Objekt}
+   Ein Objekt $A$ einer Kategorie $\CC$ ist ein \textbf{Anfangs-Objekt}, wenn es zu jedem Objekt $X \in \CC$ genau einen Morphismus $A \to X$ von $A$ zu dem Objekt gibt. Ein Objekt $E$ einer Kategorie $\CC$ ist ein \textbf{End-Objekt}, wenn es von jedem Objekt $X \in \CC$ genau einen Morphismus $X \to E$ von dem Objekt zu $E$ gibt. Ein Objekt $N$ einer Kategorie $\CC$ ist ein \textbf{Null-Objekt}, wenn es zugleich Anfangs- wie End-Objekt ist. 
+\end{Definition}
+
+\begin{Satz}{Morphismen von bzw. zu Null-Objekt ist immer mono bzw. epi}
+   Sei $N$ ein Null-Objekt in einer Kategorie $\CC$. Seien $X, Y$ zwei beliebige Objekte in $\CC$. Dann ist der eindeutige Morphismus $m \colon N \to Y$ mono, der ebenfalls eindeutige $e \colon X \to N$ epi. 
+\end{Satz}
+\begin{proof}
+   Seien $g, h \colon W \to N$ zwei Morphismen mit $mg = mh$, dann gilt $g = h$. Dies liegt nicht an den Eigenschaften von $m$, sondern weil $N$ als End-Objekt nur einen Morphismus von $W$ nach $N$ erlaubt. Also ist $m$ mono. Der Beweis für epi geht genauso.
+\end{proof}
+
+Ein Beispiel für ein Null-Objekt ist der Null-Vektorraum $\{ 0 \}$ in der Kategorie der $\K$-Vektorräume.
+
+\begin{backup}
+Noch zu erledigen sind
+%******************************************************************************************************
+%                                                                                                     *
+\section{TODO}
+%                                                                                                     *
+%******************************************************************************************************
+\begin{itemize}
+   \item xxx
+\end{itemize}
+\end{backup}
+
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+   \bibitem[Awodey2010]{Awodey}
+      Steve Awode, \emph{Category Theory},
+      2010 Oxford University Press, 978-0-19-923718-0 (ISBN)
+
+   \bibitem[Bradley2020]{Bradley}
+      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
+      2020 MIT Press, 978-0-262-53935-7 (ISBN)
+
+   \bibitem[LawvereSchanuel2009]{Lawvere}
+      F. William Lawvere, Stephen H. Schanuel, \emph{Conceptual Mathematics: a First Introduction to Categories},
+      2009 Cambridge University Press, 978-0-521-71916-2 (ISBN)
+
+   \bibitem[MacLane1978]{MacLane}
+      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
+      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
+
+   \bibitem[Rotman2009]{Rotman}
+   	Joseph J. Rotman, \emph{An Introduction to Homological Algebra},
+   	2009 Springer-Verlag New York Inc., 978-0-387-24527-0 (ISBN)
+      
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $A, B, C, \cdots, X, Y, Z$          & Objekte\\
+    $F,G$                               & Funktoren\\
+    $f, g, h, r, s, \cdots$             & Homomorphismen\\
+    $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
+    \textbf{Set}                        & Die Kategorie der Mengen\\
+    $\Hom( X, Y)$                       & Die Menge der Homomorphismen von $X$ nach $Y$\\
+    $\alpha, \beta, \cdots$             & natürliche Transformationen\\
+    $\mathcal C ^{\text{op}}$           & Duale Kategorie\\
+    \textbf{Ring}, \textbf{Gruppe}      & Kategorie der Ringe und der Gruppen\\
+    $\GL_n(R)$                          & Allgemeine lineare Gruppe über dem Ring $R$\\
+    $R^*$                               & Einheitengruppe des Rings $R$\\
+    $\Det_n^R$                          & $n$-dimensionale Determinante für Matrizen mit Koeffizienten in $R$. 
+    
+\end{tabular}
+
+\end{document}
