@@ -1,10 +1,10 @@
 %******************************************************** -*-LaTeX-*- ******************************
 %                                                                                                  *
-% v5.0.1.0.5 Mono Epi Null.tex                                                                     *
+% v5.0.1.0.6 Mathematische Grundlagen der Kategorien.tex                                           *
 %                                                                                                  *
 % Copyright (C) 2023 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
 %                                                                                                  *
-% v5.0.1.0.5 Mono Epi Null is part of kategoryMathematik.                                          *
+% v5.0.1.0.6 Mathematische Grundlagen der Kategorien is part of kategoryMathematik.                *
 %                                                                                                  *
 % kategoryMathematik is free software: you can redistribute it and/or modify                       *
 % it under the terms of the GNU General Public License as published by                             *
@@ -84,6 +84,7 @@
 \myTheorem{Proposition}
 \myTheorem{Satz}
 \myTheorem{Theorem}
+\myTheorem{Axiom}
 \myTheorem{Beispiel}
 \myTheorem{Anmerkung}
 
@@ -203,7 +204,7 @@
 \centering
 {\huge
 (Höhere Grundlagen) Kategorien\\[1cm]
-\textbf{v5.0.1.0.5 Mono Epi Null}
+\textbf{v5.0.1.0.6 Mathematische Grundlagen der Kategorien}
 }\\[1cm]
 
 \textbf{Kategory GmbH \& Co. KG}\\
@@ -228,18 +229,35 @@ Copyright (C) 2023 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
-Monomorphismen und Epimorphismen sind die kategorialen Verallgemeinerungen von Injektionen und Surjektionen. Bei diesen Verallgemeinerungen betrachten wir keine Elemente. Stattdessen nutzen wir andere Eigenschaften: nämlich die Kürzbarkeit. Monomorphismen sind links-kürzbare, Epimorphismen rechts-kürzbare Homomorphismen.
+Mathematische Grundlagen in der Kategorientheorie werden notwendig, da wir bei der Definition einer Kategorie nicht fordern, dass die Klasse der Objekte oder die der Homomorphismen eine Menge ist. Wir fordern dies noch nicht einmal von der Klasse der Morphismen zwischen je zwei Objekten einer Kategorie.
 
-Die stärkere Eigenschaft der Existenz von einseitigen Inversen hätten wir auch nehmen können. Morphismen mit Links-Inversen heißen Koretraktion oder Schnitt (englisch split mono) und sind immer mono. Die mit Rechts-Inversen heißen Retraktion (englisch split epi) und sind immer epi. 
+Wegen dieser weiten Auffassung können wir von der Kategorie der Gruppen reden. Und das wollen wir auch.
 
-Morphismen die ein zweiseitiges Inverses haben sind Isomorphismen oder iso. Diese sind immer mono und epi.
+Die Objekte und die Morphismen sind aber alles mathematische Objekte. Somit können wir z.B. formulieren: Für alle Objekte der Kategorie $\CC$ gilt ...
 
-Die Einbettung Z→Q ist in der Kategorie der kommutativen Ringe mit Eins (\textbf{Ring}) mono und epi aber nicht iso.
-In \textbf{Ring} ist Z→Q ist noch nicht einmal Schnitt. Es ist gleichzeitig epi aber nicht surjektiv.
+Aber wir müssen immer auf der Hut, dass wir Kategorien nicht als mathematische Objekte betrachten. Z.B. können wir nicht die Klasse aller Kategorien bilden oder einen Satz wie "`Für alle Kategorien gilt ..."' als mathematischen Satz auffassen.
 
-Ein Objekt heißt Anfangs-Objekt oder initial, falls es zu jedem Objekt der Kategorie genau einen Morphismus von dem Objekt gibt. Genauso heißt ein Objekt End-Objekt oder terminal, falls es von jedem Objekt der Kategorie genau einen Morphismus zu dem Objekt gibt.
+Gefühlt bilden aber die Kategorien selber eine Kategorie: die Kategorie der Kategorien mit den Funktoren als Morphismen. Hier wären dann Objekte keine Mengen mehr. Mist!
 
-Ein Objekt, welches zugleich Anfangs- und End-Objekt ist, heißt Null-Objekt. In den Kategorien der Vektorräume, in Ab oder der $R$-Moduln sind Null-Objekte die trivialen, die nur ein Element, nämlich die Null enthalten.
+Wir haben also ein Größenproblem. Hier bleiben wir bei der Intuition, dass echte Klassen "`zu groß"' sind um Mengen zu sein.
+
+Wir haben hier zwei sehr unterschiedliche Möglichkeiten, dies zu lösen.
+
+1. Wir verabschieden uns von ZFC und betrachten Kategorien, Objekte und Morphismen als Grundobjekte die mit geeigneten Axiomen zu einer Mathematik aufgebaut werden. In dieser Mathematik versuchen wir dann Mengen, Zahlen, und, was wir alles so brauchen, zu definieren. Dies wird z.B. in der "`Elementary Theory of the Category of Sets"' (ETCS) gemacht. Ein Ansatz, den wir hier nicht verfolgen.
+
+2. Wir führen die Idee eines Universums (dies ist eine bestimmte Klasse) und den der kleinen Klassen ein. Eine Klasse ist klein, wenn sie Element des Universums ist. Kleine Klassen sind also automatisch Mengen. Wir könnten also auch von kleinen Mengen reden.
+
+Die Eigenschaft "`klein"' dehnt sich dann auf andere mathematische Objekte aus und wir können von kleinen Gruppen oder auch kleinen Kategorien reden. Im ersten Fall ist die Klasse der Elemente im zweiten Fall die der Objekte und die der Morphismen klein.
+
+In lokal kleinen Kategorie wird nur gefordert, dass die Klassen der Morphismen zwischen jeweils Objekten klein ist.
+
+Wenn wir haben wollen, dass in der Kategorie der kleinen Gruppen die Klasse der Objekte eine Menge ist, muss das Universum eine Menge sein.
+
+Universen können auch geschachtelt sein $U1 \subseteq U2 \subseteq U3 \subseteq \cdots$. Damit hätten wir dann verschiedene Kleins: klein$_1$, klein$_2$, klein$_3$, $\cdots$.
+
+Wenn wir wollen, dass die Klasse der Objekte und die der Morphismen der Kategorie der kleinen Gruppen oder die der kleinen Kategorien Mengen sind, muss unser Universum eine Menge sein.
+
+Wenn wir in diesem Kurs nichts anderes sagen, ist unser Universum die Klasse aller Mengen und "`klein"' bedeutet "`Menge seiend"'. Die K
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -262,25 +280,32 @@ Der Begleittext als PDF und als LaTeX findet sich unter
 %******************************************************************************************************
 \subsection*{Meine Videos}
 %******************************************************************************************************
-Siehe auch in den folgenden Videos:\\ 
+Siehe auch in den folgenden Videos:\\
 \\
 v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
 \url{https://youtu.be/X8v5Kyly0KI}\\
 \\
 v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
 \url{https://youtu.be/sIaKt-Wxlog}\\
-\\
-v5.0.1.6.1 (Höher) Kategorien - Abelsche - Nullobjekt\\
-\url{https://youtu.be/XbOf-nVZ1t0}\\
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Monomorphismus}\\
-\url{https://de.wikipedia.org/wiki/Epimorphismus}\\
-\url{https://de.wikipedia.org/wiki/Retraktion_und_Koretraktion}\\
-\url{https://de.wikipedia.org/wiki/Anfangsobjekt,_Endobjekt_und_Nullobjekt}\\
+\url{https://de.wikipedia.org/wiki/Kategorientheorie}\\
+\url{https://ncatlab.org/nlab/show/small+category}\\
+\url{https://en.wikipedia.org/wiki/Small_set_(category_theory)}\\
+\url{https://de.wikipedia.org/wiki/Von-Neumann-Hierarchie}\\
+\url{https://ncatlab.org/nlab/show/Grothendieck+universe}\\
+\url{https://de.wikipedia.org/wiki/Grothendieck-Universum}\\
+\url{https://de.wikipedia.org/wiki/Tarski-Grothendieck-Mengenlehre}\\
+\url{https://mathoverflow.net/questions/437256/why-do-we-care-about-small-sets}\\
+\url{https://ncatlab.org/nlab/show/ETCS}\\
+\url{https://mathoverflow.net/questions/3278/whats-a-reasonable-category-that-is-not-locally-small}
+\url{https://de.wikipedia.org/wiki/Tarski-Grothendieck-Mengenlehre}\\
+\url{https://de.wikipedia.org/wiki/Grothendieck-Universum}\\
+\url{https://de.wikipedia.org/wiki/Von-Neumann-Hierarchie}\\
+\url{https://ncatlab.org/nlab/show/span}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -298,7 +323,7 @@ Gut für die kategorische Sichtweise ist:\\
 "`Topology, A Categorical Approach"'\\
 Tai-Danae Bradley\\
 2020 MIT Press\\
-978-0-262-53935-7 (ISBN)\\ 
+978-0-262-53935-7 (ISBN)\\
 {\tiny
 \url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}}\\
 
@@ -306,7 +331,7 @@ Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von:\\
 "`An Introduction to Homological Algebra"'\\
 Joseph J. Rotman\\
 2009 Springer-Verlag New York Inc.\\
-978-0-387-24527-0 (ISBN)\\ 
+978-0-387-24527-0 (ISBN)\\
 {\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
 
 Etwas weniger umfangreich und weniger tiefgehend aber gut motivierend ist:
@@ -326,134 +351,220 @@ F. William Lawvere, Stephen H. Schanuel\\
 %******************************************************************************************************
 \subsection*{Lizenz}
 %******************************************************************************************************
-Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der 
-GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben 
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben
 und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
 
-Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird, 
-aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der 
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird,
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der
 VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
 
-Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben 
-(zu finden im selben Git-Projekt). 
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben
+(zu finden im selben Git-Projekt).
 Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
 
 \subsection*{Das Video}
 %******************************************************************************************************
-Das Video hierzu ist zu finden unter 
+Das Video hierzu ist zu finden unter
 {\tiny
    \url{huch!}
 }
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Mono, Epi, Null}
+\section{Mathematische Grundlagen der Kategorien}
 %                                                                                                     *
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Mono, Epi, injektiv und surjektiv}
+\subsection{Das Problem der Größe}
 %******************************************************************************************************
-Mono und Epi sind einerseits Verallgemeinerungen der Begriffe injektiv und surjektiv auf Kategorien, deren Morphismen keine Funktionen sind. Es sind aber auch Abschwächungen in dem Sinne, dass es Monos gibt, die nicht injektiv sind, und Epis, die nicht surjektiv sind.
+In der Kategorie aller Gruppen ist die Klasse der Objekte eine echte Klasse. Das können wir uns klar machen, da wir allein schon zu jeder Menge $x$ eine einelementige und damit triviale Gruppe $( {x}, +)$ mit $x + x = x$ konstruieren können, in der das $x$ die Rolle des neutralen Elementes hat.
+
+Dies ist oft gar kein Problem und wir wollen den Fall explizit mit einschließen und behandeln.
+
+Aber: Wir müssen ständig akribisch darauf achten, dass wir nicht irgendwo unbemerkt, Klassen wie Mengen behandeln, wo es nicht erlaubt ist.
+
+Beachte z.B., dass es zwei verschiedene "`für alle"' gibt: zum einen das normale, welches über Mengen quantifiziert und durch den All-Quantor geschrieben werden kann. Zum anderen ein meta-sprachliches, wie in "`für alle Prädikate $P(x)$ ist $P(x) \lor \neg P(x)$ immer wahr"'. Prädikate sind Formeln, die wir hingeschrieben haben. So gibt es z.B. eine Formel, die besagt, $x$ ist Gruppe.
+
+Es gibt auch eine Formel, die besagt $\FF$ ist Funktor von der Kategorie der Gruppen in die Kategorie der Ringe. "`Für alle Funktoren von \textbf{Gruppe} nach \textbf{Ring} ..."' bedeutet, dass wir aus der Formel, das "`..."' ableiten können.
+
+Wenn wir aber die Funktorkategorie
+\begin{equation}
+    \mathbf{Ring}^\mathbf{Gruppe}
+\end{equation}
+bilden, hängen wir am Fliegenfänger. Da ein Funktor zwischen Echt-Klassen-Kategorien kein mathematisches Objekt, sprich keine Menge ist, sondern ein Prädikat, können wir NICHT die Klasse aller Funktoren bilden. Das haben wir im Video "`v5.0.1.0.4 (Höher) Kategorien - Natürliche Transformationen"' schon angedeutet.
+Damit wir die Funktorkategorie $\DD^\CC$ bilden können, muss die Klasse der Objekte und die der Morphismen von $\CC$ eine Menge sein.
+
+Da intuitiv echte Klassen zu groß sind, sprechen wir von Größenproblemen.
 
 %******************************************************************************************************
-\subsection{Mono}
+\subsection{Die Lösung: Universen}
 %******************************************************************************************************
+Ein Universum ist eine Klasse, deren Elemente wir kleine Mengen nennen. Alle Klassen, die nicht im Universum liegen, nennen wir groß. \textbf{Da eine echte Klasse nirgendwo drinne liegen kann, sind echte Klassen immer groß}. Ein Gruppe, die im Universum liegt heißt kleine Gruppe, eine Kategorie deren Klasse aller Objekte und deren Klassen aller Morphismen im Universum liegen heißt kleine Kategorie. Das Universum liegt selbst nicht im Universum.
 
-\begin{Definition}{Monomorphismus}
-   Ein Homomorphismus $f \colon X \to Y$ zwischen zwei beliebigen Objekten einer Kategorie $\CC$ ist ein \textbf{Monomorphismus} oder ein \textbf{Mono} oder ist \textbf{mono}, wenn er \textbf{links-kürzbar} ist. D.h. für alle Objekte $W$ und alle Morphismen $g,h \colon W \to X$ gilt
-	\begin{equation}
-      fg = fh \Rightarrow g = h.
-	\end{equation}
+Dann definieren wir z.B. die Kategorie der kleinen Gruppen. Diese enthält als Objekte nur kleine Gruppen. Universen sind in der Regel so aufgebaut, dass damit auch die Klasse der Morphismen zwischen kleinen Gruppen klein ist.
+
+Damit wir in einem Universum arbeiten können, fordern wir vom Universum, dass wir bei unserer Arbeit mit mathematischen Objekten nicht aus dem Universum fallen. Wir möchten, dass es abgeschlossen gegenüber der normalen mathematischen Tätigkeit ist. Wir stellen im Folgenden drei mögliche Konstruktionen vor.
+
+%******************************************************************************************************
+\subsection{Abgeschlossene Universen}
+%******************************************************************************************************
+Damit wir bei unseren Arbeiten nicht aus dem Universum fallen, wollen wir, dass es gegenüber allen gängigen mathematischen Konstruktionen abgeschlossen ist. Das präzisieren wir wie folgt:
+\begin{Definition}{Abgeschlossenes Universum}
+   Eine Klasse $U$ heißt \textbf{abgeschlossenes Universum}, falls folgendes gilt:
+   \begin{alignat}{3}
+      &x \in U \land y \in x       &&\Rightarrow \quad y \in U      && \quad \text{(Transitivität)}\\
+      &x \in U                     &&\Rightarrow \quad \PP(x) \in U && \quad \text{(Potenzmenge)}\\
+      &I \in U \land \forall 
+          i \in I \colon u_i \in U &&\Rightarrow \quad \bigcup_{i\in I} u_i \in U 
+                                                               && \quad \text{(Vereinigung)}
+   \end{alignat}
 \end{Definition}
-Das ist wie bei der Multiplikation in $\Z$. Und wie dort heißt dies nicht, dass es auch ein Links-Inverses geben muss. $3 \in \Z$ ist zwar links-kürzbar (aus $3x = 3y$ folgt $x=y$) hat aber in $\Z$ kein multiplikativ Inverses.
-
-In der Kategorie \textbf{Set} ist mono dasselbe wie injektiv.
-
-Betrachten wir als Beispiel folgende Inklusion als Morphismus kommutativer Ringe mit Eins, also als Ring-Homomorphismus.
-\begin{alignat}{4}
-   &i \colon &&\Z &&\to     &&\Q\\
-            &&&n &&\mapsto &&n = \frac{n}{1}
-\end{alignat}
-
-Seien $g,h \colon X \to \Z$ zwei Ring-Homomorphismen mit $ig = ih$ und sei $x \in X$ beliebig. Wegen $g(x) = i(g(x)) = i(h(x)) = h(x)$ gilt $g=h$. Also ist $i$ mono.
+Anmerkungen:
+\begin{itemize}
+   \item Mit $x \in U$ ist $x \subseteq U$, da alle Elemente von $x$ auch in $U$ sind.
+   \item Mit $x$ und $y$ sind auch $\{x, y\}$ und $(x,y)$ in $U$.
+   \item Es sind nicht notwendig beliebige Vereinigungen von Mengen aus $U$ wieder in $U$. Wichtig ist, dass sie über eine Menge in $U$ indiziert werden können.
+   \item Es wird nicht gefordert, dass $U$ nicht leer ist.
+   \item Es wird nicht gefordert, dass $U$ unendliche Mengen enthält.
+\end{itemize}
 
 %******************************************************************************************************
-\subsection{Epi}
+\subsection{Erste Lösung: Klasse aller Mengen}
 %******************************************************************************************************
-
-\begin{Definition}{Epimorphismus}
-   Ein Homomorphismus $f \colon X \to Y$ zwischen zwei beliebigen Objekten einer Kategorie $\CC$ ist ein \textbf{Epimorphismus} oder ein \textbf{Epi} oder ist \textbf{epi}, wenn er \textbf{rechts-kürzbar} ist. D.h. für alle Objekte $Z$ und alle Morphismen $g,h \colon Y \to Z$ gilt
+Hier definieren wir z.B.
+\begin{Definition}{Klassen-Universum}
+   Das Klassen-Universum $U_K$ ist die Klasse aller Mengen, also z.B. 
    \begin{equation}
-      gf = hf \Rightarrow g = h.
+      U_K := \{ x \mid x = x \}.
    \end{equation}
 \end{Definition}
-Das ist wie bei der Multiplikation in $\Z$. Und wie dort heißt dies nicht, dass es auch ein Rechts-Inverses geben muss. $3 \in \Z$ ist zwar rechts-kürzbar (aus $x\cdot 3 = y \cdot 3$ folgt $x=y$) hat aber in $\Z$ kein multiplikativ Inverses.
+Wenn wir mit diesem Universum arbeiten, sind kleine Klassen Mengen und große Klassen sind echte Klassen. Jede Gruppe ist eine kleine Gruppe und eine Kategorie ist dann klein, wenn Objekt- und Morphismen-Klassen Mengen sind. Das Klassen-Universum ist aufgrund der Axiome von ZFC abgeschlossen. Mit diesem Universum arbeiten wir in dieser Vorlesungsreihe, wenn nichts anderes dazugesagt wird. Die Vorteile sind:
+\begin{itemize}
+   \item Dieses Universum kann mit Mitteln aus ZFC gebildet werden.
+   \item Es ist nicht leer, enthält unendliche Mengen und alle bekannten Objekte, mit denen wir betrüblicherweise hantieren.
+\end{itemize}
 
-In der Kategorie \textbf{Set} ist epi dasselbe wie surjektiv.
-
-Betrachten wir als Beispiel wieder das $i$ von oben. Es ist klar nicht surjektiv ($\frac{13}{666}$ ist nicht im Bild) aber dennoch epi, was wir im folgenden zeigen.
-Seien $g,h \colon \Q \to R$ mit $gi = hi$. Sei $y = \frac{p}{q}$ ein beliebiges Element aus $\Q$. Aus $q \cdot 1/q = 1$ folgt $g(q) \cdot g(1/q) = 1$ und $h(q) \cdot h(1/q) = 1$. Da $g$ und $h$ auf dem Bild von $i$ übereinstimmen, also da $g(q) = h(q)$ und da das multiplikativ Inversen in einem Ring, falls es denn existiert, eindeutig ist, gilt  $g(1/q) = h(1/q)$ und damit auch $g(p/q) = h(p/q)$
-
-Mit anderen Worten ist ein Ring-Morphismus $g,h \colon \Q \to R$ durch seine Werte auf $\Z$ schon vollständig festgelegt, wie ein Polynom $n$-ten Grades durch die Werte an $n-1$ Stellen bereits festgelegt ist. 
-
-Die Ortsangaben bei den Wörtern links- und rechts-kürzbar beziehen sich auf die Schreibweise mt Buchstaben. Wenn wir die Morphismen als Pfeile von Links nach Rechts malen, wird der links-kürzbare Morphismus rechts gekürzt!
+Nachteile: Die Kategorie der kleinen Gruppen ist keine Menge und somit können wir die oben gewollte Funktorkategorie nicht bilden.
 
 %******************************************************************************************************
-\subsection{Retraktion, Schnitt, split}
+\subsection{Zweite Lösung: Grothendieck-Universum}
 %******************************************************************************************************
-\begin{Definition}{Epimorphismus}
-   Ein Homomorphismus $f \colon X \to Y$ zwischen zwei beliebigen Objekten einer Kategorie $\CC$ ist eine \textbf{Retraktion} bzw. ein \textbf{Schnitt} wenn er ein Rechts- bzw. Links-Inverses hat. Statt Schnitt sagen wir auch \textbf{Koretraktion} und wir sagen auch \textbf{split epi} bzw.  \textbf{split mono}
+Hier definieren wir z.B.
+\begin{Definition}{Grothendieck-Universum}
+   Ein Grothendieck-Universum ist ein Klassen-Universum, welches eine Menge ist.
+\end{Definition}
+Vorteile sind:
+\begin{itemize}
+   \item Nun ist die Klasse aller kleinen Gruppen und wir können unsere Funktorkategorie bilden, die selber aber nicht mehr klein ist.
+   \item Ähnlich besteht die Kategorie der kleinen Kategorien jetzt aus Mengen.
+\end{itemize}
+
+Nachteile: Die einzigen beiden Grothendieck-Universen, deren Existenz in ZFC nachgewiesen werden können, ist das leere Universum und $V_\omega$ (die kleinste unendliche Menge in der von Neumann Hierarchie). $V_\omega$ enthält nur endliche Mengen und ist damit für die mathematische Forschung nur bedingt brauchbar.
+
+Die üblich Lösung ist eine Erweiterung des Axiomensystems um das Universen-Axiom zur ZFCU (auch Tarski-Grothendieck-Mengenlehre oder TG genannt).
+
+\begin{Definition}{Universen-Axiom}
+   Für jede Menge $x$ existiert ein Grothendieck-Universum $U$ mit $x \in U$. 
 \end{Definition}
 
-Es ist leicht zu sehen, dass Retraktionen Epis und Schnitte Monos sind. Es handelt sich also um stärkere Eigenschaften, die auch kategoriale Verallgemeinerungen von surjektiv bzw. injektiv sind.
+Aber eigentlich wollen wir nicht leichtfertig unser Axiomen-System erweitern. Also nutzen wir diesen Ansatz nur, wenn wir anders nicht weiterkommen. Und wir führen dann sehr genau Buch, für welche Sätze wir dieses Axiom benutzt haben. Wir versuchen auch in Zukunft alternative Beweise zu finden, die dieses Axiom nicht anwenden.
 
-Die Tatsache, dass unser obiger Momo $i \colon \Z \to \Q$ kein Schnitt (es hat kein Links-Inverses in \textbf{Ring}) aber injektiv ist, zeigt dass das Wort "`Verallgemeinerung"' mit Vorsicht zu genießen ist. Dieses Beispiel zeigt auch, dass "`Schnitt"' echt stärker ist als "`mono"'.
-
-Ein Beispiel in der Kategorie der topologischen Räume mit stetigen Funktionen als Homomorphismen ist die Funktion $[0,1] \to [0,1]^2$ mit $x \mapsto 1.25 x^2 + 0.75 x + 0.25$. Das Links-Inverse ist die Projektion $(x,y) \mapsto x$. Dieses Bild ist auch eine Motivation für das Wort Schnitt. 
-
-\begin{tikzpicture}[scale=3]
-   \draw[->, thick] (0, -0.5) -- (0, 1.5) node(yaxis)[above]{$y$};
-   \draw[->, thick] (-0.5, 0) -- (2, 0) node(xaxis)[right]{$x$};
-   
-   \draw (1, -0.05) node[below]{$1$} -- (1, 1);
-   \draw (-0.05, 1) node[left]{$1$} -- (1, 1);
-   
-   \draw[domain = 0:1, variable = \x, red] 
-      plot ({\x}, {1.25*\x*\x - 0.75*\x + 0.25});
-   \node[right] at (1.2, 1.2) {$1.25 x^2 + 0.75 x + 0.25$};  
-\end{tikzpicture}
-
-Da das Rechts-Inverse eines Morphismus ein Links-Inverses hat und umgekehrt, treten Retraktion und Schnitt immer als Paar auf.
-
-
+Da aufgrund des Axioms auch das Universum $U$ selbst Element eines Universums, sagen wir $U'$ ist, bilden die Grothendieck-Universen ein System. Damit können wir den Begriff "`klein"' relativ zum gewählten Universum bilden. Wird sagen dann $U$-klein. Damit ist die Funktorkategorie zwischen $U$-kleinen Gruppen und $U$-kleinen Ringen selbst $U'$-klein. Wir können mit der Funktorkategorie also ganz normal weiterarbeiten und, wenn nötig, diesen Schritt wiederholen zu einem $U''$.
 
 %******************************************************************************************************
-\subsection{Anfangs-, End- und Null-Objekt}
+\subsection{Dritte Lösung: Von-Neumann-Hierarchie}
 %******************************************************************************************************
-\begin{Definition}{Anfangs-, End- und Null-Objekt}
-   Ein Objekt $A$ einer Kategorie $\CC$ ist ein \textbf{Anfangs-Objekt}, wenn es zu jedem Objekt $X \in \CC$ genau einen Morphismus $A \to X$ von $A$ zu dem Objekt gibt. Ein Objekt $E$ einer Kategorie $\CC$ ist ein \textbf{End-Objekt}, wenn es von jedem Objekt $X \in \CC$ genau einen Morphismus $X \to E$ von dem Objekt zu $E$ gibt. Ein Objekt $N$ einer Kategorie $\CC$ ist ein \textbf{Null-Objekt}, wenn es zugleich Anfangs- wie End-Objekt ist. 
+Im Folgenden sind $\alpha, \beta, \gamma$ Ordinalzahlen. Die folgenden Mengen existieren in ZFC ohne zusätzliche Axiome.
+\begin{Definition}{Von-Neumann-Hierarchie}
+   \begin{align}
+      V_0\, & :=\, \emptyset \\
+      V_{\alpha + 1}\, & :=\, \PP\left(V_\alpha\right) \\
+      V_\lambda\, & :=\, \bigcup_{\alpha <\lambda}V_\alpha
+   \end{align}
 \end{Definition}
+Damit ist
+\begin{align}
+   V_1 &= \{\emptyset \} \\
+   V_2 &= \{\emptyset,\{\emptyset\}\} \\
+   V_3 &= \{\,\emptyset, \{\emptyset\}, \{\{\emptyset\}\}, \{\emptyset,\{\emptyset\}\}\,\} \\
+   \vdots \\
+   V_\omega &= \{ x \mid x \text{ ist erblich endlich} \} \\
+   \vdots
+\end{align}
 
-\begin{Satz}{Morphismen von bzw. zu Null-Objekt ist immer mono bzw. epi}
-   Sei $N$ ein Null-Objekt in einer Kategorie $\CC$. Seien $X, Y$ zwei beliebige Objekte in $\CC$. Dann ist der eindeutige Morphismus $m \colon N \to Y$ mono, der ebenfalls eindeutige $e \colon X \to N$ epi. 
-\end{Satz}
-\begin{proof}
-   Seien $g, h \colon W \to N$ zwei Morphismen mit $mg = mh$, dann gilt $g = h$. Dies liegt nicht an den Eigenschaften von $m$, sondern weil $N$ als End-Objekt nur einen Morphismus von $W$ nach $N$ erlaubt. Also ist $m$ mono. Der Beweis für epi geht genauso.
-\end{proof}
+Die $V_\alpha$ wachsen ($\alpha < \beta \Rightarrow V:\alpha \subset V_\beta$) und sie decken alle mathematischen Objekte ab: zu jedem $x$ gibt es ein $\alpha$ mit $x \in V_\alpha$.
 
-Ein Beispiel für ein Null-Objekt ist der Null-Vektorraum $\{ 0 \}$ in der Kategorie der $\K$-Vektorräume.
+Damit können wir auch eine Hierarchie von "`klein"'-Begriffen aufbauen.
+
+Nachteil: die $V_\alpha$ sind nicht notwendigerweise abgeschlossen. Damit müssen wir mit unseren Konstruktionen immer sehr genau Buch führen, wie viel mal wir den Potenzmengenoperator benötigen.
+
+Alternativ, könnten versuchen mit einem $V_\alpha$ zu beginnen, und einfach annehmen, dass wir am Ende all unsere Konstruktionen mit einem ausreichend großen $V\beta$ einfangen können, ohne dass wir dieses $\beta$ benennen.
+
+%******************************************************************************************************
+\subsection{Vokabeln}
+%******************************************************************************************************
+Wählen wir ein, sagen wir mal Grothendieck-) Universum $U$, können wir folgende Namenshierarchie bilden:
+\begin{itemize}
+   \item $x$ kleine Menge: $x \in U$
+   \item $\CC$ kleine Kategorie: $\operatorname{Obj}(\CC)$ und $\Hom(\CC)$ sind klein
+   \item $\CC$ große Kategorie: die Objekte und Hom-Mengen sind klein
+   \item $\CC$ Mengen-Kategorie: die Objekte und Hom-Mengen sind Mengen 
+   \item $\CC$ Klassen-Kategorie: die Objekte und Hom-Mengen sind Klassen
+   \item $\CC$ Meta-Kategorie: Objekte und Morphismen sind eigenständige Dinge einer Prädikationlogik. Wir scheren uns nicht um deren Implementierung in ZFC
+\end{itemize}
+Die Namen Mengen-Kategorie und Klassen-Kategorie sind Eigenkreationen von mir. So wie wir in diesem Kurs auch Klassen-Relation und Klassen-Funktion sagen, wenn die Klasse der Paare, die die Relation oder Funktion ausmachen, nicht notwendig eine Menge ist. Bei \cite{MacLane} werden Klassen-Kategorie und Meta-Kategorie zusammengefasst zu Meta-Kategorie.
+
+%******************************************************************************************************
+\subsection{Lokal klein}
+%******************************************************************************************************
+Wir verlagen weder von $\operatorname{Obj}(\CC)$, noch von $\Hom(\CC)$ \textbf{aber noch nicht einmal von $\Hom(X,Y)$, dass es Mengen sind}.
+\begin{Definition}{Lokal klein}
+   Eine Kategorie heißt \textbf{lokal klein}, wenn für alle Objekte $X,Y \in \CC$ die Klasse $\Hom(X,Y)$ aller Morphismen von $X$ nach $Y$ eine kleine Menge ist.
+\end{Definition}
+Es gibt Situationen, in denen Konstruktionen schon dann möglich sind, wenn die Kategorie lokal klein ist. Ein Beispiel ist die Klassen-Kategorie aller Gruppen. Die Klasse der Gruppen-Homomorphismen zwischen je zwei Gruppen ist aber immer eine Menge, also klein, wenn wir die Klasse aller Mengen als Universum zu Grunde legen.
+
+Da Morphismen nicht Mengen sein müssen, gibt es Kategorien mit endlich vielen Objekten, die nicht lokal klein sind. Hier ein künstliches Beispiel: Sei $\CC$ eine Kategorie mit zwei Objekten $X, Y$. Die obligatorischen $\id_X, \id_Y$ definieren wir als $(0, X)$ und $(0, Y)$. Und weiter
+\begin{equation}
+   \Hom(X, Y) := \{ (1,x) \mid x = x \}. 
+\end{equation}
+Damit gibt es zu jeder Menge $x$ einen Homomorphismus. Die Paare mit der $0$ und der $1$ davor haben wir nur gemacht, damit die Hom-Klassen paarweise disjunkt sind. Im Resultat ist $\Hom(X, Y)$ eine echte Klasse und unsere Kategorie ist nicht lokal klein.
+
+Ein "`realistisches"' Beispiel ist die Kategorie der Spanne, siehe \url{https://ncatlab.org/nlab/show/span}.
+
+%******************************************************************************************************
+\subsection{Wieso erst jetzt?}
+%******************************************************************************************************
+Wieso taucht das Groß-Klein-Problem erst bei den Kategorien auf und nicht schon bei beispielsweise den Gruppen? Beide sind doch letztendlich algebraische Strukturen.
+
+In der Tat könnten wir auch Klassen-Gruppen definieren. Z.B. so:
+\begin{Definition}{Freie Klassen-Gruppe}
+   Sei $V := \{ x \mid x = x \}$ die Klasse aller Mengen. Damit definieren wir:
+   \begin{equation}
+      A := \{ (a, x ) \mid a \in \{0, 1\} \text{ und } x \in V \} \setminus \{ (1, \emptyset) \}
+   \end{equation}
+   Das ist ein \textbf{Klassen-Alphabet}, bestehend aus $+x := (0,x)$ und $-x := (1,x)$, wobei $x$ alle nicht-leeren Mengen durchläuft und $0 := \{(0, \emptyset)\}$.
+   Wir definieren weiter ein \textbf{Wort} als Funktion $\{0, 1, \cdots n \} \to a$, wobei $a$ eine Teilmenge von $A$ ist (eine Menge!).
+   Wir definieren ein \textbf{reduziertes Wort} als ein solches, wo nicht $+x$ und $-x$ oder umgekehrt aufeinander folgen.
+   Die Klasse $G$ sei die Klasse aller reduzierten Wörter. Sodann definieren wir eine Klassen-Relation $M := \{ (u,v,w) \mid u,v,w \in V \text{ und $w$ geht aus $u$ und $v$ durch die üblichen Kürzungsreglen hervor}\}$.
+\end{Definition}
+Diese  Konstruktion erfüllt alle Axiome einer Gruppe, außer dass Elemente und Verknüpfung echte Klassen sind und keine Mengen.
+
+Der Punkt ist: diese Konstruktion taucht während üblicher mathematischer Untersuchungen niemals ungefragt von selbst auf. Sie wird für nichts benötigt und wirkt manieristisch. 
+Die Klassen-Kategorie aller Gruppen entsteht dagegen schon im Grundstudium völlig automatisch im Kopf, wenn wir ein wenig Gruppentheorie und dort Gruppen-Homomorphismen studieren.
 
 \begin{backup}
-Noch zu erledigen sind
 %******************************************************************************************************
 %                                                                                                     *
 \section{TODO}
 %                                                                                                     *
 %******************************************************************************************************
 \begin{itemize}
-   \item xxx
+     \item Überprüfe Symbolverzeichnis
 \end{itemize}
+
+
 \end{backup}
 
 \begin{backup}
@@ -484,7 +595,7 @@ Noch zu erledigen sind
    \bibitem[Rotman2009]{Rotman}
    	Joseph J. Rotman, \emph{An Introduction to Homological Algebra},
    	2009 Springer-Verlag New York Inc., 978-0-387-24527-0 (ISBN)
-      
+
 \end{thebibliography}
 
 %******************************************************************************************************
@@ -499,19 +610,20 @@ Noch zu erledigen sind
 \renewcommand*{\arraystretch}{1}
 
 \begin{tabular}{ll}
+    $P(x)$                              & ein Prädikat\\
     $A, B, C, \cdots, X, Y, Z$          & Objekte\\
     $F,G$                               & Funktoren\\
     $f, g, h, r, s, \cdots$             & Homomorphismen\\
     $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
     \textbf{Set}                        & Die Kategorie der Mengen\\
     $\Hom( X, Y)$                       & Die Menge der Homomorphismen von $X$ nach $Y$\\
-    $\alpha, \beta, \cdots$             & natürliche Transformationen\\
+    $\alpha, \beta, \cdots$             & natürliche Transformationen oder Ordinalzahlen\\
     $\mathcal C ^{\text{op}}$           & Duale Kategorie\\
-    \textbf{Ring}, \textbf{Gruppe}      & Kategorie der Ringe und der Gruppen\\
-    $\GL_n(R)$                          & Allgemeine lineare Gruppe über dem Ring $R$\\
-    $R^*$                               & Einheitengruppe des Rings $R$\\
-    $\Det_n^R$                          & $n$-dimensionale Determinante für Matrizen mit Koeffizienten in $R$. 
-    
+    $\DD^\CC$                           & Funktorkategorie\\
+    $\textbf{Ring}, \textbf{Gruppe}$    & Kategorie der Ringe und der Gruppen\\
+    $U, U', U''$                        & Universen\\
+    $V_\alpha$                          & eine Menge der Von-Neumann-Hierarchie
+
 \end{tabular}
 
 \end{document}
