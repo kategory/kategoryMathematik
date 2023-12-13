@@ -229,22 +229,21 @@ Copyright (C) 2023 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
-Die Church-Markov-Turing These besagt, dass jede denkbare Formalisierung des Begriffs der Berechenbarkeit zur selben Menge berechenbarer Funktion führt. Anders gesagt, die Klasse der Turing-berechenbaren Funktionen stimmt mit der Klasse der intuitiv berechenbaren Funktionen überein. Sie besagt unter anderem auch, dass wir mit jeder erdenklichen Programmiersprache die selben Programme schreiben können. Alle Programmiersprachen sind prinzipiell gleich.
+Die Church-Markov-Turing These besagt, dass jede denkbare Formalisierung des Begriffs der Berechenbarkeit zur selben Menge berechenbarer Funktion führt. Anders gesagt, die Klasse der Turing-berechenbaren Funktionen stimmt mit der Klasse der intuitiv berechenbaren Funktionen überein. Sie besagt unter anderem auch, dass wir mit jeder erdenklichen Programmiersprache die selben Programme schreiben können. 
 
-Es ist eine These. Kein Theorem, da es nicht bewiesen ist. Noch nicht einmal ein mathematischer Satz, sodass es auch nie bewiesen werden kann. Es ist also auch keine Vermutung. Aber alles, was wir bisher in dieser Richtung unternommen haben, stützt die Church-Markov-Turing These. Die These heißt auch Church-Turing These oder nur Church These.
+Es ist eine These. Kein Theorem, da es nicht bewiesen ist. Noch nicht einmal eine mathematische Aussage, sodass es auch nie bewiesen werden kann. Es ist also auch keine Vermutung. Aber alles, was wir bisher in dieser Richtung unternommen haben, stützt die Church-Markov-Turing These.
 
 Ein System, welches zu den selben Funktionen führt, wie die Turing-Maschinen heißt Turing-äquivalent.
 
-Mathematisch beweisen können wir Teile dieser These. So z.~B. die Äquivalenz von rekursiven, Lambda-Kalkül und Turing-Maschinen Funktionen. Wir können ebenfalls beweisen, dass die üblichen Programmiersprachen Turing-äquivalent sind. Dies gilt für prozedurale Sprachen wie C und objektorientierte Sprachen wie C++ und Java ein. Auch funktionale Programmiersprachen wie LISP und Haskell und Sprachen für Logikprogrammierung wie Prolog, sind Turing-äquivalent.
+Mathematisch beweisen können wir Teile dieser These. So z.~B. die Äquivalenz von rekursiven, Lambda-Kalkül und Turing-Maschinen Funktionen. Wir können ebenfalls beweisen, dass die üblichen Programmiersprachen Turing-äquivalent sind. Wenn wir also zu einem Problem eine JavaScript Implementierung im Kopf haben, können wir davon ausgehen, dass es Turing-maschinen-berechenbar ist.
 
 Die Turing-Äquivalenz von z.~B. JavaScript könnte dadurch bewiesen werden, dass wir eine Turing-Maschine in JavaScript simulieren und dass wir einen JavaScript-Interpreter in einer Turing-Maschine implementieren.
 
-Ein konzeptioneller Unterschied von JavaScript und einer Turing-Maschine ist, dass letztere einen unendlichen Speicher hat. Hier ist allerdings zu bedenken, dass die Turing-Maschine zu keinem Zeitpunkt unendliche viel Speicher nutzt. Es sind immer nur endliche viele Speicherplätze mit einer 1 belegt. Der Rest ist 0. Dies entspricht en wenig der Idee des potentiell unendlichen.
+Ein konzeptioneller Unterschied von JavaScript und einer Turing-Maschine ist, dass letztere einen unendlichen Speicher hat. Hier ist allerdings zu bedenken, dass die Turing-Maschine zu keinem Zeitpunkt unendliche viel Speicher nutzt. Es sind immer nur endliche viele Speicherplätze mit einer 1 belegt. Der Rest ist 0. Dies entspricht ein wenig der Idee des potentiell unendlichen.
 
-JavaScript und andere real-technische Programmiersprachen sind in folgenden Sinne pragmatisch potentiell unendlich: wenn eine Berechnung wegen zu wenig Speicher abbricht, können wir neuen RAM oder Plattenspeicher kaufen, und das ganze dann nochmal versuchen. Oder wir warten auf die nächste Rechner-Generation. Ein Schritt, den die Menschheit immer wieder macht.
+JavaScript und andere real-technische Programmiersprachen sind in folgendem Sinne pragmatisch potentiell unendlich: wenn eine Berechnung wegen zu wenig Speicher abbricht, können wir neuen RAM oder Plattenspeicher kaufen, und das ganze dann nochmal versuchen. 
 
-Ein wichtiger pragmatischer Unterschied ist noch, dass in JavaScript der Typ Number nicht eine natürliche Zahl repräsentiert, da dieser Datentyp größenbeschränkt ist. Die Alternative ist BigInt.
-
+Die Auswirkung auf die mathematischen Grundlagen und Logik: ein Algorithmus, wie der euklidische, sollte Turing-maschinen-berechenbar sein, um als solcher zu gelten. Definitionen von "`gültiger Term"', "`wohl geformte mathematische Aussage"' oder "`korrekter Beweis"' sollten durch Turing-maschinen-berechenbare Funktionen auf den Zeichenketten von Term, Aussage oder Beweis definiert werden können. Sie sollten also in JavaScript programmiert werden können.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -254,14 +253,14 @@ Von Jörg Kunze
 %******************************************************************************************************
 \subsection*{Voraussetzungen}
 %******************************************************************************************************
-Mu-rekursive Funktionen, berechenbare Funktionen, Turing-Maschinen.s
+Mu-rekursive Funktionen, berechenbare Funktionen, Turing-Maschinen
 
 %******************************************************************************************************
 \subsection*{Text}
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v4%20Master/v4.0%20Berechenbarkeit/v4.0.4.4%20Church-Markov-Turing%20These}
 }
 
 %******************************************************************************************************
@@ -269,61 +268,32 @@ Der Begleittext als PDF und als LaTeX findet sich unter
 %******************************************************************************************************
 Siehe auch in den folgenden Videos:\\
 \\
-v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
-\url{https://youtu.be/X8v5Kyly0KI}\\
+v4.0.3 (Master) Berechenbarkeit - Turing Maschine\\
+\url{https://youtu.be/29UcyRumdFo}\\
 \\
-v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
-\url{https://youtu.be/sIaKt-Wxlog}\\
+v4.0.4 (Master) Berechenbarkeit - Berechenbare Funktionen\\
+\url{https://youtu.be/tARmHFIP32o}\\
+\\
+v4.0.4.2 (Master) Berechenbarkeit - Rekursive Funktionen\\
+\url{https://youtu.be/tFEn2GoLLEQ}
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Kategorientheorie}\\
-\url{https://ncatlab.org/nlab/show/small+category}\\
-\url{https://en.wikipedia.org/wiki/Small_set_(category_theory)}\\
-
+\url{https://de.wikipedia.org/wiki/Church-Turing-These}\\
+\url{https://de.wikipedia.org/wiki/Turing-Vollst%C3%A4ndigkeit}\\
+\url{https://en.wikipedia.org/wiki/Turing_completeness}
 
 %******************************************************************************************************
 \subsection*{Buch}
 %******************************************************************************************************
 Grundlage ist folgendes Buch:\\
-"`Categories for the Working Mathematician"'\\
-Saunders Mac Lane\\
-1998 | 2nd ed. 1978\\
-Springer-Verlag New York Inc.\\
-978-0-387-98403-2 (ISBN)\\
-{\tiny
-   \url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}}\\
-
-Gut für die kategorische Sichtweise ist:\\
-"`Topology, A Categorical Approach"'\\
-Tai-Danae Bradley\\
-2020 MIT Press\\
-978-0-262-53935-7 (ISBN)\\
-{\tiny
-\url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}}\\
-
-Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von:\\
-"`An Introduction to Homological Algebra"'\\
-Joseph J. Rotman\\
-2009 Springer-Verlag New York Inc.\\
-978-0-387-24527-0 (ISBN)\\
-{\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
-
-Etwas weniger umfangreich und weniger tiefgehend aber gut motivierend ist:
-"`Category Theory"'\\
-Steve Awodey\\
-2010 Oxford University Press\\
-978-0-19-923718-0 (ISBN)\\
-{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/9478288-9780199237180-category-theory}}\\
-
-Mit noch weniger Mathematik und die Konzepte motivierend ist:
-"`Conceptual Mathematics: a First Introduction to Categories"'\\
-F. William Lawvere, Stephen H. Schanuel\\
-2009 Cambridge University Press\\
-978-0-521-71916-2 (ISBN)\\
-{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/8643555-9780521719162-conceptual-mathematics}}
+Computability\\
+A Mathematical Sketchbook\\
+Douglas S. Bridges\\
+Springer-Verlag New York Inc. 2013\\
+978-1-4612-6925-0 (ISBN)
 
 %******************************************************************************************************
 \subsection*{Lizenz}
@@ -349,34 +319,66 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Mathematische Grundlagen der Kategorien}
+\section{Church-Markov-Turing These}
 %                                                                                                     *
 %******************************************************************************************************
+%******************************************************************************************************
+\subsection{Drei Definitionen von berechenbar}
+%******************************************************************************************************
+Es gibt drei übliche Definitionen von berechenbaren Funktionen:\\
+Turing-Maschinen\\
+Lambda-Kalkül\\
+Mu-rekursiv
 
 %******************************************************************************************************
-\subsection{Das Problem der Größe}
+\subsection{Turing-äquivalent}
 %******************************************************************************************************
+Eine System oder ein Begriff, welches Funktionen liefert oder definiert, ist \textbf{Turing-vollständig}, wenn jede Turing-Maschinen-berechenbare Funktion geliefert wird. Die können wir z.~B. dadurch beweisen, dass in diesem System ein Turing-Maschinen-Simulator implementiert werden kann.
 
+Können alle Funktionen eines Turing-vollständigen Systems auch von einer Turing-Maschine geliefert werden, heißt das System \textbf{Turing-äquivalent}. Das können wir z.~B. dadurch beweisen, dass wir das System in einer Turing-Maschine implementieren.
 
-Number.MAX_VALUE = 21024 - 2971, or approximately 1.7976931348623157E+308
+%******************************************************************************************************
+\subsection{Church-Markov-Turing These}
+%******************************************************************************************************
+Die Church-Markov-Turing These, die weder mathematischer Satz noch Vermutung ist, besagt, dass jede auch nur erdenkliche halbwegs vernünftige Definition des Berechenbarkeits-Begriffs Turing-äquivalent ist.  Die These heißt auch Church-Turing These oder nur Church These.
 
-Number, the most popular type of number, is a 64-bit floating point IEEE 754 number.
+Formal bewiesen ist es als mathematischer Satz für 
+Turing-Maschinen,
+Lambda-Kalkül,
+Mu-rekursiv, und alle normalen Programmiersprachen, wie C, C++, Python, JavaScript, Lisp, Prolog, Java, Haskell \dots Bei den Programmiersprachen nehmen wir dann an, dass sie über einen unendlichen Speicher verfügen. Alle Programmiersprachen sind prinzipiell gleich. Wir können den Raum der erreichbaren Funktionen nicht erweitern.
 
-Number.MAX SAFE INTEGER, which is the following, has the largest precise integral value of this type −
+Ein konzeptioneller Unterschied von JavaScript und einer Turing-Maschine ist, dass letztere einen unendlichen Speicher hat. Hier ist allerdings zu bedenken, dass die Turing-Maschine zu keinem Zeitpunkt unendliche viel Speicher nutzt. Es sind immer nur endliche viele Speicherplätze mit einer 1 belegt. Der Rest ist 0. Dies entspricht en wenig der Idee des potentiell unendlichen.
+JavaScript und andere real-technische Programmiersprachen sind in folgenden Sinne pragmatisch potentiell unendlich: wenn eine Berechnung wegen zu wenig Speicher abbricht, können wir neuen RAM oder Plattenspeicher kaufen, und das ganze dann nochmal versuchen. Oder wir warten auf die nächste Rechner-Generation. Ein Schritt, den die Menschheit immer wieder macht.
 
+%******************************************************************************************************
+\subsection{JavaScript}
+%******************************************************************************************************
+JavaScript ist Turing-äquivalent, wenn wir von der Speicherbegrenzung absehen. In der Spezifikation von JavaScript wird nicht gesagt, dass nur Speicher bis zu einer bestimmten Größe erlaubt ist. Über das Adressierungsmodel oder Pointer-Datentypen wird keine Aussage gemacht.
 
-console.log(Number.MAX_SAFE_INTEGER);
-// Expected output: 9007199254740991
+Ein realer Computer aber, der isoliert dasteht also keinen Zugriff auf (eventuell mit der Zeit wachsende) externe (Cloud-) Speicher hat ist auch mit JavaScript nicht Turing-äquivalent noch nicht einmal Turing-vollständig.
 
+Ein Augenmerk muss dabei auf Zahlen gerichtet werden. Normale Zahlen in JavaScript sind vom Typ Number, eine 64-bit floating point IEEE 754 Darstellung. Der höchste Wert hier ist
 
-It seems like there is no maximum limit to a BigInt as per spec, which makes sense considering BigInts are supposed to be arbitrary-precision integers, whose "digits of precision are limited only by the available memory of the host system".
+{\tt Number.MAX\_VALUE} $= 2^{1024} - 2^{971} \approx 1.7976931348623157 10^{308}$
+\\Allerdings sind hier Dezimalstellen abgeschnitten. Unabgeschnitten geht es nur bis
 
-const previouslyMaxSafeInteger = 9007199254740991n;
+{\tt Number.MAX\_SAFE\_INTEGER} $ 2^{53} - 1 = 9007199254740991$.
 
-const alsoHuge = BigInt(9007199254740991);
-// 9007199254740991n
+Eine Lösung ist, mit BigInt zu arbeiten. Dies ist ein Datentyp, der beliebig große ganze Zahlen mit all ihren Dezimalstellen abbilden kann. In der Spezifikation findet sich, meines Wissens, keine Obergrenze. Der zur Verfügung stehende Speicher liefert natürlich eine solche. BigInt können über den Konstruktor oder auch über Literale (ganze Zahlen mit einem n am Ende) erzeugt werden:
 
+\begin{lstlisting}[language=c]
+   x = BigInt( 42 );
+   y = 4875498574329574398572940385790234857423n;
+\end{lstlisting}
 
+%******************************************************************************************************
+\subsection{Mathematische Grundlagen}
+%******************************************************************************************************
+Die Auswirkung auf die mathematischen Grundlagen und Logik: ein Algorithmus, wie der euklidische, sollte Turing-maschinen-berechenbar sein, um als solcher zu gelten. Definitionen von "`gültiger Term"', "`wohl geformte mathematische Aussage"' oder "`korrekter Beweis"' sollten durch Turing-maschinen-berechenbare Funktionen auf den Zeichenketten von Term, Aussage oder Beweis definiert werden können. Sie sollten also in JavaScript programmiert werden können.
+
+\begin{equation}
+   x + \hbox{text}
+\end{equation}
 
 \begin{backup}
 %******************************************************************************************************
@@ -400,25 +402,9 @@ const alsoHuge = BigInt(9007199254740991);
 \begin{thebibliography}{9}
 %                                                                                                     *
 %******************************************************************************************************
-   \bibitem[Awodey2010]{Awodey}
-      Steve Awode, \emph{Category Theory},
-      2010 Oxford University Press, 978-0-19-923718-0 (ISBN)
-
-   \bibitem[Bradley2020]{Bradley}
-      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
-      2020 MIT Press, 978-0-262-53935-7 (ISBN)
-
-   \bibitem[LawvereSchanuel2009]{Lawvere}
-      F. William Lawvere, Stephen H. Schanuel, \emph{Conceptual Mathematics: a First Introduction to Categories},
-      2009 Cambridge University Press, 978-0-521-71916-2 (ISBN)
-
-   \bibitem[MacLane1978]{MacLane}
-      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
-      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
-
-   \bibitem[Rotman2009]{Rotman}
-   	Joseph J. Rotman, \emph{An Introduction to Homological Algebra},
-   	2009 Springer-Verlag New York Inc., 978-0-387-24527-0 (ISBN)
+   \bibitem[Douglas2013]{Douglas}
+   Douglas S. Bridges, \emph{Computability, A Mathematical Sketchbook},
+   Springer, Berlin Heidelberg New York 2013, ISBN 978-1-4612-6925-0 (ISBN).
 
 \end{thebibliography}
 
@@ -434,19 +420,11 @@ const alsoHuge = BigInt(9007199254740991);
 \renewcommand*{\arraystretch}{1}
 
 \begin{tabular}{ll}
-    $P(x)$                              & ein Prädikat\\
-    $A, B, C, \cdots, X, Y, Z$          & Objekte\\
-    $F,G$                               & Funktoren\\
-    $f, g, h, r, s, \cdots$             & Homomorphismen\\
-    $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
-    \textbf{Set}                        & Die Kategorie der Mengen\\
-    $\Hom( X, Y)$                       & Die Menge der Homomorphismen von $X$ nach $Y$\\
-    $\alpha, \beta, \cdots$             & natürliche Transformationen oder Ordinalzahlen\\
-    $\mathcal C ^{\text{op}}$           & Duale Kategorie\\
-    $\DD^\CC$                           & Funktorkategorie\\
-    $\textbf{Ring}, \textbf{Gruppe}$    & Kategorie der Ringe und der Gruppen\\
-    $U, U', U''$                        & Universen\\
-    $V_\alpha$                          & eine Menge der Von-Neumann-Hierarchie
+    $\N$                    & Die Menge der natürlichen Zahlen (mit Null): $\{ 0, 1, 2, 3, \cdots \}$\\
+    $n, k, l, s, i, x_i, q$ & Natürliche Zahlen\\
+    $A( k, n )$             & Ackermannfunktion\\
+    $f, g, h$               & Funktionen\\
+    $s()$                   & Nachfolgerfunktion: $s(n) := n+1$
 
 \end{tabular}
 
