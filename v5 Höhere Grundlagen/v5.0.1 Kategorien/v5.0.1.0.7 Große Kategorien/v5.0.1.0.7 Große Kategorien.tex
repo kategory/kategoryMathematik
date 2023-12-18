@@ -1,0 +1,619 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v5.0.1.0.7 Große Kategorien.tex                                                                  *
+%                                                                                                  *
+% Copyright (C) 2023 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v5.0.1.0.7 Große Kategorien is part of kategoryMathematik.                                       *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Satz}
+\myTheorem{Theorem}
+\myTheorem{Axiom}
+\myTheorem{Beispiel}
+\myTheorem{Anmerkung}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\GL}{GL}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\DD}{\ensuremath{\mathcal{ D }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\FF}{\ensuremath{\mathcal{ F }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+\newcommand{\m}{\mathcal}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\newcommand{\zb}{z.~B. }
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Höhere Grundlagen) Kategorien\\[1cm]
+\textbf{v5.0.1.0.7 Große Kategorien}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2023 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Große Kategorien sind Kategorien mit kleinen Objekten und Hom-Klassen. Um von ihnen reden zu können müssen wir vorher ein Universum festlegen. Es handelt sich also um relative Definitionen: immer relativ zu einem festgelegten Universum.
+
+Wir denken uns zwei Universen festgelegt: ein Grothendieck-Universum (welches also gegenüber den üblichen Konstruktionen abgeschlossen ist,) und die Klasse aller Mengen. Wir führen die Konstruktionen dann immer parallel und gleichzeitig zweimal aus: für jedes dieser beiden Universen einmal.
+
+Da große Kategorien gar nicht so groß sind (so sind es \zb im Fall eines Grothendieck-Universum alles Mengen) würde ich sie lieber mittlere Kategorien nennen. Groß wären dann \zb die Klassen-Kategorien. Wir folgen hier aber der Notation aus \cite{MacLane}.
+
+Dann gibt es auch noch echt kleine Kategorien: bei denen ist die Klasse aller Objekte und die aller Morphismen jeweils eine kleine Menge, also Element es Universums. Prototypische Beispiel sind Quasiordnungen (Präordnugen), wo die ganze Kategorie aus einer Struktur auf einer Menge entsteht.
+
+Es folgen einige typische, wichtige und immer wiederkehrende kleine und große Kategorien.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Kategorie, Homomorphismus, Funktor, Universum
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+{\tiny
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.6%20Mathematische%20Grundlagen%20der%20Kategorien}
+}
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\
+\\
+v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
+\url{https://youtu.be/X8v5Kyly0KI}\\
+\\
+v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
+\url{https://youtu.be/sIaKt-Wxlog}\\
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Kategorientheorie}\\
+\url{https://ncatlab.org/nlab/show/small+category}\\
+\url{https://en.wikipedia.org/wiki/Small_set_(category_theory)}\\
+\url{https://de.wikipedia.org/wiki/Von-Neumann-Hierarchie}\\
+\url{https://ncatlab.org/nlab/show/Grothendieck+universe}\\
+\url{https://de.wikipedia.org/wiki/Grothendieck-Universum}\\
+\url{https://de.wikipedia.org/wiki/Tarski-Grothendieck-Mengenlehre}\\
+\url{https://mathoverflow.net/questions/437256/why-do-we-care-about-small-sets}\\
+\url{https://ncatlab.org/nlab/show/ETCS}\\
+\url{https://mathoverflow.net/questions/3278/whats-a-reasonable-category-that-is-not-locally-small}
+\url{https://de.wikipedia.org/wiki/Tarski-Grothendieck-Mengenlehre}\\
+\url{https://de.wikipedia.org/wiki/Grothendieck-Universum}\\
+\url{https://de.wikipedia.org/wiki/Von-Neumann-Hierarchie}\\
+\url{https://ncatlab.org/nlab/show/span}
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+"`Categories for the Working Mathematician"'\\
+Saunders Mac Lane\\
+1998 | 2nd ed. 1978\\
+Springer-Verlag New York Inc.\\
+978-0-387-98403-2 (ISBN)\\
+{\tiny
+   \url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}}\\
+
+Gut für die kategorische Sichtweise ist:\\
+"`Topology, A Categorical Approach"'\\
+Tai-Danae Bradley\\
+2020 MIT Press\\
+978-0-262-53935-7 (ISBN)\\
+{\tiny
+\url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}}\\
+
+Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von:\\
+"`An Introduction to Homological Algebra"'\\
+Joseph J. Rotman\\
+2009 Springer-Verlag New York Inc.\\
+978-0-387-24527-0 (ISBN)\\
+{\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
+
+Etwas weniger umfangreich und weniger tiefgehend aber gut motivierend ist:
+"`Category Theory"'\\
+Steve Awodey\\
+2010 Oxford University Press\\
+978-0-19-923718-0 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/9478288-9780199237180-category-theory}}\\
+
+Mit noch weniger Mathematik und die Konzepte motivierend ist:
+"`Conceptual Mathematics: a First Introduction to Categories"'\\
+F. William Lawvere, Stephen H. Schanuel\\
+2009 Cambridge University Press\\
+978-0-521-71916-2 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/8643555-9780521719162-conceptual-mathematics}}
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird,
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben
+(zu finden im selben Git-Projekt).
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter
+{\tiny
+   \url{https://youtu.be/ezW54mnzHMw}
+}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Mathematische Grundlagen der Kategorien}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{Kleine Kategorien}
+%******************************************************************************************************
+Präordnung, Monoid, Gruppe, Graph, ...
+
+%******************************************************************************************************
+\subsection{Große Kategorien}
+%******************************************************************************************************
+
+
+
+In der Kategorie aller Gruppen ist die Klasse der Objekte eine echte Klasse. Das können wir uns klar machen, da wir allein schon zu jeder Menge $x$ eine einelementige und damit triviale Gruppe $( {x}, +)$ mit $x + x = x$ konstruieren können, in der das $x$ die Rolle des neutralen Elementes hat.
+
+Dies ist oft gar kein Problem und wir wollen den Fall explizit mit einschließen und behandeln.
+
+Aber: Wir müssen ständig akribisch darauf achten, dass wir nicht irgendwo unbemerkt, Klassen wie Mengen behandeln, wo es nicht erlaubt ist.
+
+Beachte z.B., dass es zwei verschiedene "`für alle"' gibt: zum einen das normale, welches über Mengen quantifiziert und durch den All-Quantor geschrieben werden kann. Zum anderen ein meta-sprachliches, wie in "`für alle Prädikate $P(x)$ ist $P(x) \lor \neg P(x)$ immer wahr"'. Prädikate sind Formeln, die wir hingeschrieben haben. So gibt es z.B. eine Formel, die besagt, $x$ ist Gruppe.
+
+Es gibt auch eine Formel, die besagt $\FF$ ist Funktor von der Kategorie der Gruppen in die Kategorie der Ringe. "`Für alle Funktoren von \textbf{Gruppe} nach \textbf{Ring} ..."' bedeutet, dass wir aus der Formel, das "`..."' ableiten können.
+
+Wenn wir aber die Funktorkategorie
+\begin{equation}
+    \mathbf{Ring}^\mathbf{Gruppe}
+\end{equation}
+bilden, hängen wir am Fliegenfänger. Da ein Funktor zwischen Echt-Klassen-Kategorien kein mathematisches Objekt, sprich keine Menge ist, sondern ein Prädikat, können wir NICHT die Klasse aller Funktoren bilden. Das haben wir im Video "`v5.0.1.0.4 (Höher) Kategorien - Natürliche Transformationen"' schon angedeutet.
+Damit wir die Funktorkategorie $\DD^\CC$ bilden können, muss die Klasse der Objekte und die der Morphismen von $\CC$ eine Menge sein.
+
+Da intuitiv echte Klassen zu groß sind, sprechen wir von Größenproblemen.
+
+%******************************************************************************************************
+\subsection{Die Lösung: Universen}
+%******************************************************************************************************
+Ein Universum ist eine Klasse, deren Elemente wir kleine Mengen nennen. Alle Klassen, die nicht im Universum liegen, nennen wir groß. \textbf{Da eine echte Klasse nirgendwo drinne liegen kann, sind echte Klassen immer groß}. Ein Gruppe, die im Universum liegt heißt kleine Gruppe, eine Kategorie deren Klasse aller Objekte und deren Klassen aller Morphismen im Universum liegen heißt kleine Kategorie. Das Universum liegt selbst nicht im Universum.
+
+Dann definieren wir z.B. die Kategorie der kleinen Gruppen. Diese enthält als Objekte nur kleine Gruppen. Universen sind in der Regel so aufgebaut, dass damit auch die Klasse der Morphismen zwischen kleinen Gruppen klein ist.
+
+Damit wir in einem Universum arbeiten können, fordern wir vom Universum, dass wir bei unserer Arbeit mit mathematischen Objekten nicht aus dem Universum fallen. Wir möchten, dass es abgeschlossen gegenüber der normalen mathematischen Tätigkeit ist. Wir stellen im Folgenden drei mögliche Konstruktionen vor.
+
+%******************************************************************************************************
+\subsection{Abgeschlossene Universen}
+%******************************************************************************************************
+Damit wir bei unseren Arbeiten nicht aus dem Universum fallen, wollen wir, dass es gegenüber allen gängigen mathematischen Konstruktionen abgeschlossen ist. Das präzisieren wir wie folgt:
+\begin{Definition}{Abgeschlossenes Universum}
+   Eine Klasse $U$ heißt \textbf{abgeschlossenes Universum}, falls folgendes gilt:
+   \begin{alignat}{3}
+      &x \in U \land y \in x       &&\Rightarrow \quad y \in U      && \quad \text{(Transitivität)}\\
+      &x \in U                     &&\Rightarrow \quad \PP(x) \in U && \quad \text{(Potenzmenge)}\\
+      &I \in U \land \forall 
+          i \in I \colon u_i \in U &&\Rightarrow \quad \bigcup_{i\in I} u_i \in U 
+                                                               && \quad \text{(Vereinigung)}
+   \end{alignat}
+\end{Definition}
+Anmerkungen:
+\begin{itemize}
+   \item Mit $x \in U$ ist $x \subseteq U$, da alle Elemente von $x$ auch in $U$ sind.
+   \item Mit $x$ und $y$ sind auch $\{x, y\}$ und $(x,y)$ in $U$.
+   \item Es sind nicht notwendig beliebige Vereinigungen von Mengen aus $U$ wieder in $U$. Wichtig ist, dass sie über eine Menge in $U$ indiziert werden können.
+   \item Es wird nicht gefordert, dass $U$ nicht leer ist.
+   \item Es wird nicht gefordert, dass $U$ unendliche Mengen enthält.
+\end{itemize}
+
+%******************************************************************************************************
+\subsection{Erste Lösung: Klasse aller Mengen}
+%******************************************************************************************************
+Hier definieren wir z.B.
+\begin{Definition}{Klassen-Universum}
+   Das Klassen-Universum $U_K$ ist die Klasse aller Mengen, also z.B. 
+   \begin{equation}
+      U_K := \{ x \mid x = x \}.
+   \end{equation}
+\end{Definition}
+Wenn wir mit diesem Universum arbeiten, sind kleine Klassen Mengen und große Klassen sind echte Klassen. Jede Gruppe ist eine kleine Gruppe und eine Kategorie ist dann klein, wenn Objekt- und Morphismen-Klassen Mengen sind. Das Klassen-Universum ist aufgrund der Axiome von ZFC abgeschlossen. Mit diesem Universum arbeiten wir in dieser Vorlesungsreihe, wenn nichts anderes dazugesagt wird. Die Vorteile sind:
+\begin{itemize}
+   \item Dieses Universum kann mit Mitteln aus ZFC gebildet werden.
+   \item Es ist nicht leer, enthält unendliche Mengen und alle bekannten Objekte, mit denen wir betrüblicherweise hantieren.
+\end{itemize}
+
+Nachteile: Die Kategorie der kleinen Gruppen ist keine Menge und somit können wir die oben gewollte Funktorkategorie nicht bilden.
+
+%******************************************************************************************************
+\subsection{Zweite Lösung: Grothendieck-Universum}
+%******************************************************************************************************
+Hier definieren wir z.B.
+\begin{Definition}{Grothendieck-Universum}
+   Ein Grothendieck-Universum ist ein Klassen-Universum, welches eine Menge ist.
+\end{Definition}
+Vorteile sind:
+\begin{itemize}
+   \item Nun ist die Klasse aller kleinen Gruppen und wir können unsere Funktorkategorie bilden, die selber aber nicht mehr klein ist.
+   \item Ähnlich besteht die Kategorie der kleinen Kategorien jetzt aus Mengen.
+\end{itemize}
+
+Nachteile: Die einzigen beiden Grothendieck-Universen, deren Existenz in ZFC nachgewiesen werden können, ist das leere Universum und $V_\omega$ (die kleinste unendliche Menge in der von Neumann Hierarchie). $V_\omega$ enthält nur endliche Mengen und ist damit für die mathematische Forschung nur bedingt brauchbar.
+
+Die üblich Lösung ist eine Erweiterung des Axiomensystems um das Universen-Axiom zur ZFCU (auch Tarski-Grothendieck-Mengenlehre oder TG genannt).
+
+\begin{Definition}{Universen-Axiom}
+   Für jede Menge $x$ existiert ein Grothendieck-Universum $U$ mit $x \in U$. 
+\end{Definition}
+
+Aber eigentlich wollen wir nicht leichtfertig unser Axiomen-System erweitern. Also nutzen wir diesen Ansatz nur, wenn wir anders nicht weiterkommen. Und wir führen dann sehr genau Buch, für welche Sätze wir dieses Axiom benutzt haben. Wir versuchen auch in Zukunft alternative Beweise zu finden, die dieses Axiom nicht anwenden.
+
+Da aufgrund des Axioms auch das Universum $U$ selbst Element eines Universums, sagen wir $U'$ ist, bilden die Grothendieck-Universen ein System. Damit können wir den Begriff "`klein"' relativ zum gewählten Universum bilden. Wird sagen dann $U$-klein. Damit ist die Funktorkategorie zwischen $U$-kleinen Gruppen und $U$-kleinen Ringen selbst $U'$-klein. Wir können mit der Funktorkategorie also ganz normal weiterarbeiten und, wenn nötig, diesen Schritt wiederholen zu einem $U''$.
+
+%******************************************************************************************************
+\subsection{Dritte Lösung: Von-Neumann-Hierarchie}
+%******************************************************************************************************
+Im Folgenden sind $\alpha, \beta, \gamma$ Ordinalzahlen. Die folgenden Mengen existieren in ZFC ohne zusätzliche Axiome.
+\begin{Definition}{Von-Neumann-Hierarchie}
+   \begin{align}
+      V_0\, & :=\, \emptyset \\
+      V_{\alpha + 1}\, & :=\, \PP\left(V_\alpha\right) \\
+      V_\lambda\, & :=\, \bigcup_{\alpha <\lambda}V_\alpha
+   \end{align}
+\end{Definition}
+Damit ist
+\begin{align}
+   V_1 &= \{\emptyset \} \\
+   V_2 &= \{\emptyset,\{\emptyset\}\} \\
+   V_3 &= \{\,\emptyset, \{\emptyset\}, \{\{\emptyset\}\}, \{\emptyset,\{\emptyset\}\}\,\} \\
+   \vdots \\
+   V_\omega &= \{ x \mid x \text{ ist erblich endlich} \} \\
+   \vdots
+\end{align}
+
+Die $V_\alpha$ wachsen ($\alpha < \beta \Rightarrow V:\alpha \subset V_\beta$) und sie decken alle mathematischen Objekte ab: zu jedem $x$ gibt es ein $\alpha$ mit $x \in V_\alpha$.
+
+Damit können wir auch eine Hierarchie von "`klein"'-Begriffen aufbauen.
+
+Nachteil: die $V_\alpha$ sind nicht notwendigerweise abgeschlossen. Damit müssen wir mit unseren Konstruktionen immer sehr genau Buch führen, wie viel mal wir den Potenzmengenoperator benötigen.
+
+Alternativ, könnten versuchen mit einem $V_\alpha$ zu beginnen, und einfach annehmen, dass wir am Ende all unsere Konstruktionen mit einem ausreichend großen $V\beta$ einfangen können, ohne dass wir dieses $\beta$ benennen.
+
+%******************************************************************************************************
+\subsection{Vokabeln}
+%******************************************************************************************************
+Wählen wir ein, sagen wir mal Grothendieck-) Universum $U$, können wir folgende Namenshierarchie bilden:
+\begin{itemize}
+   \item $x$ kleine Menge: $x \in U$
+   \item $\CC$ kleine Kategorie: $\operatorname{Obj}(\CC)$ und $\Hom(\CC)$ sind klein
+   \item $\CC$ große Kategorie: die Objekte und Hom-Mengen sind klein
+   \item $\CC$ Mengen-Kategorie: $\operatorname{Obj}(\CC)$ und $\Hom(\CC)$ sind Mengen 
+   \item $\CC$ Klassen-Kategorie: $\operatorname{Obj}(\CC)$ und $\Hom(\CC)$ sind Klassen
+   \item $\CC$ Meta-Kategorie: Objekte und Morphismen sind eigenständige Dinge einer Prädikationlogik. Wir scheren uns nicht um deren Implementierung in ZFC
+\end{itemize}
+Die Namen Mengen-Kategorie und Klassen-Kategorie sind Eigenkreationen von mir. So wie wir in diesem Kurs auch Klassen-Relation und Klassen-Funktion sagen, wenn die Klasse der Paare, die die Relation oder Funktion ausmachen, nicht notwendig eine Menge ist. Bei \cite{MacLane} werden Klassen-Kategorie und Meta-Kategorie zusammengefasst zu Meta-Kategorie.
+
+%******************************************************************************************************
+\subsection{Lokal klein}
+%******************************************************************************************************
+Wir verlagen weder von $\operatorname{Obj}(\CC)$, noch von $\Hom(\CC)$ \textbf{aber noch nicht einmal von $\Hom(X,Y)$, dass es Mengen sind}.
+\begin{Definition}{Lokal klein}
+   Eine Kategorie heißt \textbf{lokal klein}, wenn für alle Objekte $X,Y \in \CC$ die Klasse $\Hom(X,Y)$ aller Morphismen von $X$ nach $Y$ eine kleine Menge ist.
+\end{Definition}
+Es gibt Situationen, in denen Konstruktionen schon dann möglich sind, wenn die Kategorie lokal klein ist. Ein Beispiel ist die Klassen-Kategorie aller Gruppen. Die Klasse der Gruppen-Homomorphismen zwischen je zwei Gruppen ist aber immer eine Menge, also klein, wenn wir die Klasse aller Mengen als Universum zu Grunde legen.
+
+Da Morphismen nicht Mengen sein müssen, gibt es Kategorien mit endlich vielen Objekten, die nicht lokal klein sind. Hier ein künstliches Beispiel: Sei $\CC$ eine Kategorie mit zwei Objekten $X, Y$. Die obligatorischen $\id_X, \id_Y$ definieren wir als $(0, X)$ und $(0, Y)$. Und weiter
+\begin{equation}
+   \Hom(X, Y) := \{ (1,x) \mid x = x \}. 
+\end{equation}
+Damit gibt es zu jeder Menge $x$ einen Homomorphismus. Die Paare mit der $0$ und der $1$ davor haben wir nur gemacht, damit die Hom-Klassen paarweise disjunkt sind. Im Resultat ist $\Hom(X, Y)$ eine echte Klasse und unsere Kategorie ist nicht lokal klein.
+
+Ein "`realistisches"' Beispiel ist die Kategorie der Spanne, siehe \url{https://ncatlab.org/nlab/show/span}.
+
+%******************************************************************************************************
+\subsection{Wieso erst jetzt?}
+%******************************************************************************************************
+Wieso taucht das Groß-Klein-Problem erst bei den Kategorien auf und nicht schon bei beispielsweise den Gruppen? Beide sind doch letztendlich algebraische Strukturen.
+
+In der Tat könnten wir auch Klassen-Gruppen definieren. Z.B. so:
+\begin{Definition}{Freie Klassen-Gruppe}
+   Sei $V := \{ x \mid x = x \}$ die Klasse aller Mengen. Damit definieren wir:
+   \begin{equation}
+      A := \{ (a, x ) \mid a \in \{0, 1\} \text{ und } x \in V \} \setminus \{ (1, \emptyset) \}
+   \end{equation}
+   Das ist ein \textbf{Klassen-Alphabet}, bestehend aus $+x := (0,x)$ und $-x := (1,x)$, wobei $x$ alle nicht-leeren Mengen durchläuft und $0 := \{(0, \emptyset)\}$.
+   Wir definieren weiter ein \textbf{Wort} als Funktion $\{0, 1, \cdots n \} \to a$, wobei $a$ eine Teilmenge von $A$ ist (eine Menge!).
+   Wir definieren ein \textbf{reduziertes Wort} als ein solches, wo nicht $+x$ und $-x$ oder umgekehrt aufeinander folgen.
+   Die Klasse $G$ sei die Klasse aller reduzierten Wörter. Sodann definieren wir eine Klassen-Relation $M := \{ (u,v,w) \mid u,v,w \in V \text{ und $w$ geht aus $u$ und $v$ durch die üblichen Kürzungsreglen hervor}\}$.
+\end{Definition}
+Diese  Konstruktion erfüllt alle Axiome einer Gruppe, außer dass Elemente und Verknüpfung echte Klassen sind und keine Mengen.
+
+Der Punkt ist: diese Konstruktion taucht während üblicher mathematischer Untersuchungen niemals ungefragt von selbst auf. Sie wird für nichts benötigt und wirkt manieristisch. 
+Die Klassen-Kategorie aller Gruppen entsteht dagegen schon im Grundstudium völlig automatisch im Kopf, wenn wir ein wenig Gruppentheorie und dort Gruppen-Homomorphismen studieren.
+
+\begin{backup}
+%******************************************************************************************************
+%                                                                                                     *
+\section{TODO}
+%                                                                                                     *
+%******************************************************************************************************
+\begin{itemize}
+     \item Überprüfe Symbolverzeichnis
+\end{itemize}
+
+
+\end{backup}
+
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+   \bibitem[Awodey2010]{Awodey}
+      Steve Awode, \emph{Category Theory},
+      2010 Oxford University Press, 978-0-19-923718-0 (ISBN)
+
+   \bibitem[Bradley2020]{Bradley}
+      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
+      2020 MIT Press, 978-0-262-53935-7 (ISBN)
+
+   \bibitem[LawvereSchanuel2009]{Lawvere}
+      F. William Lawvere, Stephen H. Schanuel, \emph{Conceptual Mathematics: a First Introduction to Categories},
+      2009 Cambridge University Press, 978-0-521-71916-2 (ISBN)
+
+   \bibitem[MacLane1978]{MacLane}
+      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
+      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
+
+   \bibitem[Rotman2009]{Rotman}
+   	Joseph J. Rotman, \emph{An Introduction to Homological Algebra},
+   	2009 Springer-Verlag New York Inc., 978-0-387-24527-0 (ISBN)
+
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $P(x)$                              & ein Prädikat\\
+    $A, B, C, \cdots, X, Y, Z$          & Objekte\\
+    $F,G$                               & Funktoren\\
+    $f, g, h, r, s, \cdots$             & Homomorphismen\\
+    $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
+    \textbf{Set}                        & Die Kategorie der Mengen\\
+    $\Hom( X, Y)$                       & Die Menge der Homomorphismen von $X$ nach $Y$\\
+    $\alpha, \beta, \cdots$             & natürliche Transformationen oder Ordinalzahlen\\
+    $\mathcal C ^{\text{op}}$           & Duale Kategorie\\
+    $\DD^\CC$                           & Funktorkategorie\\
+    $\textbf{Ring}, \textbf{Gruppe}$    & Kategorie der Ringe und der Gruppen\\
+    $U, U', U''$                        & Universen\\
+    $V_\alpha$                          & eine Menge der Von-Neumann-Hierarchie
+
+\end{tabular}
+
+\end{document}
