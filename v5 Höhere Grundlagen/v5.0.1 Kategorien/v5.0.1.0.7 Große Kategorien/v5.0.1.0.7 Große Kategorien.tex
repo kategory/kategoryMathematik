@@ -175,6 +175,9 @@
 \newcommand{\PP}{\ensuremath{\mathcal{ P }}}
 \newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
 
+\newcommand{\Set}{\text{\textbf{Set}} }
+
+
 \newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
 
 \newcommand{\bb}[1]{\mathbf{#1}}
@@ -256,7 +259,7 @@ Kategorie, Homomorphismus, Funktor, Universum
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.6%20Mathematische%20Grundlagen%20der%20Kategorien}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.7%20Gro%C3%9Fe%20Kategorien}
 }
 
 %******************************************************************************************************
@@ -269,25 +272,22 @@ v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
 \\
 v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
 \url{https://youtu.be/sIaKt-Wxlog}\\
+\\
+v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
+\url{https://youtu.be/Ojf5LQGeyOU}\\
+\\
+v5.0.1.0.6 (Höher) Kategorien - Mathematische Grundlagen\\
+\url{https://youtu.be/ezW54mnzHMw}
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Kategorientheorie}\\
-\url{https://ncatlab.org/nlab/show/small+category}\\
-\url{https://en.wikipedia.org/wiki/Small_set_(category_theory)}\\
-\url{https://de.wikipedia.org/wiki/Von-Neumann-Hierarchie}\\
-\url{https://ncatlab.org/nlab/show/Grothendieck+universe}\\
-\url{https://de.wikipedia.org/wiki/Grothendieck-Universum}\\
-\url{https://de.wikipedia.org/wiki/Tarski-Grothendieck-Mengenlehre}\\
-\url{https://mathoverflow.net/questions/437256/why-do-we-care-about-small-sets}\\
-\url{https://ncatlab.org/nlab/show/ETCS}\\
-\url{https://mathoverflow.net/questions/3278/whats-a-reasonable-category-that-is-not-locally-small}
-\url{https://de.wikipedia.org/wiki/Tarski-Grothendieck-Mengenlehre}\\
-\url{https://de.wikipedia.org/wiki/Grothendieck-Universum}\\
-\url{https://de.wikipedia.org/wiki/Von-Neumann-Hierarchie}\\
-\url{https://ncatlab.org/nlab/show/span}
+\url{https://ncatlab.org/nlab/show/large+category}\\
+\url{https://ncatlab.org/nlab/show/preorder}\\
+\url{https://ncatlab.org/nlab/show/monoid}\\
+\url{https://de.wikipedia.org/wiki/Graph_(Graphentheorie)}\\
+{\tiny\url{https://math.stackexchange.com/questions/3317487/is-every-concretizable-category-equivalent-to-a-subcategory-of-the-category-of-s}}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -349,7 +349,7 @@ Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
 %******************************************************************************************************
 Das Video hierzu ist zu finden unter
 {\tiny
-   \url{https://youtu.be/ezW54mnzHMw}
+   \url{XXX}
 }
 
 %******************************************************************************************************
@@ -361,188 +361,106 @@ Das Video hierzu ist zu finden unter
 %******************************************************************************************************
 \subsection{Kleine Kategorien}
 %******************************************************************************************************
-Präordnung, Monoid, Gruppe, Graph, ...
 
-%******************************************************************************************************
-\subsection{Große Kategorien}
-%******************************************************************************************************
-
-
-
-In der Kategorie aller Gruppen ist die Klasse der Objekte eine echte Klasse. Das können wir uns klar machen, da wir allein schon zu jeder Menge $x$ eine einelementige und damit triviale Gruppe $( {x}, +)$ mit $x + x = x$ konstruieren können, in der das $x$ die Rolle des neutralen Elementes hat.
-
-Dies ist oft gar kein Problem und wir wollen den Fall explizit mit einschließen und behandeln.
-
-Aber: Wir müssen ständig akribisch darauf achten, dass wir nicht irgendwo unbemerkt, Klassen wie Mengen behandeln, wo es nicht erlaubt ist.
-
-Beachte z.B., dass es zwei verschiedene "`für alle"' gibt: zum einen das normale, welches über Mengen quantifiziert und durch den All-Quantor geschrieben werden kann. Zum anderen ein meta-sprachliches, wie in "`für alle Prädikate $P(x)$ ist $P(x) \lor \neg P(x)$ immer wahr"'. Prädikate sind Formeln, die wir hingeschrieben haben. So gibt es z.B. eine Formel, die besagt, $x$ ist Gruppe.
-
-Es gibt auch eine Formel, die besagt $\FF$ ist Funktor von der Kategorie der Gruppen in die Kategorie der Ringe. "`Für alle Funktoren von \textbf{Gruppe} nach \textbf{Ring} ..."' bedeutet, dass wir aus der Formel, das "`..."' ableiten können.
-
-Wenn wir aber die Funktorkategorie
-\begin{equation}
-    \mathbf{Ring}^\mathbf{Gruppe}
-\end{equation}
-bilden, hängen wir am Fliegenfänger. Da ein Funktor zwischen Echt-Klassen-Kategorien kein mathematisches Objekt, sprich keine Menge ist, sondern ein Prädikat, können wir NICHT die Klasse aller Funktoren bilden. Das haben wir im Video "`v5.0.1.0.4 (Höher) Kategorien - Natürliche Transformationen"' schon angedeutet.
-Damit wir die Funktorkategorie $\DD^\CC$ bilden können, muss die Klasse der Objekte und die der Morphismen von $\CC$ eine Menge sein.
-
-Da intuitiv echte Klassen zu groß sind, sprechen wir von Größenproblemen.
-
-%******************************************************************************************************
-\subsection{Die Lösung: Universen}
-%******************************************************************************************************
-Ein Universum ist eine Klasse, deren Elemente wir kleine Mengen nennen. Alle Klassen, die nicht im Universum liegen, nennen wir groß. \textbf{Da eine echte Klasse nirgendwo drinne liegen kann, sind echte Klassen immer groß}. Ein Gruppe, die im Universum liegt heißt kleine Gruppe, eine Kategorie deren Klasse aller Objekte und deren Klassen aller Morphismen im Universum liegen heißt kleine Kategorie. Das Universum liegt selbst nicht im Universum.
-
-Dann definieren wir z.B. die Kategorie der kleinen Gruppen. Diese enthält als Objekte nur kleine Gruppen. Universen sind in der Regel so aufgebaut, dass damit auch die Klasse der Morphismen zwischen kleinen Gruppen klein ist.
-
-Damit wir in einem Universum arbeiten können, fordern wir vom Universum, dass wir bei unserer Arbeit mit mathematischen Objekten nicht aus dem Universum fallen. Wir möchten, dass es abgeschlossen gegenüber der normalen mathematischen Tätigkeit ist. Wir stellen im Folgenden drei mögliche Konstruktionen vor.
-
-%******************************************************************************************************
-\subsection{Abgeschlossene Universen}
-%******************************************************************************************************
-Damit wir bei unseren Arbeiten nicht aus dem Universum fallen, wollen wir, dass es gegenüber allen gängigen mathematischen Konstruktionen abgeschlossen ist. Das präzisieren wir wie folgt:
-\begin{Definition}{Abgeschlossenes Universum}
-   Eine Klasse $U$ heißt \textbf{abgeschlossenes Universum}, falls folgendes gilt:
-   \begin{alignat}{3}
-      &x \in U \land y \in x       &&\Rightarrow \quad y \in U      && \quad \text{(Transitivität)}\\
-      &x \in U                     &&\Rightarrow \quad \PP(x) \in U && \quad \text{(Potenzmenge)}\\
-      &I \in U \land \forall 
-          i \in I \colon u_i \in U &&\Rightarrow \quad \bigcup_{i\in I} u_i \in U 
-                                                               && \quad \text{(Vereinigung)}
+%------------------------------------------------------------------------------------------------------
+\subsubsection{Quasiordnung}
+\begin{Definition}{Quasiordnung}
+   Eine \textbf{Quasiorndung} oder \textbf{Präordnung} ist eine Menge $C$ zusammen mit einer Relation $\le$, so dass für alle $x, y, z \in C$ gilt
+   \begin{alignat}{1}
+      &x \le x\\
+      &x \le y \land y \le z \Rightarrow x \le z
    \end{alignat}
 \end{Definition}
-Anmerkungen:
-\begin{itemize}
-   \item Mit $x \in U$ ist $x \subseteq U$, da alle Elemente von $x$ auch in $U$ sind.
-   \item Mit $x$ und $y$ sind auch $\{x, y\}$ und $(x,y)$ in $U$.
-   \item Es sind nicht notwendig beliebige Vereinigungen von Mengen aus $U$ wieder in $U$. Wichtig ist, dass sie über eine Menge in $U$ indiziert werden können.
-   \item Es wird nicht gefordert, dass $U$ nicht leer ist.
-   \item Es wird nicht gefordert, dass $U$ unendliche Mengen enthält.
-\end{itemize}
 
-%******************************************************************************************************
-\subsection{Erste Lösung: Klasse aller Mengen}
-%******************************************************************************************************
-Hier definieren wir z.B.
-\begin{Definition}{Klassen-Universum}
-   Das Klassen-Universum $U_K$ ist die Klasse aller Mengen, also z.B. 
-   \begin{equation}
-      U_K := \{ x \mid x = x \}.
-   \end{equation}
-\end{Definition}
-Wenn wir mit diesem Universum arbeiten, sind kleine Klassen Mengen und große Klassen sind echte Klassen. Jede Gruppe ist eine kleine Gruppe und eine Kategorie ist dann klein, wenn Objekt- und Morphismen-Klassen Mengen sind. Das Klassen-Universum ist aufgrund der Axiome von ZFC abgeschlossen. Mit diesem Universum arbeiten wir in dieser Vorlesungsreihe, wenn nichts anderes dazugesagt wird. Die Vorteile sind:
-\begin{itemize}
-   \item Dieses Universum kann mit Mitteln aus ZFC gebildet werden.
-   \item Es ist nicht leer, enthält unendliche Mengen und alle bekannten Objekte, mit denen wir betrüblicherweise hantieren.
-\end{itemize}
+Nun definieren wir für alle $x, y, z \in C$
+\begin{equation}
+   \Hom(x,y) := \begin{cases}
+      \{ (x,y) \} & \text{ falls } x \le y\\
+      \emptyset & \text{ sonst }
+   \end{cases}
+\end{equation}
+mit $(y,z) \circ (x,y) := (x,z)$. Dies macht die Quasiordnung zu einer Kategorie. Wählen wir $C$ aus unserem Universum, ist $C$ eine kleine Kategorie, da dann die Menge der Objekte (gleich der Menge der Elemente) und die Menge der Morphismen (gleich der Menge der Paare $(x,y)$ mit $x \le y$) klein sind.
 
-Nachteile: Die Kategorie der kleinen Gruppen ist keine Menge und somit können wir die oben gewollte Funktorkategorie nicht bilden.
+%------------------------------------------------------------------------------------------------------
+\subsubsection{Monoid}
+Sei $M$ ein Monoid dessen Menge von Elementen, die wir hier mit $|M|$ bezeichnen, klein ist, also ein Element des Universums ist. Wir bilden eine Kategorie mit nur einem Objekt. Es spielt keine Rolle, was wir als Objekt auswählen, solange die Wahl im Universum bleibt. Wir können $\emptyset$ oder auch $M$ selber nehmen. Wir nehmen $M$. Da wir nur ein Objekt $M$ haben gibt es nur eine einzige Hom-Menge, nämlich $\Hom( M, M )$. Wir definieren $\Hom( M, M ) := |M|$. Die Verknüpfung von Morphismen sei dabei die Multiplikation im Monoid. Das neutrale Element übernimmt die Rolle der Identität.
 
-%******************************************************************************************************
-\subsection{Zweite Lösung: Grothendieck-Universum}
-%******************************************************************************************************
-Hier definieren wir z.B.
-\begin{Definition}{Grothendieck-Universum}
-   Ein Grothendieck-Universum ist ein Klassen-Universum, welches eine Menge ist.
-\end{Definition}
-Vorteile sind:
-\begin{itemize}
-   \item Nun ist die Klasse aller kleinen Gruppen und wir können unsere Funktorkategorie bilden, die selber aber nicht mehr klein ist.
-   \item Ähnlich besteht die Kategorie der kleinen Kategorien jetzt aus Mengen.
-\end{itemize}
+Damit ist das Monoid eine kleine Kategorie.
 
-Nachteile: Die einzigen beiden Grothendieck-Universen, deren Existenz in ZFC nachgewiesen werden können, ist das leere Universum und $V_\omega$ (die kleinste unendliche Menge in der von Neumann Hierarchie). $V_\omega$ enthält nur endliche Mengen und ist damit für die mathematische Forschung nur bedingt brauchbar.
+%------------------------------------------------------------------------------------------------------
+\subsubsection{Graph}
+Eine Kategorie ist ein gerichteter Graph mit mindestens einer Kante von jedem Knoten zu sich selber, auf dessen Menge der Kanten eine bestimmte Verknüpfung definiert ist.
 
-Die üblich Lösung ist eine Erweiterung des Axiomensystems um das Universen-Axiom zur ZFCU (auch Tarski-Grothendieck-Mengenlehre oder TG genannt).
+Aus jedem gerichteten Graph kann durch Aufnahme der Verknüpfungen eine Kategorie erzeugt werden.
 
-\begin{Definition}{Universen-Axiom}
-   Für jede Menge $x$ existiert ein Grothendieck-Universum $U$ mit $x \in U$. 
-\end{Definition}
-
-Aber eigentlich wollen wir nicht leichtfertig unser Axiomen-System erweitern. Also nutzen wir diesen Ansatz nur, wenn wir anders nicht weiterkommen. Und wir führen dann sehr genau Buch, für welche Sätze wir dieses Axiom benutzt haben. Wir versuchen auch in Zukunft alternative Beweise zu finden, die dieses Axiom nicht anwenden.
-
-Da aufgrund des Axioms auch das Universum $U$ selbst Element eines Universums, sagen wir $U'$ ist, bilden die Grothendieck-Universen ein System. Damit können wir den Begriff "`klein"' relativ zum gewählten Universum bilden. Wird sagen dann $U$-klein. Damit ist die Funktorkategorie zwischen $U$-kleinen Gruppen und $U$-kleinen Ringen selbst $U'$-klein. Wir können mit der Funktorkategorie also ganz normal weiterarbeiten und, wenn nötig, diesen Schritt wiederholen zu einem $U''$.
-
-%******************************************************************************************************
-\subsection{Dritte Lösung: Von-Neumann-Hierarchie}
-%******************************************************************************************************
-Im Folgenden sind $\alpha, \beta, \gamma$ Ordinalzahlen. Die folgenden Mengen existieren in ZFC ohne zusätzliche Axiome.
-\begin{Definition}{Von-Neumann-Hierarchie}
-   \begin{align}
-      V_0\, & :=\, \emptyset \\
-      V_{\alpha + 1}\, & :=\, \PP\left(V_\alpha\right) \\
-      V_\lambda\, & :=\, \bigcup_{\alpha <\lambda}V_\alpha
-   \end{align}
-\end{Definition}
-Damit ist
-\begin{align}
-   V_1 &= \{\emptyset \} \\
-   V_2 &= \{\emptyset,\{\emptyset\}\} \\
-   V_3 &= \{\,\emptyset, \{\emptyset\}, \{\{\emptyset\}\}, \{\emptyset,\{\emptyset\}\}\,\} \\
-   \vdots \\
-   V_\omega &= \{ x \mid x \text{ ist erblich endlich} \} \\
-   \vdots
-\end{align}
-
-Die $V_\alpha$ wachsen ($\alpha < \beta \Rightarrow V:\alpha \subset V_\beta$) und sie decken alle mathematischen Objekte ab: zu jedem $x$ gibt es ein $\alpha$ mit $x \in V_\alpha$.
-
-Damit können wir auch eine Hierarchie von "`klein"'-Begriffen aufbauen.
-
-Nachteil: die $V_\alpha$ sind nicht notwendigerweise abgeschlossen. Damit müssen wir mit unseren Konstruktionen immer sehr genau Buch führen, wie viel mal wir den Potenzmengenoperator benötigen.
-
-Alternativ, könnten versuchen mit einem $V_\alpha$ zu beginnen, und einfach annehmen, dass wir am Ende all unsere Konstruktionen mit einem ausreichend großen $V\beta$ einfangen können, ohne dass wir dieses $\beta$ benennen.
+Ich gezeichnetes Diagramm entspricht einer endlichen Kategorie.
 
 %******************************************************************************************************
 \subsection{Vokabeln}
 %******************************************************************************************************
-Wählen wir ein, sagen wir mal Grothendieck-) Universum $U$, können wir folgende Namenshierarchie bilden:
+Wählen wir ein, sagen wir mal Grothendieck-, Universum $U$, können wir folgende Namenshierarchie bilden:
 \begin{itemize}
    \item $x$ kleine Menge: $x \in U$
    \item $\CC$ kleine Kategorie: $\operatorname{Obj}(\CC)$ und $\Hom(\CC)$ sind klein
    \item $\CC$ große Kategorie: die Objekte und Hom-Mengen sind klein
    \item $\CC$ Mengen-Kategorie: $\operatorname{Obj}(\CC)$ und $\Hom(\CC)$ sind Mengen 
    \item $\CC$ Klassen-Kategorie: $\operatorname{Obj}(\CC)$ und $\Hom(\CC)$ sind Klassen
-   \item $\CC$ Meta-Kategorie: Objekte und Morphismen sind eigenständige Dinge einer Prädikationlogik. Wir scheren uns nicht um deren Implementierung in ZFC
+   \item $\CC$ Meta-Kategorie: Objekte und Morphismen sind eigenständige Dinge einer Prädikatenlogik. Wir scheren uns nicht um deren Implementierung in ZFC
 \end{itemize}
 Die Namen Mengen-Kategorie und Klassen-Kategorie sind Eigenkreationen von mir. So wie wir in diesem Kurs auch Klassen-Relation und Klassen-Funktion sagen, wenn die Klasse der Paare, die die Relation oder Funktion ausmachen, nicht notwendig eine Menge ist. Bei \cite{MacLane} werden Klassen-Kategorie und Meta-Kategorie zusammengefasst zu Meta-Kategorie.
 
 %******************************************************************************************************
-\subsection{Lokal klein}
+\subsection{Große Kategorien}
 %******************************************************************************************************
-Wir verlagen weder von $\operatorname{Obj}(\CC)$, noch von $\Hom(\CC)$ \textbf{aber noch nicht einmal von $\Hom(X,Y)$, dass es Mengen sind}.
-\begin{Definition}{Lokal klein}
-   Eine Kategorie heißt \textbf{lokal klein}, wenn für alle Objekte $X,Y \in \CC$ die Klasse $\Hom(X,Y)$ aller Morphismen von $X$ nach $Y$ eine kleine Menge ist.
+\begin{itemize}
+   \item Ab: kleine ablesche Gruppen
+   \item Ring: kleine Ringe 
+   \item Gruppe: kleine Gruppen
+   \item R-Moduln: kleine R-Moduln 
+   \item Top: kleine topologische Räume mit stetigen Funktionen 
+   \item Toph: kleine topologische Räume mit Homotopie-Klassen von stetigen Funktionen
+   \item Set: kleine Mengen mit Funktionen
+   \item Rel: kleine Mengen mit Relationen
+\end{itemize}
+
+Hier wird jeweils gefordert, dass die Grundmengen klein sind. Die Menge der Morphismen und im Falle der topologischen Räume die Topologie (als Menge der offenen Mengen) sind dann aufgrund der Abgeschlossenheit eines Universums auch klein.
+
+%******************************************************************************************************
+\subsection{Konkrete Kategorien}
+%******************************************************************************************************
+\begin{Definition}{Konkrete Kategorie}
+   Ein Paar $(\CC, V)$ aus einer Kategorie $\CC$ und einem treuen Funktor $V \colon \CC \to \Set$ heißt \textbf{konkrete Kategorie}. Dabei ist ein Funktor \textbf{treu}, wenn er injektiv auf Hom-Mengen operiert. Der Funktor $V$ heißt \textbf{Vergiss-Funktor}. Eine Kategorie heißt \textbf{konkretisierbar}, falls es einen Vergiss-Funktor wie oben gibt.
 \end{Definition}
-Es gibt Situationen, in denen Konstruktionen schon dann möglich sind, wenn die Kategorie lokal klein ist. Ein Beispiel ist die Klassen-Kategorie aller Gruppen. Die Klasse der Gruppen-Homomorphismen zwischen je zwei Gruppen ist aber immer eine Menge, also klein, wenn wir die Klasse aller Mengen als Universum zu Grunde legen.
 
-Da Morphismen nicht Mengen sein müssen, gibt es Kategorien mit endlich vielen Objekten, die nicht lokal klein sind. Hier ein künstliches Beispiel: Sei $\CC$ eine Kategorie mit zwei Objekten $X, Y$. Die obligatorischen $\id_X, \id_Y$ definieren wir als $(0, X)$ und $(0, Y)$. Und weiter
-\begin{equation}
-   \Hom(X, Y) := \{ (1,x) \mid x = x \}. 
-\end{equation}
-Damit gibt es zu jeder Menge $x$ einen Homomorphismus. Die Paare mit der $0$ und der $1$ davor haben wir nur gemacht, damit die Hom-Klassen paarweise disjunkt sind. Im Resultat ist $\Hom(X, Y)$ eine echte Klasse und unsere Kategorie ist nicht lokal klein.
+Beachte: es wird nicht die Injektivität der Abbildung der Objekte verlangt. Das heißt, für zwei Objekte $X \ne Y$ aus $\CC$ kann durchaus $V(X) = V(Y)$ gelten. Der folgende Satz zeigt, dass wir dies stets heilen können.
 
-Ein "`realistisches"' Beispiel ist die Kategorie der Spanne, siehe \url{https://ncatlab.org/nlab/show/span}.
-
-%******************************************************************************************************
-\subsection{Wieso erst jetzt?}
-%******************************************************************************************************
-Wieso taucht das Groß-Klein-Problem erst bei den Kategorien auf und nicht schon bei beispielsweise den Gruppen? Beide sind doch letztendlich algebraische Strukturen.
-
-In der Tat könnten wir auch Klassen-Gruppen definieren. Z.B. so:
-\begin{Definition}{Freie Klassen-Gruppe}
-   Sei $V := \{ x \mid x = x \}$ die Klasse aller Mengen. Damit definieren wir:
+\begin{Satz}{konkrete Kategorien sind Unter-Kategorien von Set}
+   $\CC$ ist konkretisierbar genau dann, wenn sie isomorph zu einer Unter-Kategorie von \Set ist. 
+\end{Satz}
+\begin{proof}
+   Idee aus\\
+   {\tiny\url{https://math.stackexchange.com/questions/3317487/is-every-concretizable-category-equivalent-to-a-subcategory-of-the-category-of-s}}
+   
+   Sei $(\CC, V)$ eine konkrete Kategorie. Wir wollen einen neuen Funktor $V'$ bauen. Die Zielmengen sollen nun eindeutig sein. Um dies zu erreichen wollen wir $X$ als neues Element in $V(X)$ aufnehmen. 
+   
+   $V(X) \cup \{X\}$ könnte aber schiefgehen, da $X$ schon in $V(X)$ liegen könnte. Also brauchen wir ein Element, was in einer Form $X$ enthält und nicht in $V(X)$ enthalten sein kann. Wir definieren
    \begin{equation}
-      A := \{ (a, x ) \mid a \in \{0, 1\} \text{ und } x \in V \} \setminus \{ (1, \emptyset) \}
+      V'(X) := V(X) \cup \{ (X, V(X)) \}
    \end{equation}
-   Das ist ein \textbf{Klassen-Alphabet}, bestehend aus $+x := (0,x)$ und $-x := (1,x)$, wobei $x$ alle nicht-leeren Mengen durchläuft und $0 := \{(0, \emptyset)\}$.
-   Wir definieren weiter ein \textbf{Wort} als Funktion $\{0, 1, \cdots n \} \to a$, wobei $a$ eine Teilmenge von $A$ ist (eine Menge!).
-   Wir definieren ein \textbf{reduziertes Wort} als ein solches, wo nicht $+x$ und $-x$ oder umgekehrt aufeinander folgen.
-   Die Klasse $G$ sei die Klasse aller reduzierten Wörter. Sodann definieren wir eine Klassen-Relation $M := \{ (u,v,w) \mid u,v,w \in V \text{ und $w$ geht aus $u$ und $v$ durch die üblichen Kürzungsreglen hervor}\}$.
-\end{Definition}
-Diese  Konstruktion erfüllt alle Axiome einer Gruppe, außer dass Elemente und Verknüpfung echte Klassen sind und keine Mengen.
+   
+   Jetzt müssen wir noch zeigen, dass wenn $X \ne Y$, nicht doch $V'(X) = V'(Y)$ entstehen könnte, weil $\{ (X, V(X)) \} \in Y$ und $\{ (Y, V(Y)) \} \in X$. Wir arbeiten mit der Definition $(a,b) := \{\{a\}, \{a, b\}\}$. Mit dem Fall, den wir ausschließen wollen, könnten wir damit eine zyklische Element-Kette bilden ($x_1 \in x_2 \in \cdots \in x_1$ ), welches gegen das Fundierungs-Axiom aus ZFC verstößt. Aus dem selben Grund kann übrigens auch $(X, V(X))$ nicht in $X$ liegen.
+   
+   Die Bilder der Morphismen $f \colon X \to Y$ werden so definiert, das sie auf den Elementen von $V(X)$ die Werte von $V(f)$ bekommen und auf dem neuen Element das neue:
 
-Der Punkt ist: diese Konstruktion taucht während üblicher mathematischer Untersuchungen niemals ungefragt von selbst auf. Sie wird für nichts benötigt und wirkt manieristisch. 
-Die Klassen-Kategorie aller Gruppen entsteht dagegen schon im Grundstudium völlig automatisch im Kopf, wenn wir ein wenig Gruppentheorie und dort Gruppen-Homomorphismen studieren.
+   \begin{equation}
+     V'(f)(x) := \begin{cases}
+        f(x)      & \text{falls } x \in X\\
+        (Y, V(Y)) & \text{falls } x = (X, V(X)).
+     \end{cases}
+   \end{equation}
+
+   Dass Unter-Kategorien von \Set konkretisierbar sind, ist klar, da der Einbettungs-Funktor hier die Rolle des Vergiss-Funktors übernimmt. 
+\end{proof}
 
 \begin{backup}
 %******************************************************************************************************
@@ -603,6 +521,7 @@ Die Klassen-Kategorie aller Gruppen entsteht dagegen schon im Grundstudium völl
     $P(x)$                              & ein Prädikat\\
     $A, B, C, \cdots, X, Y, Z$          & Objekte\\
     $F,G$                               & Funktoren\\
+    $V, V'$                             & Vergiss-Funktoren\\
     $f, g, h, r, s, \cdots$             & Homomorphismen\\
     $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
     \textbf{Set}                        & Die Kategorie der Mengen\\
