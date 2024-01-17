@@ -192,6 +192,8 @@
 \newcommand{\q}[1]{(\e{#1})^2}
 \newcommand{\m}{\mathcal}
 
+\newcommand{\zz}[1]{\ensuremath{\Z /#1\Z}}
+
 \excludecomment{book}
 \excludecomment{example}
 \excludecomment{backup}
@@ -249,7 +251,7 @@ Phänomene sind beispielsweise
    \item Der Ring $R$ kann Nullteiler haben
    \item In einer linearen Gleichung können wir nicht einfach durch einen Koeffizienten teilen, um ihn zu $1$ zu machen
    \item Echte Teilmengen von $R$, die aber ungleich dem Null-Modul $\{0\}$ sind, können $R$-Moduln sein
-   \item Ein $R$-Modul kann stärker aufgewickelt sein als $R$ selber (in dem Sinne, indem der Körper $\Z / 7 \Z$ aufgewickelt ist.) So ist \zb $\Z / 6 \Z$ ein $\Z$-Modul, obwohl $\Z$ selber gar nicht aufgewickelt ist.
+   \item Ein $R$-Modul kann stärker aufgewickelt sein als $R$ selber (in dem Sinne, indem der Körper \zz7 aufgewickelt ist.) So ist \zb $\Z / 6 \Z$ ein $\Z$-Modul, obwohl $\Z$ selber gar nicht aufgewickelt ist.
    \item Es gibt $R$-Moduln, die keine Basis haben.
 \end{itemize}
 
@@ -270,7 +272,7 @@ Kategorien-Theorie, Ringe, Gruppen, lineare Algebra
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.1%20Homologische%20Algebra/v5.1.1.1%20Moduln}
 }
 
 %******************************************************************************************************
@@ -278,17 +280,8 @@ Der Begleittext als PDF und als LaTeX findet sich unter
 %******************************************************************************************************
 Siehe auch in den folgenden Videos:\\
 \\
-v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
-\url{https://youtu.be/X8v5Kyly0KI}\\
-\\
-v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
-\url{https://youtu.be/sIaKt-Wxlog}\\
-\\
-v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
-\url{https://youtu.be/Ojf5LQGeyOU}\\
-\\
-v5.0.1.0.6 (Höher) Kategorien - Mathematische Grundlagen\\
-\url{https://youtu.be/ezW54mnzHMw}
+v5.0.1 (Höher) Kategorien - Playlist\\
+\url{https://www.youtube.com/playlist?list=PLqVqq9xKS5R-baIvTr9GnW0Pb8rlPig7S}
 
 %******************************************************************************************************
 \subsection*{Quellen}
@@ -298,54 +291,37 @@ Siehe auch in den folgenden Seiten:\\
 \url{https://de.wikipedia.org/wiki/Homologische_Algebra}\\
 \url{https://de.wikipedia.org/wiki/Modul_(Mathematik)}\\
 \url{https://de.wikipedia.org/wiki/Vektorraum}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-
+\url{https://de.wikipedia.org/wiki/Freier_Modul}
 
 %******************************************************************************************************
 \subsection*{Buch}
 %******************************************************************************************************
 Grundlage ist folgendes Buch:\\
-"`Categories for the Working Mathematician"'\\
-Saunders Mac Lane\\
-1998 | 2nd ed. 1978\\
-Springer-Verlag New York Inc.\\
-978-0-387-98403-2 (ISBN)\\
-{\tiny
-   \url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}}\\
-
-Gut für die kategorische Sichtweise ist:\\
-"`Topology, A Categorical Approach"'\\
-Tai-Danae Bradley\\
-2020 MIT Press\\
-978-0-262-53935-7 (ISBN)\\
-{\tiny
-\url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}}\\
-
-Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von:\\
 "`An Introduction to Homological Algebra"'\\
 Joseph J. Rotman\\
-2009 Springer-Verlag New York Inc.\\
+2009\\
+Springer-Verlag New York Inc.\\
 978-0-387-24527-0 (ISBN)\\
-{\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
-
-Etwas weniger umfangreich und weniger tiefgehend aber gut motivierend ist:
-"`Category Theory"'\\
-Steve Awodey\\
-2010 Oxford University Press\\
-978-0-19-923718-0 (ISBN)\\
-{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/9478288-9780199237180-category-theory}}\\
-
-Mit noch weniger Mathematik und die Konzepte motivierend ist:
-"`Conceptual Mathematics: a First Introduction to Categories"'\\
-F. William Lawvere, Stephen H. Schanuel\\
-2009 Cambridge University Press\\
-978-0-521-71916-2 (ISBN)\\
-{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/8643555-9780521719162-conceptual-mathematics}}
+{\tiny
+   \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
+\\
+Oft zitiert:\\
+"`An Introduction to Homological Algebra"'\\
+Charles A. Weibel\\
+1995\\
+Cambridge University Press\\
+978-0-521-55987-4 (ISBN)\\
+{\tiny
+   \url{https://www.lehmanns.de/shop/mathematik-informatik/510327-9780521559874-an-introduction-to-homological-algebra}}\\
+\\
+Ohne Kategorien-Theorie:\\
+"`Algébre 10. Algèbre homologique"'\\
+Nicolas Bourbaki\\
+1980\\
+Springer-Verlag \\
+978-3-540-34492-6 (ISBN)\\
+{\tiny
+   \url{https://www.lehmanns.de/shop/mathematik-informatik/7416782-9783540344926-algebre}}
 
 %******************************************************************************************************
 \subsection*{Lizenz}
@@ -371,113 +347,148 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Mathematische Grundlagen der Kategorien}
+\section{Moduln}
 %                                                                                                     *
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Kleine Kategorien}
+\subsection{Definition}
 %******************************************************************************************************
+Salopp: Ein $R$-Modul ist ein $R$-Vektorraum, wo $R$ ein kommutativer Ring mit Eins aber nicht notwendig ein Körper ist.
 
 %------------------------------------------------------------------------------------------------------
-\subsubsection{Quasiordnung}
-\begin{Definition}{Quasiordnung}
-   Eine \textbf{Quasiorndung} oder \textbf{Präordnung} ist eine Menge $C$ zusammen mit einer Relation $\le$, so dass für alle $x, y, z \in C$ gilt
-   \begin{alignat}{1}
-      &x \le x\\
-      &x \le y \land y \le z \Rightarrow x \le z
+\begin{Definition}{R-Modul}
+   Eine abelsche Gruppe $M$ (additiv geschrieben, also mit $+$ und $0$) zusammen mit einem kommutativen Ring mit Eins $R$ und einer Skalar- Multiplikation $R \times M \to M$ heißt $R$\textbf{-Modul}, wenn für alle $m,n \in M$ und $r, s \in R$ gilt 
+   \begin{alignat}{2}
+      &(rs)m &&= r(sm)\\
+      &(r+s)m &&= rm + rs\\
+      &r(m+n) &&= rm +rn\\
+      &1m &&= m
    \end{alignat}
 \end{Definition}
 
-Nun definieren wir für alle $x, y, z \in C$
+%******************************************************************************************************
+\subsection{Beispiele}
+%******************************************************************************************************
+\begin{enumerate}
+   \item $R$ ist selbst $R$-Modul
+   \item $\Z^2$ als \Z-Modul (mit Löchern)
+   \item $2\Z$ als \Z-Modul (Echte Teilmenge von $R$)
+   \item Ideal = Unter-$R$-Modul von $R$
+   \item $\Q, \R$ sind $\Z$-Moduln (Achtung: es sind keine freien Moduln)
+   \item \zz6 als \Z-Modul (stärker aufgewickelt als $R$)
+   \item $(\zz6)^2$ als \zz6-Modul (Achtung Nullteiler)
+   \item Freier $R$-Modul
+   \item Das \Z-Modul $(\zz{12})^2$ ist nicht kürzbar
+   \item $\K$-Vektorraum ist auch $\K$-Modul
+\end{enumerate}
+
+%-----------------------------------------------------------------------------------------------
+\subsubsection{$R$ ist selbst $R$-Modul}
+Die Ring-Axiome sind schon rein formel-technisch gleich zu den Modul-Axiomen. Nur, dass die Multiplikation eine interne ist, in dem Sinne, dass die Skalare die Elemente der additiven Gruppe selber sind.
+
+%-----------------------------------------------------------------------------------------------
+\subsubsection{$\Z^2$ als \Z-Modul (mit Löchern)}
+Auf den Achsen gibt es nur die ganzzahligen Werte.
+\begin{tikzpicture}
+   \draw[->, thick] (0, -0.5) -- (0, 5) node(yaxis)[above]{$y$};
+   \draw[->, thick] (-0.5, 0) -- (5, 0) node(xaxis)[right]{$x$};
+   
+   \draw (1, -0.05) node[below]{$1$} -- (1, 0.05);
+   \draw (-0.05, 1) node[left]{$1$} -- (0.05, 1);
+   
+   \fill (1,1) circle (0.03);
+   \fill (2,1) circle (0.03);
+   \fill (3,1) circle (0.03);
+   \fill (4,1) circle (0.03);
+   \fill (5,1) circle (0.03);
+   
+   \fill (1,2) circle (0.03);
+   \fill (2,2) circle (0.03);
+   \fill (3,2) circle (0.03);
+   \fill (4,2) circle (0.03);
+   \fill (5,2) circle (0.03);
+
+   \fill (1,3) circle (0.03);
+   \fill (2,3) circle (0.03);
+   \fill (3,3) circle (0.03);
+   \fill (4,3) circle (0.03);
+   \fill (5,3) circle (0.03);
+
+   \fill (1,4) circle (0.03);
+   \fill (2,4) circle (0.03);
+   \fill (3,4) circle (0.03);
+   \fill (4,4) circle (0.03);
+   \fill (5,4) circle (0.03);
+
+   \fill (1,5) circle (0.03);
+   \fill (2,5) circle (0.03);
+   \fill (3,5) circle (0.03);
+   \fill (4,5) circle (0.03);
+   \fill (5,5) circle (0.03);
+
+\end{tikzpicture}
+
+
+%-----------------------------------------------------------------------------------------------
+\subsubsection{$2\Z$ als \Z-Modul (Echte Teilmenge von $R$)}
+Dies ist bei Körpern nicht möglich. Da es auch keinen Null-Körper gibt, da hier immer $0 \ne 1$ gilt, ist der einzige $\K$-Vektorraum in $\K$ der ganze Körper $\K$.
+
+%-----------------------------------------------------------------------------------------------
+\subsubsection{Ideal = Unter-$R$-Modul von $R$}
+Die Ideal-Axiome sind schon rein formel-technisch gleich zu den Modul-Axiomen. Nur, dass die additiven Gruppe eine Teilmenge der Skalare sind.
+
+%-----------------------------------------------------------------------------------------------
+\subsubsection{$\Q, \R$ sind $\Z$-Moduln (Achtung: es sind keine freien Moduln)}
+Da es für alle $x,y \in \Q$ Werte $n_x, n_y \in \Z$ mit
 \begin{equation}
-   \Hom(x,y) := \begin{cases}
-      \{ (x,y) \} & \text{ falls } x \le y\\
-      \emptyset & \text{ sonst }
-   \end{cases}
+   n_xx + n_yy = 0
 \end{equation}
-mit $(y,z) \circ (x,y) := (x,z)$. Dies macht die Quasiordnung zu einer Kategorie. Wählen wir $C$ aus unserem Universum, ist $C$ eine kleine Kategorie, da dann die Menge der Objekte (gleich der Menge der Elemente) und die Menge der Morphismen (gleich der Menge der Paare $(x,y)$ mit $x \le y$) klein sind.
+gibt, bestehen hier Relationen zwischen den Elementen.
 
-%------------------------------------------------------------------------------------------------------
-\subsubsection{Monoid}
-Sei $M$ ein Monoid dessen Menge von Elementen, die wir hier mit $|M|$ bezeichnen, klein ist, also ein Element des Universums ist. Wir bilden eine Kategorie mit nur einem Objekt. Es spielt keine Rolle, was wir als Objekt auswählen, solange die Wahl im Universum bleibt. Wir können $\emptyset$ oder auch $M$ selber nehmen. Wir nehmen $M$. Da wir nur ein Objekt $M$ haben gibt es nur eine einzige Hom-Menge, nämlich $\Hom( M, M )$. Wir definieren $\Hom( M, M ) := |M|$. Die Verknüpfung von Morphismen sei dabei die Multiplikation im Monoid. Das neutrale Element übernimmt die Rolle der Identität.
+%-----------------------------------------------------------------------------------------------
+\subsubsection{\zz6 als \Z-Modul (stärker aufgewickelt als $R$)}
+Obwohl es in \Z\ keine Nullteiler gibt, gibt es im \Z-Modul \zz6 ein Element welches mit einem Skalar multipliziert Null ergibt: $2 \cdot 3 = 0$. Hier ist $2 \in \Z$ aber $3 \in \zz6$.
 
-Damit ist das Monoid eine kleine Kategorie.
+%-----------------------------------------------------------------------------------------------
+\subsubsection{$(\zz6)^2$ als \zz6-Modul (Achtung Nullteiler)}
+Aufgrund der Nullteiler in \zz6 haben wir $3\vec{x} + 3\vec{x} = 0$ für alle $\vec x \in (\zz6)^2$.
 
-%------------------------------------------------------------------------------------------------------
-\subsubsection{Graph}
-Eine Kategorie ist ein gerichteter Graph mit mindestens einer Kante von jedem Knoten zu sich selber, auf dessen Menge der Kanten eine bestimmte Verknüpfung definiert ist.
+%-----------------------------------------------------------------------------------------------
+\subsubsection{Freier $R$-Modul}
+$G$ ist die Menge der Generatoren (entspricht in etwa einer Basis)
+\begin{equation}
+   \left \{ \sum_{i \in I} r_i g_i \mid I \subseteq G, I \text{ endlich}, r_i \in R, g_i \in G \right \} 
+\end{equation}
+in Worten: der $R$-Modul der endlichen Linearkombinationen von Elementen aus $G$ mit Koeffizienten aus $R$. Bei endlichem $G = \{0, \cdots, n-1 \}$ schreiben wir dafür auch
+\begin{equation}
+   R^n := R^{\{0, \cdots, n-1 \}},
+\end{equation}
+in welchem Fall wir die Elemente des Moduls als Tupel schreiben: $(r_0, r_1, r_2) \in R^3$.
 
-Aus jedem gerichteten Graph kann durch Aufnahme der Verknüpfungen eine Kategorie erzeugt werden.
+%-----------------------------------------------------------------------------------------------
+\subsubsection{Das \Z-Modul $(\zz{12})^2$ ist nicht kürzbar}
+Wir haben 
+\begin{equation}
+   \begin{pmatrix} 1 \\ 3 \end{pmatrix} \ne
+   \begin{pmatrix} 4 \\ 6 \end{pmatrix}
+\end{equation}
+und gleichzeitig
+\begin{equation}
+   4 \cdot \begin{pmatrix} 1 \\ 3 \end{pmatrix} =
+   4 \cdot \begin{pmatrix} 4 \\ 6 \end{pmatrix} =
+          \begin{pmatrix} 4 \\ 0 \end{pmatrix}.
+\end{equation}
 
-Ich gezeichnetes Diagramm entspricht einer endlichen Kategorie.
+Das heißt, in diesem \Z-Modul gilt im allgemeinen nicht
+\begin{equation}
+   4 \vec x = 4 \vec y \Rightarrow \vec x = \vec y,
+\end{equation}
+obwohl das entsprechende innerhalb von \Z\ gilt.
 
-%******************************************************************************************************
-\subsection{Vokabeln}
-%******************************************************************************************************
-Wählen wir ein, sagen wir mal Grothendieck-, Universum $U$, können wir folgende Namenshierarchie bilden:
-\begin{itemize}
-   \item $x$ kleine Menge: $x \in U$
-   \item $\CC$ kleine Kategorie: $\operatorname{Obj}(\CC)$ und $\Hom(\CC)$ sind klein
-   \item $\CC$ große Kategorie: die Objekte und Hom-Mengen sind klein
-   \item $\CC$ Mengen-Kategorie: $\operatorname{Obj}(\CC)$ und $\Hom(\CC)$ sind Mengen 
-   \item $\CC$ Klassen-Kategorie: $\operatorname{Obj}(\CC)$ und $\Hom(\CC)$ sind Klassen
-   \item $\CC$ Meta-Kategorie: Objekte und Morphismen sind eigenständige Dinge einer Prädikatenlogik. Wir scheren uns nicht um deren Implementierung in ZFC
-\end{itemize}
-Die Namen Mengen-Kategorie und Klassen-Kategorie sind Eigenkreationen von mir. So wie wir in diesem Kurs auch Klassen-Relation und Klassen-Funktion sagen, wenn die Klasse der Paare, die die Relation oder Funktion ausmachen, nicht notwendig eine Menge ist. Bei \cite{MacLane} werden Klassen-Kategorie und Meta-Kategorie zusammengefasst zu Meta-Kategorie.
-
-%******************************************************************************************************
-\subsection{Große Kategorien}
-%******************************************************************************************************
-\begin{itemize}
-   \item Ab: kleine ablesche Gruppen
-   \item Ring: kleine Ringe 
-   \item Gruppe: kleine Gruppen
-   \item R-Moduln: kleine R-Moduln 
-   \item Top: kleine topologische Räume mit stetigen Funktionen 
-   \item Toph: kleine topologische Räume mit Homotopie-Klassen von stetigen Funktionen
-   \item Set: kleine Mengen mit Funktionen
-   \item Rel: kleine Mengen mit Relationen
-\end{itemize}
-
-Hier wird jeweils gefordert, dass die Grundmengen klein sind. Die Menge der Morphismen und im Falle der topologischen Räume die Topologie (als Menge der offenen Mengen) sind dann aufgrund der Abgeschlossenheit eines Universums auch klein.
-
-%******************************************************************************************************
-\subsection{Konkrete Kategorien}
-%******************************************************************************************************
-\begin{Definition}{Konkrete Kategorie}
-   Ein Paar $(\CC, V)$ aus einer Kategorie $\CC$ und einem treuen Funktor $V \colon \CC \to \Set$ heißt \textbf{konkrete Kategorie}. Dabei ist ein Funktor \textbf{treu}, wenn er injektiv auf Hom-Mengen operiert. Der Funktor $V$ heißt \textbf{Vergiss-Funktor}. Eine Kategorie heißt \textbf{konkretisierbar}, falls es einen Vergiss-Funktor wie oben gibt.
-\end{Definition}
-
-Beachte: es wird nicht die Injektivität der Abbildung der Objekte verlangt. Das heißt, für zwei Objekte $X \ne Y$ aus $\CC$ kann durchaus $V(X) = V(Y)$ gelten. Der folgende Satz zeigt, dass wir dies stets heilen können.
-
-\begin{Satz}{konkrete Kategorien sind Unter-Kategorien von Set}
-   $\CC$ ist konkretisierbar genau dann, wenn sie isomorph zu einer Unter-Kategorie von \Set ist. 
-\end{Satz}
-\begin{proof}
-   Idee aus\\
-   {\tiny\url{https://math.stackexchange.com/questions/3317487/is-every-concretizable-category-equivalent-to-a-subcategory-of-the-category-of-s}}
-   
-   Sei $(\CC, V)$ eine konkrete Kategorie. Wir wollen einen neuen Funktor $V'$ bauen. Die Zielmengen sollen nun eindeutig sein. Um dies zu erreichen wollen wir $X$ als neues Element in $V(X)$ aufnehmen. 
-   
-   $V(X) \cup \{X\}$ könnte aber schiefgehen, da $X$ schon in $V(X)$ liegen könnte. Also brauchen wir ein Element, was in einer Form $X$ enthält und nicht in $V(X)$ enthalten sein kann. Wir definieren
-   \begin{equation}
-      V'(X) := V(X) \cup \{ (X, V(X)) \}
-   \end{equation}
-   
-   Jetzt müssen wir noch zeigen, dass wenn $X \ne Y$, nicht doch $V'(X) = V'(Y)$ entstehen könnte, weil $\{ (X, V(X)) \} \in Y$ und $\{ (Y, V(Y)) \} \in X$. Wir arbeiten mit der Definition $(a,b) := \{\{a\}, \{a, b\}\}$. Mit dem Fall, den wir ausschließen wollen, könnten wir damit eine zyklische Element-Kette bilden ($x_1 \in x_2 \in \cdots \in x_1$ ), welches gegen das Fundierungs-Axiom aus ZFC verstößt. Aus dem selben Grund kann übrigens auch $(X, V(X))$ nicht in $X$ liegen.
-   
-   Die Bilder der Morphismen $f \colon X \to Y$ werden so definiert, das sie auf den Elementen von $V(X)$ die Werte von $V(f)$ bekommen und auf dem neuen Element das neue:
-
-   \begin{equation}
-     V'(f)(x) := \begin{cases}
-        f(x)      & \text{falls } x \in X\\
-        (Y, V(Y)) & \text{falls } x = (X, V(X)).
-     \end{cases}
-   \end{equation}
-
-   Dass Unter-Kategorien von \Set konkretisierbar sind, ist klar, da der Einbettungs-Funktor hier die Rolle des Vergiss-Funktors übernimmt. 
-\end{proof}
+%-----------------------------------------------------------------------------------------------
+\subsubsection{$\K$-Vektorraum ist auch $\K$-Modul}
+Da ein Körper unter anderem auch ein kommutativer Ring mit Eins ist, sind Vektorräume automatisch auch Moduln. Da abelsche Gruppen das gleiche wie \Z-Moduln sind, sind Moduln die gleichzeitige Verallgemeinerung von Vektorräumen und abelschen Gruppen.
 
 \begin{backup}
 %******************************************************************************************************
@@ -531,21 +542,11 @@ Beachte: es wird nicht die Injektivität der Abbildung der Objekte verlangt. Das
 \renewcommand*{\arraystretch}{1}
 
 \begin{tabular}{ll}
-    $P(x)$                              & ein Prädikat\\
-    $A, B, C, \cdots, X, Y, Z$          & Objekte\\
-    $F,G$                               & Funktoren\\
-    $V, V'$                             & Vergiss-Funktoren\\
-    $f, g, h, r, s, \cdots$             & Homomorphismen\\
-    $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
-    \textbf{Set}                        & Die Kategorie der Mengen\\
-    $\Hom( X, Y)$                       & Die Menge der Homomorphismen von $X$ nach $Y$\\
-    $\alpha, \beta, \cdots$             & natürliche Transformationen oder Ordinalzahlen\\
-    $\mathcal C ^{\text{op}}$           & Duale Kategorie\\
-    $\DD^\CC$                           & Funktorkategorie\\
-    $\textbf{Ring}, \textbf{Gruppe}$    & Kategorie der Ringe und der Gruppen\\
-    $U, U', U''$                        & Universen\\
-    $V_\alpha$                          & eine Menge der Von-Neumann-Hierarchie
-
+    $R$                                 & ein kommutativer Ring mit Eins\\
+    $n\Z$                               & das Ideal aller Vielfachen von $n$ in $\Z$\\
+    $\zz{n}$                            & Der Restklassenring modulo $n$\\
+    $\K$                                & Ein Körper\\
+    $\vec x, \vec y$                    & Elemente des Moduls, wenn wir sie von den Skalaren abheben wollen. \\& Entspricht in etwa Vektoren
 \end{tabular}
 
 \end{document}
