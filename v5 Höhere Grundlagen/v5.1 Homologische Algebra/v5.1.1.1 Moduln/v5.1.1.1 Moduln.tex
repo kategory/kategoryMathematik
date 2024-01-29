@@ -236,11 +236,11 @@ Copyright (C) 2024 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
-Moduln sind die prototypischen Beispiele in der homologischen Algebra. Genauer sind es die Kategorien der R-Moduln, für jeden kommutativen Ring mit Eins eine Kategorie. Der eigentliche Schauplatz der homologischen Algebra sind die abelschen Kategorien. So dass wir sagen können, die homologische Algebra ist die Untersuchung von abelschen Kategorien.
+Moduln sind die prototypischen Beispiele in der homologischen Algebra. Genauer sind es die Kategorien der R-Moduln, für jeden Ring mit Eins eine Kategorie. Der eigentliche Schauplatz der homologischen Algebra sind die abelschen Kategorien. So dass wir sagen können, die homologische Algebra ist die Untersuchung von abelschen Kategorien.
 
 Die Kategorien der R-Moduln sind abelsche Kategorien: welche Eigenschaften das sind und der Nachweis ist Teil dieses Kurses.
 
-R-Moduln sind Vektorräume, in denen wir statt einen Körper nur einen kommutativen Ring mit Eins voraussetzen. Das heißt wir haben eine kommutative Gruppe (wir sagen eine additive Gruppe) mit einer Skalarmultiplikation, welche assoziativ und distributiv ist und wo die Multiplikation mit Eins nichts macht.
+R-Moduln sind Vektorräume, in denen wir statt einen Körper nur einen Ring mit Eins voraussetzen. Das heißt wir haben eine kommutative Gruppe (wir sagen eine additive Gruppe) mit einer Skalarmultiplikation, welche assoziativ und distributiv ist und wo die Multiplikation mit Eins nichts macht.
 
 Die simple Tatsache, dass wir nicht mehr zu jedem Skalar ein multiplikativ Inverses (noch $0 \ne 1$) fordern, hat umfangreiche Konsequenzen für die entstehenden Phänomene. Es gibt erheblich schrägere Phänomene als bei den Vektorräumen.
 
@@ -248,6 +248,7 @@ Auf der anderen Seite funktioniert ein großer Teil der linearen Algebra auch in
 
 Phänomene sind beispielsweise
 \begin{itemize}
+   \item Der Ring $R$ kann nicht-kommutativ sein
    \item Der Ring $R$ kann Nullteiler haben
    \item In einer linearen Gleichung können wir nicht einfach durch einen Koeffizienten teilen, um ihn zu $1$ zu machen
    \item Echte Teilmengen von $R$, die aber ungleich dem Null-Modul $\{0\}$ sind, können $R$-Moduln sein
@@ -287,11 +288,13 @@ v5.0.1 (Höher) Kategorien - Playlist\\
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Ring}\\
 \url{https://de.wikipedia.org/wiki/Abelsche_Kategorie}\\
 \url{https://de.wikipedia.org/wiki/Homologische_Algebra}\\
 \url{https://de.wikipedia.org/wiki/Modul_(Mathematik)}\\
 \url{https://de.wikipedia.org/wiki/Vektorraum}\\
-\url{https://de.wikipedia.org/wiki/Freier_Modul}
+\url{https://de.wikipedia.org/wiki/Freier_Modul}\\
+\url{https://math.stackexchange.com/questions/72723/isomorphism-of-an-endomorphism-ring-how-can-r-cong-r2}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -342,7 +345,7 @@ Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
 %******************************************************************************************************
 Das Video hierzu ist zu finden unter
 {\tiny
-   \url{XXX}
+   \url{https://youtu.be/JY43_07kNmA}
 }
 
 %******************************************************************************************************
@@ -354,11 +357,11 @@ Das Video hierzu ist zu finden unter
 %******************************************************************************************************
 \subsection{Definition}
 %******************************************************************************************************
-Salopp: Ein $R$-Modul ist ein $R$-Vektorraum, wo $R$ ein kommutativer Ring mit Eins aber nicht notwendig ein Körper ist.
+Salopp: Ein $R$-Modul ist ein $R$-Vektorraum, wo $R$ ein Ring mit Eins aber nicht notwendig ein Körper ist. Es können also Inverse und die Kommutativität der Multiplikation fehlen.
 
 %------------------------------------------------------------------------------------------------------
 \begin{Definition}{R-Modul}
-   Eine abelsche Gruppe $M$ (additiv geschrieben, also mit $+$ und $0$) zusammen mit einem kommutativen Ring mit Eins $R$ und einer Skalar- Multiplikation $R \times M \to M$ heißt $R$\textbf{-Modul}, wenn für alle $m,n \in M$ und $r, s \in R$ gilt 
+   Eine abelsche Gruppe $M$ (additiv geschrieben, also mit $+$ und $0$) zusammen mit einem  Ring mit Eins $R$ und einer Skalar- Multiplikation $R \times M \to M$ heißt $R$\textbf{-Modul}, wenn für alle $m,n \in M$ und $r, s \in R$ gilt
    \begin{alignat}{2}
       &(rs)m &&= r(sm)\\
       &(r+s)m &&= rm + rs\\
@@ -366,6 +369,9 @@ Salopp: Ein $R$-Modul ist ein $R$-Vektorraum, wo $R$ ein kommutativer Ring mit E
       &1m &&= m
    \end{alignat}
 \end{Definition}
+Hier haben wir einen Links-Modul definiert. Da die Multiplikation nicht als kommutativ vorausgesetzt wird, müssen wir diese von Rechts-Moduln unterscheiden, wo wir die Skalare von rechts multiplizieren. 
+
+Ein wichtiges Beispiel für nicht-kommutative Ringe sind Endomorphismen-Ringe von abelschen Gruppen.
 
 %******************************************************************************************************
 \subsection{Beispiele}
@@ -393,16 +399,16 @@ Auf den Achsen gibt es nur die ganzzahligen Werte.
 \begin{tikzpicture}
    \draw[->, thick] (0, -0.5) -- (0, 5) node(yaxis)[above]{$y$};
    \draw[->, thick] (-0.5, 0) -- (5, 0) node(xaxis)[right]{$x$};
-   
+
    \draw (1, -0.05) node[below]{$1$} -- (1, 0.05);
    \draw (-0.05, 1) node[left]{$1$} -- (0.05, 1);
-   
+
    \fill (1,1) circle (0.03);
    \fill (2,1) circle (0.03);
    \fill (3,1) circle (0.03);
    \fill (4,1) circle (0.03);
    \fill (5,1) circle (0.03);
-   
+
    \fill (1,2) circle (0.03);
    \fill (2,2) circle (0.03);
    \fill (3,2) circle (0.03);
@@ -458,7 +464,7 @@ Aufgrund der Nullteiler in \zz6 haben wir $3\vec{x} + 3\vec{x} = 0$ für alle $\
 \subsubsection{Freier $R$-Modul}
 $G$ ist die Menge der Generatoren (entspricht in etwa einer Basis)
 \begin{equation}
-   \left \{ \sum_{i \in I} r_i g_i \mid I \subseteq G, I \text{ endlich}, r_i \in R, g_i \in G \right \} 
+   \left \{ \sum_{i \in I} r_i g_i \mid I \subseteq G, I \text{ endlich}, r_i \in R, g_i \in G \right \}
 \end{equation}
 in Worten: der $R$-Modul der endlichen Linearkombinationen von Elementen aus $G$ mit Koeffizienten aus $R$. Bei endlichem $G = \{0, \cdots, n-1 \}$ schreiben wir dafür auch
 \begin{equation}
@@ -466,9 +472,13 @@ in Worten: der $R$-Modul der endlichen Linearkombinationen von Elementen aus $G$
 \end{equation}
 in welchem Fall wir die Elemente des Moduls als Tupel schreiben: $(r_0, r_1, r_2) \in R^3$.
 
+Hier kann $R^2 \cong R$ gelten. D.~h. Begriffe wie Basis und Dimension stehen nicht oder zumindest zunächst nicht oder nicht so einfach zur Verfügung. So bei den Endomorphismen-Ringen. TODO: Beweis.
+
+
+
 %-----------------------------------------------------------------------------------------------
 \subsubsection{Das \Z-Modul $(\zz{12})^2$ ist nicht kürzbar}
-Wir haben 
+Wir haben
 \begin{equation}
    \begin{pmatrix} 1 \\ 3 \end{pmatrix} \ne
    \begin{pmatrix} 4 \\ 6 \end{pmatrix}
@@ -523,7 +533,7 @@ Da ein Körper unter anderem auch ein kommutativer Ring mit Eins ist, sind Vekto
    \bibitem[Bourbaki1980]{A10}
       Nicolas Bourbaki, \emph{Algébre 10. Algèbre homologique},
       2006 Springer-Verlag, 978-3-540-34492-6 (ISBN)
-      
+
    \bibitem[MacLane1978]{MacLane}
       Saunders Mac Lane, \emph{Categories for the Working Mathematician},
       Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
