@@ -175,8 +175,8 @@
 \newcommand{\PP}{\ensuremath{\mathcal{ P }}}
 \newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
 
-\newcommand{\Set}{\text{\textbf{Set}} }
-
+\newcommand{\Set}{\text{\textbf{Set}}}
+\newcommand{\Ab}{\text{\textbf{Ab}}}
 
 \newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
 
@@ -234,7 +234,17 @@ Copyright (C) 2024 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
-Gr
+Wenn die Hom-Klassen zwischen je zwei Objekten einer Kategorie relativ zum gewählten Universum klein sind, leben diese Hom-Mengen, solche sind es dann, in Wirklichkeit in einer anderen Kategorie. Nämlich in \Set.
+
+Wie immer denken wir dabei immer parallel an ein Grothendieck-Universum (eine Menge), oder an die Klasse aller Mengen. Im letzteren Fall sind kleine Klassen das selbe wie Mengen.
+
+Strukturen, die es in \Set\ gibt, sind dann auch auf dem Hom-Mengen relevant. So ist in dem Fall die Komposition eine Funktion auf dem cartesischen Produkt von Hom-Mengen.
+
+Im Falle von \Ab, $\K$-Vektorräumen oder allgemeiner $R$-Moduln sind die Hom-Mengen sogar abelsche Gruppen. Falls die Komposition mit der Addition verträglich ist, im Sinne dass das Rechts- und Links-Distributivgesetz gelten, sprechen wir von \Ab-Kategorien.
+
+Die "`richtigen"' Funktoren zwischen \Ab-Kategorien sind additive Funktoren.
+
+Mit \Set- und \Ab-Kategorien erhaschen wir einen ersten Blick auf das abgefahrene Konzept der angereicherten Kategorien.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -244,14 +254,14 @@ Von Jörg Kunze
 %******************************************************************************************************
 \subsection*{Voraussetzungen}
 %******************************************************************************************************
-Kategorie, Homomorphismus, Funktor, Universum
+Kategorie, Homomorphismus, Universum, kleine Mengen, Funktoren
 
 %******************************************************************************************************
 \subsection*{Text}
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.7%20Gro%C3%9Fe%20Kategorien}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.8%20Hom-Mengen}
 }
 
 %******************************************************************************************************
@@ -265,21 +275,20 @@ v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
 v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
 \url{https://youtu.be/sIaKt-Wxlog}\\
 \\
-v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
-\url{https://youtu.be/Ojf5LQGeyOU}\\
-\\
-v5.0.1.0.6 (Höher) Kategorien - Mathematische Grundlagen\\
-\url{https://youtu.be/ezW54mnzHMw}
+v5.0.1.0.3.5 (Höher) Kategorien - Kategorien von Homomorphismen\\
+\url{https://youtu.be/v1F5BFH8nbo?si=3HES4OZ5SNWPlcX6}
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://ncatlab.org/nlab/show/large+category}\\
-\url{https://ncatlab.org/nlab/show/preorder}\\
-\url{https://ncatlab.org/nlab/show/monoid}\\
-\url{https://de.wikipedia.org/wiki/Graph_(Graphentheorie)}\\
-{\tiny\url{https://math.stackexchange.com/questions/3317487/is-every-concretizable-category-equivalent-to-a-subcategory-of-the-category-of-s}}
+\url{https://de.wikipedia.org/wiki/Hom-Funktor}\\
+\url{https://ncatlab.org/nlab/show/hom-set}\\
+\url{https://ncatlab.org/nlab/show/locally+small+category}\\
+\url{https://ncatlab.org/nlab/show/enriched+category}\\
+\url{https://en.wikipedia.org/wiki/Preadditive_category}\\
+\url{https://en.wikipedia.org/wiki/Preadditive_category#Additive_functors}\\
+\url{https://ncatlab.org/nlab/show/additive+functor}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -346,113 +355,78 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Mathematische Grundlagen der Kategorien}
+\section{Hom-Mengen}
 %                                                                                                     *
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Kleine Kategorien}
+\subsection{Lokal kleine Kategorien}
 %******************************************************************************************************
+Wir wählen ein Grothendieck-Universum oder die Klasse aller Mengen als Universum.
 
-%------------------------------------------------------------------------------------------------------
-\subsubsection{Quasiordnung}
-\begin{Definition}{Quasiordnung}
-   Eine \textbf{Quasiorndung} oder \textbf{Präordnung} ist eine Menge $C$ zusammen mit einer Relation $\le$, so dass für alle $x, y, z \in C$ gilt
-   \begin{alignat}{1}
-      &x \le x\\
-      &x \le y \land y \le z \Rightarrow x \le z
+Eine Klasse heißt klein, falls sie Element unseres gewählten Universums ist. 
+
+Sei eine Kategorie \CC\ gegeben.
+
+Falls die Klassen $\Hom(X,Y)$ klein sind, sind sie Objekte der Kategorie \Set, also der Kategorie der kleinen Mengen.
+
+Eine solche Kategorie heiß \textbf{lokal klein}. Die Klasse der Objekte oder die aller Morphismen muss dazu nicht klein sein. Es muss also nicht kann aber eine kleine Kategorie sein.
+
+In diesem Kurs ist eine Kategorie \textbf{groß}, wenn die Objekte und die Hom-Mengen kleine sind. Die Objekte selber sind klein, nicht die Klasse aller Objekte. D.~h. bei uns sind große Kategorien immer lokal klein. Damit sind \textbf{Set}, \textbf{Ab}, \textbf{Gruppe} und \textbf{Top} Beispiele für lokal kleine Kategorien.
+
+Damit haben wir den Fall einer Kategorie $\CC$, deren Hom's Objekte in einer anderen Kategorie $\mathcal{V}$ sind. Wenn noch ein paar strukturelle Bedingungen erfüllt sind (,auf die wir hier nicht eingehen und was bei \Set\ der Fall ist), sagen wir $\CC$ ist eine $\mathcal{V}$-angereicherte Kategorie oder kürzer $\mathcal{V}$-Kategorie.
+
+\Set\ hat als Kategorie und darüber hinaus Strukturen. Z.~B. das cartesische Produkt $X \times Y$.
+
+Die Verknüpfung von Morphismen in \CC\ induziert damit Funktionen
+\begin{equation}
+   \circ \colon \Hom(Y,Z) \times \Hom(X,Y) \to \Hom(X,Z).
+\end{equation}
+
+%******************************************************************************************************
+\subsection{Kategorien der $R$-Moduln}
+%******************************************************************************************************
+Im Falle der Kategorien der $\K$-Vektorräume oder in \textbf{Ab}, der Kategorie der abelschen Gruppen (dies sind Spezialfälle der Kategorien der $R$-Moduln, wo $R$ ein Ring mit 1 ist), können wir auf den $\Hom$-Mengen die Struktur einer abelschen Gruppe definieren. Seien $f, g \in  \Hom(X,Y)$. 
+
+\begin{alignat}{3}
+   &(f+g)(x) &&:= f(x) +_Y g(x)\\
+   &(-f)(x) &&:= -_Yf(x)\\
+   &0(x) &&:= 0_Y
+\end{alignat}
+Wir sagen, das Addition, Inverses und Einselement komponentenweise definiert werden.
+
+Damit leben in diesen Fällen die Hom-Mengen in Wirklichkeit in \textbf{Ab}.
+
+Die induzierten $\circ \colon \Hom(Y,Z) \times \Hom(X,Y) \to \Hom(X,Z)$ sind dann Gruppen-Homomorphismen.
+
+Hier haben wir auch noch die zusätzliche Struktur eines Tensorproduktes, und da die Verknüpfung bilinear ist, induziert sie auch Gruppen-Homomorphismen $\circ \colon \Hom(Y,Z) \otimes \Hom(X,Y) \to \Hom(X,Z)$.
+
+Da auch hier die oben erwähnten ominösen Bedingungen erfüllt sind, handelt es sich hier um \textbf{Ab}-Kategorien, also um \textbf{Ab} angereicherte Kategorien.
+
+%******************************************************************************************************
+\subsection{Ab-Kategorien}
+%******************************************************************************************************
+"`\textbf{Ab}-Kategorie"' ist ein von der Kategorie der abelschen Gruppe (\textbf{Ab}) auf der einen Seite und von "abelsche Kategorie"' andererseits zu unterscheidender Begriff. Der Name kommt von allgemeiner $\mathcal{V}$-Kategorie und beutet, dass die Kategorie über \textbf{Ab} angereichert ist. Darauf gehen wir aber hier nicht tiefer ein.
+
+Ein andere Name für \textbf{Ab}-Kategorie ist \textbf{präadditive} Kategorie. 
+
+\begin{Definition}{Ab-Kategorie}
+   Eine Kategorie \CC\ ist eine \textbf{Ab-Kategorie}, wenn alle $\Hom(X, Y)$ klein sind und auf ihnen eine Verknüpfung $+$ definiert ist, die diese zu (kleinen) abelschen Gruppen macht, so dass zusätzlich die Addition und die Verknüpfung verträglich im folgenden Sinne sind: es gelten das linke und rechte Distributivgesetz
+   \begin{alignat}{3}
+      &f(g+h) &&= fg+fh\\
+      &(g+h)f &&= gf+hf.
+   \end{alignat}
+   Wir sagen, die Komposition von Morphismen ist \textbf{biadditiv}.
+\end{Definition}
+Damit fühlt sich eine \textbf{Ab}-Kategorie so bisschen wie ein Ring an, bei dem wir nicht beliebig addieren und multiplizieren können. Oder anders ausgedrückt: "`\textbf{Ab}-Kategorie"' ist eine Verallgemeinerung von "`Ring"' in dem Sinne, in dem "`Kategorie"' eine Verallgemeinerung von "`Monoid"' ist.
+
+Die "`richtigen"' Funktoren zwischen \textbf{Ab}-Kategorien sind solche, die die additive Struktur respektieren.
+\begin{Definition}{Additiver Funktor}
+   Seien $\CC, \DD$ zwei additive Kategorien. Ein Funktor $F \colon \CC \to \DD$ heißt \textbf{additiv}, falls für alle parallel Morphismen (die beiden haben die selben Quell- und Ziel-Objekte) $f,g$ gilt:
+   \begin{alignat}{3}
+      &F(f+g) &&= F(f)+F(g).
    \end{alignat}
 \end{Definition}
-
-Nun definieren wir für alle $x, y, z \in C$
-\begin{equation}
-   \Hom(x,y) := \begin{cases}
-      \{ (x,y) \} & \text{ falls } x \le y\\
-      \emptyset & \text{ sonst }
-   \end{cases}
-\end{equation}
-mit $(y,z) \circ (x,y) := (x,z)$. Dies macht die Quasiordnung zu einer Kategorie. Wählen wir $C$ aus unserem Universum, ist $C$ eine kleine Kategorie, da dann die Menge der Objekte (gleich der Menge der Elemente) und die Menge der Morphismen (gleich der Menge der Paare $(x,y)$ mit $x \le y$) klein sind.
-
-%------------------------------------------------------------------------------------------------------
-\subsubsection{Monoid}
-Sei $M$ ein Monoid dessen Menge von Elementen, die wir hier mit $|M|$ bezeichnen, klein ist, also ein Element des Universums ist. Wir bilden eine Kategorie mit nur einem Objekt. Es spielt keine Rolle, was wir als Objekt auswählen, solange die Wahl im Universum bleibt. Wir können $\emptyset$ oder auch $M$ selber nehmen. Wir nehmen $M$. Da wir nur ein Objekt $M$ haben gibt es nur eine einzige Hom-Menge, nämlich $\Hom( M, M )$. Wir definieren $\Hom( M, M ) := |M|$. Die Verknüpfung von Morphismen sei dabei die Multiplikation im Monoid. Das neutrale Element übernimmt die Rolle der Identität.
-
-Damit ist das Monoid eine kleine Kategorie.
-
-%------------------------------------------------------------------------------------------------------
-\subsubsection{Graph}
-Eine Kategorie ist ein gerichteter Graph mit mindestens einer Kante von jedem Knoten zu sich selber, auf dessen Menge der Kanten eine bestimmte Verknüpfung definiert ist.
-
-Aus jedem gerichteten Graph kann durch Aufnahme der Verknüpfungen eine Kategorie erzeugt werden.
-
-Ich gezeichnetes Diagramm entspricht einer endlichen Kategorie.
-
-%******************************************************************************************************
-\subsection{Vokabeln}
-%******************************************************************************************************
-Wählen wir ein, sagen wir mal Grothendieck-, Universum $U$, können wir folgende Namenshierarchie bilden:
-\begin{itemize}
-   \item $x$ kleine Menge: $x \in U$
-   \item $\CC$ kleine Kategorie: $\operatorname{Obj}(\CC)$ und $\Hom(\CC)$ sind klein
-   \item $\CC$ große Kategorie: die Objekte und Hom-Mengen sind klein
-   \item $\CC$ Mengen-Kategorie: $\operatorname{Obj}(\CC)$ und $\Hom(\CC)$ sind Mengen 
-   \item $\CC$ Klassen-Kategorie: $\operatorname{Obj}(\CC)$ und $\Hom(\CC)$ sind Klassen
-   \item $\CC$ Meta-Kategorie: Objekte und Morphismen sind eigenständige Dinge einer Prädikatenlogik. Wir scheren uns nicht um deren Implementierung in ZFC
-\end{itemize}
-Die Namen Mengen-Kategorie und Klassen-Kategorie sind Eigenkreationen von mir. So wie wir in diesem Kurs auch Klassen-Relation und Klassen-Funktion sagen, wenn die Klasse der Paare, die die Relation oder Funktion ausmachen, nicht notwendig eine Menge ist. Bei \cite{MacLane} werden Klassen-Kategorie und Meta-Kategorie zusammengefasst zu Meta-Kategorie.
-
-%******************************************************************************************************
-\subsection{Große Kategorien}
-%******************************************************************************************************
-\begin{itemize}
-   \item Ab: kleine ablesche Gruppen
-   \item Ring: kleine Ringe 
-   \item Gruppe: kleine Gruppen
-   \item R-Moduln: kleine R-Moduln 
-   \item Top: kleine topologische Räume mit stetigen Funktionen 
-   \item Toph: kleine topologische Räume mit Homotopie-Klassen von stetigen Funktionen
-   \item Set: kleine Mengen mit Funktionen
-   \item Rel: kleine Mengen mit Relationen
-\end{itemize}
-
-Hier wird jeweils gefordert, dass die Grundmengen klein sind. Die Menge der Morphismen und im Falle der topologischen Räume die Topologie (als Menge der offenen Mengen) sind dann aufgrund der Abgeschlossenheit eines Universums auch klein.
-
-%******************************************************************************************************
-\subsection{Konkrete Kategorien}
-%******************************************************************************************************
-\begin{Definition}{Konkrete Kategorie}
-   Ein Paar $(\CC, V)$ aus einer Kategorie $\CC$ und einem treuen Funktor $V \colon \CC \to \Set$ heißt \textbf{konkrete Kategorie}. Dabei ist ein Funktor \textbf{treu}, wenn er injektiv auf Hom-Mengen operiert. Der Funktor $V$ heißt \textbf{Vergiss-Funktor}. Eine Kategorie heißt \textbf{konkretisierbar}, falls es einen Vergiss-Funktor wie oben gibt.
-\end{Definition}
-
-Beachte: es wird nicht die Injektivität der Abbildung der Objekte verlangt. Das heißt, für zwei Objekte $X \ne Y$ aus $\CC$ kann durchaus $V(X) = V(Y)$ gelten. Der folgende Satz zeigt, dass wir dies stets heilen können.
-
-\begin{Satz}{konkrete Kategorien sind Unter-Kategorien von Set}
-   $\CC$ ist konkretisierbar genau dann, wenn sie isomorph zu einer Unter-Kategorie von \Set ist. 
-\end{Satz}
-\begin{proof}
-   Idee aus\\
-   {\tiny\url{https://math.stackexchange.com/questions/3317487/is-every-concretizable-category-equivalent-to-a-subcategory-of-the-category-of-s}}
-   
-   Sei $(\CC, V)$ eine konkrete Kategorie. Wir wollen einen neuen Funktor $V'$ bauen. Die Zielmengen sollen nun eindeutig sein. Um dies zu erreichen wollen wir $X$ als neues Element in $V(X)$ aufnehmen. 
-   
-   $V(X) \cup \{X\}$ könnte aber schiefgehen, da $X$ schon in $V(X)$ liegen könnte. Also brauchen wir ein Element, was in einer Form $X$ enthält und nicht in $V(X)$ enthalten sein kann. Wir definieren
-   \begin{equation}
-      V'(X) := V(X) \cup \{ (X, V(X)) \}
-   \end{equation}
-   
-   Jetzt müssen wir noch zeigen, dass wenn $X \ne Y$, nicht doch $V'(X) = V'(Y)$ entstehen könnte, weil $\{ (X, V(X)) \} \in Y$ und $\{ (Y, V(Y)) \} \in X$. Wir arbeiten mit der Definition $(a,b) := \{\{a\}, \{a, b\}\}$. Mit dem Fall, den wir ausschließen wollen, könnten wir damit eine zyklische Element-Kette bilden ($x_1 \in x_2 \in \cdots \in x_1$ ), welches gegen das Fundierungs-Axiom aus ZFC verstößt. Aus dem selben Grund kann übrigens auch $(X, V(X))$ nicht in $X$ liegen.
-   
-   Die Bilder der Morphismen $f \colon X \to Y$ werden so definiert, das sie auf den Elementen von $V(X)$ die Werte von $V(f)$ bekommen und auf dem neuen Element das neue:
-
-   \begin{equation}
-     V'(f)(x) := \begin{cases}
-        f(x)      & \text{falls } x \in X\\
-        (Y, V(Y)) & \text{falls } x = (X, V(X)).
-     \end{cases}
-   \end{equation}
-
-   Dass Unter-Kategorien von \Set konkretisierbar sind, ist klar, da der Einbettungs-Funktor hier die Rolle des Vergiss-Funktors übernimmt. 
-\end{proof}
 
 \begin{backup}
 %******************************************************************************************************
@@ -463,7 +437,6 @@ Beachte: es wird nicht die Injektivität der Abbildung der Objekte verlangt. Das
 \begin{itemize}
      \item Überprüfe Symbolverzeichnis
 \end{itemize}
-
 
 \end{backup}
 
@@ -516,14 +489,16 @@ Beachte: es wird nicht die Injektivität der Abbildung der Objekte verlangt. Das
     $V, V'$                             & Vergiss-Funktoren\\
     $f, g, h, r, s, \cdots$             & Homomorphismen\\
     $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
-    \textbf{Set}                        & Die Kategorie der Mengen\\
-    $\Hom( X, Y)$                       & Die Menge der Homomorphismen von $X$ nach $Y$\\
+    \Set                                & Die Kategorie der kleinen Mengen\\
+    \Ab                                 & Kategorie der kleinen abelschen Gruppen\\
+    $\Hom( X, Y)$                       & Die Klasse der Homomorphismen von $X$ nach $Y$\\
     $\alpha, \beta, \cdots$             & natürliche Transformationen oder Ordinalzahlen\\
     $\mathcal C ^{\text{op}}$           & Duale Kategorie\\
     $\DD^\CC$                           & Funktorkategorie\\
-    $\textbf{Ring}, \textbf{Gruppe}$    & Kategorie der Ringe und der Gruppen\\
+    $\textbf{Ring}, \textbf{Gruppe}$    & Kategorie der kleinen Ringe und der kleinen Gruppen\\
     $U, U', U''$                        & Universen\\
-    $V_\alpha$                          & eine Menge der Von-Neumann-Hierarchie
+    $V_\alpha$                          & eine Menge der Von-Neumann-Hierarchie zur Ordinalzahl
+                                          $\alpha$
 
 \end{tabular}
 
