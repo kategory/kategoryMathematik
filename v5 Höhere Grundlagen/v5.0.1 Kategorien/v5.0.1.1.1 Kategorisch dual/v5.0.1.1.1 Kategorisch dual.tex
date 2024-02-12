@@ -1,0 +1,526 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v5.0.1.1.1 Kategorisch dual.tex                                                                  *
+%                                                                                                  *
+% Copyright (C) 2024 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v5.0.1.1.1 Kategorisch dual is part of kategoryMathematik.                                       *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Satz}
+\myTheorem{Theorem}
+\myTheorem{Axiom}
+\myTheorem{Beispiel}
+\myTheorem{Anmerkung}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\GL}{GL}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\DD}{\ensuremath{\mathcal{ D }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\FF}{\ensuremath{\mathcal{ F }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\Set}{\text{\textbf{Set}}}
+\newcommand{\Ab}{\text{\textbf{Ab}}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+\newcommand{\m}{\mathcal}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\newcommand{\zb}{z.~B. }
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Höhere Grundlagen) Kategorien\\[1cm]
+\textbf{v5.0.1.1.1 Kategorisch dual}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2024 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+"`Dual"' ist eine Eigenschaft von Ausdrücken, Prädikaten oder Sätzen der Kategorien-Theorie. Es ist keine Eingenschaft von den mathematischen Objekten dieser Theorie. Also keine Eigenschaft von \zb Objekten, Homomorphismen oder Kategorien.
+
+Damit wir dual definieren können müssen wir eine weitere Ebene schaffen, da wir dabei über die Sprache sprechen müssen, mit der wir die ganze Zeit über Kategorien sprechen. Damit das möglich wird, bedienen wir uns der mathematischen Logik. In ihr formalisieren wir eine "`normale"' Theorie in der Prädikaten-Logik erster Stufe (Variablen, Ausdrücke, boolsche Operatoren, Quantoren, Prädikate, Aussagen, Beweise. Kurz: logische Bestandteile). Wir fügen Variablen für Objekte ($A,B,C, \cdots$) und für Morphismen ($f, g, h, r, s, \cdots$) hinzu. Weiter fügen wir die üblichen Axiome der Kategorien-Theorie als Axiome hinzu. 
+
+Das Ergebnis ist ETAC = Elementary Theory of an abstract Category. 
+
+Wir haben also drei Ebenen: Meta-Mathematik (META). Das ist der deutsche Text, in dem wir über die Dinge reden. Mathematik (MATH). Das ist die Welt der mathematischen Objekte. Hier befinden wir uns in der Regel in ZFC. Kategorien-Theorie ist eine Theorie über bestimmte solche Objekte. ETAC (LOGIK). Das ist eine mathematische Struktur, die Sätze der Kategorien-Theorie als endliche Folgende von Zeichen formalisiert. Objekt-Matematik (OBMA). Das sind die Objekte, die wir uns mit den Variablen bezeichnet denken. Es ist intuitiv klar, dass alle wahren Aussagen in ETAC gesehen als Sätze in META über MATH in jeder Kategorie aus MATH wahr sind.
+
+Hier nutzen wir eine Art geheimes Pseudo-Axiom: Wenn wir beweisen können, dass wir eine Aussage aus LOGIK beweisen/nicht beweisen können, gehen wir davon aus, dass wir die entsprechende Aussage auch in META beweisen/nicht beweisen können. Ich nenne es das Pseudo-Axiom des logischen Ebenen-Liftens.
+
+ETAC hat neben den Atomen der normalen mathematischen Logik, wie Gleichheit, boolsche Operatoren usw., noch drei Funktionssymbole $\circ, Q, Z$. $f \circ g$ lesen wir als die Komposition von $f$ und $g$, $Q(f)$ lesen wir als das Quellobjekt des Morphismus $f$, und  $Z(Y)$ das Zielobjekt des Morphismus $f$.
+
+Nun definieren wir das Dual zu einem logischen Bestandteil $\Sigma$, indem wir überall $Q$ druch $Z$, $Z$ durch $Q$ und $f \circ g$ durch $g \circ f$ für alle Ausdrücke $f$ und $g$. Mit anderen Worten: wir drehen die Pfeile um.
+
+Offensichtlich ist Dualisierung idempotent.
+
+Denn
+\begin{equation}
+   (f \colon X \to Y) :\Leftrightarrow (X=Q(f) \land Y=Z(f)).
+\end{equation} 
+
+Da die Dualen der Axiome von ETAC wahr sind, ist jedes Dual eines beweisbaren Satzes ebenfalls beweisbar: wir brauchen nur das Dual des Beweises hinschreiben.
+
+Also ist es so: wenn immer wir etwas hinschreiben, eine Notation, Definition, einen Satz oder einen Beweis, gibt es immer auch das Dual dazu. Ein wahrer Satz über ein Konstrukt ist automatisch auch der wahre duale Satz über da duale Konstrukt.
+
+Manchmal haben Duale eigene Namen, manchmal hängen wir "`Ko"' davor und manchmal gibt es beides.
+
+Komono = Epi.
+
+Witze innerhalb der Kategorientheorie, die durch Wortspiele mit Ko entstehen, sind verpönt, weil zu einfach zu generieren.
+
+Funktoren werden bei der Dualisierung NICHT umgedreht.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Kategorie, Homomorphismus, Mono, Epi, Anfangs-, End- und Null-Objekt, ein wenig mathematische Logik
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+{\tiny
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.8%20Hom-Mengen}
+}
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\
+\\
+v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
+\url{https://youtu.be/X8v5Kyly0KI}\\
+\\
+v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
+\url{https://youtu.be/sIaKt-Wxlog}\\
+\\
+v5.0.1.0.3.5 (Höher) Kategorien - Kategorien von Homomorphismen\\
+\url{https://youtu.be/v1F5BFH8nbo?si=3HES4OZ5SNWPlcX6}
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Hom-Funktor}\\
+\url{https://ncatlab.org/nlab/show/hom-set}\\
+\url{https://ncatlab.org/nlab/show/locally+small+category}\\
+\url{https://ncatlab.org/nlab/show/enriched+category}\\
+\url{https://en.wikipedia.org/wiki/Preadditive_category}\\
+\url{https://en.wikipedia.org/wiki/Preadditive_category#Additive_functors}\\
+\url{https://ncatlab.org/nlab/show/additive+functor}
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+"`Categories for the Working Mathematician"'\\
+Saunders Mac Lane\\
+1998 | 2nd ed. 1978\\
+Springer-Verlag New York Inc.\\
+978-0-387-98403-2 (ISBN)\\
+{\tiny
+   \url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}}\\
+
+Gut für die kategorische Sichtweise ist:\\
+"`Topology, A Categorical Approach"'\\
+Tai-Danae Bradley\\
+2020 MIT Press\\
+978-0-262-53935-7 (ISBN)\\
+{\tiny
+\url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}}\\
+
+Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von:\\
+"`An Introduction to Homological Algebra"'\\
+Joseph J. Rotman\\
+2009 Springer-Verlag New York Inc.\\
+978-0-387-24527-0 (ISBN)\\
+{\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
+
+Etwas weniger umfangreich und weniger tiefgehend aber gut motivierend ist:
+"`Category Theory"'\\
+Steve Awodey\\
+2010 Oxford University Press\\
+978-0-19-923718-0 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/9478288-9780199237180-category-theory}}\\
+
+Mit noch weniger Mathematik und die Konzepte motivierend ist:
+"`Conceptual Mathematics: a First Introduction to Categories"'\\
+F. William Lawvere, Stephen H. Schanuel\\
+2009 Cambridge University Press\\
+978-0-521-71916-2 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/8643555-9780521719162-conceptual-mathematics}}
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird,
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben
+(zu finden im selben Git-Projekt).
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter
+{\tiny
+   \url{XXX}
+}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Hom-Mengen}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{Lokal kleine Kategorien}
+%******************************************************************************************************
+Wir wählen ein Grothendieck-Universum oder die Klasse aller Mengen als Universum.
+
+Eine Klasse heißt klein, falls sie Element unseres gewählten Universums ist. 
+
+Sei eine Kategorie \CC\ gegeben.
+
+Falls die Klassen $\Hom(X,Y)$ klein sind, sind sie Objekte der Kategorie \Set, also der Kategorie der kleinen Mengen.
+
+Eine solche Kategorie heiß \textbf{lokal klein}. Die Klasse der Objekte oder die aller Morphismen muss dazu nicht klein sein. Es muss also nicht kann aber eine kleine Kategorie sein.
+
+In diesem Kurs ist eine Kategorie \textbf{groß}, wenn die Objekte und die Hom-Mengen kleine sind. Die Objekte selber sind klein, nicht die Klasse aller Objekte. D.~h. bei uns sind große Kategorien immer lokal klein. Damit sind \textbf{Set}, \textbf{Ab}, \textbf{Gruppe} und \textbf{Top} Beispiele für lokal kleine Kategorien.
+
+Damit haben wir den Fall einer Kategorie $\CC$, deren Hom's Objekte in einer anderen Kategorie $\mathcal{V}$ sind. Wenn noch ein paar strukturelle Bedingungen erfüllt sind (,auf die wir hier nicht eingehen und was bei \Set\ der Fall ist), sagen wir $\CC$ ist eine $\mathcal{V}$-angereicherte Kategorie oder kürzer $\mathcal{V}$-Kategorie.
+
+\Set\ hat als Kategorie und darüber hinaus Strukturen. Z.~B. das cartesische Produkt $X \times Y$.
+
+Die Verknüpfung von Morphismen in \CC\ induziert damit Funktionen
+\begin{equation}
+   \circ \colon \Hom(Y,Z) \times \Hom(X,Y) \to \Hom(X,Z).
+\end{equation}
+
+%******************************************************************************************************
+\subsection{Kategorien der $R$-Moduln}
+%******************************************************************************************************
+Im Falle der Kategorien der $\K$-Vektorräume oder in \textbf{Ab}, der Kategorie der abelschen Gruppen (dies sind Spezialfälle der Kategorien der $R$-Moduln, wo $R$ ein Ring mit 1 ist), können wir auf den $\Hom$-Mengen die Struktur einer abelschen Gruppe definieren. Seien $f, g \in  \Hom(X,Y)$. 
+
+\begin{alignat}{3}
+   &(f+g)(x) &&:= f(x) +_Y g(x)\\
+   &(-f)(x) &&:= -_Yf(x)\\
+   &0(x) &&:= 0_Y
+\end{alignat}
+Wir sagen, das Addition, Inverses und Einselement komponentenweise definiert werden.
+
+Damit leben in diesen Fällen die Hom-Mengen in Wirklichkeit in \textbf{Ab}.
+
+Die induzierten $\circ \colon \Hom(Y,Z) \times \Hom(X,Y) \to \Hom(X,Z)$ sind dann Gruppen-Homomorphismen.
+
+Hier haben wir auch noch die zusätzliche Struktur eines Tensorproduktes, und da die Verknüpfung bilinear ist, induziert sie auch Gruppen-Homomorphismen $\circ \colon \Hom(Y,Z) \otimes \Hom(X,Y) \to \Hom(X,Z)$.
+
+Da auch hier die oben erwähnten ominösen Bedingungen erfüllt sind, handelt es sich hier um \textbf{Ab}-Kategorien, also um \textbf{Ab} angereicherte Kategorien.
+
+%******************************************************************************************************
+\subsection{Ab-Kategorien}
+%******************************************************************************************************
+"`\textbf{Ab}-Kategorie"' ist ein von der Kategorie der abelschen Gruppe (\textbf{Ab}) auf der einen Seite und von "abelsche Kategorie"' andererseits zu unterscheidender Begriff. Der Name kommt von allgemeiner $\mathcal{V}$-Kategorie und beutet, dass die Kategorie über \textbf{Ab} angereichert ist. Darauf gehen wir aber hier nicht tiefer ein.
+
+Ein andere Name für \textbf{Ab}-Kategorie ist \textbf{präadditive} Kategorie. 
+
+\begin{Definition}{Ab-Kategorie}
+   Eine Kategorie \CC\ ist eine \textbf{Ab-Kategorie}, wenn alle $\Hom(X, Y)$ klein sind und auf ihnen eine Verknüpfung $+$ definiert ist, die diese zu (kleinen) abelschen Gruppen macht, so dass zusätzlich die Addition und die Verknüpfung verträglich im folgenden Sinne sind: es gelten das linke und rechte Distributivgesetz
+   \begin{alignat}{3}
+      &f(g+h) &&= fg+fh\\
+      &(g+h)f &&= gf+hf.
+   \end{alignat}
+   Wir sagen, die Komposition von Morphismen ist \textbf{biadditiv}.
+\end{Definition}
+Damit fühlt sich eine \textbf{Ab}-Kategorie so bisschen wie ein Ring an, bei dem wir nicht beliebig addieren und multiplizieren können. Oder anders ausgedrückt: "`\textbf{Ab}-Kategorie"' ist eine Verallgemeinerung von "`Ring"' in dem Sinne, in dem "`Kategorie"' eine Verallgemeinerung von "`Monoid"' ist.
+
+Die "`richtigen"' Funktoren zwischen \textbf{Ab}-Kategorien sind solche, die die additive Struktur respektieren.
+\begin{Definition}{Additiver Funktor}
+   Seien $\CC, \DD$ zwei additive Kategorien. Ein Funktor $F \colon \CC \to \DD$ heißt \textbf{additiv}, falls für alle parallel Morphismen (die beiden haben die selben Quell- und Ziel-Objekte) $f,g$ gilt:
+   \begin{alignat}{3}
+      &F(f+g) &&= F(f)+F(g).
+   \end{alignat}
+\end{Definition}
+
+\begin{backup}
+%******************************************************************************************************
+%                                                                                                     *
+\section{TODO}
+%                                                                                                     *
+%******************************************************************************************************
+\begin{itemize}
+     \item Überprüfe Symbolverzeichnis
+\end{itemize}
+
+\end{backup}
+
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+   \bibitem[Awodey2010]{Awodey}
+      Steve Awode, \emph{Category Theory},
+      2010 Oxford University Press, 978-0-19-923718-0 (ISBN)
+
+   \bibitem[Bradley2020]{Bradley}
+      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
+      2020 MIT Press, 978-0-262-53935-7 (ISBN)
+
+   \bibitem[LawvereSchanuel2009]{Lawvere}
+      F. William Lawvere, Stephen H. Schanuel, \emph{Conceptual Mathematics: a First Introduction to Categories},
+      2009 Cambridge University Press, 978-0-521-71916-2 (ISBN)
+
+   \bibitem[MacLane1978]{MacLane}
+      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
+      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
+
+   \bibitem[Rotman2009]{Rotman}
+   	Joseph J. Rotman, \emph{An Introduction to Homological Algebra},
+   	2009 Springer-Verlag New York Inc., 978-0-387-24527-0 (ISBN)
+
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $P(x)$                              & ein Prädikat\\
+    $A, B, C, \cdots, X, Y, Z$          & Objekte\\
+    $F,G$                               & Funktoren\\
+    $V, V'$                             & Vergiss-Funktoren\\
+    $f, g, h, r, s, \cdots$             & Homomorphismen\\
+    $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
+    \Set                                & Die Kategorie der kleinen Mengen\\
+    \Ab                                 & Kategorie der kleinen abelschen Gruppen\\
+    $\Hom( X, Y)$                       & Die Klasse der Homomorphismen von $X$ nach $Y$\\
+    $\alpha, \beta, \cdots$             & natürliche Transformationen oder Ordinalzahlen\\
+    $\mathcal C ^{\text{op}}$           & Duale Kategorie\\
+    $\DD^\CC$                           & Funktorkategorie\\
+    $\textbf{Ring}, \textbf{Gruppe}$    & Kategorie der kleinen Ringe und der kleinen Gruppen\\
+    $U, U', U''$                        & Universen\\
+    $V_\alpha$                          & eine Menge der Von-Neumann-Hierarchie zur Ordinalzahl
+                                          $\alpha$
+
+\end{tabular}
+
+\end{document}
