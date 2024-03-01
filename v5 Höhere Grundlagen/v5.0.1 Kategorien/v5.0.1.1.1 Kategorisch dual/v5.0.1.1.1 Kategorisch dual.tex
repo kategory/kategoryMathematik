@@ -236,36 +236,21 @@ Copyright (C) 2024 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 "`Dual"' ist eine Eigenschaft von Ausdrücken, Prädikaten oder Sätzen der Kategorien-Theorie. Es ist keine Eingenschaft von den mathematischen Objekten dieser Theorie. Also keine Eigenschaft von \zb Objekten, Homomorphismen oder Kategorien.
 
-Damit wir dual definieren können müssen wir eine weitere Ebene schaffen, da wir dabei über die Sprache sprechen müssen, mit der wir die ganze Zeit über Kategorien sprechen. Damit das möglich wird, bedienen wir uns der mathematischen Logik. In ihr formalisieren wir eine "`normale"' Theorie in der Prädikaten-Logik erster Stufe (Variablen, Ausdrücke, boolsche Operatoren, Quantoren, Prädikate, Aussagen, Beweise. Kurz: logische Bestandteile). Wir fügen Variablen für Objekte ($A,B,C, \cdots$) und für Morphismen ($f, g, h, r, s, \cdots$) hinzu. Weiter fügen wir die üblichen Axiome der Kategorien-Theorie als Axiome hinzu. 
+Damit wir dual definieren können müssen wir eine weitere Ebene schaffen, da wir dabei über die Sprache sprechen müssen, mit der wir die ganze Zeit über Kategorien sprechen. Dazu bedienen wir uns der mathematischen Logik. In ihr formalisieren wir eine "`normale"' Theorie in der Prädikaten-Logik erster Stufe und fügen die üblichen Axiome der Kategorien-Theorie als Axiome hinzu. 
 
-Das Ergebnis ist ETAC = Elementary Theory of an abstract Category. 
+Das Ergebnis ist ETAC = elementary theory of abstract categories. 
 
-Wir haben also drei Ebenen: Meta-Mathematik (META). Das ist der deutsche Text, in dem wir über die Dinge reden. Mathematik (MATH). Das ist die Welt der mathematischen Objekte. Hier befinden wir uns in der Regel in ZFC. Kategorien-Theorie ist eine Theorie über bestimmte solche Objekte. ETAC (LOGIK). Das ist eine mathematische Struktur, die Sätze der Kategorien-Theorie als endliche Folgende von Zeichen formalisiert. Objekt-Matematik (OBMA). Das sind die Objekte, die wir uns mit den Variablen bezeichnet denken. Es ist intuitiv klar, dass alle wahren Aussagen in ETAC gesehen als Sätze in META über MATH in jeder Kategorie aus MATH wahr sind.
+Hier nutzen wir eine Art geheimes Pseudo-Axiom: Wenn wir mathematisch beweisen können, dass etwas in dieser formalisierten Theorie gilt, gehen wir davon aus, dass die entsprechende Aussage auch für unsere Sprache gilt, in der wir über die Mathematik reden. Ich nenne es das Pseudo-Axiom des logischen Ebenen-Liftens.
 
-Hier nutzen wir eine Art geheimes Pseudo-Axiom: Wenn wir beweisen können, dass wir eine Aussage aus LOGIK beweisen/nicht beweisen können, gehen wir davon aus, dass wir die entsprechende Aussage auch in META beweisen/nicht beweisen können. Ich nenne es das Pseudo-Axiom des logischen Ebenen-Liftens.
-
-ETAC hat neben den Atomen der normalen mathematischen Logik, wie Gleichheit, boolsche Operatoren usw., noch drei Funktionssymbole $\circ, Q, Z$. $f \circ g$ lesen wir als die Komposition von $f$ und $g$, $Q(f)$ lesen wir als das Quellobjekt des Morphismus $f$, und  $Z(Y)$ das Zielobjekt des Morphismus $f$.
-
-Nun definieren wir das Dual zu einem logischen Bestandteil $\Sigma$, indem wir überall $Q$ druch $Z$, $Z$ durch $Q$ und $f \circ g$ durch $g \circ f$ für alle Ausdrücke $f$ und $g$. Mit anderen Worten: wir drehen die Pfeile um.
-
-Offensichtlich ist Dualisierung idempotent.
-
-Denn
-\begin{equation}
-   (f \colon X \to Y) :\Leftrightarrow (X=Q(f) \land Y=Z(f)).
-\end{equation} 
+Nun definieren wir das Dual zu einem logischen Bestandteil indem wir alle Pfeile umdrehen.
 
 Da die Dualen der Axiome von ETAC wahr sind, ist jedes Dual eines beweisbaren Satzes ebenfalls beweisbar: wir brauchen nur das Dual des Beweises hinschreiben.
 
-Also ist es so: wenn immer wir etwas hinschreiben, eine Notation, Definition, einen Satz oder einen Beweis, gibt es immer auch das Dual dazu. Ein wahrer Satz über ein Konstrukt ist automatisch auch der wahre duale Satz über da duale Konstrukt.
+Ein wahrer Satz über ein Konstrukt ist automatisch auch der wahre duale Satz über da duale Konstrukt.
 
 Manchmal haben Duale eigene Namen, manchmal hängen wir "`Ko"' davor und manchmal gibt es beides.
 
 Komono = Epi.
-
-Witze innerhalb der Kategorientheorie, die durch Wortspiele mit Ko entstehen, sind verpönt, weil zu einfach zu generieren.
-
-Funktoren werden bei der Dualisierung NICHT umgedreht.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -282,7 +267,7 @@ Kategorie, Homomorphismus, Mono, Epi, Anfangs-, End- und Null-Objekt, ein wenig 
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.0.8%20Hom-Mengen}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.1.1%20Kategorisch%20dual}
 }
 
 %******************************************************************************************************
@@ -296,20 +281,17 @@ v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
 v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
 \url{https://youtu.be/sIaKt-Wxlog}\\
 \\
-v5.0.1.0.3.5 (Höher) Kategorien - Kategorien von Homomorphismen\\
-\url{https://youtu.be/v1F5BFH8nbo?si=3HES4OZ5SNWPlcX6}
+v5.0.1.0.5 (Höher) Kategorien - Mono Epi Null\\
+\url{https://youtu.be/n4-qZJK_sH0}
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Hom-Funktor}\\
-\url{https://ncatlab.org/nlab/show/hom-set}\\
-\url{https://ncatlab.org/nlab/show/locally+small+category}\\
-\url{https://ncatlab.org/nlab/show/enriched+category}\\
-\url{https://en.wikipedia.org/wiki/Preadditive_category}\\
-\url{https://en.wikipedia.org/wiki/Preadditive_category#Additive_functors}\\
-\url{https://ncatlab.org/nlab/show/additive+functor}
+\url{https://de.wikipedia.org/wiki/Duale_Kategorie}\\
+\url{https://de.wikipedia.org/wiki/Pr%C3%A4dikatenlogik_erster_Stufe}\\
+\url{https://en.wikipedia.org/wiki/Dual_(category_theory)}\\
+\url{https://ncatlab.org/nlab/show/duality}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -376,78 +358,46 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Hom-Mengen}
+\section{Dual}
 %                                                                                                     *
 %******************************************************************************************************
+"`Dual"' ist eine Eigenschaft von Ausdrücken, Prädikaten oder Sätzen der Kategorien-Theorie. Es ist keine Eingenschaft von den mathematischen Objekten dieser Theorie. Also keine Eigenschaft von \zb Objekten, Homomorphismen oder Kategorien.
 
-%******************************************************************************************************
-\subsection{Lokal kleine Kategorien}
-%******************************************************************************************************
-Wir wählen ein Grothendieck-Universum oder die Klasse aller Mengen als Universum.
+Damit wir dual definieren können müssen wir eine weitere Ebene schaffen, da wir dabei über die Sprache sprechen müssen, mit der wir die ganze Zeit über Kategorien sprechen. Damit das möglich wird, bedienen wir uns der mathematischen Logik. In ihr formalisieren wir eine "`normale"' Theorie in der Prädikaten-Logik erster Stufe (Variablen, Ausdrücke, boolsche Operatoren, Quantoren, Prädikate, Aussagen, Beweise. Kurz: logische Bestandteile). Wir fügen Variablen für Objekte ($A,B,C, \cdots$) und für Morphismen ($f, g, h, r, s, \cdots$) hinzu. Weiter fügen wir die üblichen Axiome der Kategorien-Theorie als Axiome hinzu. 
 
-Eine Klasse heißt klein, falls sie Element unseres gewählten Universums ist. 
+Das Ergebnis ist ETAC = elementary theory of abstract categories. 
 
-Sei eine Kategorie \CC\ gegeben.
+Wir haben also drei Ebenen: Meta-Mathematik (META). Das ist der deutsche Text, in dem wir über die Dinge reden. Mathematik (MATH). Das ist die Welt der mathematischen Objekte. Hier befinden wir uns in der Regel in ZFC. Kategorien-Theorie ist eine Theorie über bestimmte solche Objekte. ETAC (LOGIK). Das ist eine mathematische Struktur, die Sätze der Kategorien-Theorie als endliche Folgende von Zeichen formalisiert. Objekt-Matematik (OBMA). Das sind die Objekte, die wir uns mit den Variablen bezeichnet denken. Es ist intuitiv klar, dass alle wahren Aussagen in ETAC gesehen als Sätze in META über MATH in jeder Kategorie aus MATH wahr sind.
 
-Falls die Klassen $\Hom(X,Y)$ klein sind, sind sie Objekte der Kategorie \Set, also der Kategorie der kleinen Mengen.
+Wir haben also drei Ebenen: 1. Meta-Mathematik (META). Das ist der deutsche Text, in dem wir über die Dinge reden. 2. ETAC (LOGIK). Das ist eine mathematische Struktur innerhalb der Mathematik, die Sätze der Kategorien-Theorie als endliche Folgende von Zeichen formalisiert. 3. ACMO (MODELLE). Das sind Modelle von ETAC. Sätze in ETAC können so über Kategorien in ACMO reden, wie Sätze aus META über Kategorien reden können.
 
-Eine solche Kategorie heiß \textbf{lokal klein}. Die Klasse der Objekte oder die aller Morphismen muss dazu nicht klein sein. Es muss also nicht kann aber eine kleine Kategorie sein.
+Hier nutzen wir eine Art geheimes Pseudo-Axiom: Wenn wir mathematisch beweisen können, dass etwas in dieser formalisierten Theorie gilt, gehen wir davon aus, dass die entsprechende Aussage auch für unsere Sprache gilt, in der wir über die Mathematik reden. Ich nenne es das Pseudo-Axiom des logischen Ebenen-Liftens.
 
-In diesem Kurs ist eine Kategorie \textbf{groß}, wenn die Objekte und die Hom-Mengen kleine sind. Die Objekte selber sind klein, nicht die Klasse aller Objekte. D.~h. bei uns sind große Kategorien immer lokal klein. Damit sind \textbf{Set}, \textbf{Ab}, \textbf{Gruppe} und \textbf{Top} Beispiele für lokal kleine Kategorien.
+(Es gibt noch ein zweites geheimes ähnliches Ebenen-Lift-Axiom, welches aber hier nicht Anwendung findet: Wenn wir beweisen können, dass wir eine Aussage aus LOGIK beweisen/nicht beweisen können, gehen wir davon aus, dass wir die entsprechende Aussage auch in META beweisen/nicht beweisen können.)
 
-Damit haben wir den Fall einer Kategorie $\CC$, deren Hom's Objekte in einer anderen Kategorie $\mathcal{V}$ sind. Wenn noch ein paar strukturelle Bedingungen erfüllt sind (,auf die wir hier nicht eingehen und was bei \Set\ der Fall ist), sagen wir $\CC$ ist eine $\mathcal{V}$-angereicherte Kategorie oder kürzer $\mathcal{V}$-Kategorie.
+ETAC hat neben den Atomen der normalen mathematischen Logik, wie Gleichheit, boolsche Operatoren usw., noch drei Funktionssymbole $\circ, Q, Z$. $f \circ g$ lesen wir als die Komposition von $f$ und $g$, $Q(f)$ lesen wir als das Quellobjekt des Morphismus $f$, und  $Z(Y)$ das Zielobjekt des Morphismus $f$.
 
-\Set\ hat als Kategorie und darüber hinaus Strukturen. Z.~B. das cartesische Produkt $X \times Y$.
+Nun definieren wir das Dual zu einem logischen Bestandteil $\Sigma$, indem wir überall $Q$ druch $Z$, $Z$ durch $Q$ und $f \circ g$ durch $g \circ f$ für alle Ausdrücke $f$ und $g$. Mit anderen Worten: wir drehen die Pfeile um.
 
-Die Verknüpfung von Morphismen in \CC\ induziert damit Funktionen
+Offensichtlich ist Dualisierung idempotent.
+
+Denn
 \begin{equation}
-   \circ \colon \Hom(Y,Z) \times \Hom(X,Y) \to \Hom(X,Z).
-\end{equation}
+   (f \colon X \to Y) :\Leftrightarrow (X=Q(f) \land Y=Z(f)).
+\end{equation} 
 
-%******************************************************************************************************
-\subsection{Kategorien der $R$-Moduln}
-%******************************************************************************************************
-Im Falle der Kategorien der $\K$-Vektorräume oder in \textbf{Ab}, der Kategorie der abelschen Gruppen (dies sind Spezialfälle der Kategorien der $R$-Moduln, wo $R$ ein Ring mit 1 ist), können wir auf den $\Hom$-Mengen die Struktur einer abelschen Gruppe definieren. Seien $f, g \in  \Hom(X,Y)$. 
+Da die Dualen der Axiome von ETAC wahr sind, ist jedes Dual eines beweisbaren Satzes ebenfalls beweisbar: wir brauchen nur das Dual des Beweises hinschreiben.
 
-\begin{alignat}{3}
-   &(f+g)(x) &&:= f(x) +_Y g(x)\\
-   &(-f)(x) &&:= -_Yf(x)\\
-   &0(x) &&:= 0_Y
-\end{alignat}
-Wir sagen, das Addition, Inverses und Einselement komponentenweise definiert werden.
+Also ist es so: wenn immer wir etwas hinschreiben, eine Notation, Definition, einen Satz oder einen Beweis, gibt es immer auch das Dual dazu. Ein wahrer Satz über ein Konstrukt ist automatisch auch der wahre duale Satz über da duale Konstrukt.
 
-Damit leben in diesen Fällen die Hom-Mengen in Wirklichkeit in \textbf{Ab}.
+Manchmal haben Duale eigene Namen, manchmal hängen wir "`Ko"' davor und manchmal gibt es beides.
 
-Die induzierten $\circ \colon \Hom(Y,Z) \times \Hom(X,Y) \to \Hom(X,Z)$ sind dann Gruppen-Homomorphismen.
+Komono = Epi.
 
-Hier haben wir auch noch die zusätzliche Struktur eines Tensorproduktes, und da die Verknüpfung bilinear ist, induziert sie auch Gruppen-Homomorphismen $\circ \colon \Hom(Y,Z) \otimes \Hom(X,Y) \to \Hom(X,Z)$.
+Witze innerhalb der Kategorientheorie, die durch Wortspiele mit Ko entstehen, sind verpönt, weil zu einfach zu generieren.
 
-Da auch hier die oben erwähnten ominösen Bedingungen erfüllt sind, handelt es sich hier um \textbf{Ab}-Kategorien, also um \textbf{Ab} angereicherte Kategorien.
+Funktoren werden bei der Dualisierung NICHT umgedreht.
 
-%******************************************************************************************************
-\subsection{Ab-Kategorien}
-%******************************************************************************************************
-"`\textbf{Ab}-Kategorie"' ist ein von der Kategorie der abelschen Gruppe (\textbf{Ab}) auf der einen Seite und von "abelsche Kategorie"' andererseits zu unterscheidender Begriff. Der Name kommt von allgemeiner $\mathcal{V}$-Kategorie und beutet, dass die Kategorie über \textbf{Ab} angereichert ist. Darauf gehen wir aber hier nicht tiefer ein.
-
-Ein andere Name für \textbf{Ab}-Kategorie ist \textbf{präadditive} Kategorie. 
-
-\begin{Definition}{Ab-Kategorie}
-   Eine Kategorie \CC\ ist eine \textbf{Ab-Kategorie}, wenn alle $\Hom(X, Y)$ klein sind und auf ihnen eine Verknüpfung $+$ definiert ist, die diese zu (kleinen) abelschen Gruppen macht, so dass zusätzlich die Addition und die Verknüpfung verträglich im folgenden Sinne sind: es gelten das linke und rechte Distributivgesetz
-   \begin{alignat}{3}
-      &f(g+h) &&= fg+fh\\
-      &(g+h)f &&= gf+hf.
-   \end{alignat}
-   Wir sagen, die Komposition von Morphismen ist \textbf{biadditiv}.
-\end{Definition}
-Damit fühlt sich eine \textbf{Ab}-Kategorie so bisschen wie ein Ring an, bei dem wir nicht beliebig addieren und multiplizieren können. Oder anders ausgedrückt: "`\textbf{Ab}-Kategorie"' ist eine Verallgemeinerung von "`Ring"' in dem Sinne, in dem "`Kategorie"' eine Verallgemeinerung von "`Monoid"' ist.
-
-Die "`richtigen"' Funktoren zwischen \textbf{Ab}-Kategorien sind solche, die die additive Struktur respektieren.
-\begin{Definition}{Additiver Funktor}
-   Seien $\CC, \DD$ zwei additive Kategorien. Ein Funktor $F \colon \CC \to \DD$ heißt \textbf{additiv}, falls für alle parallel Morphismen (die beiden haben die selben Quell- und Ziel-Objekte) $f,g$ gilt:
-   \begin{alignat}{3}
-      &F(f+g) &&= F(f)+F(g).
-   \end{alignat}
-\end{Definition}
 
 \begin{backup}
 %******************************************************************************************************
