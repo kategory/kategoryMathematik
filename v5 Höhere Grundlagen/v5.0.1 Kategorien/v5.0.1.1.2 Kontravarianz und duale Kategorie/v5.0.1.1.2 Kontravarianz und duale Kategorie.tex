@@ -128,6 +128,10 @@
 \DeclareMathOperator{\minimal}{minimal}
 \DeclareMathOperator{\maximal}{maximal}
 
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\Cod}{Cod}
+\DeclareMathOperator{\Obj}{Obj}
+
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
@@ -251,7 +255,7 @@ Kategorie, Homomorphismus, Funktor, Hom-Mengen, Dual
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.1.1%20Kategorisch%20dual}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.1.2%20Kontravarianz%20und%20duale%20Kategorie}
 }
 
 %******************************************************************************************************
@@ -265,17 +269,20 @@ v5.0.1.0.1 (Höher) Kategorien - Axiome für Kategorien\\
 v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
 \url{https://youtu.be/sIaKt-Wxlog}\\
 \\
-v5.0.1.0.5 (Höher) Kategorien - Mono Epi Null\\
-\url{https://youtu.be/n4-qZJK_sH0}
+v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
+\url{https://youtu.be/Ojf5LQGeyOU}\\
+\\
+v5.0.1.0.8 (Höher) Kategorien - Hom-Mengen\\
+\url{https://youtu.be/bnMkDng-NnA}
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
 \url{https://de.wikipedia.org/wiki/Duale_Kategorie}\\
-\url{https://de.wikipedia.org/wiki/Pr%C3%A4dikatenlogik_erster_Stufe}\\
-\url{https://en.wikipedia.org/wiki/Dual_(category_theory)}\\
-\url{https://ncatlab.org/nlab/show/duality}
+\url{https://de.wikipedia.org/wiki/Funktor_(Mathematik)}\\
+\url{https://de.wikipedia.org/wiki/Hom-Funktor}\\
+\url{https://de.wikipedia.org/wiki/Potenzmengenfunktor}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -342,46 +349,141 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Dual}
+\section{Kontravarianz und duale Kategorie}
 %                                                                                                     *
 %******************************************************************************************************
-"`Dual"' ist eine Eigenschaft von Ausdrücken, Prädikaten oder Sätzen der Kategorien-Theorie. Es ist keine Eingenschaft von den mathematischen Objekten dieser Theorie. Also keine Eigenschaft von \zb Objekten, Homomorphismen oder Kategorien.
 
-Damit wir dual definieren können müssen wir eine weitere Ebene schaffen, da wir dabei über die Sprache sprechen müssen, mit der wir die ganze Zeit über Kategorien sprechen. Damit das möglich wird, bedienen wir uns der mathematischen Logik. In ihr formalisieren wir eine "`normale"' Theorie in der Prädikaten-Logik erster Stufe (Variablen, Ausdrücke, boolsche Operatoren, Quantoren, Prädikate, Aussagen, Beweise. Kurz: logische Bestandteile). Wir fügen Variablen für Objekte ($A,B,C, \cdots$) und für Morphismen ($f, g, h, r, s, \cdots$) hinzu. Weiter fügen wir die üblichen Axiome der Kategorien-Theorie als Axiome hinzu. 
+%******************************************************************************************************
+\subsection{Duale Kategorie}
+%******************************************************************************************************
+\begin{Definition}{Duale Kategorie}
+   Sei \CC\ eine Kategorie. Die dazu \textbf{duale Kategorie} (englisch \textbf{opposite category}, $\CC^\text{op}$) geschrieben als $\CC^*$ ist durch folgende Daten gegeben:
+   \begin{itemize}
+      \item Die Objekte von $\CC^*$ sind genau die Objekte von $\CC$
+      \item Die Morphismen von $\CC^*$ sind genau die Morphismen von $\CC$. Ist $f \in \CC$ so schreiben wir $f^*$, wenn wir ihn als Morphismus in $\CC^*$ betrachten.
+      \item $f^*$ geht in die entgegengesetzte Richtung von $f$. D.~h. wir definieren $\Cod(f^*) := \Dom(f)$ und $\Dom(f^*) := \Cod(f)$. (Mit Dom = Domain = Quelle und Cod = Codomain = Bild = Ziel). Mit anderen Worten $(f^* \colon Y \to X) \in \CC^*$, genau dann wenn $(f \colon X \to Y) \in \CC$. Mit ganz anderen Worten: Es sind die selben Morphismen, nur andersrum.
+      \item Die Verknüpfung definieren wir über $f^* \circ g^* := (g \circ f)^*$.
+   \end{itemize}
+\end{Definition}   
+Es ist leicht zu sehen, dass die Axiome einer Kategorie erfüllt sind.
 
-Das Ergebnis ist ETAC = elementary theory of abstract categories. 
+\begin{Satz}{Dual der Konstruktion einer Kategorie ergibt deren duale}
+   Sei $\Delta$ eine gültige Zeichenkette in ETAC, welche eine Kategorie $\CC$ definiert/konstruiert. Dann ist die duale Zeichenkette $\Delta^*$ eine Definition/Konstruktion der dualen Kategorie $\CC^*$.
+\end{Satz}
+\begin{proof}
+   Dies ist insofern klar, als beide Definitionen von "`dual"' die Richtung der Pfeile umdrehen. Wenn wir das präzise beweisen wollen, müssen wir, glaube ich, das Dual einer Kategorie formalisieren und dann induktiv über den Aufbau gültiger Zeichenketten arbeiten.
+\end{proof}
 
-Wir haben also drei Ebenen: Meta-Mathematik (META). Das ist der deutsche Text, in dem wir über die Dinge reden. Mathematik (MATH). Das ist die Welt der mathematischen Objekte. Hier befinden wir uns in der Regel in ZFC. Kategorien-Theorie ist eine Theorie über bestimmte solche Objekte. ETAC (LOGIK). Das ist eine mathematische Struktur, die Sätze der Kategorien-Theorie als endliche Folgende von Zeichen formalisiert. Objekt-Matematik (OBMA). Das sind die Objekte, die wir uns mit den Variablen bezeichnet denken. Es ist intuitiv klar, dass alle wahren Aussagen in ETAC gesehen als Sätze in META über MATH in jeder Kategorie aus MATH wahr sind.
+\begin{Satz}{In Dualer Kategorie gelten die dualen Sätze}
+   Sei $\phi$ ein Prädikat, \CC\ eine Kategorie und gelte $\phi(\CC)$. Sei $\Phi$ die Zeichenkette aus ETAC, die $\phi$ formalisiert, $\Phi^*$ deren Dual und $\phi^*$ die Rücküberführung von $\Phi^*$ in unsere Sprache, dann gilt $\phi^*(\CC^*)$.
+\end{Satz}
+\begin{proof}
+   Da dies ein Satz über die menschliche Sprache ist, können wir ihn nicht so ohne weiteres beweisen. Ich würde es so beweisen, dass wir, wie oben das  Dual einer Kategorie in ETAC formalisieren, dann folgenden Satz über ETAC beweisen: Falls "`$\Phi(\CC)$"' gilt/beweisbar ist dann gilt/ist beweisbar auch "`$\Phi^*(\CC^*)$"'. Danach bemühen wir wieder unser geheimes Axiom, dass Aussagen über ETAC auch in der echten Welt gelten.
+\end{proof}
 
-Wir haben also drei Ebenen: 1. Meta-Mathematik (META). Das ist der deutsche Text, in dem wir über die Dinge reden. 2. ETAC (LOGIK). Das ist eine mathematische Struktur innerhalb der Mathematik, die Sätze der Kategorien-Theorie als endliche Folgende von Zeichen formalisiert. 3. ACMO (MODELLE). Das sind Modelle von ETAC. Sätze in ETAC können so über Kategorien in ACMO reden, wie Sätze aus META über Kategorien reden können.
+In diesem Sinne ist epi das selbe wie das Dual von mono, was wir schnell sehen, da die beiden Definitionen sich nur durch die Richtung der Pfeile unterscheiden. Wenn \zb in einer Kategorie \CC\ gilt, dass alle Morphismen mono sind, dann gilt in $\CC^*$, dass alle Morphismen epi sind.
 
-Hier nutzen wir eine Art geheimes Pseudo-Axiom: Wenn wir mathematisch beweisen können, dass etwas in dieser formalisierten Theorie gilt, gehen wir davon aus, dass die entsprechende Aussage auch für unsere Sprache gilt, in der wir über die Mathematik reden. Ich nenne es das Pseudo-Axiom des logischen Ebenen-Liftens.
+%******************************************************************************************************
+\subsection{Kontravarianter Funktor}
+%******************************************************************************************************
+\begin{Definition}{Kontravarianter Funktor via dual}
+   Ein \textbf{kontravarianter Funktor} $F \colon \CC \to \DD$ ist ein Funktor $F \colon \CC^* \to \DD$. Funktoren heißen zur Abgrenzung gegenüber den kontravarianten Funktoren auch \textbf{kovariant}. 
+\end{Definition}   
 
-(Es gibt noch ein zweites geheimes ähnliches Ebenen-Lift-Axiom, welches aber hier nicht Anwendung findet: Wenn wir beweisen können, dass wir eine Aussage aus LOGIK beweisen/nicht beweisen können, gehen wir davon aus, dass wir die entsprechende Aussage auch in META beweisen/nicht beweisen können.)
+\begin{Definition}{Kontravarianter Funktor via Axiome}
+   Ein \textbf{kontravarianter Funktor} sind zwei Abbildungen $F \colon \Obj( \CC ) \to \Obj( \DD )$ und $F \colon \Hom( \CC ) \to \Hom( \DD )$ zwischen den Klassen der Objekte und den Klassen der Morphismen, wobei dies Klassen-Abbildungen sein können, sodass für alle $C \in \Obj(\CC)$ und alle $f, g \in \Hom( \CC )$, für die wir $f \circ g$ bilden können gilt:
+   \begin{alignat}{4}
+      \text{ wir können } &F(g) \circ F(f) \quad &&\text{bilden}\\
+      &F( f \circ g ) &&= F(g) \circ F(f)\\
+      &F( \id_C) &&= \id_{F(C)}.
+   \end{alignat} 
+\end{Definition}
+   
+\begin{Satz}{Kontravariant via dual äquivalent Kontravariant via Axiome}
+   Die beiden Definitionen oben führen zum selben Begriff von "`kontravarianter Funktor"'.
+\end{Satz}
+\begin{proof}
+   Die Definition der Verknüpfung enthält genau die Vertauschung, die wir für die Verknüpfung bei den Axiomen benötigen.
+\end{proof}
 
-ETAC hat neben den Atomen der normalen mathematischen Logik, wie Gleichheit, boolsche Operatoren usw., noch drei Funktionssymbole $\circ, Q, Z$. $f \circ g$ lesen wir als die Komposition von $f$ und $g$, $Q(f)$ lesen wir als das Quellobjekt des Morphismus $f$, und  $Z(Y)$ das Zielobjekt des Morphismus $f$.
+%******************************************************************************************************
+\subsection{Kontravarianter Potenzmengen-Funktor}
+%******************************************************************************************************
+\begin{Definition}{Kontravarianter Potenzmengen-Funktor}
+   Der \textbf{kontravarianter Potenzmengen-Funktor} $\PP \colon \Set \to \Set$ ist definiert auf den Objekten (in diesem Fall Mengen) als $\PP( X ) := $ Menge aller Teilmengen von $X$. Für ein $f \colon X \to Y$ definieren wir $\PP(f) \colon \PP(Y) \to \PP(X)$ über seine Wirkung auf Teilmengen $Y' \subseteq Y$ als
+   \begin{equation}
+      \PP(f)(Y') := f^{-1}(Y').
+   \end{equation}
+\end{Definition}   
+Hier sehen wir, dass ein Funktor viel mehr ist als eine stupide Abbildung der Objekte. Er geht immer einher mit einer Abbildung der Morphismen und das ganze ist strukturverträglich. Die Potenzmengen-Bildung ist also mächtiger oder reicher als auf den ersten Blick zu erkennen ist.
 
-Nun definieren wir das Dual zu einem logischen Bestandteil $\Sigma$, indem wir überall $Q$ druch $Z$, $Z$ durch $Q$ und $f \circ g$ durch $g \circ f$ für alle Ausdrücke $f$ und $g$. Mit anderen Worten: wir drehen die Pfeile um.
+Es gibt auch einen kovarianten Potenzmengen-Funktor, der sich nur in seiner Wirkung  auf die Morphismen unterscheidet.
 
-Offensichtlich ist Dualisierung idempotent.
+%******************************************************************************************************
+\subsection{Hom-Funktoren}
+%******************************************************************************************************
+\begin{Definition}{Hom-Funktor}
+   Sei \CC\ eine Kategorie in der die Klassen $\Hom(X,Y)$ unabhängig von $X,Y$ immer Mengen sind (wir nennen eine solche Kategorie lokal klein). Dann definieren wir zu jedem $C \in \CC$ den \textbf{kovarianten Hom-Funktor} $\Hom(C, \_) \colon \CC \to \Set$ durch seine Wirkung auf alle $X,Y, f \colon X \to Y \in \CC$:
+   \begin{alignat}{4}
+      &\Hom(C, \_)( Y ) := &&\Hom(C, Y)\\
+      &\Hom(C, \_)( f ) := &&\Hom(C, f ) \colon &&\Hom(C, X ) &&\to \Hom(C, Y )\\
+      &                    &&                   &&h           &&\mapsto f \circ h.
+   \end{alignat}
+   Wir schreiben gerne prägnanter $h_C := \Hom(C, \_)$ und  $f_* := f \circ \_ := \Hom(C, f )$ schreiben.
+   
+   Ähnlich definieren wir den \textbf{kontravarianten Hom-Funktor} $\Hom(\_, C) \colon \CC \to \Set$ durch seine Wirkung auf alle $X,Y, f \colon X \to Y \in \CC$:
+   \begin{alignat}{4}
+      &\Hom(\_, C)( Y ) := &&\Hom(Y, C)\\
+      &\Hom(\_, C)( f ) := &&\Hom( f, C ) \colon &&\Hom(Y, C ) &&\to \Hom(X, C )\\
+      &                    &&                   &&h           &&\mapsto h \circ f.
+   \end{alignat}
+   Wir schreiben gerne prägnanter $h^C := \Hom(\_, C)$ und  $f^* := \_ \circ f := \Hom( f, C )$ schreiben.
+\end{Definition}   
+Diese Sterne haben allerdings nichts mit "`dual"' zu tun. Diese Definition für die Wirkung auf $f$ ist formeltechnisch unabhängig von $C$. Sie wirkt aber jeweils nur auf Morphismen, deren Start $C$ ist.
 
-Denn
+$f_* = f \circ \_$ drückt den Endpunkt von $h$ von $X$ in Richtung $f$ nach $Y$.
 \begin{equation}
-   (f \colon X \to Y) :\Leftrightarrow (X=Q(f) \land Y=Z(f)).
-\end{equation} 
+   \begin{tikzcd}
+                         &C   \arrow[dl, "h"{above, name=0}] \arrow[dr, dashed, "f \circ h"{name=1}] \\
+      X \arrow[rr, "f"{below}]  &        &Y
+      \arrow[Rightarrow, bend right, from=0, to=1, "f \circ \_"{below}]
+   \end{tikzcd}
+\end{equation}
 
-Da die Dualen der Axiome von ETAC wahr sind, ist jedes Dual eines beweisbaren Satzes ebenfalls beweisbar: wir brauchen nur das Dual des Beweises hinschreiben.
 
-Also ist es so: wenn immer wir etwas hinschreiben, eine Notation, Definition, einen Satz oder einen Beweis, gibt es immer auch das Dual dazu. Ein wahrer Satz über ein Konstrukt ist automatisch auch der wahre duale Satz über da duale Konstrukt.
+$f^* = \_ \circ f$ zieht den Startpunkt von $h$ von $Y$ gegen (kontra) die Richtung $f$ zurück nach $X$.
+\begin{equation}
+   \begin{tikzcd}
+      X \arrow[rr, "f"{above}] \arrow[dr, dashed, "h \circ f"{left, name=1}] &   
+                            &Y \arrow[dl, , "h"{right,name=0}]\\
+      &C     \\
+      \arrow[Rightarrow, bend right, from=0, to=1, "\_ \circ f"{below}]
+   \end{tikzcd}
+\end{equation}
 
-Manchmal haben Duale eigene Namen, manchmal hängen wir "`Ko"' davor und manchmal gibt es beides.
+%******************************************************************************************************
+\subsection{Hom-Funktoren-Verträglichkeit}
+%******************************************************************************************************
+Haben wir die beiden Morphismen $f \colon X \to Y$ und $g \colon C \to D$ so gibt es zwei Wege von $\Hom(D,X)$ nach $\Hom(C,Y)$. Beide Wege liefern das selbe Ergebnis. Mit anderen Worten, $f_*$ und $g^*$ vertauschen oder, noch andere Worte, das folgende Diagramm ist kommutativ.
+\begin{equation}
+   \begin{tikzcd}
+      \Hom(D,X)   \arrow[d, "g^*"]  \arrow[r, "f_*"] & \Hom(D,Y) \arrow[d, "g^*"]\\
+      \Hom(C,X)                     \arrow[r, "f_*"] & \Hom(C,Y)
+   \end{tikzcd}
+\end{equation}
+\begin{proof}
+   Sei $h\in \Hom(D,X)$, dann gilt
+   \begin{alignat}{4}
+      &g^*(f_*(h))         &&= g^*(f \circ h)      &&= \\
+      &(f \circ h) \circ g &&= f \circ (h \circ g) &&=\\
+      &f_*(h \circ g)      &&= f_*(g^*(h)).
+   \end{alignat}
+\end{proof}
+Hier handelt es sich also eigentlich um die Assoziativität der Verknüpfung von Funktionen. Etwas poetischer: die Vertauschung ist in Wirklichkeit eine zeitliche und keine räumliche. Das ist in dem Sinne gemeint, dass die Kommutativität die örtliche Reihenfolge der Symbole auf der Tafel irrelevant macht, während die Assoziativität die zeitliche Reihenfolge der Auswertung irrelevant macht. 
 
-Komono = Epi.
-
-Witze innerhalb der Kategorientheorie, die durch Wortspiele mit Ko entstehen, sind verpönt, weil zu einfach zu generieren.
-
-Funktoren werden bei der Dualisierung NICHT umgedreht.
-
+\begin{itemize}
+   \item eine Zeicnung für $f_*$ und $f^*$
+\end{itemize}
 
 \begin{backup}
 %******************************************************************************************************
@@ -444,6 +546,7 @@ Funktoren werden bei der Dualisierung NICHT umgedreht.
     $V, V'$                             & Vergiss-Funktoren\\
     $f, g, h, r, s, \cdots$             & Homomorphismen\\
     $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
+    $\PP$                               & Potenzmengen-Funktor\\
     \Set                                & Die Kategorie der kleinen Mengen\\
     \Ab                                 & Kategorie der kleinen abelschen Gruppen\\
     $\Hom( X, Y)$                       & Die Klasse der Homomorphismen von $X$ nach $Y$\\
