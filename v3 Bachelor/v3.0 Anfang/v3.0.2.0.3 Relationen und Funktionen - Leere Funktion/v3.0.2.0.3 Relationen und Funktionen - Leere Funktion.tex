@@ -224,38 +224,20 @@ Copyright (C) 2024 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
-Relationen und Funktionen passen gut zu leeren Mengen.
+Leere Funktionen entstehen, wenn die Quelle leer ist. 
 
-Eine Relation zwischen zwei Mengen ist definiert als Teilmenge des kartesischen Produktes dieser beiden Mengen. So wie das Produkt selber eine seiner Teilmengen und damit eine Relation ist, so ist auch die leere Menge eine Teilmenge und damit eine Relation. Die leere Relation oder Null-Relation.
+Von der leeren Menge gibt es genau eine Funktion, die leere Funktion. Und die leere Funktion existiert nur, wenn die Quelle leer ist. Es gibt keine Funktion, auch nicht die leere, von einer nicht-leeren Menge in die leere.
 
-Intuitiv handelt es sich dann um eine Eigenschaft zwischen den Elementen, die nicht eintritt. Denken wir uns die Relation "`ist zusammen mit"' als Relation über einer Menge von Menschen. So ist es völlig normal, dass bei der einen oder anderen Menge diese Relation von keinem Paar erfüllt wird, die Relation also leer ist.
+Relationen sind Teilmengen des kartesischen Produktes von Quelle und Ziel. Ist eine der beiden Mengen leer, ist die leere Menge die einzige Teilmenge dieses Produktes. Aber auch, wenn beide Mengen ungleich leer sind, ist die leere Menge eine Teilmenge des kartesischen Produktes. Diese Teilmenge nennen wir die leere Relation. Sie ist eine Relation wie alle anderen auch, mit allen Rechten.
 
-Ein mathematisches Beispiel ist die Relation "`ist echt größer und echt kleiner"' über den natürlichen Zahlen.
+Funktionen sind spezielle Relationen. Frage: ist die leere Relation eine Funktion?
 
-Wenn eine der beiden Ausgangsmengen leer ist, ist auch das Produkt leer. Dann gibt es nur eine einzige Teilmenge des Produktes, nämlich die leere Menge selber. Ist dies eine Relation: ja. Kann es eine Funktion sein? Vorsicht!
+Ja, und zwar genau dann, wenn die Quelle leer ist, da dann die Bedingung dafür, eine Funktion zu sein, eine leere Wahrheit ist.
 
-Also: ist $X$ oder $Y$ leer, so existiert zwar z.B. die Relation $x < y$, aber es gibt keine Paare $(x, y)$ in ihr, die sie erfüllen. Die Relation existiert, ist aber leer.
+Andererseits gibt es keine Funktion von einer nicht-leeren Quelle in ein leeres Ziel. 
 
-Kann eine Null-Relation eine Funktion sein? Funktionen sind Relationen, bei denen es für alle Elemente der linken Seite ein Element der rechten Seite gibt. Eine Funktion kann nicht leer sein, wenn es auf der linken Seite Elemente gibt. 
-
-Zusammen: Es gibt keine Funktion einer nicht-leeren in die leere Menge.
-
-Wenn die linke Seite leer ist, gibt es aber genau eine Funktion, egal ob die rechte leer ist oder nicht: die leere Funktion.
-
-Denn $\forall x \in X \exists!y \in Y \colon xFy$ ist wahr, sobald $X$ leer ist.
-
-Denn $\forall x \phi(x)$ ist wahr, sobald $X$ leer ist. Wir sagen es ist eine leere Wahrheit.
-
-Das liegt daran, dass es äquivalent zu $x \in X \Rightarrow \phi(x)$ ist und eine Implikation immer wahr ist, wenn die Annahme falsch ist.
-
-Sei $M$ eine Menge ganzer Zahlen. Sei $G$ die Teilmenge der geraden Zahlen in $M$. Sei $f \colon G \to \Z$ mit $x \mapsto x/2$, die Funktion, die jeder dieser geraden Zahlen ihre Hälfte zuordnet. Das macht eben alles auch dann Sinn, wenn $G$ leer ist. Dann wird halt keiner Zahl die Hälfte zugeordnet.
-
-Sei nun $N := \{1,2,3\}$. Jetzt suchen wir eine Funktion, die jeder Zahl aus $N$ ein Element aus $G$ zuordnet. Das geht nicht, falls $G$ leer ist.
-
-Sei nun $N := \emptyset$ und $G$ ebenfalls leer. Dann können wir jedem $n$ aus $N$ ein Element aus $G$ zuordnen. 
- 
-
-
+Somit können wir sagen:
+Wenn die Quelle leer ist, ENTHÄLT die Menge der Funktionen von der Quelle in das Ziel die leeren Menge. Wenn die Quelle nicht-leer das Ziel aber leer ist, IST die Menge der Funktionen von der Quelle in das Ziel die leeren Menge.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -265,14 +247,14 @@ Von Jörg Kunze
 %******************************************************************************************************
 \subsection*{Voraussetzungen}
 %******************************************************************************************************
-Relation, Funktion, injektiv, surjektiv, bijektiv.
+Relation, Funktion, Teilmenge, leere Wahrheit.
 
 %******************************************************************************************************
 \subsection*{Text}
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v3%20Bachelor/v3.0%20Anfang/v3.0.2.0.2%20Relationen%20und%20Funktionen%20-%20Geometrisches%20Bild}
+   \url{}
 }
 
 %******************************************************************************************************
