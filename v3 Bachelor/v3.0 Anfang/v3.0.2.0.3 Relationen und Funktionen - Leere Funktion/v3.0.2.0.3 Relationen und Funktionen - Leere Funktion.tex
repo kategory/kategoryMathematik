@@ -83,6 +83,7 @@
 \myTheorem{Definition}
 \myTheorem{Proposition}
 \myTheorem{Theorem}
+\myTheorem{Satz}
 \myTheorem{Example}
 \myTheorem{Remark}
 
@@ -184,6 +185,8 @@
 \newcommand{\e}[1]{\z{#1}^*}
 \newcommand{\q}[1]{(\e{#1})^2}
 
+\newcommand{\zb}{z.~B. }
+
 \excludecomment{book}
 \excludecomment{example}
 \excludecomment{backup}
@@ -254,24 +257,31 @@ Relation, Funktion, Teilmenge, leere Wahrheit.
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v3%20Bachelor/v3.0%20Anfang/v3.0.2.0.3%20Relationen%20und%20Funktionen%20-%20Leere%20Funktion}
 }
 
 %******************************************************************************************************
 \subsection*{Meine Videos}
 %******************************************************************************************************
 Siehe auch in den folgenden Videos:\\
+\\
 v3.0.2.0.1 (Bachelor) Relationen und Funktionen - Surjektiv, injektiv, bijektiv\\
 \url{https://youtu.be/8YFNEWZBpWc}\\
+\\
 v3.0.2 (Bachelor) Relationen und Funktionen\\
-\url{https://youtu.be/qjhNZXFAYEM}
+\url{https://youtu.be/qjhNZXFAYEM}\\
+\\
+v3.0.1.3.1 (Bachelor) Mengen - Leere Wahrheit\\
+\url{https://youtu.be/MImsrTFa2DA}
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Leere_Funktion}\\
 \url{https://de.wikipedia.org/wiki/Relation_(Mathematik)}\\
-\url{https://jcsites.juniata.edu/faculty/rhodes/ida/relations.html}
+\url{https://de.wikipedia.org/wiki/Leere_Wahrheit}
+
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -310,13 +320,128 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Geometrisches Bild von Relationen und Funktionen}
+\section{Leere Funktion}
 %                                                                                                     *
 %******************************************************************************************************
+Eine Relation zwischen zwei Mengen $X,Y$ ist nichts anderes als eine Teilmenge des kartesischen Produktes $X \times Y$, der Menge aller Paare $\{ (x,y) \mid x \in X \land y \in Y \}$. Da eine Relation eine Richtung hat, könne wir auch von einer Relation von $X$ nach $Y$ sprechen. Ähnlich wie bei Funktionen schreiben wir auch $R \colon X - Y$.
 
-Zur Förderung der Intuition und um verschiedene Aspekte von Relationen und damit auch Funktionen zu visualisieren, stellen wir diese hier graphisch in drei Weisen dar. Die Nummern beziehen sich auf die händischen Skizzen auf den beiden eingefügten Bildern.
+Oft wollen wir Quelle und Ziel als Teil der Definition einer Relation sehen, so dass zwei Relationen mit der selben Menge von Paaren aber unterschiedlicher Quelle oder unterschiedlichem Ziel als unterschiedlich angesehen werden. Dann können wir \zb definieren: Eine Relation $R \colon X - Y$ ist ein Tripel $(X,Y,\overline R)$ mit $\overline R \subseteq X \times Y$. Hier lassen wir dann den Strich über dem $R$ gerne weg (par abus de langage), solange keine Missverständnisse auftreten. 
 
+Eine Funktion $F \colon X \to Y$ ist eine Relation, die zusätzlich einer bestimmten Bedingung genügt:
+\begin{equation}\label{funktion}
+   \boxed{\forall x \in X \exists! y \in Y \colon xFy}.
+\end{equation}
 
+Da die leere Menge eine völlig legitime Teilmenge des Produktes ist, $\emptyset \subseteq X \times Y$, untersuchen wir hier, ob diese auch ein Relation oder Funktion sein kann, und was dies zu bedeuten hat.
+
+%******************************************************************************************************
+\subsection*{Leere Relation}
+%******************************************************************************************************
+\emph{Jede} Teilmenge von $X \times Y$ ist eine Relation $R \colon X - Y$. Also auch $\emptyset$. Wir nennen sie die \textbf{leere Relation}.
+\begin{Satz}{Existenz der leeren Relation}
+   Sein $X$ oder $Y$ Mengen. Dann ist die leere Relation eine Relation von $X$ nach $Y$
+   \begin{equation}
+      \emptyset \colon X - Y.
+   \end{equation}
+\end{Satz}
+
+Ein Beispiel ist die Relation "`ist ein Kind von"' bei einer Veranstaltung, wo Kinder und Eltern kommen können und wo zufällig zu keinem Kind sein Elt gekommen ist. In dieser Situation ist diese Relation leer.
+
+Ein leicht andere Situation ist gegeben, wenn kein einziges Kind da ist. Dann kann, egal wer von den Eltern da, kein (Kind, Elt)-Paar anwesend sein. Genauso, wenn keine Eltern da sind. Auch in diesem Fall ist die Relation "`ist ein Kind von"' leer.
+
+Im Extremfall ist niemand gekommen. Auch dann ist die Relation "`ist ein Kind von"' leer.
+
+\begin{Satz}{Leere Menge führt zu leerer Relation}
+   Sei $X$ oder $Y$ leer. Dies schließt den Fall, dass beide leer sind ein. Dann gibt es genau eine Relation $R \colon X - Y$, nämlich die leere Relation.
+\end{Satz}
+
+Wenn wir mit $\operatorname{Rel}(X,Y)$ die Menge der Relationen zwischen $X$ und $Y$ bezeichnen, 
+können wir die obigen Erkenntnisse schreiben als:
+\begin{alignat}{4}
+   \boxed{\emptyset \in \operatorname{Rel}(X,Y)}
+\end{alignat}
+und
+\begin{alignat}{4}
+   X = \emptyset \lor Y = \emptyset \Rightarrow \operatorname{Rel}(X,Y) = \{ \emptyset \}.
+\end{alignat}
+
+Oder als Tabelle: Hier sind $X, Y$ nicht leere Mengen und "`$*, \cdots$"' bedeutet ein oder mehrere Elemente, von denen keins die leere Menge ist.
+
+\begin{tabular}{|l|l|}
+   \hline
+   $\operatorname{Rel}(X,Y)$ & $\{ \emptyset, *, \cdots \}$\\
+   $\operatorname{Rel}(\emptyset,Y)$ & $\{\emptyset\}$\\
+   $\operatorname{Rel}(\emptyset,\emptyset)$ & $\{\emptyset\}$\\
+   $\operatorname{Rel}(X,\emptyset)$ & $\{\emptyset\}$\\
+   \hline
+\end{tabular}
+
+können wir die obigen Erkenntnisse schreiben als:
+\begin{alignat*}{4}
+   \emptyset \in \operatorname{Rel}(X,Y)\\
+   X = \emptyset \lor Y = \emptyset \Rightarrow \operatorname{Rel}(X,Y) = \{ \emptyset \}.
+\end{alignat*}
+
+%******************************************************************************************************
+\subsection*{Leere Funktion}
+%******************************************************************************************************
+Wenn $X$ nicht leer ist, dann kann die Relation $\emptyset \colon X - Y$ nicht die Bedingung \eqref{funktion} erfüllen.
+\begin{Satz}{Keine leere Funktion auf nicht leerer Menge}
+   Sei $X \ne \emptyset$. Dann ist $\emptyset \colon X - Y$ keine Funktion.
+\end{Satz}
+
+Dies gilt insbesondere, wenn $Y$ leer ist. Da dann $\emptyset$ die einzige Relation von $X$ nach $Y$ ist (, weil $X \times Y = \emptyset$), gibt es in dem Fall gar keine Funktion.
+\begin{Satz}{Keine Funktion von nicht-leerer in leerer Menge}
+   Sei $X \ne \emptyset$. Dann existiert keine Funktion $F \colon X - \emptyset$.
+\end{Satz}
+
+Wenn auf der anderen Seite $X$ leer ist, ist \eqref{funktion} als leere Wahrheit erfüllt. Und das unabhängig davon, ob $Y$ leer ist oder nicht.
+\begin{Satz}{Leere Funktion von leerer Menge}
+   $\emptyset \colon \emptyset - Y$ ist Funktion.
+\end{Satz}
+
+Wenn wir mit $\operatorname{Fun}(X,Y)$ die Menge der Funktionen zwischen $X$ und $Y$ bezeichnen, können wir die obigen Erkenntnisse folgendermaßen zusammenfassen. Hier sind $X, Y$ nicht leere Mengen und "`$*, \cdots$"' bedeutet ein oder mehrere Elemente, von denen keins die leere Menge ist.
+
+\begin{tabular}{|l|l|}
+   \hline
+   $\operatorname{Fun}(X,Y)$ & $\{ *, \cdots \}$\\
+   $\operatorname{Fun}(\emptyset,Y)$ & $\{\emptyset\}$\\
+   $\operatorname{Fun}(\emptyset,\emptyset)$ & $\{\emptyset\}$\\
+   $\operatorname{Fun}(X,\emptyset)$ & $\emptyset$\\
+   \hline
+\end{tabular}
+
+\textbf{Beachte den Unterschied von "`Fun ist leer"' und "`Fun enthält nur die leere Menge"'}.
+
+\begin{equation}
+   \boxed{\emptyset \ne \{\emptyset\}}
+\end{equation}
+
+In unserm Beispiel von oben, nehmen wir an, dass zu jedem Kind ein Elt als Ansprechpartner eingetragen sein muss. Dies ist eine Funktion von der Menge der Kinder der Veranstaltung in die Menge der Eltern der Veranstaltung.
+
+Wenn kein Kind da ist, ist diese Funktion leer. Aber sie existiert. Es gibt kein Problem, die Regeln sind eingehalten.
+
+Wenn weder Kinder noch Eltern da sind, ist es ebenso kein Problem und die Funktion ist wieder die leere.
+
+Wenn aber Kinder nicht jedoch Eltern da sind, gibt es keine solche Funktion. Fun ist leer, wir haben ein Problem, die Regeln können nicht eingehalten werden.
+
+%******************************************************************************************************
+\subsection*{Null-Funktion}
+%******************************************************************************************************
+Von der leeren Funktion ist zu unterscheiden die Null-Funktion
+\begin{Definition}{Null-Funktion}
+   Seien $X, Y$ Mengen. In $Y$ gäbe es ein Element Null, geschrieben als $0$. Dies kann in manchen Zusammenhängen auch mal die leere Menge sein. Dann ist die \textbf{Null-Funktion} die Funktion, die jedem Element von $X$ das Element $0$ zuordnet.
+   \begin{alignat}{4}
+      &0 \colon &&X &&\to     &&\quad Y\\
+      &         &&x &&\mapsto &&\quad 0.
+   \end{alignat}
+\end{Definition}
+In dem obigen Fall ist insbesondere $Y$ nicht leer. Wenn $X$ nicht leer ist, ist $0 = \{(x,0) \mid x \in X \}$ auch nicht leer.7
+
+%******************************************************************************************************
+\subsection*{Echte Klassen}
+%******************************************************************************************************
+Das meiste, was hier erwähnt wurde gilt auch, falls $X$ oder $Y$ echte Klassen sind. Dann können wir allerdings eine Relation oder Funktion nicht als Tupel auffassen. Da dann in der Regel auch die Relationen $R \colon X-Y$  und Funktionen $F \colon X \to Y$ echte Klassen sind, können wir $\operatorname{Rel}(X,Y)$ oder $\operatorname{Fun}(X,Y)$ nicht bilden, da echte Klassen nicht Elemente von Klassen sein können.
 
 \begin{backup}
 %******************************************************************************************************
@@ -358,9 +483,11 @@ Noch zu erledigen sind
 \renewcommand*{\arraystretch}{1}
 
 \begin{tabular}{ll}
+    $\emptyset$             & die leere Menge $\{\}$\\
     $X, Y, \cdots$          & Mengen\\
     $x, y, \cdots$             & Elemente\\
-    $R$             & Eine Relation
+    $F$                 & eine Funktion\\
+    $R$             & eine Relation
    
 \end{tabular}
 
