@@ -238,7 +238,19 @@ Copyright (C) 2024 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
-xxx
+Das Produkt zweier Kategorien ist das kartesische Produkt der Klassen der Objekte und das der Klasse der Homomorphismen mit einer geeignet definierten Verknüpfung.
+
+Hier betrachten wir Kategorien weniger als Werkzeug zur Untersuchung von Strukturen und ein wenig als mathematische Struktur selber. Und wie bei Gruppen oder topologischen Räumen können wir die Struktur auf die Produkte der zugrunde liegenden Klasse/Menge ausdehnen.
+
+Ein Funktor vom Produkt von zwei Kategorien in eine Kategorie heißt Bi-Funktor (Bifunktor). 
+
+$\Hom( \_, \_ )$ liefert mit jeweils festem Wert links oder rechts einen Funktor. Damit haben wir dadurch zwei Funktor-Scharen gegeben. Ist dies ein Bi-Funktor?
+
+Generell erfüllt eine Funktion vom Produkt von zwei Kategorien in eine Kategorie, welche mit jeweils festem Wert links oder rechts einen Funktor liefert, fast alle Axiome eines Bi-Funktors. Damit wir diese Funktion auch auf beliebige Paare von Morphismen anwenden können, müssen wir ihn darauf sinnvoll erweitern.
+
+Dies ist genau dann möglich, wenn die Ausgangsfunktion die Bi-Funktor-Bedingung erfüllt.
+
+Dies ist nicht automatisch der Fall, wie ein Gegenbeispiel zeigen wird.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -248,14 +260,14 @@ Von Jörg Kunze
 %******************************************************************************************************
 \subsection*{Voraussetzungen}
 %******************************************************************************************************
-Kategorie, Funktor, Hom-Funktor, Dual
+Kategorie, Funktor, Hom-Funktor, kontravarianter Funktor, Duale-Kategorie
 
 %******************************************************************************************************
 \subsection*{Text}
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.1.2%20Kontravarianz%20und%20duale%20Kategorie}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.1.3%20Produkte%20von%20Kategorien}
 }
 
 %******************************************************************************************************
@@ -274,6 +286,12 @@ v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
 \\
 v5.0.1.0.8 (Höher) Kategorien - Hom-Mengen\\
 \url{https://youtu.be/bnMkDng-NnA}
+\\
+v5.0.1.1.1 (Höher) Kategorien - Kategorisch dual\\
+\url{https://youtu.be/5bll2AYkCC4}
+\\
+v5.0.1.1.2 (Höher) Kategorien - Kontravarianz und duale Kategorie\\
+\url{https://youtu.be/D3DfjfSjNlc}
 
 %******************************************************************************************************
 \subsection*{Quellen}
@@ -282,7 +300,9 @@ Siehe auch in den folgenden Seiten:\\
 \url{https://de.wikipedia.org/wiki/Duale_Kategorie}\\
 \url{https://de.wikipedia.org/wiki/Funktor_(Mathematik)}\\
 \url{https://de.wikipedia.org/wiki/Hom-Funktor}\\
-\url{https://de.wikipedia.org/wiki/Potenzmengenfunktor}
+\url{https://ncatlab.org/nlab/show/bifunctor}\\
+\url{https://ncatlab.org/nlab/show/product+category}\\
+\url{https://en.wikipedia.org/wiki/Product_category}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -349,141 +369,47 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Kontravarianz und duale Kategorie}
+\section{Produkt von Kategorien}
 %                                                                                                     *
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Duale Kategorie}
+\subsection{Produkt von Kategorien}
 %******************************************************************************************************
-\begin{Definition}{Duale Kategorie}
-   Sei \CC\ eine Kategorie. Die dazu \textbf{duale Kategorie} (englisch \textbf{opposite category}, $\CC^\text{op}$) geschrieben als $\CC^*$ ist durch folgende Daten gegeben:
-   \begin{itemize}
-      \item Die Objekte von $\CC^*$ sind genau die Objekte von $\CC$
-      \item Die Morphismen von $\CC^*$ sind genau die Morphismen von $\CC$. Ist $f \in \CC$ so schreiben wir $f^*$, wenn wir ihn als Morphismus in $\CC^*$ betrachten.
-      \item $f^*$ geht in die entgegengesetzte Richtung von $f$. D.~h. wir definieren $\Cod(f^*) := \Dom(f)$ und $\Dom(f^*) := \Cod(f)$. (Mit Dom = Domain = Quelle und Cod = Codomain = Bild = Ziel). Mit anderen Worten $(f^* \colon Y \to X) \in \CC^*$, genau dann wenn $(f \colon X \to Y) \in \CC$. Mit ganz anderen Worten: Es sind die selben Morphismen, nur andersrum.
-      \item Die Verknüpfung definieren wir über $f^* \circ g^* := (g \circ f)^*$.
-   \end{itemize}
+\begin{Definition}{Produkt von Kategorien}
+   Seien $\CC, \DD$ zwei Kategorien. Das \textbf{Produkt} ist definiert als das kartesische Produkt der beiden Klassen der Objekte als Klasse der Objekte und das kartesische Produkt der beiden Klassen der Morphismen als Klasse der Morphismen. Für jeden Morphismus $f \colon C_1 \to C_2$ und $g \colon D_1 \to D_2$ ist 
+   \begin{equation}
+      (f, g) \colon (C_1, D_1) \to (C_2, D_2).
+   \end{equation}
+   Weiter wird definiert:
+   \begin{alignat}{4}
+      &\id_{(C,D)}               &&:= (\id_C, \id_D)\\
+      &(f_1,g_1) \circ (f_2,g_2) &&:= (f_1 \circ f_2, g_1 \circ g_2).
+   \end{alignat}
 \end{Definition}
 Es ist leicht zu sehen, dass die Axiome einer Kategorie erfüllt sind.
 
-\begin{Satz}{Dual der Konstruktion einer Kategorie ergibt deren duale}
-   Sei $\Delta$ eine gültige Zeichenkette in ETAC, welche eine Kategorie $\CC$ definiert/konstruiert. Dann ist die duale Zeichenkette $\Delta^*$ eine Definition/Konstruktion der dualen Kategorie $\CC^*$.
-\end{Satz}
-\begin{proof}
-   Dies ist insofern klar, als beide Definitionen von "`dual"' die Richtung der Pfeile umdrehen. Wenn wir das präzise beweisen wollen, müssen wir, glaube ich, das Dual einer Kategorie formalisieren und dann induktiv über den Aufbau gültiger Zeichenketten arbeiten.
-\end{proof}
-
-\begin{Satz}{In Dualer Kategorie gelten die dualen Sätze}
-   Sei $\phi$ ein Prädikat, \CC\ eine Kategorie und gelte $\phi(\CC)$. Sei $\Phi$ die Zeichenkette aus ETAC, die $\phi$ formalisiert, $\Phi^*$ deren Dual und $\phi^*$ die Rücküberführung von $\Phi^*$ in unsere Sprache, dann gilt $\phi^*(\CC^*)$.
-\end{Satz}
-\begin{proof}
-   Da dies ein Satz über die menschliche Sprache ist, können wir ihn nicht so ohne weiteres beweisen. Ich würde es so beweisen, dass wir, wie oben das  Dual einer Kategorie in ETAC formalisieren, dann folgenden Satz über ETAC beweisen: Falls "`$\Phi(\CC)$"' gilt/beweisbar ist dann gilt/ist beweisbar auch "`$\Phi^*(\CC^*)$"'. Danach bemühen wir wieder unser geheimes Axiom, dass Aussagen über ETAC auch in der echten Welt gelten.
-\end{proof}
-
-In diesem Sinne ist epi das selbe wie das Dual von mono, was wir schnell sehen, da die beiden Definitionen sich nur durch die Richtung der Pfeile unterscheiden. Wenn \zb in einer Kategorie \CC\ gilt, dass alle Morphismen mono sind, dann gilt in $\CC^*$, dass alle Morphismen epi sind.
-
 %******************************************************************************************************
-\subsection{Kontravarianter Funktor}
+\subsection{Hom()}
 %******************************************************************************************************
-\begin{Definition}{Kontravarianter Funktor via dual}
-   Ein \textbf{kontravarianter Funktor} $F \colon \CC \to \DD$ ist ein Funktor $F \colon \CC^* \to \DD$. Funktoren heißen zur Abgrenzung gegenüber den kontravarianten Funktoren auch \textbf{kovariant}.
-\end{Definition}
+Hom definiert zwei Scharen vom Morphismen $\Hom( C, \_)$ und $\Hom( \_, D)$. Ergeben diese zusammen einen Bi-Funktor $\Hom( \_, \_ ) \colon \CC^* \times \CC \to \DD$?
 
-\begin{Definition}{Kontravarianter Funktor via Axiome}
-   Ein \textbf{kontravarianter Funktor} sind zwei Abbildungen $F \colon \Obj( \CC ) \to \Obj( \DD )$ und $F \colon \Hom( \CC ) \to \Hom( \DD )$ zwischen den Klassen der Objekte und den Klassen der Morphismen, wobei dies Klassen-Abbildungen sein können, sodass für alle $C \in \Obj(\CC)$ und alle $f, g \in \Hom( \CC )$, für die wir $f \circ g$ bilden können gilt:
-   \begin{alignat}{4}
-      \text{ wir können } &F(g) \circ F(f) \quad &&\text{bilden}\\
-      &F( f \circ g ) &&= F(g) \circ F(f)\\
-      &F( \id_C) &&= \id_{F(C)}.
-   \end{alignat}
-\end{Definition}
+Allgemeiner: Sei $K \colon \CC \times \DD \to \EE$ eine Funktion auf den Objekten von $\CC \times \DD$ und eine Funktion auf den Morphismen der Form $(f, \id_D)$ und $(\id_c, g)$ und seien $K(C, \_)$ und $K(\_,D)$ Scharen von Funktoren. Können wir K als Bi-Funktor erweitern? Wir müssen ihn erweitern, da er nicht auf allgemeinen Morphismen der Form $(f,g)$ definiert ist.
 
-\begin{Satz}{Kontravariant via dual äquivalent Kontravariant via Axiome}
-   Die beiden Definitionen oben führen zum selben Begriff von "`kontravarianter Funktor"'.
-\end{Satz}
-\begin{proof}
-   Die Definition der Verknüpfung enthält genau die Vertauschung, die wir für die Verknüpfung bei den Axiomen benötigen.
-\end{proof}
-
-%******************************************************************************************************
-\subsection{Kontravarianter Potenzmengen-Funktor}
-%******************************************************************************************************
-\begin{Definition}{Kontravarianter Potenzmengen-Funktor}
-   Der \textbf{kontravarianter Potenzmengen-Funktor} $\PP \colon \Set \to \Set$ ist definiert auf den Objekten (in diesem Fall Mengen) als $\PP( X ) := $ Menge aller Teilmengen von $X$. Für ein $f \colon X \to Y$ definieren wir $\PP(f) \colon \PP(Y) \to \PP(X)$ über seine Wirkung auf Teilmengen $Y' \subseteq Y$ als
-   \begin{equation}
-      \PP(f)(Y') := f^{-1}(Y').
-   \end{equation}
-\end{Definition}
-Hier sehen wir, dass ein Funktor viel mehr ist als eine stupide Abbildung der Objekte. Er geht immer einher mit einer Abbildung der Morphismen und das ganze ist strukturverträglich. Die Potenzmengen-Bildung ist also mächtiger oder reicher als auf den ersten Blick zu erkennen ist.
-
-Es gibt auch einen kovarianten Potenzmengen-Funktor, der sich nur in seiner Wirkung  auf die Morphismen unterscheidet.
-
-%******************************************************************************************************
-\subsection{Hom-Funktoren}
-%******************************************************************************************************
-\begin{Definition}{Hom-Funktor}
-   Sei \CC\ eine Kategorie in der die Klassen $\Hom(X,Y)$ unabhängig von $X,Y$ immer Mengen sind (wir nennen eine solche Kategorie lokal klein). Dann definieren wir zu jedem $C \in \CC$ den \textbf{kovarianten Hom-Funktor} $\Hom(C, \_) \colon \CC \to \Set$ durch seine Wirkung auf alle $X,Y, f \colon X \to Y \in \CC$:
-   \begin{alignat}{4}
-      &\Hom(C, \_)( Y ) := &&\Hom(C, Y)\\
-      &\Hom(C, \_)( f ) := &&\Hom(C, f ) \colon &&\Hom(C, X ) &&\to \Hom(C, Y )\\
-      &                    &&                   &&h           &&\mapsto f \circ h.
-   \end{alignat}
-   Wir schreiben gerne prägnanter $h_C := \Hom(C, \_)$ und  $f_* := f \circ \_ := \Hom(C, f )$ schreiben.
-
-   Ähnlich definieren wir den \textbf{kontravarianten Hom-Funktor} $\Hom(\_, C) \colon \CC \to \Set$ durch seine Wirkung auf alle $X,Y, f \colon X \to Y \in \CC$:
-   \begin{alignat}{4}
-      &\Hom(\_, C)( Y ) := &&\Hom(Y, C)\\
-      &\Hom(\_, C)( f ) := &&\Hom( f, C ) \colon &&\Hom(Y, C ) &&\to \Hom(X, C )\\
-      &                    &&                   &&h           &&\mapsto h \circ f.
-   \end{alignat}
-   Wir schreiben gerne prägnanter $h^C := \Hom(\_, C)$ und  $f^* := \_ \circ f := \Hom( f, C )$ schreiben.
-\end{Definition}
-Diese Sterne haben allerdings nichts mit "`dual"' zu tun. Diese Definition für die Wirkung auf $f$ ist formeltechnisch unabhängig von $C$. Sie wirkt aber jeweils nur auf Morphismen, deren Start $C$ ist.
-
-$f_* = f \circ \_$ drückt den Endpunkt von $h$ von $X$ in Richtung $f$ nach $Y$.
+Mit dem Ansatz für $f \colon C_1 \to C_2$ und $g \colon D_1 \to D_2$
 \begin{equation}
-   \begin{tikzcd}
-                         &C   \arrow[dl, "h"{above, name=0}] \arrow[dr, dashed, "f \circ h"{name=1}] \\
-      X \arrow[rr, "f"{below}]  &        &Y
-      \arrow[Rightarrow, bend right, from=0, to=1, "f \circ \_"{below}]
-   \end{tikzcd}
+   K(f,g) := K(f, D_2) \circ K(C_1, g)
+\end{equation}
+können wir fast alle Axiome eines Funktors beweisen. Außer das mit der Verknüpfung. Wir haben also einen Fast-Funktor.
+
+Damit $K((f_2,g_2) \circ (f_1,g_1)) = K(f_2,g_2) \circ K(f_1,g_1)$ ist, können wir unserer angesetzten Definition und der Definition der Verknüpfung im Produkt zeigen, dass folgendes gelten muss:
+\begin{equation}
+   K(f_2,D_3) \circ K(f_1, D_3)  \circ K(C_1, g_2)  \circ K(C_1,g_1) = K(f_2,D_3) \circ K(C_2,g_2)  \circ K(f_1,D_2)  \circ K(C_1,g_1).
 \end{equation}
 
 
-$f^* = \_ \circ f$ zieht den Startpunkt von $h$ von $Y$ gegen (kontra) die Richtung $f$ zurück nach $X$.
-\begin{equation}
-   \begin{tikzcd}
-      X \arrow[rr, "f"{above}] \arrow[dr, dashed, "h \circ f"{left, name=1}] &
-                            &Y \arrow[dl, , "h"{right,name=0}]\\
-      &C     \\
-      \arrow[Rightarrow, bend right, from=0, to=1, "\_ \circ f"{below}]
-   \end{tikzcd}
-\end{equation}
+NICHT FERTIG!
 
-%******************************************************************************************************
-\subsection{Hom-Funktoren-Verträglichkeit}
-%******************************************************************************************************
-Haben wir die beiden Morphismen $f \colon X \to Y$ und $g \colon C \to D$ so gibt es zwei Wege von $\Hom(D,X)$ nach $\Hom(C,Y)$. Beide Wege liefern das selbe Ergebnis. Mit anderen Worten, $f_*$ und $g^*$ vertauschen oder, noch andere Worte, das folgende Diagramm ist kommutativ.
-\begin{equation}
-   \begin{tikzcd}
-      \Hom(D,X)   \arrow[d, "g^*"]  \arrow[r, "f_*"] & \Hom(D,Y) \arrow[d, "g^*"]\\
-      \Hom(C,X)                     \arrow[r, "f_*"] & \Hom(C,Y)
-   \end{tikzcd}
-\end{equation}
-\begin{proof}
-   Sei $h\in \Hom(D,X)$, dann gilt
-   \begin{alignat}{4}
-      &g^*(f_*(h))         &&= g^*(f \circ h)      &&= \\
-      &(f \circ h) \circ g &&= f \circ (h \circ g) &&=\\
-      &f_*(h \circ g)      &&= f_*(g^*(h)).
-   \end{alignat}
-\end{proof}
-Hier handelt es sich also eigentlich um die Assoziativität der Verknüpfung von Funktionen. Etwas poetischer: die Vertauschung ist in Wirklichkeit eine zeitliche und keine räumliche. Das ist in dem Sinne gemeint, dass die Kommutativität die örtliche Reihenfolge der Symbole auf der Tafel irrelevant macht, während die Assoziativität die zeitliche Reihenfolge der Auswertung irrelevant macht.
-
-\begin{itemize}
-   \item eine Zeicnung für $f_*$ und $f^*$
-\end{itemize}
 
 \begin{backup}
 %******************************************************************************************************
