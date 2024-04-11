@@ -1,0 +1,436 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v4.0.4.4.3 Text und Gödelnummer.tex                                                              *
+%                                                                                                  *
+% Copyright (C) 2024 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v4.0.4.4.3 Text und Gödelnummer is part of kategoryMathematik.                                   *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Satz}
+\myTheorem{Theorem}
+\myTheorem{Axiom}
+\myTheorem{Beispiel}
+\myTheorem{Anmerkung}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\GL}{GL}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\DD}{\ensuremath{\mathcal{ D }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\FF}{\ensuremath{\mathcal{ F }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+\newcommand{\m}{\mathcal}
+
+\newcommand{\zb}{z.~B. }
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Master) Berechenbarkeit\\[1cm]
+\textbf{v4.0.4.4.3 Text und Gödelnummer}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2024 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Texte, definiert als endliche Folgen von Zeichen aus einem Alphabet, kommen in der Mathematik vor, wenn wir Formeln, Aussagen, Beweise oder Algorithmen mit mathematischen Methoden untersuchen. Ein Satz ist in dem Zusammenhang eine Folge von Zeichen.
+
+Eine Gödelnummer ist ein Code, der aus einem Text oder einem Tupel von natürlichen Zahlen, was eigentlich auch wieder eine Art Text ist, eine natürliche Zahl macht. Umkehrbar. Damit können wir Funktionen, die auf Texten oder auf Tupeln arbeiten, auf Funktionen von $\N$ nach $\N$ zurückführen.
+
+Unsere ganze Berechenbarkeitstheorie führen wir auf $\N$ durch. Wir haben aber immer im Kopf, dass alles, was wir sagen, auch für Funktionen auf Texten gilt.
+
+Beispiele für Textfunktionen in der mathematischen Logik sind: Ist ein Ausdruck syntaktisch korrekt. Ist ein Satz beweisbar. Ist eine Folge von Aussagen ein Beweis. Das Einsetzen eines Ausdrucks für eine Variable. Ermitteln, ob ein Algorithmus gegeben durch einen formalen Programm-Code in eine Endlos-Schleife gerät.
+
+Wir hätten auch Texte als das ursprüngliche ansehen können und dann Zahlen als Wörter auffassen können, wie \zb durch die Dezimaldarstellung. Tatsächlich kommt dies dem tatsächlichen Geschehen bei der mathematischen Arbeit näher.
+
+Eine Gödelnummer ist eine Funktion von der Ausgangsmenge in $\N$ mit bestimmten Eigenschaften. Die Bilder dieses Funktion heißen auch Codes. Die Ausgangsmenge ist \zb die Menge der Wörter über einem Alphabet oder die Menge der Tupel über $\N$. Die Eigenschaften sind:
+\begin{itemize}
+   \item Injektiv
+   \item Berechenbar
+   \item Die Frage, ob eine Zahl im Bild ist, ist berechenbar
+   \item Die auf dem Bild definierte Umkehrfunktion ist ebenfalls berechenbar.
+\end{itemize}
+Mit anderen Worten können wir zwischen Wörtern/Tupeln und deren Codes verlustfrei mit Hilfe eines Computerprogramms hin und her rechnen.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Berechenbare Funktionen, Alphabet
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+{\tiny
+   \url{}
+}
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\
+\\
+v4.0.3 (Master) Berechenbarkeit - Turing Maschine\\
+\url{https://youtu.be/29UcyRumdFo}\\
+\\
+v4.0.4 (Master) Berechenbarkeit - Berechenbare Funktionen\\
+\url{https://youtu.be/tARmHFIP32o}\\
+\\
+v4.0.4.2 (Master) Berechenbarkeit - Rekursive Funktionen\\
+\url{https://youtu.be/tFEn2GoLLEQ}
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Church-Turing-These}\\
+\url{https://de.wikipedia.org/wiki/Turing-Vollst%C3%A4ndigkeit}\\
+\url{https://en.wikipedia.org/wiki/Turing_completeness}
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+Computability\\
+A Mathematical Sketchbook\\
+Douglas S. Bridges\\
+Springer-Verlag New York Inc. 2013\\
+978-1-4612-6925-0 (ISBN)
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird,
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben
+(zu finden im selben Git-Projekt).
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter
+{\tiny
+   \url{hhh}
+}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{Church-Markov-Turing These}
+%                                                                                                     *
+%******************************************************************************************************
+%******************************************************************************************************
+\subsection{Drei Definitionen von berechenbar}
+%******************************************************************************************************
+Es gibt drei übliche Definitionen von berechenbaren Funktionen:\\
+Turing-Maschinen\\
+Lambda-Kalkül\\
+Mu-rekursiv
+
+%******************************************************************************************************
+\subsection{Turing-äquivalent}
+%******************************************************************************************************
+Eine System oder ein Begriff, welches Funktionen liefert oder definiert, ist \textbf{Turing-vollständig}, wenn jede Turing-Maschinen-berechenbare Funktion geliefert wird. Die können wir z.~B. dadurch beweisen, dass in diesem System ein Turing-Maschinen-Simulator implementiert werden kann.
+
+Können alle Funktionen eines Turing-vollständigen Systems auch von einer Turing-Maschine geliefert werden, heißt das System \textbf{Turing-äquivalent}. Das können wir z.~B. dadurch beweisen, dass wir das System in einer Turing-Maschine implementieren.
+
+%******************************************************************************************************
+\subsection{Church-Markov-Turing These}
+%******************************************************************************************************
+Die Church-Markov-Turing These, die weder mathematischer Satz noch Vermutung ist, besagt, dass jede auch nur erdenkliche halbwegs vernünftige Definition des Berechenbarkeits-Begriffs Turing-äquivalent ist.  Die These heißt auch Church-Turing These oder nur Church These.
+
+Formal bewiesen ist es als mathematischer Satz für 
+Turing-Maschinen,
+Lambda-Kalkül,
+Mu-rekursiv, und alle normalen Programmiersprachen, wie C, C++, Python, JavaScript, Lisp, Prolog, Java, Haskell \dots Bei den Programmiersprachen nehmen wir dann an, dass sie über einen unendlichen Speicher verfügen. Alle Programmiersprachen sind prinzipiell gleich. Wir können den Raum der erreichbaren Funktionen nicht erweitern.
+
+Ein konzeptioneller Unterschied von JavaScript und einer Turing-Maschine ist, dass letztere einen unendlichen Speicher hat. Hier ist allerdings zu bedenken, dass die Turing-Maschine zu keinem Zeitpunkt unendliche viel Speicher nutzt. Es sind immer nur endliche viele Speicherplätze mit einer 1 belegt. Der Rest ist 0. Dies entspricht en wenig der Idee des potentiell unendlichen.
+JavaScript und andere real-technische Programmiersprachen sind in folgenden Sinne pragmatisch potentiell unendlich: wenn eine Berechnung wegen zu wenig Speicher abbricht, können wir neuen RAM oder Plattenspeicher kaufen, und das ganze dann nochmal versuchen. Oder wir warten auf die nächste Rechner-Generation. Ein Schritt, den die Menschheit immer wieder macht.
+
+%******************************************************************************************************
+\subsection{JavaScript}
+%******************************************************************************************************
+JavaScript ist Turing-äquivalent, wenn wir von der Speicherbegrenzung absehen. In der Spezifikation von JavaScript wird nicht gesagt, dass nur Speicher bis zu einer bestimmten Größe erlaubt ist. Über das Adressierungsmodel oder Pointer-Datentypen wird keine Aussage gemacht.
+
+Ein realer Computer aber, der isoliert dasteht also keinen Zugriff auf (eventuell mit der Zeit wachsende) externe (Cloud-) Speicher hat ist auch mit JavaScript nicht Turing-äquivalent noch nicht einmal Turing-vollständig.
+
+Ein Augenmerk muss dabei auf Zahlen gerichtet werden. Normale Zahlen in JavaScript sind vom Typ Number, eine 64-bit floating point IEEE 754 Darstellung. Der höchste Wert hier ist
+
+{\tt Number.MAX\_VALUE} $= 2^{1024} - 2^{971} \approx 1.7976931348623157 10^{308}$
+\\Allerdings sind hier Dezimalstellen abgeschnitten. Unabgeschnitten geht es nur bis
+
+{\tt Number.MAX\_SAFE\_INTEGER} $ 2^{53} - 1 = 9007199254740991$.
+
+Eine Lösung ist, mit BigInt zu arbeiten. Dies ist ein Datentyp, der beliebig große ganze Zahlen mit all ihren Dezimalstellen abbilden kann. In der Spezifikation findet sich, meines Wissens, keine Obergrenze. Der zur Verfügung stehende Speicher liefert natürlich eine solche. BigInt können über den Konstruktor oder auch über Literale (ganze Zahlen mit einem n am Ende) erzeugt werden:
+
+\begin{lstlisting}[language=c]
+   x = BigInt( 42 );
+   y = 4875498574329574398572940385790234857423n;
+\end{lstlisting}
+
+%******************************************************************************************************
+\subsection{Mathematische Grundlagen}
+%******************************************************************************************************
+Die Auswirkung auf die mathematischen Grundlagen und Logik: ein Algorithmus, wie der euklidische, sollte Turing-maschinen-berechenbar sein, um als solcher zu gelten. Definitionen von "`gültiger Term"', "`wohl geformte mathematische Aussage"' oder "`korrekter Beweis"' sollten durch Turing-maschinen-berechenbare Funktionen auf den Zeichenketten von Term, Aussage oder Beweis definiert werden können. Sie sollten also in JavaScript programmiert werden können.
+
+\begin{equation}
+   x + \hbox{text}
+\end{equation}
+
+\begin{backup}
+%******************************************************************************************************
+%                                                                                                     *
+\section{TODO}
+%                                                                                                     *
+%******************************************************************************************************
+\begin{itemize}
+     \item Überprüfe Symbolverzeichnis
+\end{itemize}
+
+
+\end{backup}
+
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+   \bibitem[Douglas2013]{Douglas}
+   Douglas S. Bridges, \emph{Computability, A Mathematical Sketchbook},
+   Springer, Berlin Heidelberg New York 2013, ISBN 978-1-4612-6925-0 (ISBN).
+
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $\N$                    & Die Menge der natürlichen Zahlen (mit Null): $\{ 0, 1, 2, 3, \cdots \}$\\
+    $n, k, l, s, i, x_i, q$ & Natürliche Zahlen\\
+    $A( k, n )$             & Ackermannfunktion\\
+    $f, g, h$               & Funktionen\\
+    $s()$                   & Nachfolgerfunktion: $s(n) := n+1$
+
+\end{tabular}
+
+\end{document}
