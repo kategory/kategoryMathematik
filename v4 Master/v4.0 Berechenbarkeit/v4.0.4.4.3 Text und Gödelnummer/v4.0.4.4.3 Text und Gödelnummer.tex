@@ -231,17 +231,27 @@ Copyright (C) 2024 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
-Texte, definiert als endliche Folgen von Zeichen aus einem Alphabet, kommen in der Mathematik vor, wenn wir Formeln, Aussagen, Beweise oder Algorithmen mit mathematischen Methoden untersuchen. Ein Satz ist in dem Zusammenhang eine Folge von Zeichen.
+Texte, definiert als endliche Folgen von Zeichen aus einem Alphabet, kommen in der Mathematik vor, wenn wir Formeln, Aussagen, Beweise oder Algorithmen mit mathematischen Methoden untersuchen. Ein Satz ist in dem Zusammenhang eine Folge von Zeichen, der einer bestimmten Syntax gehorcht.
 
 Eine Gödelnummer ist ein Code, der aus einem Text oder einem Tupel von natürlichen Zahlen, was eigentlich auch wieder eine Art Text ist, eine natürliche Zahl macht. Umkehrbar. Damit können wir Funktionen, die auf Texten oder auf Tupeln arbeiten, auf Funktionen von $\N$ nach $\N$ zurückführen.
 
-Unsere ganze Berechenbarkeitstheorie führen wir auf $\N$ durch. Wir haben aber immer im Kopf, dass alles, was wir sagen, auch für Funktionen auf Texten gilt.
+Wir wollen die üblichen Formelmanipulationen, die wir in der Mathematik benötigen, wie Termumformungen, Variablen einsetzen, Prüfen, ob ein Text (eine Zeichenkette) ein gültiger Term, Ausdruck, Satz oder Beweis ist, berechenbar haben.
 
-Beispiele für Textfunktionen in der mathematischen Logik sind: Ist ein Ausdruck syntaktisch korrekt. Ist ein Satz beweisbar. Ist eine Folge von Aussagen ein Beweis. Das Einsetzen eines Ausdrucks für eine Variable. Ermitteln, ob ein Algorithmus gegeben durch einen formalen Programm-Code in eine Endlos-Schleife gerät.
+Dafür haben wir zwei Möglichkeiten:
 
-Wir hätten auch Texte als das ursprüngliche ansehen können und dann Zahlen als Wörter auffassen können, wie \zb durch die Dezimaldarstellung. Tatsächlich kommt dies dem tatsächlichen Geschehen bei der mathematischen Arbeit näher.
+1. Wir bauen eine Variante der Berechenbarkeitstheorie auf, die auf Texten statt auf den natürlichen Zahlen beruht.
 
-Eine Gödelnummer ist eine Funktion von der Ausgangsmenge in $\N$ mit bestimmten Eigenschaften. Die Bilder dieses Funktion heißen auch Codes. Die Ausgangsmenge ist \zb die Menge der Wörter über einem Alphabet oder die Menge der Tupel über $\N$. Die Eigenschaften sind:
+2. Wir kodieren Texte als Zahlen auf eine Weise, dass die oben genannten Funktionen berechenbar werden.
+
+Wir gehen den zweiten Weg, denn er hat zwei entscheidende Vorteile:
+
+1. Die Berechenbarkeitstheorie bleibt erheblich einfacher.
+
+2. In den meisten Axiomen-Systemen, die wir untersuchen, werden wir in der Lage sein, mit Zahlen zu rechnen. Damit stehen uns in all diesen Systemen die Ergebnisse einer auf Zahlen basierenden Berechenbarkeitstheorie zur Verfügung.
+
+Auch Turingmaschinen können gödelisiert werden, d.~h. so durch Zahlen repräsentiert werden, dass deren Manipulation und deren Laufenlassen berechenbare Funktionen werden.
+
+Eine Wunsch-Definition von Gödelnummer ist eine Funktion von der Ausgangsmenge in $\N$ mit bestimmten Eigenschaften. Die Bilder dieses Funktion heißen auch Codes. Die Ausgangsmenge ist \zb die Menge der Wörter über einem Alphabet oder die Menge der Tupel über $\N$. Die Eigenschaften sind:
 \begin{itemize}
    \item Injektiv
    \item Berechenbar
@@ -249,6 +259,15 @@ Eine Gödelnummer ist eine Funktion von der Ausgangsmenge in $\N$ mit bestimmten
    \item Die auf dem Bild definierte Umkehrfunktion ist ebenfalls berechenbar.
 \end{itemize}
 Mit anderen Worten können wir zwischen Wörtern/Tupeln und deren Codes verlustfrei mit Hilfe eines Computerprogramms hin und her rechnen.
+
+Dies ist allerdings keine mathematische Definition sondern Poesie:
+Die Forderung der Berechenbarkeit der Funktion und deren Umkehrung ist nämlich genau genommen Unfug, da Berechenbarkeit ja nur von $\N^m \to \N$ definiert ist. Wir wollen ja umgekehrt erst durch die Definition die Berechenbarkeit auf Texte erweitern. 
+
+In Wirklichkeit ist es so, dass wir auf Computern einen Text immer schon als Zahl haben, nämlich als Folge von Nullen und Einsen. Genauer, haben wir zunächst nur die Zahl. Dann definieren wir eine berechenbare Funktion $z(n,m) \colon \N \times \N \to M$, die aus der Zahl $n$, die wir als Text auffassen, das $m$-te Zeichen extrahiert. Hier ist $M \subset \N$ eine endliche Teilmenge von $\N$. $M$ ist unser Alphabet. Die Zahlen aus $M$ schreiben wir als abcdefg\dots.
+
+$z(n, \_)$ ist damit eine Folge von Zeichen. $z( \_, \_)$ als Funktion vom linken Parameter ist damit eine Funktion von $\N$ in die Menge er endlichen Folgen von Zeichen. Deren Umkehrfunktion ist die Gödelnummer, mit der wir, wenn wir vor dem Bildschirm hocken und auf die Tastatur einhacken, immer schon rechnen.
+
+Wir gehen immer davon aus, dass auf die eine oder andere Art Berechenbarkeitstheorie und ihre Ergebnisse auf Texte und die Textfunktionen übertragen wurden.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -265,7 +284,7 @@ Berechenbare Funktionen, Alphabet
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v4%20Master/v4.0%20Berechenbarkeit/v4.0.4.4.3%20Text%20und%20G%C3%B6delnummer}
 }
 
 %******************************************************************************************************
@@ -273,22 +292,19 @@ Der Begleittext als PDF und als LaTeX findet sich unter
 %******************************************************************************************************
 Siehe auch in den folgenden Videos:\\
 \\
-v4.0.3 (Master) Berechenbarkeit - Turing Maschine\\
-\url{https://youtu.be/29UcyRumdFo}\\
+v4.0.2 (Master) Berechenbarkeit - Alphabete und Sprachen\\
+\url{https://youtu.be/cwlU8m9ldbA}\\
 \\
 v4.0.4 (Master) Berechenbarkeit - Berechenbare Funktionen\\
-\url{https://youtu.be/tARmHFIP32o}\\
-\\
-v4.0.4.2 (Master) Berechenbarkeit - Rekursive Funktionen\\
-\url{https://youtu.be/tFEn2GoLLEQ}
+\url{https://youtu.be/tARmHFIP32o}
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Church-Turing-These}\\
-\url{https://de.wikipedia.org/wiki/Turing-Vollst%C3%A4ndigkeit}\\
-\url{https://en.wikipedia.org/wiki/Turing_completeness}
+\url{https://de.wikipedia.org/wiki/G%C3%B6delnummer}\\
+\url{https://en.wikipedia.org/wiki/G%C3%B6del_numbering}\\
+\url{https://ncatlab.org/nlab/show/computability}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -324,66 +340,57 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Church-Markov-Turing These}
+\section{Text und Gödelnummer}
 %                                                                                                     *
 %******************************************************************************************************
 %******************************************************************************************************
-\subsection{Drei Definitionen von berechenbar}
+\subsection{Texte}
 %******************************************************************************************************
-Es gibt drei übliche Definitionen von berechenbaren Funktionen:\\
-Turing-Maschinen\\
-Lambda-Kalkül\\
-Mu-rekursiv
+
 
 %******************************************************************************************************
-\subsection{Turing-äquivalent}
+\subsection{Gödelnummern: der Versuch einer Definition}
 %******************************************************************************************************
-Eine System oder ein Begriff, welches Funktionen liefert oder definiert, ist \textbf{Turing-vollständig}, wenn jede Turing-Maschinen-berechenbare Funktion geliefert wird. Die können wir z.~B. dadurch beweisen, dass in diesem System ein Turing-Maschinen-Simulator implementiert werden kann.
 
-Können alle Funktionen eines Turing-vollständigen Systems auch von einer Turing-Maschine geliefert werden, heißt das System \textbf{Turing-äquivalent}. Das können wir z.~B. dadurch beweisen, dass wir das System in einer Turing-Maschine implementieren.
 
 %******************************************************************************************************
-\subsection{Church-Markov-Turing These}
+\subsection{Gödelnummern für Tupel aus $\N$}
 %******************************************************************************************************
-Die Church-Markov-Turing These, die weder mathematischer Satz noch Vermutung ist, besagt, dass jede auch nur erdenkliche halbwegs vernünftige Definition des Berechenbarkeits-Begriffs Turing-äquivalent ist.  Die These heißt auch Church-Turing These oder nur Church These.
 
-Formal bewiesen ist es als mathematischer Satz für 
-Turing-Maschinen,
-Lambda-Kalkül,
-Mu-rekursiv, und alle normalen Programmiersprachen, wie C, C++, Python, JavaScript, Lisp, Prolog, Java, Haskell \dots Bei den Programmiersprachen nehmen wir dann an, dass sie über einen unendlichen Speicher verfügen. Alle Programmiersprachen sind prinzipiell gleich. Wir können den Raum der erreichbaren Funktionen nicht erweitern.
-
-Ein konzeptioneller Unterschied von JavaScript und einer Turing-Maschine ist, dass letztere einen unendlichen Speicher hat. Hier ist allerdings zu bedenken, dass die Turing-Maschine zu keinem Zeitpunkt unendliche viel Speicher nutzt. Es sind immer nur endliche viele Speicherplätze mit einer 1 belegt. Der Rest ist 0. Dies entspricht en wenig der Idee des potentiell unendlichen.
-JavaScript und andere real-technische Programmiersprachen sind in folgenden Sinne pragmatisch potentiell unendlich: wenn eine Berechnung wegen zu wenig Speicher abbricht, können wir neuen RAM oder Plattenspeicher kaufen, und das ganze dann nochmal versuchen. Oder wir warten auf die nächste Rechner-Generation. Ein Schritt, den die Menschheit immer wieder macht.
+Die Umkehrfunktion ist nicht berechenbar, weil ...
 
 %******************************************************************************************************
-\subsection{JavaScript}
+\subsection{Berechenbare Textfunktionen}
 %******************************************************************************************************
-JavaScript ist Turing-äquivalent, wenn wir von der Speicherbegrenzung absehen. In der Spezifikation von JavaScript wird nicht gesagt, dass nur Speicher bis zu einer bestimmten Größe erlaubt ist. Über das Adressierungsmodel oder Pointer-Datentypen wird keine Aussage gemacht.
-
-Ein realer Computer aber, der isoliert dasteht also keinen Zugriff auf (eventuell mit der Zeit wachsende) externe (Cloud-) Speicher hat ist auch mit JavaScript nicht Turing-äquivalent noch nicht einmal Turing-vollständig.
-
-Ein Augenmerk muss dabei auf Zahlen gerichtet werden. Normale Zahlen in JavaScript sind vom Typ Number, eine 64-bit floating point IEEE 754 Darstellung. Der höchste Wert hier ist
-
-{\tt Number.MAX\_VALUE} $= 2^{1024} - 2^{971} \approx 1.7976931348623157 10^{308}$
-\\Allerdings sind hier Dezimalstellen abgeschnitten. Unabgeschnitten geht es nur bis
-
-{\tt Number.MAX\_SAFE\_INTEGER} $ 2^{53} - 1 = 9007199254740991$.
-
-Eine Lösung ist, mit BigInt zu arbeiten. Dies ist ein Datentyp, der beliebig große ganze Zahlen mit all ihren Dezimalstellen abbilden kann. In der Spezifikation findet sich, meines Wissens, keine Obergrenze. Der zur Verfügung stehende Speicher liefert natürlich eine solche. BigInt können über den Konstruktor oder auch über Literale (ganze Zahlen mit einem n am Ende) erzeugt werden:
-
-\begin{lstlisting}[language=c]
-   x = BigInt( 42 );
-   y = 4875498574329574398572940385790234857423n;
-\end{lstlisting}
 
 %******************************************************************************************************
-\subsection{Mathematische Grundlagen}
+\subsection{Gödelnummern für Texte}
 %******************************************************************************************************
-Die Auswirkung auf die mathematischen Grundlagen und Logik: ein Algorithmus, wie der euklidische, sollte Turing-maschinen-berechenbar sein, um als solcher zu gelten. Definitionen von "`gültiger Term"', "`wohl geformte mathematische Aussage"' oder "`korrekter Beweis"' sollten durch Turing-maschinen-berechenbare Funktionen auf den Zeichenketten von Term, Aussage oder Beweis definiert werden können. Sie sollten also in JavaScript programmiert werden können.
 
-\begin{equation}
-   x + \hbox{text}
-\end{equation}
+Definition über die Forderung, dass die Funktionen von oben berechenbar werden sollen.
+
+
+%******************************************************************************************************
+\subsection{Gödelnummern für Turingmaschinen}
+%******************************************************************************************************
+
+
+
+
+
+
+
+
+Gödelnummern arithmetisieren das Ausgangsmaterial
+
+
+
+Wenn wir ein System mit Hilfe von Gödelnummern arithmetisieren, wissen wir, dass es immer dann zur Verfügung stehen kann, wenn die natürlichen Zahlen zur Verfügung stehen. Dies ist eine recht milde Forderung, die in den meisten Axiomen-Systemen, die wir betrachten, erfüllt ist.
+
+Siehe: https://plato.stanford.edu/entries/goedel-incompleteness/sup1.html  
+
+
+Beispiel: aus Text per Funktionen erstes Zeichen ermitteln
 
 \begin{backup}
 %******************************************************************************************************
