@@ -263,7 +263,7 @@ Kategorie, Funktor, Natürliche Transformation, kleine Kategorien
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.1.3%20Produkte%20von%20Kategorien}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.1.4%20Funktorkategorien}
 }
 
 %******************************************************************************************************
@@ -280,25 +280,24 @@ v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
 v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
 \url{https://youtu.be/Ojf5LQGeyOU}\\
 \\
-v5.0.1.0.8 (Höher) Kategorien - Hom-Mengen\\
-\url{https://youtu.be/bnMkDng-NnA}
+v5.0.1.0.4 (Höher) Kategorien - Natürliche Transformationen\\
+\url{https://youtu.be/IN7Qa-SwlD0}\\
 \\
-v5.0.1.1.1 (Höher) Kategorien - Kategorisch dual\\
-\url{https://youtu.be/5bll2AYkCC4}
+v5.0.1.0.6 (Höher) Kategorien - Mathematische Grundlagen\\
+\url{https://youtu.be/ezW54mnzHMw}\\
 \\
-v5.0.1.1.2 (Höher) Kategorien - Kontravarianz und duale Kategorie\\
-\url{https://youtu.be/D3DfjfSjNlc}
+v5.0.1.0.7 (Höher) Kategorien - Große Kategorien\\
+\url{https://youtu.be/Dcz6at6EXqM}
+
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Duale_Kategorie}\\
 \url{https://de.wikipedia.org/wiki/Funktor_(Mathematik)}\\
-\url{https://de.wikipedia.org/wiki/Hom-Funktor}\\
-\url{https://ncatlab.org/nlab/show/bifunctor}\\
-\url{https://ncatlab.org/nlab/show/product+category}\\
-\url{https://en.wikipedia.org/wiki/Product_category}
+\url{https://de.wikipedia.org/wiki/Funktorkategorie}\\
+\url{https://en.wikipedia.org/wiki/Functor_category}\\
+\url{https://ncatlab.org/nlab/show/functor+category}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -365,47 +364,94 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{v5.0.1.1.4 Funktorkategorien}
+\section{Funktorkategorien}
 %                                                                                                     *
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Produkt von Kategorien}
+\subsection{Kategorien-Axiome}
 %******************************************************************************************************
-\begin{Definition}{Produkt von Kategorien}
-   Seien $\CC, \DD$ zwei Kategorien. Das \textbf{Produkt} ist definiert als das kartesische Produkt der beiden Klassen der Objekte als Klasse der Objekte und das kartesische Produkt der beiden Klassen der Morphismen als Klasse der Morphismen. Für jeden Morphismus $f \colon C_1 \to C_2$ und $g \colon D_1 \to D_2$ ist 
-   \begin{equation}
-      (f, g) \colon (C_1, D_1) \to (C_2, D_2).
-   \end{equation}
-   Weiter wird definiert:
-   \begin{alignat}{4}
-      &\id_{(C,D)}               &&:= (\id_C, \id_D)\\
-      &(f_1,g_1) \circ (f_2,g_2) &&:= (f_1 \circ f_2, g_1 \circ g_2).
-   \end{alignat}
-\end{Definition}
-Es ist leicht zu sehen, dass die Axiome einer Kategorie erfüllt sind.
+Seien $\CC, \DD$ zwei Kategorien. Die Objekte der Funktorkategorie $\DD^\CC$ sind die Funktoren $F \colon \CC \to \DD$. Die Homomorphismen zwischen zwei Funktoren $F, G \colon \CC \to \DD$ sind die natürlichen Transformationen (Nat) $F \to G$.
 
-%******************************************************************************************************
-\subsection{Hom()}
-%******************************************************************************************************
-Hom definiert zwei Scharen vom Morphismen $\Hom( C, \_)$ und $\Hom( \_, D)$. Ergeben diese zusammen einen Bi-Funktor $\Hom( \_, \_ ) \colon \CC^* \times \CC \to \DD$?
-
-Allgemeiner: Sei $K \colon \CC \times \DD \to \EE$ eine Funktion auf den Objekten von $\CC \times \DD$ und eine Funktion auf den Morphismen der Form $(f, \id_D)$ und $(\id_c, g)$ und seien $K(C, \_)$ und $K(\_,D)$ Scharen von Funktoren. Können wir K als Bi-Funktor erweitern? Wir müssen ihn erweitern, da er nicht auf allgemeinen Morphismen der Form $(f,g)$ definiert ist.
-
-Mit dem Ansatz für $f \colon C_1 \to C_2$ und $g \colon D_1 \to D_2$
+Seien zwei Nat's $\alpha \colon F \to G$ und $\beta \colon G \to H$ gegeben. Die Verknüpfung wird komponentenweise für alle Objekte $X \in \CC$ definiert:
 \begin{equation}
-   K(f,g) := K(f, D_2) \circ K(C_1, g)
+   (\beta \circ \alpha)_X := \beta_X \circ \alpha_X.
 \end{equation}
-können wir fast alle Axiome eines Funktors beweisen. Außer das mit der Verknüpfung. Wir haben also einen Fast-Funktor.
+Dies geht, da die Komponenten $\beta_X, \alpha_X$ Morphismen in $\DD$ sind. Um nachzuweisen, dass es sich bei dieser Verknüpfung wieder um eine Nat handelt, dass also die entsprechenden Quadrate kommutativ sind, betrachten wir folgende Zeichnung:
+\begin{equation}\label{kommutativ}
+   \begin{tikzcd}
+       F(X) \arrow[r, "\alpha_X"] \arrow[d, "F(f)"]
+      &G(X) \arrow[r, "\beta_X" ] \arrow[d, "G(f)"]
+      &H(X)                       \arrow[d, "H(f)"]
+      \\
+       F(Y) \arrow[r, "\alpha_Y"]  
+      &G(Y) \arrow[r, "\beta_Y" ]  
+      & H(Y)
+   \end{tikzcd}
+\end{equation}
+Hier haben wir dann
+\begin{alignat}{4}
+   &H(f) \circ (\beta \circ \alpha)_X   &&= \\
+   &H(f) \circ (\beta_X \circ \alpha_X) &&= (H(f) \circ \beta_X) \circ \alpha_X = \\
+   &(\beta_Y \circ G(f)) \circ \alpha_X &&= \beta_Y \circ (G(f) \circ \alpha_X) = \\
+   &\beta_Y \circ (\alpha_Y \circ F(f)) &&= (\beta_Y \circ \alpha_Y) \circ F(f) = \\
+   &(\beta \circ \alpha)_Y \circ F(f)
+\end{alignat}
+Hier haben wir die Assoziativität der Verknüpfung von Morphismen in $\DD$, die Definition der Verknüpfung von Nat's und die Kommutativität der Teil-Quadrate ausgenutzt.
 
-Damit $K((f_2,g_2) \circ (f_1,g_1)) = K(f_2,g_2) \circ K(f_1,g_1)$ ist, können wir unserer angesetzten Definition und der Definition der Verknüpfung im Produkt zeigen, dass folgendes gelten muss:
+Wir definieren weiter die Identitäten als die komponentenweise Identitäten:
 \begin{equation}
-   K(f_2,D_3) \circ K(f_1, D_3)  \circ K(C_1, g_2)  \circ K(C_1,g_1) = K(f_2,D_3) \circ K(C_2,g_2)  \circ K(f_1,D_2)  \circ K(C_1,g_1).
+   (\id_F)_X := \id_{F(X)}.
 \end{equation}
+Dass diese Nat's sind und als Identitäten mit der obern definierten Verknüpfung agieren ist leicht zuu zeigen.
 
+Das Assoziativgesetz ergibt sich ebenfalls schnell aus der komponentenweise Assoziativität. 
 
-NICHT FERTIG!
+Damit sind alle Eigenschaften einer Kategorie erfüllt.
 
+%******************************************************************************************************
+\subsection{Schreibweise}
+%******************************************************************************************************
+Wir schreiben 
+\begin{equation}
+   \DD^\CC
+\end{equation}
+für die Funktor-Kategorie der Funktoren von $\CC$ nach $\DD$. Das Ziel steht also dummerweise links die Quelle oben-rechts.
+Manchmal schreiben wir auch so etwas wie
+\begin{equation}
+   \operatorname{Fun}( \CC, \DD).
+\end{equation}
+Diese Hoch-Schreibweise gibt es auch bei Funktionen, wo $\{0,1,2\}^{\{0,1,2,3\}}$ eben $3^4$ Elemente hat.
+
+%******************************************************************************************************
+\subsection{Beispiele}
+%******************************************************************************************************
+
+Diskrete Kategorien sind letztlich Mengen. Ein Funktor ist dann nichts anderes als eine Funktion. In dem Fall ist $\DD^\CC$ einfach die Menge der Funktionen von $\CC$ nach $\DD$.
+
+Wenn $\CC$ diskret/Menge ist, ist $\{0,1\}^\CC$ die Menge der Teilmengen von $\CC$.
+
+Wenn $\boldsymbol 1 = \{ \bullet \}$ die Kategorie mit genau einem Element und nur der Identität $\id_\bullet$ ist, dann ist $\DD^{\boldsymbol{1}}$ isomorph zu $\DD$.
+
+Wenn $\boldsymbol 2 = \{ \bullet \to \bullet \}$ die Kategorie mit genau zwei Elementen und nur den angedeuteten Morphismus neben den beiden Identitäten ist, dann ist $\DD^{\boldsymbol{2}}$ die Kategorie der Morphismen von $\DD$.
+
+Sei nun $R$ ein kommutativer Ring mit $1$ und $G$ eine Gruppe. Wir betrachten $G$ als Kategorie mit einem Objekt und den Gruppen-Elementen als Morphismen. Wir bezeichnen mit $R$-Mod die Kategorie der $R$-Moduln. Dann ist $\text{$R$-Mod}^G$ die Kategorie der $R$-Darstellungen von $G$.
+
+%******************************************************************************************************
+\subsection{Größen-Probleme}
+%******************************************************************************************************
+Wenn $\CC$ nicht klein ist, ist Funktor im Allgemeinen nicht in unserem Universum. Wenn wir mit dem Universum aller Mengen rechnen, ist so ein Funktor eine echte Klasse.
+
+Das heißt: der ganze obere Sermon gilt nur, wenn wir als Voraussetzung "`$\CC$ ist klein"' hinzufügen.
+
+Nur wenn $\CC$ zu groß ist. $\text{\textbf{Gruppe}}^{\boldsymbol{2}}$, also die Kategorie der Morphismen der Kategorie der Gruppen ist kein Problem, auch wenn wir mit \textbf{Gruppe} die echte Klasse aller Gruppen meinen. Denn das Problem ist nicht, dass es zu viele Funktoren geben könnten, sondern dass der einzelne Funktor eine echte Klasse wird.
+
+%******************************************************************************************************
+\subsection{Deswegen benötigen wir kleine Mengen}
+%******************************************************************************************************
+Funktor-Kategorien kommen ständig vor, sind super nützlich, wichtig und interessant.
+
+Funktor-Kategorien einer der Haupt-Gründe für die Einführung der Konzepte rund um kleine Mengen und kleine Kategorien. 
 
 \begin{backup}
 %******************************************************************************************************
