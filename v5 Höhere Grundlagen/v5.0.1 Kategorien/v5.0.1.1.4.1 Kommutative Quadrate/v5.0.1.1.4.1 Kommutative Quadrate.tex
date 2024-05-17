@@ -1,0 +1,545 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v5.0.1.1.4.1 Kommutative Quadrate.tex                                                            *
+%                                                                                                  *
+% Copyright (C) 2024 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v5.0.1.1.4.1 Kommutative Quadrate is part of kategoryMathematik.                                 *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Satz}
+\myTheorem{Theorem}
+\myTheorem{Axiom}
+\myTheorem{Beispiel}
+\myTheorem{Anmerkung}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\GL}{GL}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\Cod}{Cod}
+\DeclareMathOperator{\Obj}{Obj}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\DD}{\ensuremath{\mathcal{ D }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\FF}{\ensuremath{\mathcal{ F }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\Set}{\text{\textbf{Set}}}
+\newcommand{\Ab}{\text{\textbf{Ab}}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+\newcommand{\m}{\mathcal}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\newcommand{\zb}{z.~B. }
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Höhere Grundlagen) Kategorien\\[1cm]
+\textbf{v5.0.1.1.4.1 Kommutative Quadrate}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2024 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Ein kommutatives Quadrat wird so durch 4 Objekte und 4 Morphismen aufgespannt, dass wir vom ersten zum vierten sowohl über das zweite als auch über das dritte kommen können und das Ergebnis ist das gleiche.
+\\\\
+Hier wird also nichts vertauscht, wie beim Kommutativgesetz. Sondern in einer Masche (Quadrat) im Netz einer Kategorie ist es egal, wie 'rum wir gehen.
+\\\\
+Wir gehen auf zwei Wegen von $A$ nach $B$ aber es kommt das gleiche raus.
+\\\\
+Wieso kommen die immer wieder und überall in der Kategorientheorie vor? Wieso ist es die "`richtige"' Wahl bei der Definition von natürlichen Transformationen? (als Hom der Hom's, als Nat's)
+\\\\
+Ein Komm-Quad ist eine strukturerhaltende Abbildung von einem Pfeil auf einen anderen.
+\\\\
+... und das innerhalb einer Kat. Also eine Art Morphismen-Endomorphismus.
+\\\\
+Dabei werden Anfang und Ende des Pfeils mit Morphismen der Kat auf ihre Ziele abgebildet.
+\\\\
+Der Pfeil wird also nicht irgendwie abgebildet, sondern durch die Kat als Medium gezogen.
+\\\\
+Wie eine Homotopie eine Kurve durch einen Raum zieht.
+\\\\
+Ein Komm-Quad ist also eine Art Morphismen-Homotopie.
+\\\\
+Kommutative Quadrate umgeben uns (heimlich) seit wir klein sind. Nur hat uns bisher niemand den Blickwinkel gezeigt, unter welchem sie sich als solche zu erkennen geben.
+\\\\
+Distributiv-, Assoziativ-, Kommutativgesetz, Funktoraxiom, natürliche Transformation: alles sind
+in Wirklichkeit kommutative Quadrate.
+\\\\
+Das Aneinanderhängen kommutativer Quadrate ergibt wieder kommutative Quadrate. Hier gibt es eine horizontale und eine vertikale Verknüpfung.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Kategorie, Funktor, Natürliche Transformation, Funktor-Kategorie
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+{\tiny
+   \url{}
+}
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\
+\\
+v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
+\url{https://youtu.be/Ojf5LQGeyOU}\\
+\\
+v5.0.1.0.3.5 (Höher) Kategorien - Kategorien von Homomorphismen\\
+\url{https://youtu.be/v1F5BFH8nbo}\\
+\\
+v5.0.1.0.4 (Höher) Kategorien - Natürliche Transformationen\\
+\url{https://youtu.be/IN7Qa-SwlD0}\\
+\\
+vv5.0.1.1.4 (Höher) Kategorien - Funktorkategorien\\
+\url{https://youtu.be/byvbGxRz1hs}\\
+\\
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Funktor_(Mathematik)}\\
+\url{https://de.wikipedia.org/wiki/Funktorkategorie}\\
+\url{https://de.wikipedia.org/wiki/Pfeilkategorie}\\
+\url{https://de.wikipedia.org/wiki/Kommutatives_Diagramm}\\
+\url{https://ncatlab.org/nlab/show/commutative+square}
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+"`Categories for the Working Mathematician"'\\
+Saunders Mac Lane\\
+1998 | 2nd ed. 1978\\
+Springer-Verlag New York Inc.\\
+978-0-387-98403-2 (ISBN)\\
+{\tiny
+   \url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}}\\
+
+Gut für die kategorische Sichtweise ist:\\
+"`Topology, A Categorical Approach"'\\
+Tai-Danae Bradley\\
+2020 MIT Press\\
+978-0-262-53935-7 (ISBN)\\
+{\tiny
+\url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}}\\
+
+Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von:\\
+"`An Introduction to Homological Algebra"'\\
+Joseph J. Rotman\\
+2009 Springer-Verlag New York Inc.\\
+978-0-387-24527-0 (ISBN)\\
+{\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
+
+Etwas weniger umfangreich und weniger tiefgehend aber gut motivierend ist:
+"`Category Theory"'\\
+Steve Awodey\\
+2010 Oxford University Press\\
+978-0-19-923718-0 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/9478288-9780199237180-category-theory}}\\
+
+Mit noch weniger Mathematik und die Konzepte motivierend ist:
+"`Conceptual Mathematics: a First Introduction to Categories"'\\
+F. William Lawvere, Stephen H. Schanuel\\
+2009 Cambridge University Press\\
+978-0-521-71916-2 (ISBN)\\
+{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/8643555-9780521719162-conceptual-mathematics}}
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird,
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben
+(zu finden im selben Git-Projekt).
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter
+{\tiny
+   \url{XXX}
+}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{v5.0.1.1.4.1 Kommutative Quadrate}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{Kommutatives Quadrat }
+%******************************************************************************************************
+Ein kommutatives Quadrat besteht aus folgender Anordnung von Objekten und Morphismen
+\begin{equation}
+    \begin{tikzcd}
+        A   \arrow[d, "f"]  \arrow[r, "r"] & C \arrow[d, "g"]\\
+        B                   \arrow[r, "s"] & D
+    \end{tikzcd}
+\end{equation}
+so dass gilt $gr = sf$.
+
+In dem hier eingenommenen Blickwinkel wird der Pfeil $f$ auf den Pfeil $g$ abgebildet. Nennen wir die Abbildung $\alpha$, so können wir das Bild von oben so darstellen:
+
+\begin{equation}
+    \begin{tikzcd}
+        A   \arrow[d, "f"]  \arrow[r, "\alpha"] & \alpha(A) \arrow[d, "\alpha(f)"]\\
+        B                   \arrow[r, "\alpha"] & \alpha(B)
+    \end{tikzcd}
+\end{equation}
+
+Ähnlich, wie in der Gruppentheorie die unterschiedlichsten Verknüpfungen immer mit $\asterisk$ oder $+$ bezeichnet werden, haben wir (nur für dieses Bild) auch den Zielmorphismus mit $f$ bezeichnet. Die beiden Komponenten von $\alpha$ würden präzise mit $\alpha_A$ und $\alpha_B$ bezeichnet werden.
+
+\begin{equation}
+    \begin{tikzcd}
+        A   \arrow[d, "f"]  \arrow[r, "\alpha"] & \alpha(A) \arrow[d, "f"]\\
+        B                   \arrow[r, "\alpha"] & \alpha(B)
+    \end{tikzcd}
+\end{equation}
+so dass gilt:
+\begin{equation}
+    f\alpha = \alpha f.
+\end{equation}
+
+In der Gruppentheorie gilt bei einem Gruppenhomomorphismus $\phi$, dass $\phi(x \asterisk y) = \phi(x) \asterisk \phi(y)$, d.~h. es ist egal, ob wir erst verknüpfen und dann den Homomorphismus anwenden oder umgekehrt. In einem Komm-Quad ist es egal ob wir zuerst unser $\alpha$ ud dann $f$ anwenden oder umgekehrt. Im Falle von \textbf{Set} haben wir $f(\alpha(a)) = \alpha( f(a))$
+
+%******************************************************************************************************
+\subsection{Innerhalb der Kategorie }
+%******************************************************************************************************
+Die $\alpha_A$ und $\alpha_B$ sind Morphismen der Kategorie, in der wir gerade befinden. Sind wir in der Kategorie der Gruppen unterwegs, sind es also Gruppen-Homomorphismen und nicht irgendwelche  Funktionen. Diese Verschiebung findet also innerhalb der Kategorie statt. Ähnlich wie eine Homotopie einer Kurve in eine andere nicht irgendeine stetige Abbildung ist, sondern eine stetige Verschiebung der Kurve innerhalb des betrachteten Raumes in die Zielkurve.
+
+Siehe v5.0.1.0.4 Natürliche Transformationen
+
+%******************************************************************************************************
+\subsection{Beispiele kommutativer Quadrate}
+%******************************************************************************************************
+
+Distributiv:
+\begin{equation}
+    \begin{tikzcd}
+        b   \arrow[d, "+ c"]  \arrow[r, "a \cdot"] & a \cdot b \arrow[d, "+ a \cdot c"]\\
+        b+c                   \arrow[r, "a \cdot"] & a \cdot (b+c) = a \cdot b+a \cdot c
+    \end{tikzcd}
+\end{equation}
+
+Assoziativ:
+\begin{equation}
+    \begin{tikzcd}
+    b   \arrow[d, "\cdot c"]  \arrow[r, "a \cdot"] & a \cdot b \arrow[d, "\cdot c"]\\
+    b c                   \arrow[r, "a \cdot"] & a (bc) = (ab) c
+\end{tikzcd}
+\end{equation}
+
+Funktor:
+\begin{equation}
+    \begin{tikzcd}
+        f   \arrow[d, "\circ g"]  \arrow[r, "F"] & C \arrow[d, "\circ F(g)"]\\
+        f \circ g                   \arrow[r, "F"] & F(f \circ g) = F(f) \circ F(g)
+    \end{tikzcd}
+\end{equation}
+
+Natürliche Transformation:
+\begin{equation}
+    \begin{tikzcd}
+        F(A)   \arrow[d, "F(f)"]  \arrow[r, "\alpha_A"] & G(A) \arrow[d, "G(f)"]\\
+        F(B)                      \arrow[r, "\alpha_B"] & G(B)
+    \end{tikzcd}
+\end{equation}
+
+%******************************************************************************************************
+\subsection{Das Verknüpfen kommutativer Quadrate}
+%******************************************************************************************************
+Bei dem Beweis, dass die natürlichen Transformationen die Axiome der Morphismen einer Kategorie erfüllen (v5.0.1.1.4 Funktorkategorien), haben wir im Grunde genommen bewiesen, dass das Aneinanderhängen kommutativer Quadrate wieder kommutative Quadrate ergibt.
+
+Hier gibt es eine horizontale und eine vertikale Verknüpfung.
+
+\begin{backup}
+%******************************************************************************************************
+%                                                                                                     *
+\section{TODO}
+
+%                                                                                                     *
+%******************************************************************************************************
+\begin{itemize}
+     \item Überprüfe Symbolverzeichnis
+\end{itemize}
+
+\end{backup}
+
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+   \bibitem[Awodey2010]{Awodey}
+      Steve Awode, \emph{Category Theory},
+      2010 Oxford University Press, 978-0-19-923718-0 (ISBN)
+
+   \bibitem[Bradley2020]{Bradley}
+      Tai-Danae Bradley, \emph{Topology, A Categorical Approach},
+      2020 MIT Press, 978-0-262-53935-7 (ISBN)
+
+   \bibitem[LawvereSchanuel2009]{Lawvere}
+      F. William Lawvere, Stephen H. Schanuel, \emph{Conceptual Mathematics: a First Introduction to Categories},
+      2009 Cambridge University Press, 978-0-521-71916-2 (ISBN)
+
+   \bibitem[MacLane1978]{MacLane}
+      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
+      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
+
+   \bibitem[Rotman2009]{Rotman}
+   	Joseph J. Rotman, \emph{An Introduction to Homological Algebra},
+   	2009 Springer-Verlag New York Inc., 978-0-387-24527-0 (ISBN)
+
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $P(x)$                              & ein Prädikat\\
+    $A, B, C, \cdots, X, Y, Z$          & Objekte\\
+    $F,G$                               & Funktoren\\
+    $V, V'$                             & Vergiss-Funktoren\\
+    $f, g, h, r, s, \cdots$             & Homomorphismen\\
+    $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
+    $\PP$                               & Potenzmengen-Funktor\\
+    \Set                                & Die Kategorie der kleinen Mengen\\
+    \Ab                                 & Kategorie der kleinen abelschen Gruppen\\
+    $\Hom( X, Y)$                       & Die Klasse der Homomorphismen von $X$ nach $Y$\\
+    $\alpha, \beta, \cdots$             & natürliche Transformationen oder Ordinalzahlen\\
+    $\mathcal C ^{\text{op}}$           & Duale Kategorie\\
+    $\DD^\CC$                           & Funktorkategorie\\
+    $\textbf{Ring}, \textbf{Gruppe}$    & Kategorie der kleinen Ringe und der kleinen Gruppen\\
+    $U, U', U''$                        & Universen\\
+    $V_\alpha$                          & eine Menge der Von-Neumann-Hierarchie zur Ordinalzahl
+                                          $\alpha$
+
+\end{tabular}
+
+\end{document}
