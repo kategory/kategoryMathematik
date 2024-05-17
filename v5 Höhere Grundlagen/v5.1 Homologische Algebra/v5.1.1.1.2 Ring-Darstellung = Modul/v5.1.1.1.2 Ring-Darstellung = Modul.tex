@@ -263,13 +263,16 @@ Kategorien-Theorie, Ringe, Gruppen, lineare Algebra
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.1%20Homologische%20Algebra/v5.1.1.1%20Moduln}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.1%20Homologische%20Algebra/v5.1.1.1.2%20Ring-Darstellung%20%3D%20Modul}
 }
 
 %******************************************************************************************************
 \subsection*{Meine Videos}
 %******************************************************************************************************
 Siehe auch in den folgenden Videos:\\
+\\
+v5.1.1.1 (Höher) Homologische Algebra - Moduln\\
+\url{https://youtu.be/JY43_07kNmA}
 \\
 v5.0.1 (Höher) Kategorien - Playlist\\
 \url{https://www.youtube.com/playlist?list=PLqVqq9xKS5R-baIvTr9GnW0Pb8rlPig7S}
@@ -278,25 +281,10 @@ v5.0.1 (Höher) Kategorien - Playlist\\
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Modul_(Mathematik)#Alternative_Definitionen}\\
 \url{https://math.stackexchange.com/questions/1980543/representations-of-rings}\\
 \url{https://de.wikipedia.org/wiki/Ganzheitsring}\\
-\url{https://de.wikipedia.org/wiki/Darstellungsring}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
-\url{}\\
+\url{https://de.wikipedia.org/wiki/Darstellungsring}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -357,150 +345,120 @@ Das Video hierzu ist zu finden unter
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Definition}
+\subsection{Gegenstand der homologischen Algebra}
 %******************************************************************************************************
-Salopp: Ein $R$-Modul ist ein $R$-Vektorraum, wo $R$ ein Ring mit Eins aber nicht notwendig ein Körper ist. Es können also Inverse und die Kommutativität der Multiplikation fehlen.
+Zum einen behandelt die homologischen Algebra abelsche Kategorien. Dies ist ihr abstraktes Auftreten, von Alexander Grothendieck geschaffen und Grundlage ihres weiteren Siegeszugs.
 
-%------------------------------------------------------------------------------------------------------
-\begin{Definition}{R-Modul}
-   Eine abelsche Gruppe $M$ (additiv geschrieben, also mit $+$ und $0$) zusammen mit einem  Ring mit Eins $R$ und einer Skalar- Multiplikation $R \times M \to M$ heißt $R$\textbf{-Modul}, wenn für alle $m,n \in M$ und $r, s \in R$ gilt
-   \begin{alignat}{2}
-      &(rs)m &&= r(sm)\\
-      &(r+s)m &&= rm + rs\\
-      &r(m+n) &&= rm +rn\\
-      &1m &&= m
-   \end{alignat}
+Abelsche Kategorien extrahieren die Axiome, welche bei der Theorie der Moduln für einen Großteil des Verhalten verantwortlich sind. Damit sind Moduln automatisch eine Quelle von Beispielen und von Fragestellungen, die mit Hilfe der homologischen Algebra untersucht werden können.
+
+Um Moduln bilden zu können benötigen wir Ringe.
+
+%******************************************************************************************************
+\subsection{Quelle für Ringe}
+%******************************************************************************************************
+Eine übliche Quelle für Ringe sind Zahlen. Ist $\K \subseteq \C$ ein Unter-Körper von $\C$, so ist dessen Ganzheitsring $\mathcal{O}_\K$ ein Ring. Z.~B.
+\begin{equation}
+   \mathcal{O}_{\Q(i)} = \Z[i].
+\end{equation}
+
+Eine weitere Quelle sind die Endomorphismen-Ringe von abelschen Gruppen. Zunächst ist die Menge der Endomorphismen einer abelschen Gruppe $M$ (geschrieben $\End(M)$) ein Monoid mit Eins mit der Verknüpfung als Multiplikation. Auf dieser Struktur kann eine Addition definiert werden. Seien $\phi, \psi \in \End(M)$. Wir setzen
+\begin{equation}
+   \forall m \in M \colon (\phi + \psi)(m) := \phi(m) + \psi(m).
+\end{equation}
+Diese Definitionsgleichung ist gleichzeitig der Nachweis dafür, dass es sich tatsächlich um einen Endo handelt.
+Durch einfaches Ausrechnen können wir zeigen, dass $\End(M)$ mit dieser Addition die Ring-Axiome erfüllt.
+Damit haben wir $\End(M)$ und deren Unter-Ringe als weitere Ringe zur Verfügung.
+
+%******************************************************************************************************
+\subsection{Ring-Darstellung}
+%******************************************************************************************************
+Ein Unter-Ring von $\End(M)$ ist anders gesehen ein injektiver Ring-Homo
+\begin{equation}
+   i \colon R 	\hookrightarrow \End(M).
+\end{equation}
+Wir definieren nun allgemeiner:
+\begin{Definition}{Ring-Darstellung}
+   Sei $R$ ein Ring und $M$ eine abelsche Gruppe. Eine \textbf{Ring-Darstellung} von $R$ ist ein Ring-Homo
+   \begin{equation}
+      p \colon R \to \End(M).
+   \end{equation}
 \end{Definition}
-Hier haben wir einen Links-Modul definiert. Da die Multiplikation nicht als kommutativ vorausgesetzt wird, müssen wir diese von Rechts-Moduln unterscheiden, wo wir die Skalare von rechts multiplizieren. 
 
-Ein wichtiges Beispiel für nicht-kommutative Ringe sind Endomorphismen-Ringe von abelschen Gruppen.
+Jetzt nutzen wir nicht $\End(M)$ als Quelle für Ringe, sondern wir haben schon einen Ring $R$ und versuchen ihn in $\End(M)$'s zu finden, um ihn besser zu verstehen. Ähnlich wie wir Gruppen in linearen Gruppen von Räumen finden und so zu Gruppen-Darstellungen kommen.
 
 %******************************************************************************************************
-\subsection{Beispiele}
+\subsection{Ring-Darstellung = Modul}
 %******************************************************************************************************
-\begin{enumerate}
-   \item $R$ ist selbst $R$-Modul
-   \item $\Z^2$ als \Z-Modul (mit Löchern)
-   \item $2\Z$ als \Z-Modul (Echte Teilmenge von $R$)
-   \item Ideal = Unter-$R$-Modul von $R$
-   \item $\Q, \R$ sind $\Z$-Moduln (Achtung: es sind keine freien Moduln)
-   \item \zz6 als \Z-Modul (stärker aufgewickelt als $R$)
-   \item $(\zz6)^2$ als \zz6-Modul (Achtung Nullteiler)
-   \item Freier $R$-Modul
-   \item Das \Z-Modul $(\zz{12})^2$ ist nicht kürzbar
-   \item $\K$-Vektorraum ist auch $\K$-Modul
-\end{enumerate}
-
-%-----------------------------------------------------------------------------------------------
-\subsubsection{$R$ ist selbst $R$-Modul}
-Die Ring-Axiome sind schon rein formel-technisch gleich zu den Modul-Axiomen. Nur, dass die Multiplikation eine interne ist, in dem Sinne, dass die Skalare die Elemente der additiven Gruppe selber sind.
-
-%-----------------------------------------------------------------------------------------------
-\subsubsection{$\Z^2$ als \Z-Modul (mit Löchern)}
-Auf den Achsen gibt es nur die ganzzahligen Werte.
-\begin{tikzpicture}
-   \draw[->, thick] (0, -0.5) -- (0, 5) node(yaxis)[above]{$y$};
-   \draw[->, thick] (-0.5, 0) -- (5, 0) node(xaxis)[right]{$x$};
-
-   \draw (1, -0.05) node[below]{$1$} -- (1, 0.05);
-   \draw (-0.05, 1) node[left]{$1$} -- (0.05, 1);
-
-   \fill (1,1) circle (0.03);
-   \fill (2,1) circle (0.03);
-   \fill (3,1) circle (0.03);
-   \fill (4,1) circle (0.03);
-   \fill (5,1) circle (0.03);
-
-   \fill (1,2) circle (0.03);
-   \fill (2,2) circle (0.03);
-   \fill (3,2) circle (0.03);
-   \fill (4,2) circle (0.03);
-   \fill (5,2) circle (0.03);
-
-   \fill (1,3) circle (0.03);
-   \fill (2,3) circle (0.03);
-   \fill (3,3) circle (0.03);
-   \fill (4,3) circle (0.03);
-   \fill (5,3) circle (0.03);
-
-   \fill (1,4) circle (0.03);
-   \fill (2,4) circle (0.03);
-   \fill (3,4) circle (0.03);
-   \fill (4,4) circle (0.03);
-   \fill (5,4) circle (0.03);
-
-   \fill (1,5) circle (0.03);
-   \fill (2,5) circle (0.03);
-   \fill (3,5) circle (0.03);
-   \fill (4,5) circle (0.03);
-   \fill (5,5) circle (0.03);
-
-\end{tikzpicture}
-
-
-%-----------------------------------------------------------------------------------------------
-\subsubsection{$2\Z$ als \Z-Modul (Echte Teilmenge von $R$)}
-Dies ist bei Körpern nicht möglich. Da es auch keinen Null-Körper gibt, da hier immer $0 \ne 1$ gilt, ist der einzige $\K$-Vektorraum in $\K$ der ganze Körper $\K$.
-
-%-----------------------------------------------------------------------------------------------
-\subsubsection{Ideal = Unter-$R$-Modul von $R$}
-Die Ideal-Axiome sind schon rein formel-technisch gleich zu den Modul-Axiomen. Nur, dass die additiven Gruppe eine Teilmenge der Skalare sind.
-
-%-----------------------------------------------------------------------------------------------
-\subsubsection{$\Q, \R$ sind $\Z$-Moduln (Achtung: es sind keine freien Moduln)}
-Da es für alle $x,y \in \Q$ Werte $n_x, n_y \in \Z$ mit
+"`$\Rightarrow$"': Sei $p \colon R \to \End(M)$ eine Ring-Darstellung. Wir definieren dann ein Skalar-Produkt von Ring-Elementen $r$ mit Gruppen-Elementen $m$ über
 \begin{equation}
-   n_xx + n_yy = 0
-\end{equation}
-gibt, bestehen hier Relationen zwischen den Elementen.
+   rm := p(r)(m).
+\end{equation} 
+Dieses Produkt erfüllt die Modul-Axiome. Die Beweise sind recht einfach. Hier \zb:
+\begin{alignat}{4}
+   r(m+n) = p(r)(m+n) = p(r)(m) + p(r)(n) = rm + rn
+\end{alignat}
 
-%-----------------------------------------------------------------------------------------------
-\subsubsection{\zz6 als \Z-Modul (stärker aufgewickelt als $R$)}
-Obwohl es in \Z\ keine Nullteiler gibt, gibt es im \Z-Modul \zz6 ein Element welches mit einem Skalar multipliziert Null ergibt: $2 \cdot 3 = 0$. Hier ist $2 \in \Z$ aber $3 \in \zz6$.
+"`$\Leftarrow$"': Sei $M$ ein $R$-Modul. Wir definieren
+\begin{alignat}{4}
+   &p \colon &&R \to     &&\End(M)\\
+   &         &&r \mapsto &&\begin{pmatrix}
+                              p(r) \colon &M \to     &M\\
+                                          &m \mapsto &rm
+                           \end{pmatrix}
+\end{alignat}
+Das heißt, ein Element $r$ wir auf den Endo "`Multiplikation mit $r$ von links"' abgebildet.
+Der Beweis, dass $p$ eine Ring-Darstellung ist, ist wieder sehr einfach.
 
-%-----------------------------------------------------------------------------------------------
-\subsubsection{$(\zz6)^2$ als \zz6-Modul (Achtung Nullteiler)}
-Aufgrund der Nullteiler in \zz6 haben wir $3\vec{x} + 3\vec{x} = 0$ für alle $\vec x \in (\zz6)^2$.
+Der Beweis in beiden Richtungen ist deshalb so einfach, weil die Modul-Axiome nichts anderes sind als die Aussage "`Multiplikation mit $r$ von links ist Endo"'.
 
-%-----------------------------------------------------------------------------------------------
-\subsubsection{Freier $R$-Modul}
-$G$ ist die Menge der Generatoren (entspricht in etwa einer Basis)
+Also gilt \textbf{Ring-Darstellung = Modul}
+
+Eine alternative Definition von $R$-Modul ist somit Ring-Darstellung von $R$ über $M$.
+
+%******************************************************************************************************
+\subsection{Endlich erzeugte abelsche Gruppen}
+%******************************************************************************************************
+Im Falle einer endlich erzeugten Gruppe können alle Elemente von $M$ als Linearkombination einer endlichen Erzeugermenge $\{b_1, \cdots, b_r\}$ mit Koeffizienten in $\Z$ geschrieben werden.
 \begin{equation}
-   \left \{ \sum_{i \in I} r_i g_i \mid I \subseteq G, I \text{ endlich}, r_i \in R, g_i \in G \right \}
-\end{equation}
-in Worten: der $R$-Modul der endlichen Linearkombinationen von Elementen aus $G$ mit Koeffizienten aus $R$. Bei endlichem $G = \{0, \cdots, n-1 \}$ schreiben wir dafür auch
-\begin{equation}
-   R^n := R^{\{0, \cdots, n-1 \}},
-\end{equation}
-in welchem Fall wir die Elemente des Moduls als Tupel schreiben: $(r_0, r_1, r_2) \in R^3$.
-
-Hier kann $R^2 \cong R$ gelten. D.~h. Begriffe wie Basis und Dimension stehen nicht oder zumindest zunächst nicht oder nicht so einfach zur Verfügung. So bei den Endomorphismen-Ringen. TODO: Beweis.
-
-
-
-%-----------------------------------------------------------------------------------------------
-\subsubsection{Das \Z-Modul $(\zz{12})^2$ ist nicht kürzbar}
-Wir haben
-\begin{equation}
-   \begin{pmatrix} 1 \\ 3 \end{pmatrix} \ne
-   \begin{pmatrix} 4 \\ 6 \end{pmatrix}
-\end{equation}
-und gleichzeitig
-\begin{equation}
-   4 \cdot \begin{pmatrix} 1 \\ 3 \end{pmatrix} =
-   4 \cdot \begin{pmatrix} 4 \\ 6 \end{pmatrix} =
-          \begin{pmatrix} 4 \\ 0 \end{pmatrix}.
+   m = \sum_{i=1}^r m_i b_i.
 \end{equation}
 
-Das heißt, in diesem \Z-Modul gilt im allgemeinen nicht
+Sei $r \in R$.
+Dann gilt auch für die Elemente $rb_i$:
 \begin{equation}
-   4 \vec x = 4 \vec y \Rightarrow \vec x = \vec y,
-\end{equation}
-obwohl das entsprechende innerhalb von \Z\ gilt.
+   rb_i = \sum_{j=1}^r r_{ij} b_j.
+\end{equation} 
 
-%-----------------------------------------------------------------------------------------------
-\subsubsection{$\K$-Vektorraum ist auch $\K$-Modul}
-Da ein Körper unter anderem auch ein kommutativer Ring mit Eins ist, sind Vektorräume automatisch auch Moduln. Da abelsche Gruppen das gleiche wie \Z-Moduln sind, sind Moduln die gleichzeitige Verallgemeinerung von Vektorräumen und abelschen Gruppen.
+Aufgrund der Linearität von Endomorphismen gilt damit.
+\begin{equation}
+   rm = \sum_{i,j=1}^r m_i r_{ij} b_j.
+\end{equation} 
+
+Für die Koeffizienten von $rm$ gilt:
+\begin{equation}
+   (rm)_j = \sum_{i=1}^r m_i r_{ij}.
+\end{equation} 
+
+Im Falle von endlich erzeugten Gruppen ist eine Darstellung also ein Matrix-Ring mit Koeffizienten in $\Z$.
+
+Nicht alle abelsche Gruppen sind endlich erzeugt. Bekanntes Beispiel ist $\Q$.
+
+
+%******************************************************************************************************
+\subsection{}
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{}
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{}
+%******************************************************************************************************
+
+
+
+
 
 \begin{backup}
 %******************************************************************************************************
