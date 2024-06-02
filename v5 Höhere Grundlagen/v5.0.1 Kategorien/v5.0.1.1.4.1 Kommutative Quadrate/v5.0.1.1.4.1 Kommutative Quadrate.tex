@@ -246,7 +246,7 @@ Wir gehen auf zwei Wegen von $A$ nach $B$ aber es kommt das gleiche raus.
 \\\\
 Wieso kommen die immer wieder und überall in der Kategorientheorie vor? Wieso ist es die "`richtige"' Wahl bei der Definition von natürlichen Transformationen? (als Hom der Hom's, als Nat's)
 \\\\
-Ein Komm-Quad ist eine strukturerhaltende Abbildung von einem Pfeil auf einen anderen.
+\imporant{Ein Komm-Quad ist eine strukturerhaltende Abbildung von einem Pfeil auf einen anderen.}
 \\\\
 ... und das innerhalb einer Kat. Also eine Art Morphismen-Endomorphismus.
 \\\\
@@ -254,18 +254,29 @@ Dabei werden Anfang und Ende des Pfeils mit Morphismen der Kat auf ihre Ziele ab
 \\\\
 Der Pfeil wird also nicht irgendwie abgebildet, sondern durch die Kat als Medium gezogen.
 \\\\
-In dieser Sicht ist es eine natürliche Transformation der einfachsten Kategorie (nur ein Pfeil.)\imporant{Es ist die Urzelle aller strukturkonformen Überführungen einer Struktur in eine andere.}
+\imporant{Es eine natürliche Transformation der einfachsten Kategorie (nur ein Pfeil.) }
+\\\\
+\imporant{Es ist die Urzelle aller strukturkonformen Überführungen einer Struktur in eine andere.}
 \\\\
 Wie eine Homotopie eine Kurve durch einen Raum zieht.
 \\\\
 \imporant{Ein kommutatives Quadrat ist also eine Art Morphismen-Homotopie.}
 \\\\
-\imporant{Kommutative Quadrate umgeben uns (heimlich) seit wir klein sind. Sie durchziehen die Mathematik von Anfang an und zunächst unentdeckt wie ein Stützskelett} Nur hat uns bisher niemand den Blickwinkel gezeigt, unter welchem sie sich als solche zu erkennen geben.
+Kommutative Quadrate umgeben uns (heimlich) seit wir klein sind. 
+\\\\
+Das Aneinanderhängen kommutativer Quadrate ergibt wieder kommutative Quadrate. Wir haben horizontale und eine vertikale Verknüpfungen kommutativer Quadrate. 
+\\\\
+\imporant{Wir können mit ihnen rechnen.}
+\\\\
+\imporant{Das Gewebe aus kommutativen Quadraten durchzieht die Mathematik von Anfang an und zunächst unentdeckt wie ein Stützskelett.} 
+Nur hat uns bisher niemand den Blickwinkel gezeigt, unter welchem sie sich als solche zu erkennen geben.
 \\\\
 Distributiv-, Assoziativ-, Kommutativgesetz, Funktoraxiom, natürliche Transformation: alles sind
 in Wirklichkeit kommutative Quadrate.
 \\\\
-Das Aneinanderhängen kommutativer Quadrate ergibt wieder kommutative Quadrate. \imporant{Wir haben horizontale und eine vertikale Verknüpfungen kommutativer Quadrate. Wir können mit ihnen rechnen.}
+\imporant{Die Kategorien-Theorie macht dieses Gewebe sichtbar. Nun können wir oft unsere Rechen-Intuition durch geplante Wege durch das Gewebe ersetzen.} 
+
+
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -448,7 +459,7 @@ Assoziativ:
 Funktor:
 \begin{equation}
     \begin{tikzcd}
-        f   \arrow[d, "\circ g"]  \arrow[r, "F"] & C \arrow[d, "\circ F(g)"]\\
+        f   \arrow[d, "\circ g"]  \arrow[r, "F"] & F(f) \arrow[d, "\circ F(g)"]\\
         f \circ g                   \arrow[r, "F"] & F(f \circ g) = F(f) \circ F(g)
     \end{tikzcd}
 \end{equation}
