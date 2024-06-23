@@ -245,10 +245,6 @@ Tauchen ganz natürlich immer und überall auf: \zb Die Prägarbe der stetigen F
 Viele Kategorien entpuppen sich als Prägarbe, \zb die Kategorie der Graphen.
 \\\\
 Prägarben sind Verallgemeinerungen von $\Set$. $\Set$ ist die Prägarbe $\Set^\bullet$, wobei $\bullet$ die Kategorie mit nur einem Objekt und nur einem Morphismus ist.
-\\\\
-Das erlaubt zum einen die Grundlagen der Mathematik, wie Logik und Mengenlehre auf ganz andere Arten von Objekten anzuwenden.
-\\\\
-Zm anderen können wir Kategorien, die in Wirklichkeit Prägarben sind mit einer inneren Logik ausstatten und sie damit zu einer eigenen (exotischen) mathematischen Welt im Reagenzglas, unter Laborbedingungen zu machen.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -294,7 +290,7 @@ Siehe auch in den folgenden Seiten:\\
 \url{https://ncatlab.org/nlab/show/presheaf}\\
 \url{https://mathoverflow.net/questions/302934/why-sheaves-are-important-and-why-do-we-care-about-them}\\
 \url{https://de.wikipedia.org/wiki/Garbe_(Mathematik)}\\
-\url{https://ncatlab.org/nlab/show/internal+logic}
+\url{https://de.wikipedia.org/wiki/Garbe_(Landwirtschaft)}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -368,23 +364,86 @@ Das Video hierzu ist zu finden unter
 %******************************************************************************************************
 \subsection{Definition Prägarbe}
 %******************************************************************************************************
-Eine Prägarbe ist eine kontravariante Funktor-Kategorie nach \textbf{Set}, also ein $\Set^{\CC^*}$ für eine kleine Kategorie $\CC$, die Kategorie der kontravarianten Funktoren von $\CC$ nach $\Set$, oder der Funktoren von der dualen Kategorie $\CC^*$ nach $\Set$.
+Eine Prägarbe ist ein kontravarianter Funktor von einer kleinen Kategorie $\CC$ nach $\Set$. Diese können wir auch als Diagramm der Form $\CC$ in $\Set$ mit umgedrehten Pfeilen auffassen.
+
+
+Eine Kategorie von Prägarben ist eine kontravariante Funktor-Kategorie nach \textbf{Set}, also ein $\Set^{\CC^*}$ für eine kleine Kategorie $\CC$, die Kategorie der Prägarben über $\CC$, der kontravarianten Funktoren von $\CC$ nach $\Set$, oder der Funktoren von der dualen Kategorie $\CC^*$ nach $\Set$.
+
+Wenn wir $\CC$ als Graph oder Form ansehen, dann ist $\Set^{\CC^*}$ die Kategorie aller Diagramme in $\Set$ von der Form $\CC^*$, also von der Form $\CC$ aber mit umgedrehten Pfeilen.
+
+Sei \zb $\CC$:
+
+\begin{equation}
+   \begin{tikzcd}
+      & \bullet\\
+      \bullet \arrow[ur]  \arrow[dr] \\
+      & \bullet
+   \end{tikzcd}
+\end{equation}
+Dann sind die Objekte von $\Set^{\CC^*}$ alle Figuren über $\Set$
+\begin{equation}
+   \begin{tikzcd}
+      A \arrow[dr]\\
+      &B    \\
+      C \arrow[ur]
+   \end{tikzcd}
+\end{equation}
+mit Mengen $A,B,C$.
+
+%******************************************************************************************************
+\subsection{Kontravariante Funktoren}
+%******************************************************************************************************
+Wir wollen eine sehr einfache Konzeptstruktur rund um das Konzept Auto aufbauen. Konzepte sind hierbei Objekte einer Kategorie, der Kategorie der verwendeten Konzepte. Ein Morphismus $f \colon A \to B$ von einem Konzept $A$ zu einem Konzept $B$ bedeutet, dass das Konzept $A$ in der Rolle $f$ in $B$ vorkommt. Wir betrachten stark vereinfachend nur die Konzepte Auto $A$, Rad $R$, Felge $F$ und Halter $H$. Die Modellierung kann dann so aussehen:  
+\begin{equation}
+   \begin{tikzcd}
+      F \arrow[r] & R \arrow[dr,"vl{,}vr{,}hl{,}hr"] \\
+      && A\\
+      & H \arrow[ur]
+   \end{tikzcd}
+\end{equation}
+Dabei sind $vl{,}vr{,}hl{,}hr$ 4 Morphismen (ich weiß nur nicht, wie man 4 parallele Pfeile malt), welche die Rollen "`Rad vorne links"', "`Rad vorne rechts"', "`Rad hinten links"' und "`Rad hinten rechts"' modellieren. Diese Kategorie nennen wir $\CC$.
+
+Ein Fuhrpark ist nun eine Prägarbe über $\CC$, also ein kontravarianter Funktor $\FF \colon \CC^* \to \Set$. Zu jedem Konzept gibt es eine Menge von Dingen zu diesem Konzept: die Menge der Felgen $\FF(F)$, die Menge der Räder $\FF(R)$, die Menge der Autos $\FF(A)$ und die Menge der Halter $\FF(H)$.
+Die Abbildung $\FF(A) \to \FF(H)$ ordnet jedem Auto seinem Halter zu, die Abbildung $\FF(vl) \colon \FF(A) \to \FF(R)$ ordnet jedem Auto sein vorderes linkes Rad zu. Beachte, dass diese Pfeile in umgekehrter Richtung verlaufen.
+
+Die Funktion $\FF(vl) \colon \FF(A) \to \FF(R)$ ordnet jedem Auto sein vorderes linkes Rad zu. So entsteht das Umdrehen der Pfeile.
 
 %******************************************************************************************************
 \subsection{Prägarbe der stetigen Funktionen}
 %******************************************************************************************************
+Wenn wir die stetigen Funktionen $\R \to \R$ betrachten, können wir,
+statt mit partiellen Funktionen zu arbeiten, deren Definitionsmenge bestimmt werden muss, auch die Struktur aller offenen Teilmengen von $\R$ und jeweils den auf ihnen vollständig definierten stetigen Funktionen betrachten.
+
+Die Menge der offenen Mengen bildet eine Kategorie: die Objekte sind die offenen Mengen selber, die Morphismen sind die Identitäten sowie für jedes $U \subseteq V$ die Einbettung $i_{UV} \colon U \to V$.
+Wir haben also zwischen zwei Objekten maximal einen Morphismus. Hier müssen wir eigentlich noch zeigen, dass die Axiome einer Kategorie erfüllt sind. Und wir haben noch ein oft genutztes Rudel an Beispielen für Kategorien. Diese Kategorie nennen wir $\mathcal{T}$ für Topologie.
+
+Nun sei $\CC \colon \mathcal{T}^* \to \Set$ der Funktor, der jeder offenen Mengen $U$ die Menge der stetigen Funktionen $U \to \R$ zuordnet. Dem Morphismus $i_{UV} \colon U \to V$ wird die Einschränkung der Funktionen auf $V$ auf $U$ zugeordnet. Wenn also $f \colon V \to U$ stetig ist, dann ist
+\begin{equation}
+   \CC(i_{UV})(f) = f_{|U}.
+\end{equation}
+Es ist leicht zu zeigen, dass $\CC$ eine Prägarbe ist. 
+
+In ähnlicher Weise gibt es die Prägarbe der differenzierbaren Funktionen, die der allgemeinen Funktionen und viele mehr. Diese befinden sich alle in der Kategorie der Prägarben über $\mathcal{T}$.
 
 %******************************************************************************************************
 \subsection{Kategorie der Graphen als Prägarbe}
 %******************************************************************************************************
+Sei $\mathcal{G}$ folgende Kategorie.
+\[
+\begin{tikzcd}
+   V \arrow[shift right, swap]{r}{s} \arrow[shift left]{r}{t} & A
+\end{tikzcd}
+\]
+Dann besteht eine Prägarbe $G$ über $\mathcal{G}$ aus einer Menge $G(A)$, die wir die Menge der Pfeile (arrows) nennen, und einer Menge $G(V)$, die wir die Menge der Knoten (vertices) nennen. Sei $a \in G(A)$ ein Pfeil, dann nennen wir $G(s)(a)$ den Startpunkt und $G(t)(a)$ den Endpunkt (target) von $a$.
+
+Gerichtete Graphen sind Prägarben über $\mathcal{G}$.
+
+Die Kategorie der gerichteten Graphen ist eine Prägarben-Kategorie!
 
 %******************************************************************************************************
-\subsection{Prägarbe als verallgemeinerte Kategorie aller Mengen}
+\subsection{Prägarben sind Verallgemeinerungen von Set}
 %******************************************************************************************************
-
-%******************************************************************************************************
-\subsection{Interne Logik}
-%******************************************************************************************************
+Prägarben sind Verallgemeinerungen von $\Set$. $\Set$ ist die Prägarbe $\Set^{\bullet^*}$, wobei $\bullet$ die Kategorie mit nur einem Objekt und nur einem Morphismus ist. Anders gesagt ist $\Set$ selber eine Prägarben-Kategorie.
 
 \begin{backup}
 %******************************************************************************************************
@@ -442,10 +501,8 @@ Eine Prägarbe ist eine kontravariante Funktor-Kategorie nach \textbf{Set}, also
 \renewcommand*{\arraystretch}{1}
 
 \begin{tabular}{ll}
-    $P(x)$                              & ein Prädikat\\
+    $\bullet$                           & Kategorie mit genau einem Objekt und einem Morphismus\\
     $A, B, C, \cdots, X, Y, Z$          & Objekte\\
-    $F,G$                               & Funktoren\\
-    $V, V'$                             & Vergiss-Funktoren\\
     $f, g, h, r, s, \cdots$             & Homomorphismen\\
     $\mathcal C, \mathcal D, \mathcal E, \cdots$ & Kategorien\\
     $\PP$                               & Potenzmengen-Funktor\\
@@ -453,9 +510,8 @@ Eine Prägarbe ist eine kontravariante Funktor-Kategorie nach \textbf{Set}, also
     \Ab                                 & Kategorie der kleinen abelschen Gruppen\\
     $\Hom( X, Y)$                       & Die Klasse der Homomorphismen von $X$ nach $Y$\\
     $\alpha, \beta, \cdots$             & natürliche Transformationen oder Ordinalzahlen\\
-    $\mathcal C ^{\text{op}}$           & Duale Kategorie\\
+    $\mathcal C ^{\text{op}}$ oder $\mathcal C ^{*}$         & Duale Kategorie\\
     $\DD^\CC$                           & Funktorkategorie\\
-    $\textbf{Ring}, \textbf{Gruppe}$    & Kategorie der kleinen Ringe und der kleinen Gruppen\\
     $U, U', U''$                        & Universen\\
     $V_\alpha$                          & eine Menge der Von-Neumann-Hierarchie zur Ordinalzahl
                                           $\alpha$
