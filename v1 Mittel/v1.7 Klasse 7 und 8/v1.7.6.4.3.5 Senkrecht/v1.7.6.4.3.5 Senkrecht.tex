@@ -67,6 +67,7 @@
 \usepackage{tikz-cd}
 \usetikzlibrary{babel}
 \usetikzlibrary{calc}
+\usetikzlibrary{patterns}
 
 %-----------------------------------------------------------------------------------------------------*
 % theorem:                                                                                            *
@@ -251,7 +252,7 @@ Koordinaten-System, Satz des Pythagoras, Abstand im Koordinatensystem, Rechnen m
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v1%20Mittel/v1.7%20Klasse%207%20und%208/v1.7.6.4.3.5%20Senkrecht}
 }
 
 %******************************************************************************************************
@@ -270,12 +271,16 @@ v1.7.6.4.3 (Mittel) Geometrie - Abstand im Koordinatensystem\\
 \\
 \\v1.7.6.4.3.3 (Mittel) Geometrie - Skalarprodukt
 \url{https://youtu.be/PMYHObLI54Q}
+\\
+\\v1.7.6.4.3.4 (Mittel) Geometrie - Rechnen mit Strecken
+\url{https://youtu.be/hYRLizedcVM}
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
 \\
+\url{https://de.wikipedia.org/wiki/Orthogonalit%C3%A4t}\\
 \url{https://de.wikipedia.org/wiki/Satz_des_Pythagoras}\\
 \url{https://de.wikipedia.org/wiki/Euklidischer_Abstand}\\
 \url{https://de.wikipedia.org/wiki/Skalarprodukt}\\
@@ -328,18 +333,235 @@ Das Video hierzu ist zu finden unter
 
 %******************************************************************************************************
 %                                                                                                     *
-\section{Skalarprodukt}
+\section{Senkrecht}
 %                                                                                                     *
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Senkrecht}
+\subsection{Das Konzept Senkrecht}
 %******************************************************************************************************
-W
+Wir stellen hier 5 äquivalente Definitionen des Begriffs Senkrecht vor. Zunächst ist jede Definition so gut wie die andere. Den gemeinsam sich dahinter stehenden Geist, das Wesen von Senkrecht, nenne ich Konzept Senkrecht.
+
+\begin{enumerate}
+   \item Der kürzeste Abstand eines Punktes zu einer Geraden liegt auf einer senkrechten Geraden.
+   \item Zu einer Gerade mit Steigung $m$ ist eine Gerade mit Steigung $-1/m$ senkrecht (sofern $m \ne 0$).
+   \item Zwei Seiten eines Dreiecks sind senkrecht, wenn der Satz des Pythagoras gilt (mit der dritten Seite als Hypotenuse).
+   \item Zwei Strecken sind Senkrecht, wenn deren Skalarprodukt 0 ist.
+   \item Eine Gerade ist senkrecht zu einer zweiten, wenn deren Punkte gleich weit weg von links und rechts sind.
+\end{enumerate}
 
 %******************************************************************************************************
-\subsection{}
+\subsection{Die Definitionen sind äquivalent}
 %******************************************************************************************************
+%------------------------------------------------------------------------------------------------------
+\subsubsection{Äquivalenz zu (1), minimaler Abstand}
+
+Wir betrachten den Fall des Nullpunktes. Für andere Punkte geht alles genauso, nur die Formeln werden alle unübersichtlicher. Der Abstand des Nullpunktes zu einem Punkt auf der Geraden $y = mx + q$ mit $x$-Koordinate $x$ ist 
+\begin{equation}
+   \sqrt{(m^2+1)x^2 + 2mqx + q^2},
+\end{equation}
+wie wir z.~B. dem Video "`v1.7.6.4.3.2 (Mittel) Geometrie - Abstand einer Geraden vom Nullpunkt"' entnehmen können. Um das Minimum zu finden, genügt es den Ausdruck unter der Wurzel, der Abstand zum Quadrat zu minimieren.
+Diesen schreiben wir nun um mit der quadratischen Ergänzung:
+\begin{equation}
+   \left( x \sqrt{m^2+1} + \frac{mq}{\sqrt{m^2+1}} \right)^2 - \frac{m^2q^2}{m^2+1} + q^2.
+\end{equation}
+Die Terme hinter dem Quadrat zusammenfassend erhalten wir schließlich:
+\begin{equation}
+   \boxed{
+      \left( x \sqrt{m^2+1} + \frac{mq}{\sqrt{m^2+1}} \right)^2 + \frac{q^2}{m^2+1}.
+   }
+\end{equation}
+Das Minimum dieses Ausdrucks ist $\frac{q^2}{m^2+1}$ und es wird erreicht, wenn der Term im Quadrat $0$ wird. Das führt zu dem im obengenannten Video bereits gezeigten minimalen Abstand $\sqrt{\frac{q^2}{m^2+1}}$ angenommen an der Stelle $x = -\frac{mq}{m^2+1}$.
+
+Anders gesagt ist
+\begin{equation}
+   \boxed{
+      \Delta := \left( x \sqrt{m^2+1} + \frac{mq}{\sqrt{m^2+1}} \right)^2 .
+   }
+\end{equation}
+der \textbf{Fehler} vom tatsächlichen zum minimalen Abstandquadrat.
+
+Wir möchten nun den Ausdruck im Quadrat als Skalarprodukt darstellen. Dazu suchen wir zunächst eine Strecke auf der Geraden $y = mx+q$. Dazu nehmen wir die beiden Punkte an den Stellen $x=0$ und $x=1$ auf dieser Geraden. Es handelt sich um die Punkte $(0,q)$ und $(1,m+q)$. Wir bezeichnen die Strecke von
+$(0,q)$ nach $(1,m+q)$ mit $\vec d$. Die Koordinatenversätze sind
+\begin{alignat}{3}
+   &d_x &&= 1\\
+   &d_y &&= m.
+\end{alignat}
+Für die Länge dieser Strecke gilt nach unserer Definition des Pythagoras
+\begin{equation}
+   \boxed{|\vec d| = \sqrt{m^2+1}}.
+\end{equation}
+Der Punkt an der Stelle $x$ auf der Geraden hat die Koordinaten $(x, mx+q)$. Diese Strecke nennen wir $\vec a$, und da die Strecke bei $0$ anfängt, sind die Koordinatenversätze gleich den Koordinaten des zweiten Punktes:
+\begin{alignat}{3}
+   &a_x &&= x\\
+   &a_y &&= mx+q.
+\end{alignat}
+Damit gilt
+\begin{alignat}{4}
+   &\vec a \cdot \vec d &&= x \cdot 1 + (mx+q) \cdot m\\
+   &                    &&= x + m^2x+mq\\
+   &                    &&= (m^2+1)x +mq.
+\end{alignat}
+Diesen letzten Ausdruck wollen wir mit dem Wert im Quadrat oben vergleichen und kommen auf:
+\begin{equation}
+   \sqrt{m^2+1} \left(x \sqrt{m^2+1} + \frac{mq}{\sqrt{m^2+1}} \right) = (m^2+1)x +mq.
+\end{equation}
+Schon jetzt sehen wir, dass das Skalarprodukt $0$ ist, genau dann wenn das Minimum des Abstandquadrates erreicht wird, wenn also die Fehler $\Delta$ zu $0$ wird.
+
+Betrachten wir statt dessen die Strecke $\vec e$, deren Längen mit $1/\sqrt{m^2+1}$ multipliziert werden. Diese hat ihren ersten Punkt wieder den Achsenabschnitt der Geraden, also $(0,q)$. Der zweite Punkt ist allerdings an der Stelle $x=1/\sqrt{m^2+1}$ und ist damit der Punkt $(1/\sqrt{m^2+1}, m/\sqrt{m^2+1} + q)$ mit den Koordinatenversätzen
+\begin{alignat}{3}
+   &e_x &&= 1/\sqrt{m^2+1}\\
+   &e_y &&= m/\sqrt{m^2+1}.
+\end{alignat}
+Die Länge dieser Strecke ist
+\begin{alignat}{3}
+   &(1/\sqrt{m^2+1})^2 + (m/\sqrt{m^2+1})^2 = 1/(m^2+1) + m^2/(m^2+1) = \\
+   &(m^2 +1)/(m^2 +1) = 1.
+\end{alignat}
+Es handelt sich also um eine Strecke der Länge $1$, die auf der Geraden liegt.
+Die Rechnung sparen ich mir. Es ergibt sich:
+
+\begin{equation}
+   \vec a \cdot \vec e = \left(x \sqrt{m^2+1} + \frac{mq}{\sqrt{m^2+1}} \right),
+\end{equation}
+und damit
+\begin{equation}
+   \boxed{
+      \left( \vec a \cdot \vec e \right)^2 = \Delta.
+   }
+\end{equation}
+
+\noindent\fbox{%
+   \parbox{\textwidth}{%
+      Das Quadrat des Skalarproduktes einer Strecke vom Null-Punkt zu einer Geraden mit einer Strecke der Länge $1$ auf der Geraden misst den Fehler zum minimalen Abstandsquadrat $\Delta$.
+   }%
+}
+
+\begin{tikzpicture}[scale=3]
+   \draw[->, thick] (0, -0.5) -- (0, 1.5) node(yaxis)[above]{$y$};
+   \draw[->, thick] (-1, 0) -- (2, 0) node(xaxis)[right]{$x$};
+   
+   \draw (1, -0.05) node[below]{$1$} -- (1, 0.05);
+   \draw (-0.05, 1) node[left]{$1$} -- (0.05, 1);
+   
+   \draw[blue] (-1,5/4) -- (2,-1/4);
+   
+   \coordinate (minimum) at (3/10,3/5);
+   \fill (minimum) circle (0.03); 
+   \draw[dashed] (minimum)  -- (0,0);
+   
+   \draw[fill=none](0,0) circle ( {sqrt(9/20)} ); 
+   
+   \fill[green] (3/4,3/8) coordinate (c) circle (0.03);
+
+   \draw[black] (0,0) -- (c) -- (3/4+3/8,3/8-3/4) -- (3/8,-3/4) -- (0,0);
+
+   \draw[green] (0,0) -- node[above] {$\vec a$} (c) -- (3/4+3/8,3/8-3/4) -- (3/8,-3/4) -- (0,0);
+   
+   \draw[->, thick, red] (c) -- node[above] {$\vec e$} (14/8,-1/8);
+   
+   \fill[red] ({sqrt(48/75)*3/4},{sqrt(48/75)*3/8}) coordinate (x) circle (0.03);
+
+   \draw (x) -- 
+      ({sqrt(48/75)*(3/4+3/8)},{sqrt(48/75)*(3/8-3/4)}) -- 
+      ({sqrt(48/75)*3/8},{sqrt(48/75)*(-3/4)}) -- 
+      (0,0);
+      
+   \fill[pattern=north west lines, pattern color=red] (x) -- 
+      ({sqrt(48/75)*(3/4+3/8)},{sqrt(48/75)*(3/8-3/4)}) -- 
+      ({sqrt(48/75)*3/8},{sqrt(48/75)*(-3/4)}) -- 
+      (3/8,-3/4) --
+      (3/4+3/8,3/8-3/4) --
+      (c) --
+      (x);
+      
+   \node[text width=3cm, color=red] at (1.5,-4/8) {$\Delta = \left( \vec a \cdot \vec e \right)^2$};
+   
+\end{tikzpicture}
+
+%------------------------------------------------------------------------------------------------------
+\subsubsection{Äquivalenz zu (2), Steigung ist $-1/m$}
+Die Steigung einer Geraden ergibt sich aus beliebigen zwei verschiedenen Punkten $(x_0,y_0)$ und $(x_1, y_2)$ zu
+\begin{equation}
+   m = \frac{y_1 - y_0}{x_1 - x_0}.
+\end{equation}
+Für eine Strecke $\vec a$ auf der Geraden mit den Koordinatenversätzen $a_x$ und $a_y$ gilt demnach
+\begin{equation}
+   m = \frac{a_y}{a_x}.
+\end{equation}
+Für eine zweite Gerade $y = m'x+q'$ und einer Strecke $\vec b$ auf ihr gilt genauso
+\begin{equation}
+   m' = \frac{b_y}{b_x}.
+\end{equation}
+Damit haben wir
+\begin{alignat}{4}
+   &\vec a \cdot \vec b &&= 0       &&\Leftrightarrow\\
+   &a_xb_x + a_yb_y      &&= 0       &&\Leftrightarrow\\
+   &a_xb_x               &&= -a_yb_y &&\Leftrightarrow\\
+   &\frac{a_x}{a_y}      &&= -\frac{b_y}{b_x} &&\Leftrightarrow\\
+   &m                    &&= \frac{1}{-m'}
+\end{alignat}
+Bei der Umformung zur vierten Zeile haben wir durch $a_y$ und durch $b_x$ geteilt. Das funktioniert so nur, wenn diese beiden Werte nicht $0$ sind.
+
+\noindent\fbox{%
+   \parbox{\textwidth}{%
+      Die Definition über die Steigung von Geraden funktioniert nicht für alle Strecken. Die des Skalarproduktes aber immer.
+   }%
+}
+
+%------------------------------------------------------------------------------------------------------
+\subsubsection{Äquivalenz zu (3), es gilt der Pythagoras}
+Sei ein Dreieck gegeben mit den Seiten $\vec a, \vec b, \vec c$ und zwar so gerichtet, dass $\vec a + \vec b = \vec c$ gilt. Wie in dem Video "`v1.7.6.4.3.4 (Mittel) Geometrie - Rechnen mit Strecken"' beschrieben gilt dann 
+\begin{equation}
+   \vec c ^2 = (\vec a + \vec b)^2 = \vec a^2 + 2\vec a \vec b + \vec b^2.
+\end{equation}
+Dies ist die binomische Formel für das Rechnen mit Strecken. Wir sehen sofort, dass
+\begin{equation}
+   \vec c ^2 = \vec a^2 + \vec b^2 \Leftrightarrow 2\vec a \vec b = 0.
+\end{equation}
+
+%------------------------------------------------------------------------------------------------------
+\subsubsection{Äquivalenz zu (4), gleich weit weg}
+Bilden wir links und rechts von $\vec a$ ein Dreieck mit einer Strecke der Länge $1$ auf der Geraden, die wir $\vec e_-$ und $\vec e_+$ nennen, so erhalten wir, wegen $\vec e_- = -\vec e_+$
+\begin{alignat}{5}
+   &(\vec a - \vec e)^2 = (\vec c_-)^2\\
+   &(\vec a + \vec e)^2 = (\vec c_+)^2
+\end{alignat}
+Ausmultiplizieren führt zu:
+\begin{alignat}{5}
+   &\vec a^2 -2 \vec a \cdot \vec e + \vec e^2 = (\vec c_-)^2\\
+   &\vec a^2 +2 \vec a \cdot \vec e + \vec e^2 = (\vec c_+)^2
+\end{alignat}
+Hier können wir ablesen:
+\begin{alignat}{5}
+   &(\vec c_+)^2 = (\vec c_-)^2 \Leftrightarrow 2 \vec a \cdot \vec e = 0.
+\end{alignat}
+
+\begin{tikzpicture}[scale=3]
+   \draw[->, thick] (0, -0.5) -- (0, 1.5) node(yaxis)[above]{$y$};
+   \draw[->, thick] (-1, 0) -- (2, 0) node(xaxis)[right]{$x$};
+   
+   \draw (1, -0.05) node[below]{$1$} -- (1, 0.05);
+   \draw (-0.05, 1) node[left]{$1$} -- (0.05, 1);
+   
+   \draw[blue] (-1,5/4) -- (2,-1/4);
+   
+   \coordinate (minimum) at (3/10,3/5);
+   \fill (minimum) circle (0.03); 
+   \draw[dashed] (minimum)  -- (0,0);
+   
+   \draw[fill=none](0,0) circle ( {sqrt(9/20)} ); 
+   
+   \fill[green] (3/4,3/8) coordinate (c) circle (0.03);
+   
+   \draw[->, thick, red] (c) -- node[above] {$\vec e_+$} (14/8,-1/8) coordinate (cp);
+   \draw[->, thick, red] (c) -- node[above] {$\vec e_-$} (-2/8, 7/8) coordinate (cm);
+   
+   \draw[green] (0,0) -- node[above] {$\vec a$} (c);
+    
+   \draw[blue] (0,0) -- node[below] {$c_+$} (cp);
+   \draw[blue] (0,0) -- node[left]  {$c_-$} (cm);
+\end{tikzpicture}
 
 %******************************************************************************************************
 %                                                                                                     *
@@ -378,9 +600,11 @@ W
 \renewcommand*{\arraystretch}{1}
 
 \begin{tabular}{ll}
-    $a,b,c, \cdots$               &Seiten\\
+    $\vec a,\vec b, \vec c, \cdots$               &Seiten\\
     $a_x,a_y$                   &Koordinatenversätze der Seite $a$\\
     $|a|$                       &Länge der Seite $a$\\
+    $m$                         &Steigung der Gerade\\
+    $q$                         &Achsenabschnitt der Gerade\\
     $x, y$                      &Koordinatenachsen\\
     $A, B, C, \cdots$          &Punkte\\
     $A_x, A_y$                 &Koordinaten des Punktes $A$\\
