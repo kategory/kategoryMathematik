@@ -1,0 +1,464 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v3.0.2.0.4 Relationen und Funktionen - Familie, Index, Tupel.tex                                *
+%                                                                                                  *
+% Copyright (C) 2024 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v3.0.2.0.4 Relationen und Funktionen - Familie, Index, Tupel is part of kategoryMathematik.     *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+\usepackage{leftindex}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Theorem}
+\myTheorem{Satz}
+\myTheorem{Example}
+\myTheorem{Remark}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Urbild}{Urbild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+
+\newcommand{\zb}{z.~B. }
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Bachelor) Anfang\\[1cm]
+\textbf{v3.0.2.0.4 Relationen und Funktionen - Familie, Index, Tupel}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2024 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Familien, Indexschreibweise, Zeilen- oder Spalten-Vektoren, $n$-Tupel sind alles nur andere Sprechweisen für Funktionen.
+
+Je nach Kontext und je nach Intuition, die wir wecken wollen, verwenden wir das eine oder das andere.
+
+Familien benutzen wir gerne, wenn es auf die Funktion und in der der Regel auch auf die Reihenfolge gar nicht ankommt. Der Index wird dann genutzt, um einfach einzelne Elemente der Klasse herauszupicken. Bei den meisten Termen, die Familien nutzen, können wir auch auf eine Klassenschreibweise umstellen.
+
+Zeilen- Spalten-Vektoren, also Matrizen mit nur einer Zeile oder mit nur einer Spalte, nutzen wir gerne, wenn diese Elemente eines Vektorraums, oder ähnlichem sind.
+
+Tupel, nehmen wir, wenn es nur endlich viele Elemente im Wertebereich der Funktion gibt. Ein $n$-Tupel  mit Elementen in $X$ ist aber im Endeffekt nur eine Funktion der Zahlen von $0$ bis $n-1$ nach $X$.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Klassen-Funktion, Klassenschreibweise, Teilklasse.
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+{\tiny
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v3%20Bachelor/v3.0%20Anfang/v3.0.2.0.3%20Relationen%20und%20Funktionen%20-%20Leere%20Funktion}
+}
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\
+\\
+v3.0.2.0.1 (Bachelor) Relationen und Funktionen - Surjektiv, injektiv, bijektiv\\
+\url{https://youtu.be/8YFNEWZBpWc}\\
+\\
+v3.0.2 (Bachelor) Relationen und Funktionen\\
+\url{https://youtu.be/qjhNZXFAYEM}
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Familie_(Mathematik)}\\
+\url{https://de.wikipedia.org/wiki/Tupel}\\
+\url{https://de.wikipedia.org/wiki/Matrix_(Mathematik)}\\
+\url{https://de.wikipedia.org/wiki/Indexmenge_(Mathematik)}\\
+\url{https://de.wikipedia.org/wiki/Vektor}\\
+\url{https://de.wikipedia.org/wiki/Tiefstellungr}
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+"`Grundwissen Mathematikstudium"'\\
+Tilo Arens, Rolf Busam, Frank Hettlich, Christian Karpfinger, Hellmuth Stachel \\
+2022\\
+Springer-Verlag\\
+978-3-662-63312-0 (ISBN)\\
+{\tiny
+   \url{https://www.lehmanns.de/shop/mathematik-informatik/56427740-9783662633120-grundwissen-mathematikstudium}}\\
+\\
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird,
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben
+(zu finden im selben Git-Projekt).
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter
+{\tiny
+   \url{huhu}
+}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{v3.0.2.0.4 Relationen und Funktionen - Familie, Index, Tupel}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{Konstante Tiefstellung, Hochstellung}
+%******************************************************************************************************
+Wir reden hier nur über rechte Tiefstellungen, wie bei $x_1$. Alles was wir sagen gilt aber auch für linke Tiefstellungen sowie für rechte und linke Hochstellungen $\leftindex_{1}{x}, x^1, \leftindex^{1}{x}$. Wobei die Hochstellungen in der Regel dem Potenzieren vorbehalten sind und als Index nur verwendet werden sollten, wenn es keine Zweideutigkeiten mit Potenzen ergeben kann.
+
+Manchmal benutzen wir Tiefstellungen, weil uns die Variablen ausgehen. Also statt der Variablen $a,b,c,d,e,f$ nutzen wir dann $a_0,a_1,a_2,a_3,a_4,a_5$. In diesem Fall ist $a_0$ zu lesen wie ein Buchstabe. Diese Verwendung, kann aber eigentlich immer in die folgende überführt werden. Oft ist dies nur ein gedanklicher Schritt, der an dem Text nichts ändert.
+
+Bei einem tiefgestellten Buchstaben, statt einer Zahl,
+\begin{equation}
+    x_a
+\end{equation}
+kommt es darauf an, ob $a$ eine reine Verzierung ist, wie bei $x'$ oder eine Variable ist, die Werte annehmen kann. Im ersten Fall handelt es sich um kreative Symbole im zweiten um eine Familie im Sinne von unten.
+
+%******************************************************************************************************
+\subsection{Familie}
+%******************************************************************************************************
+Eine Familie von Elementen aus einer Klasse $A$ ist nichts anderes als eine Funktion und definiert als (wobei $I$ eine weitere Klasse ist)
+\begin{alignat}{4}
+    &(a_i)_{i \in I} := (a_i \mid i \in I) := a \colon I \to A\\
+    &a_i := a(i)
+\end{alignat}
+Diese wird bisweilen als $(a_i)$ abgekürzt, wenn $I$ klar ist.
+
+Oft nutzen wir diese Sprech- und Schreibweise, wenn es uns mehr auf die Elemente in $A$ als um die Funktion geht. Manchmal sind Formeln mit dieser Schreibweise leichter zu lesen. Manchmal wechseln wir auch im Text von einer Darstellung in die andere, wobei das angekündigt werden sollte.
+
+Es müssen nicht alle Elemente von $A$ erreicht werden, und Elemente von $A$ können mehrfach vorkommen. Mit anderen Worten muss die Funktion $a$ weder surjektiv noch injektiv sein. Die Indexklasse $I$ muss nicht geordnet sein. Sie darf es aber und in manchen Kontexten ist die Reihenfolge sogar relevant (\zb bei Folgen und Reihen). Sie kann über beliebig groß sein, sogar unendlich und überabzählbar. Die Indexklasse kann auch eine echte Klasse sein.
+
+Da Folgen nicht anderes als Funktionen von $\N$ sind, schreiben wir sie oft als
+\begin{equation}
+    (a_n)_{a\in \N}.
+\end{equation}
+Falls aus dem Kontext klar ist, dass $n$ über $\N$ läuft, kürzen wir auch ab und sagen nur $(a_n)$.
+
+%******************************************************************************************************
+\subsection{Quantoren}
+%******************************************************************************************************
+Wir nutzen Quantoren über den Index. Im folgenden sei $P$ ein Prädikat.
+\begin{equation}
+    \forall i \in I \colon P(a_i).
+\end{equation}
+Nur, wenn die Funktion $a$ surjektiv ist, ist dies äquivalent mit
+\begin{equation}
+    \forall x \in A \colon P(x).
+\end{equation}
+
+%******************************************************************************************************
+\subsection{Indizieren einer Klasse}
+%******************************************************************************************************
+Sei eine beliebe (auch echte) Klasse $A$ gegeben. manchmal wollen wir die Elemente von $A$ "`durchnummerieren"'. Der bessere Begriff ist "`indizieren"'. Geht das immer? Ja! Denn die Identität $\id_A$ ist immer eine (Klassen-) Funktion:
+\begin{equation}
+    \id_A := \{(a,a) \mid a \in A\},
+\end{equation}
+welche bijektiv ist.
+
+Wenn die Funktion aber irrelevant ist, und wir wissen ja nun, dass es eine gibt, sagen wir einfach: sei $(a_i)_{i \in I}$ eine Indizierung von $A$ und meinen damit eine beliebige bijektive Funktion $a \colon I \to A$.
+
+Dann können wir dies \zb wie folgt bei Quantoren verwenden. Sei dazu $\phi$ ein Prädikat.
+
+%******************************************************************************************************
+\subsection{Tupel}
+%******************************************************************************************************
+Tupel können über Paare oder über Funktionen definiert werden. Bei der Definition über Paare, definieren wir ein 2-Tupel als Paar $(x_0, X_1)$. Und ein $n+1$ für $n>2$ wird definiert über
+\begin{equation}
+    (x_0, \cdots, x_{n-1}, x_n) := ((x_0, \cdots, x_{n-1}), x_n).
+\end{equation}
+
+Die Definition über Funktionen ist einfach eine Funktion von $\{0, 1, \cdots, n\} \to X$, wobei $X$ die Werte enthält.
+
+Allerdings kommen wir ohne den Grundbegriff "`Paar"' nicht aus, da Funktionen als Klasse von Paaren definiert werden.
+
+Ein Vorteil bei der Definition über Funktionen ist, dass wir damit auch $1$-Tupel und $0$-Tupel definieren können, wenn wir die Beschränkung $n \ge 2$ fallen lassen: $()$ und $(x_0)$.
+
+%******************************************************************************************************
+\subsection{Vektor}
+%******************************************************************************************************
+Auch Vektoren wie
+\begin{equation}
+    \vec x = \begin{pmatrix}
+        2\\3\\6
+    \end{pmatrix}
+\end{equation}
+können wir als Funktionen auffassen, in diesem Fall $\{0,1,2\} \to \R$. Damit haben wir
+\begin{equation}
+    x_0 = \vec x (0).
+\end{equation}
+
+Damit ist unser aus der Schule bekannte $\R^3$ auch ein Funktionenraum: der Raum aller Funktionen $\{0,1,2\} \to \R$.
+
+%******************************************************************************************************
+\subsection{Konzept}
+%******************************************************************************************************
+Jetzt stellt sich die Frage: Was \emph{ist} denn jetzt ein $n$-Tupel, ein Paar oder eine Funktion? Die Antwort: die Idee oder der Geist "`$n$-Tupel"' liegt dahinter und umfasst die Aspekte beider Definitionen. Da die Wörter "`Geist"' und "`Idee"' sehr abgehoben klingen, spreche ich gerne von dem \textbf{Konzept} $n$-Tupel. Beide Definitionen führen zu den selben Ergebnissen. Und wir können zwischen beiden wechseln. Mal ist die eine praktischer, mal die andere.
+
+\begin{backup}
+%******************************************************************************************************
+%                                                                                                     *
+\section{TODO}
+%                                                                                                     *
+%******************************************************************************************************
+Noch zu erledigen sind
+\begin{itemize}
+   \item leer
+\end{itemize}
+\end{backup}
+
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+
+   \bibitem[ArensBusamHettlichKarpfingerStachel2022]{Grundwissen}
+      Tilo Arens, Rolf Busam, Frank Hettlich, Christian Karpfinger, Hellmuth Stachel, \emph{Grundwissen Mathematikstudium},
+      Springer, 978-3-662-63312-0 (ISBN)
+
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $\emptyset$             & die leere Menge $\{\}$\\
+    $X, Y, \cdots$          & Mengen\\
+    $x, y, \cdots$             & Elemente\\
+    $F$                 & eine Funktion\\
+    $R$             & eine Relation
+
+\end{tabular}
+
+\end{document}
