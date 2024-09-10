@@ -133,6 +133,7 @@
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 
 \lstset{ %
+  language=Java,
   backgroundcolor=\color{white},   % choose the background color
   basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
   breaklines=true,                 % automatic line breaking only at whitespace
@@ -141,7 +142,8 @@
   escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
   keywordstyle=\color{blue},       % keyword style
   stringstyle=\color{mymauve},     % string literal style
-  frame=single
+  frame=single,
+  morekeywords={function, let}
 }
 
 \setcounter{MaxMatrixCols}{20}
@@ -231,8 +233,27 @@ Copyright (C) 2024 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
-Texte, definiert als endliche Folgen von Zeichen aus einem Alphabet, kommen in der Mathematik vor, wenn wir Formeln, Aussagen, Beweise oder Algorithmen mit mathematischen Methoden untersuchen. Ein Satz ist in dem Zusammenhang eine Folge von Zeichen, der einer bestimmten Syntax gehorcht.
+Entscheidbar ist eine Teilmenge der Menge der natürlichen Zahlen, wenn es eine totale $\mu$-rekursive Funktion gibt, die $1$ ausgibt, wenn der Eingabewert in der Menge ist, und $0$, wenn er es nicht ist.
 
+Es ist schon ein kleiner Skandal, dass wir uns die Frage stellen, ob es überhaupt andere Mengen gibt. Gibt es Mengen, zu denen wir, egal was wir anstellen, keinen Algorithmus finden, mit dem entscheiden können, ob eine Zahl enthalten ist oder nicht?
+
+Und wenn nicht, was bedeutet dann für diese Menge dieses "`geben"' in "`es gibt eine Menge ..."'?
+
+Eine andere Art von Mengen, sind die, die wir mit Hilfe eines Programms nach und nach auflisten können. Daraus folgt nicht, dass wir für eine gegebene Zahl, \zb 6354981034340343034891784, entscheiden können, ob sie dazugehört. 
+
+Eine dritte Art sind Mengen, die wir mithilfe eines Prädikats aus ZFC, also mit einer Formel definieren können: die definierbaren Mengen.
+
+Es wird sich herausstellen, dass entscheidbar $\subsetneq$ listbar $\subsetneq$ definierbar $\subsetneq$ Teilmenge von $\N$. Intuitiv sind Mengen von links nach rechts immer weniger greifbar. Einzelne nicht-definierbare Mengen verschwinden im Nebel und sind nur durch ihre Wirkung im Rudel zu erkennen.
+
+Das ein Programm eine Endlosschleife hat, ist normal. Dass es aber Funktionen gibt, zu denen es kein Programm ohne Endlosschleifen gibt, ist ein wenig unerträglich. 
+
+Beispiele:
+entscheidbar: $p$ ist prim, "`..."' ist eine Aussage
+listbar: Das Programm $P$ hält. "`..."' ist beweisbar
+definierbar: Das Programm $P$ hält nicht. "`..."' ist nicht beweisbar
+Teilmenge: indirekt nachgewiesen dadurch, dass es abzählbare viele Definitionen aber überabzählbar viele Teilmengen gibt. 
+
+Entscheidbare Mengen sind Urbilder, Listbare sind die Bilder von totalen $\mu$-rekursiven Funktionen. Listbare sind darüber hinaus die Definitionsbereiche von partiellen $\mu$-rekursiven Funktionen. 
 
 
 %******************************************************************************************************
@@ -250,7 +271,7 @@ Berechenbare Funktionen, Alphabet
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v4%20Master/v4.0%20Berechenbarkeit/v4.0.4.3%20Lambda-Kalk%C3%BCl}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v4%20Master/v4.0%20Berechenbarkeit/v4.0.5.3.4%20Entscheidbar%2C%20rekursiv%20aufz%C3%A4hlbar}
 }
 
 %******************************************************************************************************
@@ -269,7 +290,14 @@ v4.0.4 (Master) Berechenbarkeit - Berechenbare Funktionen\\
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
 \url{https://de.wikipedia.org/wiki/Entscheidbarkeit}\\
-\url{https://de.wikipedia.org/wiki/Rekursiv_aufz%C3%A4hlbare_Menge}
+\url{https://de.wikipedia.org/wiki/Rekursiv_aufz%C3%A4hlbare_Menge}\\
+\url{https://de.wikipedia.org/wiki/Halteproblem}\\
+\url{https://de.wikipedia.org/wiki/Universelle_Turingmaschine}\\
+\url{https://de.wikipedia.org/wiki/Entscheidbarkeit}\\
+\url{https://en.wikipedia.org/wiki/Definable_set}\\
+\url{https://de.wikipedia.org/wiki/Cantors_zweites_Diagonalargument}\\
+\url{https://de.wikipedia.org/wiki/Cantors_erstes_Diagonalargument}\\
+\url{}\\
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -309,25 +337,118 @@ Das Video hierzu ist zu finden unter
 %                                                                                                     *
 %******************************************************************************************************
 
-\begin{itemize}
-   \item Listbar
-   \item Entscheidbar $\ne$ rekursiv aufzählbar $\ne$ nicht rekursiv aufzählbar!
-   \item Inkonsistenz, Unabhängigkeit, Unvollständigkeit
-   \item Entscheidbarkeit ist eine Eigenschaft von Prädikaten, und nicht von Aussagen.
-   \item Das Prädikat ist dabei als wohldefiniert vorausgesetzt, es liefert also für jedes Element der Menge einen definierten Wahrheitswert.
-   \item Es gibt nicht berechenbare Funktionen und somit nicht entscheidbare Mengen!
-   \item Wir wollen Entscheidbarkeit von istTerm, istBeweis
-   \item Ausblick: Wir haben keine Entscheidbarkeit von istBeweisbar!
-\end{itemize}
+%******************************************************************************************************
+\subsection{Entscheidbar}
+%******************************************************************************************************
+Entscheidbar ist eine Teilmenge der Menge der natürlichen Zahlen, wenn es eine totale (also normale, nicht partielle, auf allen natürlichen Zahlen definierte) $\mu$-rekursive Funktion gibt, die $1$ ausgibt, wenn der Eingabewert in der Menge ist, und $0$, wenn er es nicht ist. Mit anderen Worten, ist eine Menge entscheidbar, wenn ihre charakteristische Funktion total und berechenbar ist. Noch anders: wir können mit Hilfe eines Computerprogramms entscheiden, ob ein Wert drinne ist oder nicht.
+
+Eine entscheidbare Menge ist das Urbild einer einelementigen Menge unter einer totalen Funktion.
+
+Entscheidbar: die totale berechenbare Funktion muss nicht \emph{primitiv} rekursiv sein. Die Ackermann-Funktion ist ein Beispiel einer totalen berechenbaren nicht primitiv-rekursiven Funktion. Wir könnten also \zb Ackermann einbauen in eine Funktion die $1$ ist, wenn Ackermann eine durch 17 teilbare Zahl liefert und $0$ sonst.
 
 %******************************************************************************************************
-\subsection{xx}
+\subsection{Listbar}
 %******************************************************************************************************
+Eine Menge ist rekursiv aufzählbar (ich hätte "`listbar"' genommen), wenn wir sie mit Hilfe eines Programms nach und nach auflisten können, \zb in einer Schleife.
 
+Präziser ist eine listbare Menge die leere Menge oder das Bild einer totalen Funktion $f$. Für die eben angedeutete Schleife rufen wir dann $f$ nacheinander für die Werte $0, 1, 2, \cdots $ auf und geben den Wert aus.
+\begin{lstlisting}
+   for( let i = 0; ; ++i ) console.log( f(i) );
+\end{lstlisting}
+
+Die leere Menge nehmen wir mit rein, weil sie zwar nicht das Bild einer totalen Funktion sein kann aber das Urbild einer endlichen Menge. Und wir wollen, dass alle entscheidbaren Mengen auch listbar sind. Ein Programm, welches die leere Menge auflistet, ist \zb
+\begin{lstlisting}
+   return;
+\end{lstlisting}
+weil hier kein "`console.log(...)"' stattfindet.
 
 %******************************************************************************************************
-\subsection{xx}
+\subsection{Entscheidbar vs listbar}
 %******************************************************************************************************
+Jede entscheidbare Menge ist listbar. Beweis: Sei $f$ die totale $\mu$-rekursive charakteristische Funktion der Menge. Falls die Menge leer ist sind wir fertig. Falls nicht sei $m$ Element der Menge. Dann definieren wir $g(n) = n$, falls $f(m) = 1$ und $g(n) = m$ sonst. 
+\begin{lstlisting}
+function( n ) {
+   let m = 0;  
+   for(; !f(m); ++m ); // Schleife endet, da die Menge nicht leer ist
+   
+   return f(n) ? n : m;
+}
+\end{lstlisting}
+
+Gibt es listbare Mengen, die gleichzeitig nicht entscheidbar sind? Ja! Wir werden in diesem Kurs erkennen, dass die Menge der haltenden Turingmaschinen nicht entscheidbar. 
+
+Statt $\N$ können wir, wie immer, auch die Menge der endlichen (Zeichen-) Ketten betrachten. Dort wollen wir, dass die Mengen der Terme, Formeln, Aussagen und Beweise entscheidbar sind. In der mathematischen Logik wird gezeigt werden, dass die Menge der beweisbaren Aussagen nicht entscheidbar aber immerhin listbar ist. Alan Turing und Alonzo Church haben für 1936 festgestellt, dass die Menge der beweisbaren Aussagen nicht entscheidbar ist.
+
+Um einmal ein "`normales"' Thema zu nehmen: Die Menge der Diophantischen Gleichungen ist nicht entscheidbar.
+
+%******************************************************************************************************
+\subsection{Listbar = Definitionsbereich einer $\mu$-rekursiven Funktion}
+%******************************************************************************************************
+Sei $M$ listbar. Falls $M$ leer, nehmen wir als $f$ die Funktion, die nirgendwo definiert ist:
+\begin{lstlisting}
+function( n ) {
+   while( true );
+}
+\end{lstlisting}
+Falls $M$ nicht leer, geben wir $1$ zurück, wenn der Eingabewert gelistet wird:
+\begin{lstlisting}
+function( n ) {
+   for( let i = 0; f(i) != n; ++i );
+   return 1;
+}
+\end{lstlisting}
+
+Sei nun $M$ der Definitionsbereich einer $\mu$-rekursiven Funktion $g$. Falls ein $n$ nicht im Definitionsbereich liegt, können wir in unserem zu konstruierenden $f$ nicht $g(n)$ aufrufen, da wir dann in einer Endlosschleife landen. Wir gehen statt dessen so vor, dass wir $g$ nach einander für alle Zahlen als Eingabe Stück für Stück ausführen und dabei schauen, ob das Programm zum Halten kommt. Wenn ja, geben wir den Wert aus.
+
+Sei dazu $h_g(n,k)$ ein Programm, welches $g$, genauer ein Programm, welches $g$ implementiert, mit der Eingabe $n$ für $k$ Schritte laufen lässt und dann $1$ zurückgibt, wenn das Programm mit der Eingabe nach $ \le k$ Schritten zum Halten gekommen ist, $0$ sonst. Dieses Programm nennen wir \textbf{beschränkte Haltefunktion}. Dann berechnen wir nacheinander $h_f$ auf den Paaren $(n,k)$ in $(0,1), (1,1), (0,2), (2,1), (1,2),  (0,3), (3,1), (2,2) , \cdots$ an. Immer, wenn $1$ rauskommt, geben wir $n$ aus. 
+
+Das ist ein Durchschlängeln, mit dem wir auch alle Brüche aufzählen können. Übrigens ist die Menge aller Brüche Listbar. Siehe Cantors erstes Diagonalargument.
+
+Dieses $h$ ist gar nicht so leicht zu bekommen:
+Ein Weg dieses $h$ zu bekommen, ist das ursprüngliche Programm umzuschreiben, so dass es nur eine Schleife enthält (ja das geht) und diese nach $k$ Durchläufen abbricht.
+
+Ein zweiter Weg ist sich einen JavaScript-Interpreter in JavaScript zu schreiben, mit dem das Programm für $g$ Schritt für Schritt ausgeführt wird. Dieser Interpreter bekommt als Parameter dar Ursprüngliche Programm, die Eingabe und unser $k$. Dies ist die universelle Turingmaschine, die wir in einem der nächsten Videos kennenlernen.
+
+%******************************************************************************************************
+\subsection{Nicht listbare Mengen}
+%******************************************************************************************************
+Falls eine Menge $M$ und ihr Komplement $\overline M$ listbar sind, so ist die Menge sogar entscheidbar.
+
+Beweis: Seien $f,g$ $\mu$-rekursive Funktionen, die Mengen $M, \overline M$ listen. Für ein gegebenes $n$ berechnen wir, ähnlich wie mit dem $h$ oben, schrittweise und nach und nach für alle $i$ die Werte $f(i)$ und $g(i)$. Egal, ob $n \in M$ oder $n \in \overline M$, wird es irgendwann auftauchen und wir wissen dann, ob es in $M$ ist.
+\begin{lstlisting}
+function( n ) {
+   for( let i = 0;; ++i ) {
+      if( f(i) == m ) return 1;
+      if( g(i) == m ) return 0;
+   }
+}
+\end{lstlisting}
+
+Da es nicht entscheidbare Mengen gibt, gibt es automatisch auch nicht listbare: Die Menge aller nicht haltenden Programme. Die Menge aller nicht beweisbaren Aussagen.
+
+%******************************************************************************************************
+\subsection{Definierbar}
+%******************************************************************************************************
+Eine Menge ist definierbar, wenn sie durch ein Prädikat von ZFC definiert werden kann. Die Komplemente nicht listbarer Mengen sind offensichtlich definierbar: Die Menge aller nicht haltenden Programme. Die Menge aller nicht beweisbaren Aussagen.
+
+%******************************************************************************************************
+\subsection{Nicht-definierbar}
+%******************************************************************************************************
+Dadurch, dass es abzählbare viele Definitionen aber überabzählbar viele Teilmengen gibt (siehe ), muss es auch sehr viele nicht-definierbare Mengen geben. Siehe Castors zweites Diagonalargument.
+
+%******************************************************************************************************
+\subsection{Die Hierarchie der Greifbarkeit}
+%******************************************************************************************************
+Also:
+
+\noindent\fbox{%
+   \parbox{\textwidth}{%
+      entscheidbar $\subsetneq$ listbar $\subsetneq$ definierbar $\subsetneq$ Teilmenge von $\N$.
+   }%
+}
+Intuitiv sind Mengen von links nach rechts immer weniger greifbar. Einzelne nicht-definierbare Mengen verschwinden im Nebel und sind nur durch ihre Wirkung im Rudel zu erkennen. Auf diese Weise wirken sie allerdings mit Macht.
+
+Gefühlt haben wir entscheidbare Mengen im Griff. Listbare Mengen haben wir ein wenig im Griff. Immerhin können wir alle Elemente nach und nach generieren. Nicht listbare Mengen sind dagegen mysteriös. Wir können vielleicht für einzelne Elemente beweisen, dass sie dazugehören oder nicht, aber das war es dann auch schon.
 
 \begin{backup}
 %******************************************************************************************************
@@ -335,10 +456,23 @@ Das Video hierzu ist zu finden unter
 \section{TODO}
 %                                                                                                     *
 %******************************************************************************************************
+
+
+ 
+\begin{itemize}
+   \item Inkonsistenz, Unabhängigkeit, Unvollständigkeit
+   \item Entscheidbarkeit ist eine Eigenschaft von Prädikaten, und nicht von Aussagen.
+   \item Wir wollen Entscheidbarkeit von istTerm, istBeweis
+\end{itemize}
+
 \begin{itemize}
      \item Überprüfe Symbolverzeichnis
 \end{itemize}
 
+Tafel:
+\begin{itemize}
+   \item Listbar
+\end{itemize}
 
 \end{backup}
 
