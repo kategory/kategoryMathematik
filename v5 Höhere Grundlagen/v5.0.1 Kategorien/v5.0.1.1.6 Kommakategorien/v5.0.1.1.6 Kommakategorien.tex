@@ -238,9 +238,17 @@ Copyright (C) 2024 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
-Die Kategorie der kleinen Kategorien \textbf{Cat} besteht, wie wir schon wissen aus kleinen Kategorien als Objekte und Funktoren als Morphismen.
+Eine \textbf{Kommakategorie} ist eine Art Kategorie der Morphismen zwischen Objekten aus unterschiedlichen Kategorien.
 
+Um das möglich zu machen, werden die beiden Ausgangskategorien vermöge zweier Funktoren in eine dritte Vermittler-Kategorie eingebettet.
 
+Die Konstruktion hat Ähnlichkeiten sowohl zur Kategorie aller Morphismen als auch zu natürlichen Transformationen.
+
+Mit dem Mittel der Kommakategorie können wir weitere Kategorien bilden.
+
+Beispiele sind die Kategorie der Morphismen, Über- und Unterkategorien.
+
+Eine natürliche Transformation kann als ein bestimmter Funktor in eine Kommakategorie angesehen werden.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -250,14 +258,14 @@ Von Jörg Kunze
 %******************************************************************************************************
 \subsection*{Voraussetzungen}
 %******************************************************************************************************
-Natürliche Transformation, kleine Kategorien, Produkt von Kategorien, Funktorkategorien, kommutative Quadrate
+Natürliche Transformation, kleine Kategorien, Kategorie der Morphismen, Funktorkategorien, kommutative Quadrate
 
 %******************************************************************************************************
 \subsection*{Text}
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.1.5%20Die%20Kategorie%20der%20Kategorien}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.1.6%20Kommakategorien}
 }
 
 %******************************************************************************************************
@@ -268,28 +276,19 @@ Siehe auch in den folgenden Videos:\\
 v5.0.1.0.4 (Höher) Kategorien - Natürliche Transformationen\\
 \url{https://youtu.be/IN7Qa-SwlD0}\\
 \\
-v5.0.1.0.7 (Höher) Kategorien - Große Kategorien\\
-\url{https://youtu.be/Dcz6at6EXqM}\\
-\\
-v5.0.1.1.3 (Höher) Kategorien - Produkte von Kategorien\\
-\url{https://youtu.be/9K4qY5ZEoq8}\\
-\\
-v5.0.1.1.4 (Höher) Kategorien - Funktorkategorien\\
-\url{https://youtu.be/byvbGxRz1hs}\\
-\\
 v5.0.1.1.4.1 (Höher) Kategorien - Kommutative Quadrate\\
-\url{https://youtu.be/ptnE4UzfZ68}
+\url{https://youtu.be/ptnE4UzfZ68}\\
+\\
+v5.0.1.0.3.5 (Höher) Kategorien - Kategorien von Homomorphismen\\
+\url{https://youtu.be/v1F5BFH8nbo}
+
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://en.wikipedia.org/wiki/Category_of_small_categories}\\
-\url{https://ncatlab.org/nlab/show/Cat}\\
-\url{https://ncatlab.org/nlab/show/horizontal+composition}\\
-\url{https://ncatlab.org/nlab/show/exchange+law}\\
-\url{https://en.wikipedia.org/wiki/Category_of_small_categories}\\
-\url{https://ncatlab.org/nlab/show/Cat}
+\url{https://en.wikipedia.org/wiki/Comma_category}\\
+\url{https://ncatlab.org/nlab/show/comma+category}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -302,7 +301,7 @@ Springer-Verlag New York Inc.\\
 978-0-387-98403-2 (ISBN)\\
 {\tiny
    \url{https://www.amazon.de/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038}}\\
-
+\\
 Gut für die kategorische Sichtweise ist:\\
 "`Topology, A Categorical Approach"'\\
 Tai-Danae Bradley\\
@@ -310,27 +309,26 @@ Tai-Danae Bradley\\
 978-0-262-53935-7 (ISBN)\\
 {\tiny
 \url{https://www.lehmanns.de/shop/mathematik-informatik/52489766-9780262539357-topology}}\\
-
+\\
 Einige gut Erklärungen finden sich auch in den Einführenden Kapitel von:\\
 "`An Introduction to Homological Algebra"'\\
 Joseph J. Rotman\\
 2009 Springer-Verlag New York Inc.\\
 978-0-387-24527-0 (ISBN)\\
 {\tiny \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
-
-Etwas weniger umfangreich und weniger tiefgehend aber gut motivierend ist:
+\\
+Etwas weniger umfangreich und weniger tiefgehend aber gut motivierend ist:\\
 "`Category Theory"'\\
 Steve Awodey\\
 2010 Oxford University Press\\
 978-0-19-923718-0 (ISBN)\\
 {\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/9478288-9780199237180-category-theory}}\\
-
-Mit noch weniger Mathematik und die Konzepte motivierend ist:
-"`Conceptual Mathematics: a First Introduction to Categories"'\\
-F. William Lawvere, Stephen H. Schanuel\\
-2009 Cambridge University Press\\
-978-0-521-71916-2 (ISBN)\\
-{\tiny\url{https://www.lehmanns.de/shop/mathematik-informatik/8643555-9780521719162-conceptual-mathematics}}
+\\
+Ausführlich:\\
+"`Handbook of Categorical Algebra Vol. 1"'\\
+Francis Borceux
+2008 Cambridge University Press\\
+978-0521061193 (ISBN)
 
 %******************************************************************************************************
 \subsection*{Lizenz}
@@ -361,9 +359,50 @@ Das Video hierzu ist zu finden unter
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Die }
+\subsection{Definition einer Kommakategorie }
 %******************************************************************************************************
-M
+Seien $\CC, \DD, \EE$ drei Kategorien und $S \colon \DD \to \CC$, $T \colon \EE \to \CC$ zwei Funktoren. Dann ist die Kommakategorie $(T \downarrow S)$ wie folgt definiert:
+
+Die Objekte sind die Morphismen von Bildern von $T$ nach Bildern von $S$. Die Morphismen sind kommutative Quadrate deren Kanten Bilder von Morphismen aus $\EE$ und $\DD$ sind.
+
+Etwas genauer: Die Objekte sind die Morphismen der Form $f \colon T(e) \to S(d)$, wo $e$ Objekte von $\EE$, $d$ Objekte von $\DD$ und $f$ Morphismen von $\CC$ sind. Die Morphismen sind kommutative Quadrate der Form
+\begin{equation}
+   \begin{tikzcd}
+      T(e)   \arrow[d]  \arrow[r, "f"] & S(d) \arrow[d]\\
+      T(e')                  \arrow[r, "f'"] & S(d')
+   \end{tikzcd}
+\end{equation} 
+\imporant{Beachte die graphische Ähnlichkeit zu natürlichen Transformationen!}
+
+Noch genauer: Die beiden $\CC$-Morphismen, die einen $(T \downarrow S)$-Morphismus bilden müssen darüber hinaus Bilder von Morphismen aus $\EE$ und $\DD$ sein.
+\begin{equation}
+   \begin{tikzcd}
+      T(e)   \arrow[d, "T(k)"]  \arrow[r, "f"] & S(d) \arrow[d, "S(h)"]\\
+      T(e')                  \arrow[r, "f'"] & S(d')
+   \end{tikzcd}
+\end{equation} 
+
+Präzise: Die Objekte sind die Tripel $(e,d,f)$ und $(e',d',f')$ und die Morphismen sind die Paare $(h,k)$. Diese Präzisierung führt dazu, dass, \imporant{selbst wenn die Funktoren auf den Objekten oder den Morphismen nicht injektiv sind, wir führ jedes Ausgangsobjekt und -morphismus eigene Objekte und Morphismen bekommen}. Also falls $e \ne e'$ aber $T(e) = T(e')$ ist dennoch $(e,d,f)$ und $(e',d,f)$ zwei verschiedene Objekte.
+
+Es werden also eigentlich die Objekte von $\EE$ und $\DD$ mit Pfeilen aus $\CC$ verbunden. Dies geschieht über "`Stellvertreter"' dieser Objekte in $\CC$.
+
+%******************************************************************************************************
+\subsection{Notationen}
+%******************************************************************************************************
+Wir unterscheiden in der Notation zwischen Zahlen aus $\N$, die wir "`normal"' schreiben: $0,1,2,3, \cdots$, und bestimmten Kategorien, die wir \textbf{fett} oder mit einem Pfeil drüber schreiben. Die Idee mit dem Pfeil kommt daher, dass fett auf der Kreidetafel schlecht zu realisieren ist, und weil Vektoren auch oft fett geschrieben werden. Da Kategorien Pfeile enthalten, passt es auch emotional.
+
+$\vec 2$ ist die Kategorie mit zwei Objekten und außer den beiden Identitäten einem weiteren Morphismus $\bullet \to \bullet$. 
+
+%******************************************************************************************************
+\subsection{Beispiele von Kommakategorien}
+%******************************************************************************************************
+Sind $T,S$ die Identitätsfunktoren, ist $(T \downarrow S) = \CC^{\vec 2}$.
+
+Ist $T = \id_\EE$ und $S = (d \colon \vec 1 \to \DD)$ das Herauspicken eines einzelnen Objektes aus $\DD$ erhalten wir eine Überkategorie (Overcategory, slice category, Scheibenkategorie?).
+
+Andersherum die Unterkategorie (undercategory, coslice category, Koscheibenkategorie?).
+
+Eine natürliche Transformation $\alpha \colon T \to S$ zwischen Funktoren $T, S \colon \CC \to \DD$ kann als ein bestimmter Funktor $\tau_\alpha \colon \CC \to (T \downarrow S)$ gesehen werden.
 
 \begin{backup}
 %******************************************************************************************************
@@ -406,6 +445,10 @@ M
    \bibitem[Rotman2009]{Rotman}
    	Joseph J. Rotman, \emph{An Introduction to Homological Algebra},
    	2009 Springer-Verlag New York Inc., 978-0-387-24527-0 (ISBN)
+      
+   \bibitem[Borceux2008]{Borceux}
+      Francis Borceux, \emph{Handbook of Categorical Algebra Vol. 1}
+      2008 Cambridge University Press, 978-0-521-06119-3 (ISBN)
 
 \end{thebibliography}
 
