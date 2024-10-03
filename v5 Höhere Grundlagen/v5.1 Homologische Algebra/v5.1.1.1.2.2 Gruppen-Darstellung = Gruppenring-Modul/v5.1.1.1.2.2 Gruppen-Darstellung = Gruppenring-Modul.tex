@@ -1,0 +1,518 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v5.1.1.1.2.2 Gruppen-Darstellung = Gruppenring-Modul.tex                                         *
+%                                                                                                  *
+% Copyright (C) 2024 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v5.1.1.1.2.2 Gruppen-Darstellung = Gruppenring-Modul is part of kategoryMathematik.              *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Satz}
+\myTheorem{Theorem}
+\myTheorem{Axiom}
+\myTheorem{Beispiel}
+\myTheorem{Anmerkung}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\GL}{GL}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\DD}{\ensuremath{\mathcal{ D }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\FF}{\ensuremath{\mathcal{ F }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\Set}{\text{\textbf{Set}} }
+
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+\newcommand{\m}{\mathcal}
+
+\newcommand{\zz}[1]{\ensuremath{\Z /#1\Z}}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\newcommand{\zb}{z.~B. }
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Höhere Grundlagen) Homologische Algebra\\[1cm]
+\textbf{v5.1.1.1.2.2 Gruppen-Darstellung = Gruppenring-Modul}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2024 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Eine Gruppen-Darstellung findet in gewisser Weise die Gruppe in der Gruppe der Automorphismen einer Gruppe wieder. Genauer ist eine Gruppen-Darstellung ein Gruppen-Homomorphismus in die Automorphismen-Gruppe einer Gruppe.
+
+Im Falle, dass die Zielgruppe $R^n$ ist, ist es ein Gruppen-Homomorphismus in die Menge der invertierbaren $(n \times n)$-Matrizen über $R$, also Matrizen mit Einträgen aus dem Ring $R$. Bei einem Vektorraum $V$ als Zielgruppe handelt es dabei sich am die allgemeine lineare Gruppe GL($V$).
+
+Der Gruppen-Ring $RG$ einer Gruppe $G$ über einem Ring $R$ ist der Polynomring mit Exponenten in der Gruppe und Koeffizienten im Ring $R$.
+
+Die Gruppen-Darstellungen der Gruppe sind genau die Ring-Darstellungen des Gruppen-Rings, welche wiederum genau die Moduln über dem Gruppen-Ring sind. 
+
+Also: Gruppen-Darstellung = Gruppenring-Modul.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Ringe, Gruppen, lineare Algebra, Ring-Darstellung
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+{\tiny
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.1%20Homologische%20Algebra/v5.1.1.1.2%20Ring-Darstellung%20%3D%20Modul}
+}
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\
+\\
+v5.1.1.1 (Höher) Homologische Algebra - Moduln\\
+\url{https://youtu.be/JY43_07kNmA}
+\\
+v5.0.1 (Höher) Kategorien - Playlist\\
+\url{https://www.youtube.com/playlist?list=PLqVqq9xKS5R-baIvTr9GnW0Pb8rlPig7S}
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Monoidring}\\
+
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+"`An Introduction to Homological Algebra"'\\
+Joseph J. Rotman\\
+2009\\
+Springer-Verlag New York Inc.\\
+978-0-387-24527-0 (ISBN)\\
+{\tiny
+   \url{https://www.lehmanns.de/shop/mathematik-informatik/6439666-9780387245270-an-introduction-to-homological-algebra}}\\
+\\
+Oft zitiert:\\
+"`An Introduction to Homological Algebra"'\\
+Charles A. Weibel\\
+1995\\
+Cambridge University Press\\
+978-0-521-55987-4 (ISBN)\\
+{\tiny
+   \url{https://www.lehmanns.de/shop/mathematik-informatik/510327-9780521559874-an-introduction-to-homological-algebra}}\\
+\\
+Ohne Kategorien-Theorie:\\
+"`Algébre 10. Algèbre homologique"'\\
+Nicolas Bourbaki\\
+1980\\
+Springer-Verlag \\
+978-3-540-34492-6 (ISBN)\\
+{\tiny
+   \url{https://www.lehmanns.de/shop/mathematik-informatik/7416782-9783540344926-algebre}}
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird,
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben
+(zu finden im selben Git-Projekt).
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter
+{\tiny
+   \url{https://youtu.be/JY43_07kNmA}
+}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{v5.1.1.1.2.2 Gruppen-Darstellung = Gruppenring-Modul}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{Gegenstand der homologischen Algebra}
+%******************************************************************************************************
+Zum einen behandelt die homologischen Algebra abelsche Kategorien. Dies ist ihr abstraktes Auftreten, von Alexander Grothendieck geschaffen und Grundlage ihres weiteren Siegeszugs.
+
+Abelsche Kategorien extrahieren die Axiome, welche bei der Theorie der Moduln für einen Großteil des Verhalten verantwortlich sind. Damit sind Moduln automatisch eine Quelle von Beispielen und von Fragestellungen, die mit Hilfe der homologischen Algebra untersucht werden können.
+
+Um Moduln bilden zu können benötigen wir Ringe.
+
+%******************************************************************************************************
+\subsection{Quelle für Ringe}
+%******************************************************************************************************
+Eine übliche Quelle für Ringe sind Zahlen. Ist $\K \subseteq \C$ ein Unter-Körper von $\C$, so ist dessen Ganzheitsring $\mathcal{O}_\K$ ein Ring. Z.~B.
+\begin{equation}
+   \mathcal{O}_{\Q(i)} = \Z[i].
+\end{equation}
+
+Eine weitere Quelle sind die Endomorphismen-Ringe von abelschen Gruppen. Zunächst ist die Menge der Endomorphismen einer abelschen Gruppe $M$ (geschrieben $\End(M)$) ein Monoid mit Eins mit der Verknüpfung als Multiplikation. Auf dieser Struktur kann eine Addition definiert werden. Seien $\phi, \psi \in \End(M)$. Wir setzen
+\begin{equation}
+   \forall m \in M \colon (\phi + \psi)(m) := \phi(m) + \psi(m).
+\end{equation}
+Diese Definitionsgleichung ist gleichzeitig der Nachweis dafür, dass es sich tatsächlich um einen Endo handelt.
+Durch einfaches Ausrechnen können wir zeigen, dass $\End(M)$ mit dieser Addition die Ring-Axiome erfüllt.
+Damit haben wir $\End(M)$ und deren Unter-Ringe als weitere Ringe zur Verfügung.
+
+%******************************************************************************************************
+\subsection{Ring-Darstellung}
+%******************************************************************************************************
+Ein Unter-Ring von $\End(M)$ ist anders gesehen ein injektiver Ring-Homo
+\begin{equation}
+   i \colon R 	\hookrightarrow \End(M).
+\end{equation}
+Wir definieren nun allgemeiner:
+\begin{Definition}{Ring-Darstellung}
+   Sei $R$ ein Ring und $M$ eine abelsche Gruppe. Eine \textbf{Ring-Darstellung} von $R$ ist ein Ring-Homo
+   \begin{equation}
+      p \colon R \to \End(M).
+   \end{equation}
+\end{Definition}
+
+Jetzt nutzen wir nicht $\End(M)$ als Quelle für Ringe, sondern wir haben schon einen Ring $R$ und versuchen ihn in $\End(M)$'s zu finden, um ihn besser zu verstehen. Ähnlich wie wir Gruppen in linearen Gruppen von Räumen finden und so zu Gruppen-Darstellungen kommen.
+
+%******************************************************************************************************
+\subsection{Ring-Darstellung = Modul}
+%******************************************************************************************************
+"`$\Rightarrow$"': Sei $p \colon R \to \End(M)$ eine Ring-Darstellung. Wir definieren dann ein Skalar-Produkt von Ring-Elementen $r$ mit Gruppen-Elementen $m$ über
+\begin{equation}
+   rm := p(r)(m).
+\end{equation} 
+Dieses Produkt erfüllt die Modul-Axiome. Die Beweise sind recht einfach. Hier \zb:
+\begin{alignat}{4}
+   r(m+n) = p(r)(m+n) = p(r)(m) + p(r)(n) = rm + rn
+\end{alignat}
+
+"`$\Leftarrow$"': Sei $M$ ein $R$-Modul. Wir definieren
+\begin{alignat}{4}
+   &p \colon &&R \to     &&\End(M)\\
+   &         &&r \mapsto &&\begin{pmatrix}
+                              p(r) \colon &M \to     &M\\
+                                          &m \mapsto &rm
+                           \end{pmatrix}
+\end{alignat}
+Das heißt, ein Element $r$ wir auf den Endo "`Multiplikation mit $r$ von links"' abgebildet.
+Der Beweis, dass $p$ eine Ring-Darstellung ist, ist wieder sehr einfach.
+
+Der Beweis in beiden Richtungen ist deshalb so einfach, weil die Modul-Axiome nichts anderes sind als die Aussage "`Multiplikation mit $r$ von links ist Endo"'.
+
+Also gilt \textbf{Ring-Darstellung = Modul}
+
+Eine alternative Definition von $R$-Modul ist somit Ring-Darstellung von $R$ über $M$.
+
+%******************************************************************************************************
+\subsection{Endlich erzeugte abelsche Gruppen}
+%******************************************************************************************************
+Im Falle einer endlich erzeugten Gruppe können alle Elemente von $M$ als Linearkombination einer endlichen Erzeugermenge $\{b_1, \cdots, b_r\}$ mit Koeffizienten in $\Z$ geschrieben werden.
+\begin{equation}
+   m = \sum_{i=1}^r m_i b_i.
+\end{equation}
+
+Sei $r \in R$.
+Dann gilt auch für die Elemente $rb_i$:
+\begin{equation}
+   rb_i = \sum_{j=1}^r r_{ij} b_j.
+\end{equation} 
+
+Aufgrund der Linearität von Endomorphismen gilt damit.
+\begin{equation}
+   rm = \sum_{i,j=1}^r m_i r_{ij} b_j.
+\end{equation} 
+
+Für die Koeffizienten von $rm$ gilt:
+\begin{equation}
+   (rm)_j = \sum_{i=1}^r m_i r_{ij}.
+\end{equation} 
+
+Im Falle von endlich erzeugten Gruppen ist eine Darstellung also ein Matrix-Ring mit Koeffizienten in $\Z$.
+
+Nicht alle abelsche Gruppen sind endlich erzeugt. Bekanntes Beispiel ist $\Q$.
+
+
+%******************************************************************************************************
+\subsection{}
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{}
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{}
+%******************************************************************************************************
+
+
+
+
+
+\begin{backup}
+%******************************************************************************************************
+%                                                                                                     *
+\section{TODO}
+%                                                                                                     *
+%******************************************************************************************************
+\begin{itemize}
+     \item Überprüfe Symbolverzeichnis
+\end{itemize}
+
+
+\end{backup}
+
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+  \bibitem[Rotman2009]{Rotman}
+   	Joseph J. Rotman, \emph{An Introduction to Homological Algebra},
+   	2009 Springer-Verlag New York Inc., 978-0-387-24527-0 (ISBN)
+
+   \bibitem[Bourbaki1970]{A1-3}
+      Nicolas Bourbaki, \emph{Algébre 1-3},
+      2006 Springer-Verlag, 978-3-540-33849-9 (ISBN)
+
+   \bibitem[Bourbaki1980]{A10}
+      Nicolas Bourbaki, \emph{Algébre 10. Algèbre homologique},
+      2006 Springer-Verlag, 978-3-540-34492-6 (ISBN)
+
+   \bibitem[MacLane1978]{MacLane}
+      Saunders Mac Lane, \emph{Categories for the Working Mathematician},
+      Springer-Verlag New York Inc., 978-0-387-98403-2 (ISBN)
+
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $R$                                 & ein kommutativer Ring mit Eins\\
+    $n\Z$                               & das Ideal aller Vielfachen von $n$ in $\Z$\\
+    $\zz{n}$                            & Der Restklassenring modulo $n$\\
+    $\K$                                & Ein Körper\\
+    $\vec x, \vec y$                    & Elemente des Moduls, wenn wir sie von den Skalaren abheben wollen. \\& Entspricht in etwa Vektoren
+\end{tabular}
+
+\end{document}
