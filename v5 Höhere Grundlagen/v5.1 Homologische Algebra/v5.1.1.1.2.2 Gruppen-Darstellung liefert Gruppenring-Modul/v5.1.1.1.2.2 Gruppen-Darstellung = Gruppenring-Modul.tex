@@ -236,15 +236,17 @@ Copyright (C) 2024 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
-Eine Gruppen-Darstellung findet in gewisser Weise die Gruppe in der Gruppe der Automorphismen einer Gruppe wieder. Genauer ist eine Gruppen-Darstellung ein Gruppen-Homomorphismus in die Automorphismen-Gruppe einer Gruppe.
+Eine Gruppen-Darstellung findet in gewisser Weise die Gruppe in der Gruppe der invertierbaren Matrizen mit Einträgen in einem kommutativen Ring $R$ wieder. $R$ kann auch ein Körper sein.
 
-Im Falle, dass die Zielgruppe $R^n$ ist, ist es ein Gruppen-Homomorphismus in die Menge der invertierbaren $(n \times n)$-Matrizen über $R$, also Matrizen mit Einträgen aus dem Ring $R$. Bei einem Vektorraum $V$ als Zielgruppe handelt es dabei sich am die allgemeine lineare Gruppe GL($V$).
+Genauer ist eine Gruppen-Darstellung ein Gruppen-Homomorphismus in die Gruppe der invertierbaren Matrizen mit Einträgen in $R$.
+
+Die Gruppe der invertierbaren Matrizen mit Einträgen in einem Körper als Zielgruppe ist die allgemeine lineare Gruppe GL($V$), wo $V$ der entsprechende Vektorraum ist.
 
 Der Gruppen-Ring $RG$ einer Gruppe $G$ über einem Ring $R$ ist der Polynomring mit Exponenten in der Gruppe und Koeffizienten im Ring $R$.
 
-Die Gruppen-Darstellungen der Gruppe sind genau die Ring-Darstellungen des Gruppen-Rings, welche wiederum genau die Moduln über dem Gruppen-Ring sind. 
+Die Gruppen-Darstellungen der Gruppe werden durch lineare Erweiterung zu Ring-Darstellungen des Gruppen-Rings, welche wiederum Moduln über dem Gruppen-Ring sind. 
 
-Also: Gruppen-Darstellung = Gruppenring-Modul.
+Also: Gruppen-Darstellung ist Gruppenring-Modul.
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -261,7 +263,7 @@ Ringe, Gruppen, lineare Algebra, Ring-Darstellung
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.1%20Homologische%20Algebra/v5.1.1.1.2%20Ring-Darstellung%20%3D%20Modul}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.1%20Homologische%20Algebra/v5.1.1.1.2.2%20Gruppen-Darstellung%20%3D%20Gruppenring-Modul}
 }
 
 %******************************************************************************************************
@@ -272,15 +274,16 @@ Siehe auch in den folgenden Videos:\\
 v5.1.1.1 (Höher) Homologische Algebra - Moduln\\
 \url{https://youtu.be/JY43_07kNmA}
 \\
-v5.0.1 (Höher) Kategorien - Playlist\\
-\url{https://www.youtube.com/playlist?list=PLqVqq9xKS5R-baIvTr9GnW0Pb8rlPig7S}
+v5.1.1.1.2 (Höher) Homologische Algebra - Ring-Darstellung = Modul\\
+\url{https://youtu.be/FBQAdljFVF4}
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Monoidring}\\
-
+\url{https://de.wikipedia.org/wiki/Darstellung_(Gruppe)}\\
+\url{https://de.wikipedia.org/wiki/Polynomring}\\
+\url{https://de.wikipedia.org/wiki/Monoidring}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -331,7 +334,7 @@ Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
 %******************************************************************************************************
 Das Video hierzu ist zu finden unter
 {\tiny
-   \url{https://youtu.be/JY43_07kNmA}
+   \url{uups}
 }
 
 %******************************************************************************************************
@@ -341,120 +344,99 @@ Das Video hierzu ist zu finden unter
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Gegenstand der homologischen Algebra}
+\subsection{Polynom-Ring vs Monoid-Ring}
 %******************************************************************************************************
-Zum einen behandelt die homologischen Algebra abelsche Kategorien. Dies ist ihr abstraktes Auftreten, von Alexander Grothendieck geschaffen und Grundlage ihres weiteren Siegeszugs.
+Die folgende Konstruktion entsteht bei einer genauen Analyse dessen, was wir bei einem Polynom-Ring mit Koeffizienten in $R$ machen. Hier ist das verwendete Monoid einfach nur $\N$. Bei einem Polynomring über $\Z$ haben wir sowohl als Koeffizienten als auch als Exponenten einfache Zahlen, was deren Rollen nicht so deutlich getrennt aussehen lässt. 
 
-Abelsche Kategorien extrahieren die Axiome, welche bei der Theorie der Moduln für einen Großteil des Verhalten verantwortlich sind. Damit sind Moduln automatisch eine Quelle von Beispielen und von Fragestellungen, die mit Hilfe der homologischen Algebra untersucht werden können.
-
-Um Moduln bilden zu können benötigen wir Ringe.
-
-%******************************************************************************************************
-\subsection{Quelle für Ringe}
-%******************************************************************************************************
-Eine übliche Quelle für Ringe sind Zahlen. Ist $\K \subseteq \C$ ein Unter-Körper von $\C$, so ist dessen Ganzheitsring $\mathcal{O}_\K$ ein Ring. Z.~B.
+$x$ wird im Folgenden als Träger einer Schreibweise verwendet, die an Variablen und Unbekannte erinnern soll. Seien ein Monoid (oder Gruppe) $G$ und ein Ring $R$ gegeben. Für jedes $g \in G$ und $r \in R$ definieren wir das \textbf{Monom}
 \begin{equation}
-   \mathcal{O}_{\Q(i)} = \Z[i].
+   rx^g.
+\end{equation}
+Wenn $e$ das neutrale Element des Monoids $G$ ist, schreiben wir $x = x^e$.
+Die Elemente des zu definierenden \textbf{Monoid-Ring}s $RG$ sind die Summen mit $n \in \N, r_i \in R$ und $g_i \in G$.
+\begin{equation}\label{polynomRingElement}
+   \sum_{i=1}^n r_i x^{g_i}
+\end{equation}
+Es handelt sich also um endliche Linearkombinationen von Potenzen mit Exponenten in $G$ und Koeffizienten in $R$.
+
+Addition und Multiplikation werden nun schrittweise eingeführt: Monome können zusammengefasst werden, wenn sie den selben Exponenten haben.
+\begin{equation}\label{AdditionMonom}
+   r_1x^g + r_2x^g := (r_1 + r_2)x^g.
+\end{equation}
+Monome werden multipliziert, indem die Koeffizienten im Ring multipliziert und die Exponenten im Monoid verknüpft werden.
+\begin{equation}\label{MultiplikationMonom}
+   r_1x^{g_1} \cdot r_2x^{g_2} := r_1r_2x^{g_1\asterisk g_2}.
 \end{equation}
 
-Eine weitere Quelle sind die Endomorphismen-Ringe von abelschen Gruppen. Zunächst ist die Menge der Endomorphismen einer abelschen Gruppe $M$ (geschrieben $\End(M)$) ein Monoid mit Eins mit der Verknüpfung als Multiplikation. Auf dieser Struktur kann eine Addition definiert werden. Seien $\phi, \psi \in \End(M)$. Wir setzen
-\begin{equation}
-   \forall m \in M \colon (\phi + \psi)(m) := \phi(m) + \psi(m).
-\end{equation}
-Diese Definitionsgleichung ist gleichzeitig der Nachweis dafür, dass es sich tatsächlich um einen Endo handelt.
-Durch einfaches Ausrechnen können wir zeigen, dass $\End(M)$ mit dieser Addition die Ring-Axiome erfüllt.
-Damit haben wir $\End(M)$ und deren Unter-Ringe als weitere Ringe zur Verfügung.
+Additive Kombinationen von Monomen werden addiert, indem Monome mit dem selben Exponenten zusammengefasst werden.
 
-%******************************************************************************************************
-\subsection{Ring-Darstellung}
-%******************************************************************************************************
-Ein Unter-Ring von $\End(M)$ ist anders gesehen ein injektiver Ring-Homo
-\begin{equation}
-   i \colon R 	\hookrightarrow \End(M).
-\end{equation}
-Wir definieren nun allgemeiner:
-\begin{Definition}{Ring-Darstellung}
-   Sei $R$ ein Ring und $M$ eine abelsche Gruppe. Eine \textbf{Ring-Darstellung} von $R$ ist ein Ring-Homo
-   \begin{equation}
-      p \colon R \to \End(M).
-   \end{equation}
-\end{Definition}
+Für die Multiplikation von Elementen des Polynom-Rings wird das Distributiv-Gesetz verlangt. Damit kann die Multiplikation von Elementen abgeleitet werden: ausmultiplizieren (Distributiv-Gesetz anwenden) und zusammenfassen. Das ergibt im Ergebnis:
 
-Jetzt nutzen wir nicht $\End(M)$ als Quelle für Ringe, sondern wir haben schon einen Ring $R$ und versuchen ihn in $\End(M)$'s zu finden, um ihn besser zu verstehen. Ähnlich wie wir Gruppen in linearen Gruppen von Räumen finden und so zu Gruppen-Darstellungen kommen.
-
-%******************************************************************************************************
-\subsection{Ring-Darstellung = Modul}
-%******************************************************************************************************
-"`$\Rightarrow$"': Sei $p \colon R \to \End(M)$ eine Ring-Darstellung. Wir definieren dann ein Skalar-Produkt von Ring-Elementen $r$ mit Gruppen-Elementen $m$ über
-\begin{equation}
-   rm := p(r)(m).
+\begin{equation}\label{MultiplikationPolynom}
+   \left(\sum_{i=1}^n r_i x^{g_i}\right) \cdot \left(\sum_{j=1}^m s_j x^{h_j}\right) :=
+   \sum_{z \in \left\{g_i \asterisk h_j \big| \substack{i = 1, \cdots n, \\j = 1, \cdots m} \right\} } 
+   \left( \sum_{\substack{i,j \text{ mit } \\g_i \asterisk h_j = z}} r_i s_j \right) x^z.
 \end{equation} 
-Dieses Produkt erfüllt die Modul-Axiome. Die Beweise sind recht einfach. Hier \zb:
-\begin{alignat}{4}
-   r(m+n) = p(r)(m+n) = p(r)(m) + p(r)(n) = rm + rn
-\end{alignat}
-
-"`$\Leftarrow$"': Sei $M$ ein $R$-Modul. Wir definieren
-\begin{alignat}{4}
-   &p \colon &&R \to     &&\End(M)\\
-   &         &&r \mapsto &&\begin{pmatrix}
-                              p(r) \colon &M \to     &M\\
-                                          &m \mapsto &rm
-                           \end{pmatrix}
-\end{alignat}
-Das heißt, ein Element $r$ wir auf den Endo "`Multiplikation mit $r$ von links"' abgebildet.
-Der Beweis, dass $p$ eine Ring-Darstellung ist, ist wieder sehr einfach.
-
-Der Beweis in beiden Richtungen ist deshalb so einfach, weil die Modul-Axiome nichts anderes sind als die Aussage "`Multiplikation mit $r$ von links ist Endo"'.
-
-Also gilt \textbf{Ring-Darstellung = Modul}
-
-Eine alternative Definition von $R$-Modul ist somit Ring-Darstellung von $R$ über $M$.
+Also die Summe über alle Exponenten, die bei den Kombinaten der Monome entstehen können, und für jeden Exponenten die Summe der Produkte der Koeffizienten, deren Exponenten diesen Exponenten erzeugen.
+Die Formel sieht schlimmer aus als sie ist. Wenn wir von Hand ausmultiplizieren und zusammenfassen, entsteht aber genau das.
 
 %******************************************************************************************************
-\subsection{Endlich erzeugte abelsche Gruppen}
+\subsection{Gruppen-Ring}
 %******************************************************************************************************
-Im Falle einer endlich erzeugten Gruppe können alle Elemente von $M$ als Linearkombination einer endlichen Erzeugermenge $\{b_1, \cdots, b_r\}$ mit Koeffizienten in $\Z$ geschrieben werden.
-\begin{equation}
-   m = \sum_{i=1}^r m_i b_i.
+Sei $R$ ein Ring und $G$ eine Gruppe. Der \textbf{Gruppen-Ring} $RG$ ist der Monoid-Ring $RG$, bei dem $G$ die Rolle des Monoids der Exponenten übernimmt.
+
+%******************************************************************************************************
+\subsection{Gruppen-Darstellung}
+%******************************************************************************************************
+Eine Gruppen-Darstellung ist ein Gruppen-Homomorphismus in die Gruppe der invertierbaren  $(n \times n)$-Matrizen mit Einträgen in $R$. Diese invertierbaren Matrizen sind lineare Automorphismen von $R^n$.
+
+%******************************************************************************************************
+\subsection{Schreibweise}
+%******************************************************************************************************
+Wenn bei einem Gruppen-Ring die Elemente der Gruppe und die des Rings nicht verwechselt werden können schreiben wir auch kürzer:
+\begin{equation}\label{multiplyByRing}
+   rg := rx^g.
 \end{equation}
 
-Sei $r \in R$.
-Dann gilt auch für die Elemente $rb_i$:
-\begin{equation}
-   rb_i = \sum_{j=1}^r r_{ij} b_j.
-\end{equation} 
-
-Aufgrund der Linearität von Endomorphismen gilt damit.
-\begin{equation}
-   rm = \sum_{i,j=1}^r m_i r_{ij} b_j.
-\end{equation} 
-
-Für die Koeffizienten von $rm$ gilt:
-\begin{equation}
-   (rm)_j = \sum_{i=1}^r m_i r_{ij}.
-\end{equation} 
-
-Im Falle von endlich erzeugten Gruppen ist eine Darstellung also ein Matrix-Ring mit Koeffizienten in $\Z$.
-
-Nicht alle abelsche Gruppen sind endlich erzeugt. Bekanntes Beispiel ist $\Q$.
-
+Ist $\phi \colon G \to Mat_n(R)$, so schreiben wir für ein Element \( g \in G \) und \( \vec r \in R^n \)
+\begin{equation}\label{gvruppeAlsMal}
+   g \vec r := \phi(g)(\vec r).
+\end{equation}
+Manchmal bleiben wir auch bei der Exponentialschreibweise
+\begin{equation}\label{gruppeAlsHoch}
+   \vec r^{\,g} := \phi(g)(\vec r).
+\end{equation}
 
 %******************************************************************************************************
-\subsection{}
+\subsection{Gruppenaktion \( \rightarrow \) Ring-Darstellung}
 %******************************************************************************************************
+Die obige Schreibweise unterstützt die Sichtweise, dass Vermöge der Darstellung die Gruppenelemente auf die Elemente von \( R^n \) wirken. Die Elemente des Gruppen-Rings sind bei dieser Sichtweise Linearkombinationen von Gruppen-Aktionen.
+
+Ein Polynom kann dann auf \( \vec r \in R^n \) angewandt werden:
+\begin{equation}\label{polynomAlsFunktion}
+   \sum_{i=1}^n r_i x^{g_i}
+\end{equation}
+ist die Funktion mit
+\begin{equation}\label{polynomAktion}
+   \boxed{
+      \left( \sum_{i=1}^n r_i x^{g_i} \right) (\vec r) := \sum_{i=1}^n r_i \vec r^{\,g_i} := \sum_{i=1}^n r_i \phi(g_i)(\vec r).
+   }
+\end{equation}
+d.~h. wir wenden erst alle \( g_i \) auf das $\vec r$ an und linearkombinieren daraufhin die Ergebnisse mit den Koeffizienten \( r_i \).
+
+Es ist leicht zu sehen, dass die so entstehenden Funktionen Endomorphismen von \( R^n \) sind. Damit haben wir eine Darstellung des Gruppen-Rings.
 
 %******************************************************************************************************
-\subsection{}
+\subsection{Erweiterung der Skalare}
 %******************************************************************************************************
+Die Gruppen-Elemente können auch als neue Skalare angesehen werden, mit denen wir die Elemente von \( R^n \) multiplizieren können. Wenn wir mit den originalen und den neuen Skalaren gemischt rechnen und dabei die Rechenregeln von Ringen anwenden, entstehen genau die Elemente des Gruppen-Rings als neuer Skalarbereich.
 
 %******************************************************************************************************
-\subsection{}
+\subsection{Gruppen-Darstellung \( \rightarrow \) Gruppenring-Modul}
 %******************************************************************************************************
+Über den obigen Zusammenhang, wissen wir nun, dass zu einer Gruppen-Darstellung ein Gruppen-Ring gehört, welcher die Gruppen-Aktion zu einer Ring-Darstellung erweitert. Wir wissen bereits, dass zu einer Ring-Darstellung eines Rings \( R \) ein \( R \)-Modul gehört. Damit haben wir zu jeder Gruppen-Darstellung ein \( RG \)-Modul.
 
-
-
-
+Die Skalar-Multiplikation ist dabei durch \eqref{polynomAktion} gegeben.
 
 \begin{backup}
 %******************************************************************************************************
@@ -508,11 +490,17 @@ Nicht alle abelsche Gruppen sind endlich erzeugt. Bekanntes Beispiel ist $\Q$.
 \renewcommand*{\arraystretch}{1}
 
 \begin{tabular}{ll}
-    $R$                                 & ein kommutativer Ring mit Eins\\
-    $n\Z$                               & das Ideal aller Vielfachen von $n$ in $\Z$\\
+    $R$                                 & Ein kommutativer Ring mit Eins\\
+    $G$                                 & Eine Gruppe, nicht notwendig abelsch\\
+    $\asterisk$                         & Verknüpfung der Gruppe $G$\\
+    $n\Z$                               & Das Ideal aller Vielfachen von $n$ in $\Z$\\
     $\zz{n}$                            & Der Restklassenring modulo $n$\\
     $\K$                                & Ein Körper\\
-    $\vec x, \vec y$                    & Elemente des Moduls, wenn wir sie von den Skalaren abheben wollen. \\& Entspricht in etwa Vektoren
+    $\vec x, \vec y$                    & Elemente eines Moduls, wenn wir sie von den Skalaren abheben wollen. \\
+                                        & Entspricht in etwa Vektoren\\
+    $\vec r$                            & Element von $R^n$\\
+    $\phi$                              & Gruppen-Homomorphismus
+    
 \end{tabular}
 
 \end{document}
