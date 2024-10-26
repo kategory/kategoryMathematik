@@ -1,0 +1,585 @@
+% !TeX program = lualatex
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v1.2.1.1 Zählen.tex                                                                              *
+%                                                                                                  *
+% Copyright (C) 2024 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v1.2.1.1 Zählen is part of kategoryMathematik.                                                   *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+% Wegen der hebräischen Schrift geht diese Datei nunr mit LuaLaTeX.
+% deswegen die erste Zeile, damit TeXstudio den LuaLaTeX-Compiler nimmt
+% Zusätzlich müssen wir den SBL Hebrew Font isntallieren.
+% Den finden wir unter https://www.sbl-site.org/educational/biblicalfonts_sblhebrew.aspx
+% Nach dem Download muss die Datei SBL_Hbrw.ttf in das Verzeichniss c:\Windows\Fonts kopiert werden
+% Das ist aber auch im auf der selben Web-Seite zu findenen User Manual beschrieben.
+% Wie es auf Linux oder Mac geht, können wir auch dort beschrieben finden.
+% Achte auch auf das \usepackage[utf8]{luainputenc}
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+\usepackage{luatextra}
+
+\usepackage{polyglossia}
+\usepackage[autostyle,german=guillemets]{csquotes}
+
+\setmainlanguage[spelling=new]{german}
+\setotherlanguage[variant=polytonic]{greek}
+
+\newfontfamily\hebrewfont[Script=Hebrew,Scale=MatchUppercase,Ligatures=TeX]{SBL Hebrew}
+\newcommand{\texthebrew}[1]{\bgroup\textdir TRT\hebrewfont #1\egroup}
+\newenvironment{hebrew}{\textdir TRT\pardir TRT\hebrewfont}{}
+
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{luainputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{shapes.geometric}
+
+\usetikzlibrary{babel}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Theorem}
+\myTheorem{Example}
+\myTheorem{Remark}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Grund) Packungs-Rechnen\\[1cm]
+\textbf{v1.2.1.1 Zählen}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2024 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Eine \textbf{Packung} wird benutzt, um Mengen von Dingen effizienter zu verarbeiten.
+
+Die benutzten Packungen sind alle gleich groß und können die selbe Anzahl Dinge aufnehmen. In der Mathematik arbeiten wir überwiegend mit Packungen, die 10 Elemente aufnehmen kann. Vergleichbar einem Eier-Karton für 10 Eier.
+
+Ist die Packung nur zum Teil gefüllt, sehen wir durch die Anordnung sofort, wie viele drin sind, und wie viele zur 10 fehlen.
+
+Haben wir mehr Dinge, als in die Packung passen, müssen wir die volle Packung gar nicht öffnen. Wir betrachten nur das Bild (eine Packung und soundso viel einzelne).
+
+Auch das Rechnen ist mit Packungen sehr viel schneller, hat weniger Fehler und ist übersichtlicher.
+
+Schließlich wird durch das Packen unser Verständnis für die Zahlen vertieft.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Schulmathematik, Zählen, ein wenig rechnen mit Strichen und Punkten, Zählen, Pack-Schreibweise von Zahlen.
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter\\
+{\tiny\url{https://github.com/kategory/kategoryMathematik/tree/main/v1%20Grund/v1.1%20Zahlen/v1.1.2.6.9.8%20Unendlich}}.
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\
+v1.1.2.5.6.1 (Grund) Zahlen - Darstellung\\
+\url{https://youtu.be/t8cyZevFWFs}\\
+\\
+v1.1.2.5.6 (Grund) Zahlen - Pack Schreibweise\\
+\url{https://youtu.be/OGXoLiBL2MQ}\\
+\\
+v1.1.2.4 (Grund) Zählen\\
+\url{ttps://youtu.be/I6iIG2ZtPCU}\\
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Zahl}\\
+\url{https://de.wikipedia.org/wiki/Unendlich_(Mathematik)}\\
+\url{https://math.stackexchange.com/a/36298}
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+"`Basiswissen Grundschule – Mathematik"'\\
+Ute Müller-Wolfangel, Beate Schreiber\\
+2014\\
+Bibliographisches Institut\\
+978-3-411-72063-7 (ISBN)
+\\
+{\tiny\url{https://www.lehmanns.de/shop/schulbuch-lexikon-woerterbuch/28535581-9783411720637-basiswissen-grundschule-mathematik}}
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird,
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben
+(zu finden im selben Git-Projekt).
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+Bild "`Hände"' gefunden auf \url{https://he.wikipedia.org/wiki/%D7%9B%D7%A3_%D7%A8%D7%92%D7%9C}.
+
+Bild "`Füße"' von \url{https://unsplash.com/de/@jibarox?utm_content=creditCopyText\&utm_medium=referral\&utm_source=unsplash} Luis Quintero auf \url{https://unsplash.com/de/fotos/menschenhand-qKspdY9XUzs?utm\_content=creditCopyText\&utm_medium=referral\&utm\_source=unsplash} Unsplash
+
+%******************************************************************************************************
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter \url{Ups}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{v1.2.1.1 Zählen}
+%                                                                                                     *
+%******************************************************************************************************
+\def\kategoryVspace{5pt}
+
+%******************************************************************************************************
+\subsection{Striche}
+%******************************************************************************************************
+\begin{tikzpicture}
+\draw (0.0, 0) -- (0.0, 0.4);
+\draw (0.1, 0) -- (0.1, 0.4);
+\draw (0.2, 0) -- (0.2, 0.4);
+\draw (0.3, 0) -- (0.3, 0.4);
+\draw (0.4, 0) -- (0.4, 0.4);
+\draw (0.5, 0) -- (0.5, 0.4);
+\draw (0.6, 0) -- (0.6, 0.4);
+\draw (0.7, 0) -- (0.7, 0.4);
+\draw (0.8, 0) -- (0.8, 0.4);
+\draw (0.9, 0) -- (0.9, 0.4);
+\end{tikzpicture}
+$\cdots$
+
+%******************************************************************************************************
+\subsection{Kreisbild}
+%******************************************************************************************************
+Hier bekommen wir eine unendliche Folge von Kreisen:
+
+\begin{tikzpicture}
+   \draw [blue, fill=blue] (0.0, 2) circle (0.3);
+   \draw [blue, fill=blue] (0.7, 2) circle (0.3);
+   \draw [blue, fill=blue] (1.4, 2) circle (0.3);
+   \draw [blue, fill=blue] (2.1, 2) circle (0.3);
+   \draw [blue, fill=blue] (2.8, 2) circle (0.3);
+   \draw [red , fill=red ] (3.5, 2) circle (0.3);
+   \draw [red , fill=red ] (4.2, 2) circle (0.3);
+   \draw [red , fill=red ] (4.9, 2) circle (0.3);
+   \draw [red , fill=red ] (5.6, 2) circle (0.3);
+   \draw [red , fill=red ] (6.3, 2) circle (0.3);
+\end{tikzpicture}
+\begin{tikzpicture}
+    \draw [blue, fill=blue] (0.0, 2) circle (0.3);
+    \draw [blue, fill=blue] (0.7, 2) circle (0.3);
+    \draw [blue, fill=blue] (1.4, 2) circle (0.3);
+    \draw [blue, fill=blue] (2.1, 2) circle (0.3);
+    \draw [blue, fill=blue] (2.8, 2) circle (0.3);
+    \draw [red , fill=red ] (3.5, 2) circle (0.3);
+    \draw [red , fill=red ] (4.2, 2) circle (0.3);
+    \draw [red , fill=red ] (4.9, 2) circle (0.3);
+    \draw [red , fill=red ] (5.6, 2) circle (0.3);
+    \draw [red , fill=red ] (6.3, 2) circle (0.3);
+\end{tikzpicture}
+$\cdots$
+
+Das Kreisbild und das Schreiben in Fünfer-Blöcken dient der Vorbereitung auf das Rechnen im Zehnersystem. Es zeigt Eigenschaften, die nicht zum inneren Wesen der Zahl gehören, sondern zu ihrem Verhältnis zum Zehnersystem.
+
+%******************************************************************************************************
+\subsubsection{Kreisbild als Rechnung}
+%******************************************************************************************************
+Geht nicht.
+
+%******************************************************************************************************
+\subsection{Zweiteilungen}
+%******************************************************************************************************
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
++
+\begin{tikzpicture}
+    \draw (0.0, 0) -- (0.0, 0.4);
+    \draw (0.1, 0) -- (0.1, 0.4);
+    \draw (0.2, 0) -- (0.2, 0.4);
+    \draw (0.3, 0) -- (0.3, 0.4);
+    \draw (0.4, 0) -- (0.4, 0.4);
+    \draw (0.5, 0) -- (0.5, 0.4);
+    \draw (0.6, 0) -- (0.6, 0.4);
+    \draw (0.7, 0) -- (0.7, 0.4);
+    \draw (0.8, 0) -- (0.8, 0.4);
+    \draw (0.9, 0) -- (0.9, 0.4);
+\end{tikzpicture}
+$\cdots$
+,
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+   \draw (0.15, 0) -- (0.15, 0.4);
+\end{tikzpicture}
++
+\begin{tikzpicture}
+    \draw (0.0, 0) -- (0.0, 0.4);
+    \draw (0.1, 0) -- (0.1, 0.4);
+    \draw (0.2, 0) -- (0.2, 0.4);
+    \draw (0.3, 0) -- (0.3, 0.4);
+    \draw (0.4, 0) -- (0.4, 0.4);
+    \draw (0.5, 0) -- (0.5, 0.4);
+    \draw (0.6, 0) -- (0.6, 0.4);
+    \draw (0.7, 0) -- (0.7, 0.4);
+    \draw (0.8, 0) -- (0.8, 0.4);
+    \draw (0.9, 0) -- (0.9, 0.4);
+\end{tikzpicture}
+$\cdots$
+,
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+   \draw (0.15, 0) -- (0.15, 0.4);
+   \draw (0.25, 0) -- (0.25, 0.4);
+\end{tikzpicture}
++
+\begin{tikzpicture}
+    \draw (0.0, 0) -- (0.0, 0.4);
+    \draw (0.1, 0) -- (0.1, 0.4);
+    \draw (0.2, 0) -- (0.2, 0.4);
+    \draw (0.3, 0) -- (0.3, 0.4);
+    \draw (0.4, 0) -- (0.4, 0.4);
+    \draw (0.5, 0) -- (0.5, 0.4);
+    \draw (0.6, 0) -- (0.6, 0.4);
+    \draw (0.7, 0) -- (0.7, 0.4);
+    \draw (0.8, 0) -- (0.8, 0.4);
+    \draw (0.9, 0) -- (0.9, 0.4);
+\end{tikzpicture}
+$\cdots$
+
+%******************************************************************************************************
+\subsection{Eck}
+%******************************************************************************************************
+Wir haben gesehen, dass je mehr Ecken hinzukommen, desto mehr ähnelt das $n$-Eck einem Kreis.
+
+Das regelmäßige $\infty$-Eck ist ein Kreis
+\vspace{\kategoryVspace}
+
+\begin{tikzpicture}
+    \draw  (0,0) circle [radius=1.5];
+\end{tikzpicture}
+
+%******************************************************************************************************
+\subsection{Ziffern}
+%******************************************************************************************************
+\vspace{\kategoryVspace}
+
+$\infty$
+
+%******************************************************************************************************
+\subsection{Rechnung mit Ziffern}
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsubsection{Kreisbild als Rechnung mit Ziffern}
+%******************************************************************************************************
+Nix.
+
+%******************************************************************************************************
+\subsubsection{Zweiteilung als Rechnung mit Ziffern}
+%******************************************************************************************************
+$\infty = 1 + \infty = 2 + \infty = 3 + \infty = 4 + \infty = 5 + \infty$
+
+%******************************************************************************************************
+\subsection{Namen}
+%******************************************************************************************************
+Die Namen der Neun in verschiedenen Sprachen:
+\vspace{\kategoryVspace}
+
+\begin{tabular}{|c|c|c|}
+   \hline
+   \textbf{Sprache}& \textbf{Schreiben} & \textbf{Sprechen} \\
+   \hline
+   Deutsch     &Unendlich   &unendlich      \\
+   \hline
+   Englisch    &infinity   &infiniti      \\
+   \hline
+   Französisch &infini   &angfini      \\
+   \hline
+   Latein      &infinitas  &infinitas     \\
+   \hline
+   Hebräisch   &\texthebrew{אינסוף}    &'äinsof \\
+   \hline
+   Schwedisch  &oändlighet    &oändlighäit     \\
+   \hline
+\end{tabular}
+
+%******************************************************************************************************
+\subsection{Im Alltag}
+%******************************************************************************************************
+Die Liebe, das Leben und Gott sind unendlich.
+
+%******************************************************************************************************
+\subsection{Additionsverhalten}
+%******************************************************************************************************
+Unendlich ist immun gegenüber der Behandlung mit natürlichen Zahlen:
+$\infty -100 = \infty$ genauso $\infty / 100 = \infty$. Bestimmte Rechnungen sind mit großer Vorsicht zu genießen $\infty - \infty$ und $\infty / \infty$ weswegen viele Leute diese Rechnungen verbieten. Aber verbieten kann uns in der Mathematik niemand irgendetwas. Wir können und dürfen definieren:
+\begin{alignat}{4}
+    &\infty - &&\infty &&:= 0\\
+    &\infty / &&\infty &&:= 1
+\end{alignat}
+Allerdings gelten damit und auch mit anderen Definitionen nicht alle Rechenregeln, die wir für die natürlichen Zahlen lernen werden.
+
+%******************************************************************************************************
+\subsection{Multiplikationsverhalten}
+%******************************************************************************************************
+$13 * \infty = \infty$ und z.~B. $\infty * \infty = \infty$.
+
+%******************************************************************************************************
+\subsection{Das kleine Null-plus-Zehn}
+%******************************************************************************************************
+Nix.
+
+%******************************************************************************************************
+\subsection{Das kleine Ein-mal-Neun}
+%******************************************************************************************************
+Nix.
+
+%******************************************************************************************************
+\subsection{Besonderheiten}
+%******************************************************************************************************
+Nix.
+
+%******************************************************************************************************
+\subsection{Zweitteilung geometrisch}
+%******************************************************************************************************
+Nix.
+
+\begin{backup}
+   (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+   \bibitem [MüllerWolfangel2014]{MüllerWolfangel}
+      Ute Müller-Wolfangel, Beate Schreiber \emph{Basiswissen Grundschule – Mathematik}
+      Bibliographisches Institut 2014, 978-3-411-72063-7 (ISBN)
+
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $0,1,2,3,4,5,6,7,8,9$          & Ziffern\\
+    $\infty$                       & Unendlich
+\end{tabular}
+
+\end{document}
