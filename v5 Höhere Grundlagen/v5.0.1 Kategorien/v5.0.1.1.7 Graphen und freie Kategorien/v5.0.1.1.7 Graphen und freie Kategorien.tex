@@ -248,6 +248,8 @@ Diesen letzten Schritt wollen wir nun präzisieren: so wie ein freies Monoid (un
 
 Die beiden Fälle freie Monoide und freie Kategorien sehen syntaktisch sehr ähnlich aus: Wörter deren Buchstaben Elemente oder Pfeile sind. Bei freien Kategorien können wir zwei Wörter (hier besser Pfade genannt) nur dann verknüpfen, wenn das Ende des linke mit dem Beginn des Zweiten Pfads übereinstimmen. Bei freien Monoiden können wir beliebige Wörter verknüpfen.
 
+Da die entstehenden Morphismen genau die Pfade durch den Graphen sind, können wir die Kategorie auch \textbf{Pfad-Kategorie} nennen.
+
 Der Weg von den kleinen Kategorien zu den kleinen Graphen, bei dem wir die kategorische Struktur vergessen und nur die des Graphen behalten, ist ein Funktor $U$. Wir nennen ihn Vergess-Funktor oder underlying Funktor.
 
 Der Weg vom kleinen Graph zu dessen freien Kategorie ist ebenfalls ein Funktor $F$.
@@ -269,7 +271,7 @@ Freie Monoide, freie Gruppen, gerichtete Graphen, Kategorien, kleine Kategorien,
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.1.6%20Kommakategorien}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.0.1%20Kategorien/v5.0.1.1.7%20Graphen%20und%20freie%20Kategorien}
 }
 
 %******************************************************************************************************
@@ -277,22 +279,25 @@ Der Begleittext als PDF und als LaTeX findet sich unter
 %******************************************************************************************************
 Siehe auch in den folgenden Videos:\\
 \\
-v5.0.1.0.4 (Höher) Kategorien - Natürliche Transformationen\\
-\url{https://youtu.be/IN7Qa-SwlD0}\\
+v5.0.1.1.4.5.1 (Höher) Kategorien - Graphen sind Prägarben\\
+\url{https://youtu.be/89SnwNkSyjk}\\
 \\
-v5.0.1.1.4.1 (Höher) Kategorien - Kommutative Quadrate\\
-\url{https://youtu.be/ptnE4UzfZ68}\\
+v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
+\url{https://youtu.be/sIaKt-Wxlog}\\
 \\
-v5.0.1.0.3.5 (Höher) Kategorien - Kategorien von Homomorphismen\\
-\url{https://youtu.be/v1F5BFH8nbo}
-
+v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
+\url{https://youtu.be/Ojf5LQGeyOU}\\
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://en.wikipedia.org/wiki/Comma_category}\\
-\url{https://ncatlab.org/nlab/show/comma+category}
+\url{Free category}\\
+\url{https://ncatlab.org/nlab/show/free+category}\\
+\url{https://de.wikipedia.org/wiki/Monoid#Freies_Monoid}\\
+\url{https://en.wikipedia.org/wiki/Free_monoid}\\
+\url{https://de.wikipedia.org/wiki/Freie_Gruppe}\\
+\url{https://de.wikipedia.org/wiki/Adjunktion_(Kategorientheorie)}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -363,50 +368,92 @@ Das Video hierzu ist zu finden unter
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Definition einer Kommakategorie }
+\subsection{Kategorie vs Multidigraph}
 %******************************************************************************************************
-Seien $\CC, \DD, \EE$ drei Kategorien und $S \colon \DD \to \CC$, $T \colon \EE \to \CC$ zwei Funktoren. Dann ist die Kommakategorie $(T \downarrow S)$ wie folgt definiert:
 
-Die Objekte sind die Morphismen von Bildern von $T$ nach Bildern von $S$. Die Morphismen sind kommutative Quadrate deren Kanten Bilder von Morphismen aus $\EE$ und $\DD$ sind.
+Eine Kategorie ist auch ein Graph. Genauer ein Multidigraph, also ein gerichteter Graph mit parallelen Pfeilen und Schleifen.
 
-Etwas genauer: Die Objekte sind die Morphismen der Form $f \colon T(e) \to S(d)$, wo $e$ Objekte von $\EE$, $d$ Objekte von $\DD$ und $f$ Morphismen von $\CC$ sind. Die Morphismen sind kommutative Quadrate der Form
-\begin{equation}
-   \begin{tikzcd}
-      T(e)   \arrow[d]  \arrow[r, "f"] & S(d) \arrow[d]\\
-      T(e')                  \arrow[r, "f'"] & S(d')
-   \end{tikzcd}
+%******************************************************************************************************
+\subsection{Graphen als Prägarben}
+%******************************************************************************************************
+Die Kategorie Multidigraphen ist eine Prägarbe der Kategorie mit zwei Objekten und zwei parallelen Homomorphismen.
+
+%******************************************************************************************************
+\subsection{Freies Monoid / freie Gruppe}
+%******************************************************************************************************
+Sei $X$ eine Menge. Dann ist das freie Monoid über $X$, die Menge aller Wörter über $X$ (also aller endlichen Folgen mit Werten in $X$) mit der Verknüpfung des Aneinander-Hängens und dem leeren Wort als neutralem Element. Elemente sind also $(), (x_1x_2\cdots x_n)$ und so. Manchmal und, wenn es nicht das leere Wort ist, lassen wir die Klammern auch weg.
+
+Bei freien Gruppen müssen wir noch die Inversen als Buchstaben zulassen, also zu jedem $x \in X$ das $x^{-1}$ und beim Aneinander-Hängen müssen wir $xx^{-1}$ und $x^{-1}x$ kürzen.  
+
+%******************************************************************************************************
+\subsection{Kategorien aus Graphen}
+%******************************************************************************************************
+Wenn wir Kategorien malen, zeichnen wir Graphen.
+
+Diesen letzten Schritt wollen wir nun präzisieren: Die \textbf{freie Kategorie} über einem Graphen $G$ ist die Menge der Knoten als Objekte und die Menge aller Pfade mit dem Aneinander-Hängen als Verknüpfung. Pfade sind endliche Folgen von Pfeilen, wo immer das Ende des einen gleich dem Anfang seines Nachfolgers ist. Wir sagen, dass die Pfeile \textbf{zusammenpassen}. Pfade können nur dann verknüpft werden, wenn das Ende des linken gleich dem Anfang des rechten Nachfolgers ist. Wir sagen, dass die Pfade \textbf{zusammenpassen}. Zu jedem Knoten gibt es einen leeren Pfad $()$. Diese wirken offensichtlich neutral.
+
+Die Kategorie-Axiome sind leicht nachzuprüfen.
+
+Morphismen sind also $()_A, ()_B, (x_1x_2\cdots x_n)$ und so, wobei $A,B$ Objekte der Kategorie, also Knoten des Graphen, sind.
+
+%******************************************************************************************************
+\subsection{Fehlende Homomorphismen ergänzen}
+%******************************************************************************************************
+Intuitiv ergänzen wir zu einem Graphen alle Kompositionen, die für eine Kategorie benötigt werden.
+
+%******************************************************************************************************
+\subsection{Zuordnung Graph $\rightarrow$ freie Kategorie ist funktoriell}
+%******************************************************************************************************
+Ein Morphismus in der Kategorie der kleinen Graphen besteht aus zwei Abbildungen, die wir beide $F$ nennen, von Knoten $A$ zu Knoten $F(A)$ und von Pfeil $p$ zu Pfeil $F(p)$, so dass
+\begin{equation}\label{graphMorphismus}
+   B(F(p)) = F(B(p)) \text{ und } E(F(p)) = F(B(p)),
 \end{equation} 
-\imporant{Beachte die graphische Ähnlichkeit zu natürlichen Transformationen!}
-
-Noch genauer: Die beiden $\CC$-Morphismen, die einen $(T \downarrow S)$-Morphismus bilden müssen darüber hinaus Bilder von Morphismen aus $\EE$ und $\DD$ sein.
+wobei $B,E$ Beginn- und End-Knoten eines Pfeiles sind. Anders hingeschrieben:
 \begin{equation}
-   \begin{tikzcd}
-      T(e)   \arrow[d, "T(k)"]  \arrow[r, "f"] & S(d) \arrow[d, "S(h)"]\\
-      T(e')                  \arrow[r, "f'"] & S(d')
-   \end{tikzcd}
-\end{equation} 
+   f( p \colon A_1 \to A_2 ) = F(p) \colon F(A_1) \to f(A_2),
+\end{equation}
+was schon so aussieht wie Funktor-Axiom.
 
-Präzise: Die Objekte sind die Tripel $(e,d,f)$ und $(e',d',f')$ und die Morphismen sind die Paare $(h,k)$. Diese Präzisierung führt dazu, dass, \imporant{selbst wenn die Funktoren auf den Objekten oder den Morphismen nicht injektiv sind, wir führ jedes Ausgangsobjekt und -morphismus eigene Objekte und Morphismen bekommen}. Also falls $e \ne e'$ aber $T(e) = T(e')$ ist dennoch $(e,d,f)$ und $(e',d,f)$ zwei verschiedene Objekte.
+Sei $\FF(G)$ die freie Kategorie über dem Graphen $G$. Damit $\FF$ Funktor sein kann, müssen wir ihn neben den Objekten (Graphen) auch auf Graph-Homomorphismen definieren. 
 
-Es werden also eigentlich die Objekte von $\EE$ und $\DD$ mit Pfeilen aus $\CC$ verbunden. Dies geschieht über "`Stellvertreter"' dieser Objekte in $\CC$.
+Sei dazu $F \colon G \to H$ ein Graph-Homomorphismus. Wir müssen nun einen Kategorie-Homomorphismus, sprich einen Funktor, $\FF(F) \colon \FF(G) \to \FF(H)$ definieren. Funktoren werden auf Objekten und auf Morphismen definiert. 
+
+Ein Objekt von $\FF(G)$ ist ein Koten $k$ von $G$. Wir definieren
+\begin{equation}
+   \FF(F)(A) := F(A),
+\end{equation}
+welches ein Knoten von $H$ und damit ein Objekt von $\FF(H)$ ist.
+
+Ein Homomorphismus von $\FF(G)$ ist von der Form $()_A$ oder $(p_1 \cdots p_n)$, wo die $p_i$ Pfeile von $G$ sind. Wir definieren
+\begin{equation}\label{freiIdentitaet}
+   \FF(()_A) := ()_{\FF(A)} = ()_A
+\end{equation}
+und
+\begin{equation}
+   \FF((p_1 \cdots p_n)) := (F(p_1) \cdots F(p_n)).
+\end{equation}
+Die rechte Seite ist nach der Definition von Homomorphismen in der freien Kategorie in Homomorphismus.
+
+Jetzt müssen wir noch die Funktor-Axiome nachweise, was sehr einfach ist, nachdem wir hingeschrieben haben, was nachgewiesen werden muss. Das lassen wir hier weg.
 
 %******************************************************************************************************
-\subsection{Notationen}
+\subsection{Riesen Funktor}
 %******************************************************************************************************
-Wir unterscheiden in der Notation zwischen Zahlen aus $\N$, die wir "`normal"' schreiben: $0,1,2,3, \cdots$, und bestimmten Kategorien, die wir \textbf{fett} oder mit einem Pfeil drüber schreiben. Die Idee mit dem Pfeil kommt daher, dass fett auf der Kreidetafel schlecht zu realisieren ist, und weil Vektoren auch oft fett geschrieben werden. Da Kategorien Pfeile enthalten, passt es auch emotional.
-
-$\vec 2$ ist die Kategorie mit zwei Objekten und außer den beiden Identitäten einem weiteren Morphismus $\bullet \to \bullet$. 
+Das kategorische Netzwerk der graphischen Netzwerke wird in das kategorische Netzwerk der kategorischen Netzwerke eingebettet. --> kompliziertes Bild.
 
 %******************************************************************************************************
-\subsection{Beispiele von Kommakategorien}
+\subsection{Pfad-Kategorie}
 %******************************************************************************************************
-Sind $T,S$ die Identitätsfunktoren, ist $(T \downarrow S) = \CC^{\vec 2}$.
+Da die entstehenden Morphismen genau die Pfade durch den Graphen sind, können wir die Kategorie auch \textbf{Pfad-Kategorie} nennen.
 
-Ist $T = \id_\EE$ und $S = (d \colon \vec 1 \to \DD)$ das Herauspicken eines einzelnen Objektes aus $\DD$ erhalten wir eine Überkategorie (Overcategory, slice category, Scheibenkategorie?).
+%******************************************************************************************************
+\subsection{Adjungierte Funktoren}
+%******************************************************************************************************
+Der Weg von den kleinen Kategorien zu den kleinen Graphen, bei dem wir die kategorische Struktur vergessen und nur die des Graphen behalten, ist ein Funktor $U$. Wir nennen ihn Vergess-Funktor oder underlying Funktor.
 
-Andersherum die Unterkategorie (undercategory, coslice category, Koscheibenkategorie?).
+Der Weg vom kleinen Graph zu dessen freien Kategorie ist ebenfalls ein Funktor $F$.
 
-Eine natürliche Transformation $\alpha \colon T \to S$ zwischen Funktoren $T, S \colon \CC \to \DD$ kann als ein bestimmter Funktor $\tau_\alpha \colon \CC \to (T \downarrow S)$ gesehen werden.
+Diese beiden Funktoren bilden ein Paar \textbf{adjungierter} Funktoren, was wir hier noch nicht einführen, was aber ein extrem wichtiger Begriff ist. Es ist sinnvoll, sich dieses Beispiel schon mal zu merken.
 
 \begin{backup}
 %******************************************************************************************************
