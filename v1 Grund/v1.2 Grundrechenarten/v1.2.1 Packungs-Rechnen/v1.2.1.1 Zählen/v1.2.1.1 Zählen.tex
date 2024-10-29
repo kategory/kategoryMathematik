@@ -1,4 +1,3 @@
-% !TeX program = lualatex
 %******************************************************** -*-LaTeX-*- ******************************
 %                                                                                                  *
 % v1.2.1.1 Zählen.tex                                                                              *
@@ -21,16 +20,6 @@
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
 %                                                                                                  *
 %***************************************************************************************************
-
-% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-% Wegen der hebräischen Schrift geht diese Datei nunr mit LuaLaTeX.
-% deswegen die erste Zeile, damit TeXstudio den LuaLaTeX-Compiler nimmt
-% Zusätzlich müssen wir den SBL Hebrew Font isntallieren.
-% Den finden wir unter https://www.sbl-site.org/educational/biblicalfonts_sblhebrew.aspx
-% Nach dem Download muss die Datei SBL_Hbrw.ttf in das Verzeichniss c:\Windows\Fonts kopiert werden
-% Das ist aber auch im auf der selben Web-Seite zu findenen User Manual beschrieben.
-% Wie es auf Linux oder Mac geht, können wir auch dort beschrieben finden.
-% Achte auch auf das \usepackage[utf8]{luainputenc}
 
 \documentclass[a4paper]{amsart}
 % \documentclass[a4paper]{book}
@@ -61,22 +50,12 @@
 \usepackage{upgreek}
 
 % \usepackage{diagrams}
-\usepackage{luatextra}
 
-\usepackage{polyglossia}
-\usepackage[autostyle,german=guillemets]{csquotes}
-
-\setmainlanguage[spelling=new]{german}
-\setotherlanguage[variant=polytonic]{greek}
-
-\newfontfamily\hebrewfont[Script=Hebrew,Scale=MatchUppercase,Ligatures=TeX]{SBL Hebrew}
-\newcommand{\texthebrew}[1]{\bgroup\textdir TRT\hebrewfont #1\egroup}
-\newenvironment{hebrew}{\textdir TRT\pardir TRT\hebrewfont}{}
-
+\usepackage[german]{babel}
 \usepackage[none]{hyphenat}
 \emergencystretch=4em
 
-\usepackage[utf8]{luainputenc} % to be able to use äöü as characters in text
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
 \usepackage[T1]{fontenc} % to be able to use äöü in lables
 \usepackage{lmodern}     % to avoid pixelation introduced by fontenc
 
@@ -84,8 +63,6 @@
 
 \usepackage{tikz}
 \usepackage{tikz-cd}
-\usetikzlibrary{shapes.geometric}
-
 \usetikzlibrary{babel}
 
 %-----------------------------------------------------------------------------------------------------*
@@ -105,9 +82,11 @@
 
 \myTheorem{Definition}
 \myTheorem{Proposition}
+\myTheorem{Satz}
 \myTheorem{Theorem}
-\myTheorem{Example}
-\myTheorem{Remark}
+\myTheorem{Axiom}
+\myTheorem{Beispiel}
+\myTheorem{Anmerkung}
 
 \definecollection{jkjkFrage}
 \newtheorem{jkFrage}[theorem]{Frage}
@@ -142,11 +121,16 @@
 \DeclareMathOperator{\Rang}{Rang}
 \DeclareMathOperator{\Det}{Det}
 \DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\GL}{GL}
 
 \DeclareMathOperator{\sub}{sub}
 \DeclareMathOperator{\blk}{blk}
 \DeclareMathOperator{\minimal}{minimal}
 \DeclareMathOperator{\maximal}{maximal}
+
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\Cod}{Cod}
+\DeclareMathOperator{\Obj}{Obj}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -187,11 +171,16 @@
 \newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
 \newcommand{\BB}{\ensuremath{\mathcal{ B }}}
 \newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\DD}{\ensuremath{\mathcal{ D }}}
 \newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\FF}{\ensuremath{\mathcal{ F }}}
 \newcommand{\KK}{\ensuremath{\mathcal{ K }}}
 \newcommand{\MM}{\ensuremath{\mathcal{ M }}}
 \newcommand{\PP}{\ensuremath{\mathcal{ P }}}
 \newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\Set}{\text{\textbf{Set}}}
+\newcommand{\Ab}{\text{\textbf{Ab}}}
 
 \newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
 
@@ -205,10 +194,13 @@
 \newcommand{\z}[1]{\Z_{#1}}
 \newcommand{\e}[1]{\z{#1}^*}
 \newcommand{\q}[1]{(\e{#1})^2}
+\newcommand{\m}{\mathcal}
 
 \excludecomment{book}
 \excludecomment{example}
 \excludecomment{backup}
+
+\newcommand{\zb}{z.~B. }
 
 \begin{document}
 
@@ -272,7 +264,7 @@ Schulmathematik, Zählen, ein wenig rechnen mit Strichen und Punkten, Zählen, P
 \subsection*{Text}
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter\\
-{\tiny\url{https://github.com/kategory/kategoryMathematik/tree/main/v1%20Grund/v1.1%20Zahlen/v1.1.2.6.9.8%20Unendlich}}.
+{\tiny\url{https://github.com/kategory/kategoryMathematik/tree/main/v1%20Grund/v1.2%20Grundrechenarten/v1.2.1%20Packungs-Rechnen/v1.2.1.1%20Z%C3%A4hlen}}.
 
 %******************************************************************************************************
 \subsection*{Meine Videos}
@@ -291,9 +283,7 @@ v1.1.2.4 (Grund) Zählen\\
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Zahl}\\
-\url{https://de.wikipedia.org/wiki/Unendlich_(Mathematik)}\\
-\url{https://math.stackexchange.com/a/36298}
+\url{https://de.wikipedia.org/wiki/Dezimalsystem}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -336,221 +326,504 @@ Das Video hierzu ist zu finden unter \url{Ups}
 \section{v1.2.1.1 Zählen}
 %                                                                                                     *
 %******************************************************************************************************
-\def\kategoryVspace{5pt}
 
 %******************************************************************************************************
-\subsection{Striche}
+\subsection{Packung}
 %******************************************************************************************************
-\begin{tikzpicture}
-\draw (0.0, 0) -- (0.0, 0.4);
-\draw (0.1, 0) -- (0.1, 0.4);
-\draw (0.2, 0) -- (0.2, 0.4);
-\draw (0.3, 0) -- (0.3, 0.4);
-\draw (0.4, 0) -- (0.4, 0.4);
-\draw (0.5, 0) -- (0.5, 0.4);
-\draw (0.6, 0) -- (0.6, 0.4);
-\draw (0.7, 0) -- (0.7, 0.4);
-\draw (0.8, 0) -- (0.8, 0.4);
-\draw (0.9, 0) -- (0.9, 0.4);
-\end{tikzpicture}
-$\cdots$
+Eine Packung kann Punkte aufnehmen. So wie ein Eierkarton Eier aufnehmen kann. 
 
-%******************************************************************************************************
-\subsection{Kreisbild}
-%******************************************************************************************************
-Hier bekommen wir eine unendliche Folge von Kreisen:
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$\\
+   \hline
+   $\bullet$ & $\bullet$ & $\bullet$ &  & \\
+   \hline
+\end{tabular}
+Sie ist damit eine andere Schreibweise für die Zahl, wie viele Punkte sie enthält.
 
-\begin{tikzpicture}
-   \draw [blue, fill=blue] (0.0, 2) circle (0.3);
-   \draw [blue, fill=blue] (0.7, 2) circle (0.3);
-   \draw [blue, fill=blue] (1.4, 2) circle (0.3);
-   \draw [blue, fill=blue] (2.1, 2) circle (0.3);
-   \draw [blue, fill=blue] (2.8, 2) circle (0.3);
-   \draw [red , fill=red ] (3.5, 2) circle (0.3);
-   \draw [red , fill=red ] (4.2, 2) circle (0.3);
-   \draw [red , fill=red ] (4.9, 2) circle (0.3);
-   \draw [red , fill=red ] (5.6, 2) circle (0.3);
-   \draw [red , fill=red ] (6.3, 2) circle (0.3);
-\end{tikzpicture}
-\begin{tikzpicture}
-    \draw [blue, fill=blue] (0.0, 2) circle (0.3);
-    \draw [blue, fill=blue] (0.7, 2) circle (0.3);
-    \draw [blue, fill=blue] (1.4, 2) circle (0.3);
-    \draw [blue, fill=blue] (2.1, 2) circle (0.3);
-    \draw [blue, fill=blue] (2.8, 2) circle (0.3);
-    \draw [red , fill=red ] (3.5, 2) circle (0.3);
-    \draw [red , fill=red ] (4.2, 2) circle (0.3);
-    \draw [red , fill=red ] (4.9, 2) circle (0.3);
-    \draw [red , fill=red ] (5.6, 2) circle (0.3);
-    \draw [red , fill=red ] (6.3, 2) circle (0.3);
-\end{tikzpicture}
-$\cdots$
+Die leere Packung ist Null:
 
-Das Kreisbild und das Schreiben in Fünfer-Blöcken dient der Vorbereitung auf das Rechnen im Zehnersystem. Es zeigt Eigenschaften, die nicht zum inneren Wesen der Zahl gehören, sondern zu ihrem Verhältnis zum Zehnersystem.
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+    $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+    $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+\end{tabular} $= 0$.
 
-%******************************************************************************************************
-\subsubsection{Kreisbild als Rechnung}
-%******************************************************************************************************
-Geht nicht.
+Packungen können die Zahlen von $0$ bis $10$ sein.
 
-%******************************************************************************************************
-\subsection{Zweiteilungen}
-%******************************************************************************************************
-\begin{tikzpicture}
-   \draw (0.05, 0) -- (0.05, 0.4);
-\end{tikzpicture}
-+
-\begin{tikzpicture}
-    \draw (0.0, 0) -- (0.0, 0.4);
-    \draw (0.1, 0) -- (0.1, 0.4);
-    \draw (0.2, 0) -- (0.2, 0.4);
-    \draw (0.3, 0) -- (0.3, 0.4);
-    \draw (0.4, 0) -- (0.4, 0.4);
-    \draw (0.5, 0) -- (0.5, 0.4);
-    \draw (0.6, 0) -- (0.6, 0.4);
-    \draw (0.7, 0) -- (0.7, 0.4);
-    \draw (0.8, 0) -- (0.8, 0.4);
-    \draw (0.9, 0) -- (0.9, 0.4);
-\end{tikzpicture}
-$\cdots$
-,
-\begin{tikzpicture}
-   \draw (0.05, 0) -- (0.05, 0.4);
-   \draw (0.15, 0) -- (0.15, 0.4);
-\end{tikzpicture}
-+
-\begin{tikzpicture}
-    \draw (0.0, 0) -- (0.0, 0.4);
-    \draw (0.1, 0) -- (0.1, 0.4);
-    \draw (0.2, 0) -- (0.2, 0.4);
-    \draw (0.3, 0) -- (0.3, 0.4);
-    \draw (0.4, 0) -- (0.4, 0.4);
-    \draw (0.5, 0) -- (0.5, 0.4);
-    \draw (0.6, 0) -- (0.6, 0.4);
-    \draw (0.7, 0) -- (0.7, 0.4);
-    \draw (0.8, 0) -- (0.8, 0.4);
-    \draw (0.9, 0) -- (0.9, 0.4);
-\end{tikzpicture}
-$\cdots$
-,
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\bullet$ & $\bullet$ & $\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+   &  &  &  & \\
+   \hline
+\end{tabular} = 
 \begin{tikzpicture}
    \draw (0.05, 0) -- (0.05, 0.4);
    \draw (0.15, 0) -- (0.15, 0.4);
    \draw (0.25, 0) -- (0.25, 0.4);
-\end{tikzpicture}
-+
+\end{tikzpicture} $= 3$.
+
+
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$\\
+   \hline
+   $\bullet$ & $\bullet$ & $\bullet$ &  & \\
+   \hline
+\end{tabular} = 
 \begin{tikzpicture}
-    \draw (0.0, 0) -- (0.0, 0.4);
-    \draw (0.1, 0) -- (0.1, 0.4);
-    \draw (0.2, 0) -- (0.2, 0.4);
-    \draw (0.3, 0) -- (0.3, 0.4);
-    \draw (0.4, 0) -- (0.4, 0.4);
-    \draw (0.5, 0) -- (0.5, 0.4);
-    \draw (0.6, 0) -- (0.6, 0.4);
-    \draw (0.7, 0) -- (0.7, 0.4);
-    \draw (0.8, 0) -- (0.8, 0.4);
-    \draw (0.9, 0) -- (0.9, 0.4);
-\end{tikzpicture}
-$\cdots$
+   \draw (0.05, 0) -- (0.05, 0.4);
+   \draw (0.15, 0) -- (0.15, 0.4);
+   \draw (0.25, 0) -- (0.25, 0.4);
+   \draw (0.35, 0) -- (0.35, 0.4);
+   \draw (0.40, 0) -- (0.00, 0.4);
+   \draw (0.60, 0) -- (0.60, 0.4);
+   \draw (0.70, 0) -- (0.70, 0.4);
+   \draw (0.80, 0) -- (0.80, 0.4);
+\end{tikzpicture} $= 8$.
+
+Die volle Packung ist zehn:
+
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$\\
+   \hline
+   $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$\\
+   \hline
+\end{tabular} = \begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+   \draw (0.15, 0) -- (0.15, 0.4);
+   \draw (0.25, 0) -- (0.25, 0.4);
+   \draw (0.35, 0) -- (0.35, 0.4);
+   \draw (0.40, 0) -- (0.00, 0.4);
+   
+   \draw (0.60, 0) -- (0.60, 0.4);
+   \draw (0.70, 0) -- (0.70, 0.4);
+   \draw (0.80, 0) -- (0.80, 0.4);
+   \draw (0.90, 0) -- (0.90, 0.4);
+   \draw (0.55, 0) -- (0.95, 0.4);
+\end{tikzpicture} $= 10$.
 
 %******************************************************************************************************
-\subsection{Eck}
+\subsection{Informationen ablesen}
 %******************************************************************************************************
-Wir haben gesehen, dass je mehr Ecken hinzukommen, desto mehr ähnelt das $n$-Eck einem Kreis.
+Ähnlich wie die Strichdarstellung zeigt uns die Packung in gut abzulesender Form wichtige Informationen über die Zahl
 
-Das regelmäßige $\infty$-Eck ist ein Kreis
-\vspace{\kategoryVspace}
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$\\
+   \hline
+   $\bullet$ & $\bullet$ & $\bullet$ &  & \\
+   \hline
+\end{tabular} = 
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+   \draw (0.15, 0) -- (0.15, 0.4);
+   \draw (0.25, 0) -- (0.25, 0.4);
+   \draw (0.35, 0) -- (0.35, 0.4);
+   \draw (0.40, 0) -- (0.00, 0.4);
+   \draw (0.60, 0) -- (0.60, 0.4);
+   \draw (0.70, 0) -- (0.70, 0.4);
+   \draw (0.80, 0) -- (0.80, 0.4);
+\end{tikzpicture} $= 8$.
+
+$8 = 5+3$. Und es fehlen $3$, um sie voll zu machen. Es sind mehr als $5$.
+
+%******************************************************************************************************
+\subsection{Geschlossene Packungen}
+%******************************************************************************************************
+Wenn eine Packung voll ist, lassen wir sie zu. Wir benötigen keinen Blick nach Innen. Dadurch werden wir beim Erfassen der Zahl entlastet.
+
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\bullet$&$\bullet$&$\bullet$&$\bullet$&$\bullet$\\
+   \hline
+   $\bullet$&$\bullet$&$\bullet$&$\bullet$&$\bullet$\\
+   \hline
+\end{tabular} = 
+
+\begin{tabular}{|ccccc|}
+   \hline
+   $\phantom\bullet$&$\phantom\bullet$&$\phantom\bullet$&$\phantom\bullet$&$\phantom\bullet$\\
+   $\phantom\bullet$&$\phantom\bullet$&$\phantom\bullet$&$\phantom\bullet$&$\phantom\bullet$\\
+   \hline
+\end{tabular} = 10.
+
+Geschlossene Packungen, von denen wir ja wissen, dass sie immer voll sind, werden der Übersichtlichkeit halber auch kleiner dargestellt.
+
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\bullet$&$\bullet$&$\bullet$&$\bullet$&$\bullet$\\
+   \hline
+   $\bullet$&$\bullet$&$\bullet$&$\bullet$&$\bullet$\\
+   \hline
+\end{tabular} = 
+
+\begin{tabular}{|ccccc|}
+   \hline
+   $\phantom\bullet$&$\phantom\bullet$&$\phantom\bullet$&$\phantom\bullet$&$\phantom\bullet$\\
+   $\phantom\bullet$&$\phantom\bullet$&$\phantom\bullet$&$\phantom\bullet$&$\phantom\bullet$\\
+   \hline
+\end{tabular} =
+
+\begin{tabular}{|cc|}
+   \hline
+   $\phantom\bullet$&$\phantom\bullet$\\
+   \hline
+\end{tabular} = 10.
+
+Mit diesem Werkzeug können wir große Zahlen übersichtlich angeben. Wir zeigen unsere Entwicklung der Notation hin zum Übersichtlichen an folgendem Beispiel.
 
 \begin{tikzpicture}
-    \draw  (0,0) circle [radius=1.5];
+   \draw (0.05, 0) -- (0.05, 0.4);
 \end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+\end{tikzpicture} =
 
-%******************************************************************************************************
-\subsection{Ziffern}
-%******************************************************************************************************
-\vspace{\kategoryVspace}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+   \draw (0.15, 0) -- (0.15, 0.4);
+   \draw (0.25, 0) -- (0.25, 0.4);
+   \draw (0.35, 0) -- (0.35, 0.4);
+   \draw (0.40, 0) -- (0.00, 0.4);
+   
+   \draw (0.60, 0) -- (0.60, 0.4);
+   \draw (0.70, 0) -- (0.70, 0.4);
+   \draw (0.80, 0) -- (0.80, 0.4);
+   \draw (0.90, 0) -- (0.90, 0.4);
+   \draw (0.55, 0) -- (0.95, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+   \draw (0.15, 0) -- (0.15, 0.4);
+   \draw (0.25, 0) -- (0.25, 0.4);
+   \draw (0.35, 0) -- (0.35, 0.4);
+   \draw (0.40, 0) -- (0.00, 0.4);
+   
+   \draw (0.60, 0) -- (0.60, 0.4);
+   \draw (0.70, 0) -- (0.70, 0.4);
+   \draw (0.80, 0) -- (0.80, 0.4);
+   \draw (0.90, 0) -- (0.90, 0.4);
+   \draw (0.55, 0) -- (0.95, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+   \draw (0.15, 0) -- (0.15, 0.4);
+   \draw (0.25, 0) -- (0.25, 0.4);
+   \draw (0.35, 0) -- (0.35, 0.4);
+   \draw (0.40, 0) -- (0.00, 0.4);
+   
+   \draw (0.60, 0) -- (0.60, 0.4);
+   \draw (0.70, 0) -- (0.70, 0.4);
+   \draw (0.80, 0) -- (0.80, 0.4);
+   \draw (0.90, 0) -- (0.90, 0.4);
+   \draw (0.55, 0) -- (0.95, 0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+   \draw (0.05, 0) -- (0.05, 0.4);
+   \draw (0.15, 0) -- (0.15, 0.4);
+   \draw (0.25, 0) -- (0.25, 0.4);
+   \draw (0.35, 0) -- (0.35, 0.4);
+\end{tikzpicture} = 
 
-$\infty$
-
-%******************************************************************************************************
-\subsection{Rechnung mit Ziffern}
-%******************************************************************************************************
-
-%******************************************************************************************************
-\subsubsection{Kreisbild als Rechnung mit Ziffern}
-%******************************************************************************************************
-Nix.
-
-%******************************************************************************************************
-\subsubsection{Zweiteilung als Rechnung mit Ziffern}
-%******************************************************************************************************
-$\infty = 1 + \infty = 2 + \infty = 3 + \infty = 4 + \infty = 5 + \infty$
-
-%******************************************************************************************************
-\subsection{Namen}
-%******************************************************************************************************
-Die Namen der Neun in verschiedenen Sprachen:
-\vspace{\kategoryVspace}
-
-\begin{tabular}{|c|c|c|}
+\begin{tabular}{|cc|}
    \hline
-   \textbf{Sprache}& \textbf{Schreiben} & \textbf{Sprechen} \\
+   $\phantom\bullet$&$\phantom\bullet$\\
    \hline
-   Deutsch     &Unendlich   &unendlich      \\
+\end{tabular}
+\begin{tabular}{|cc|}
    \hline
-   Englisch    &infinity   &infiniti      \\
+   $\phantom\bullet$&$\phantom\bullet$\\
    \hline
-   Französisch &infini   &angfini      \\
+\end{tabular}
+\begin{tabular}{|cc|}
    \hline
-   Latein      &infinitas  &infinitas     \\
+   $\phantom\bullet$&$\phantom\bullet$\\
    \hline
-   Hebräisch   &\texthebrew{אינסוף}    &'äinsof \\
+\end{tabular}
+\begin{tabular}{|c|c|c|c|c|}
    \hline
-   Schwedisch  &oändlighet    &oändlighäit     \\
+   $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\phantom\bullet$\\
+   \hline
+   &  &  &  & \\
    \hline
 \end{tabular}
 
 %******************************************************************************************************
-\subsection{Im Alltag}
+\subsection{Packungs-Zählen}
 %******************************************************************************************************
-Die Liebe, das Leben und Gott sind unendlich.
+Wenn wir mit Packungen zählen, beginnen wir mit einer leeren Packung:
 
-%******************************************************************************************************
-\subsection{Additionsverhalten}
-%******************************************************************************************************
-Unendlich ist immun gegenüber der Behandlung mit natürlichen Zahlen:
-$\infty -100 = \infty$ genauso $\infty / 100 = \infty$. Bestimmte Rechnungen sind mit großer Vorsicht zu genießen $\infty - \infty$ und $\infty / \infty$ weswegen viele Leute diese Rechnungen verbieten. Aber verbieten kann uns in der Mathematik niemand irgendetwas. Wir können und dürfen definieren:
-\begin{alignat}{4}
-    &\infty - &&\infty &&:= 0\\
-    &\infty / &&\infty &&:= 1
-\end{alignat}
-Allerdings gelten damit und auch mit anderen Definitionen nicht alle Rechenregeln, die wir für die natürlichen Zahlen lernen werden.
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+   $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+\end{tabular}
 
-%******************************************************************************************************
-\subsection{Multiplikationsverhalten}
-%******************************************************************************************************
-$13 * \infty = \infty$ und z.~B. $\infty * \infty = \infty$.
+Dann füllen wir nach und nach Punkte zuerst oben von links nach rechts danach unten auch von links nach rechts:
 
-%******************************************************************************************************
-\subsection{Das kleine Null-plus-Zehn}
-%******************************************************************************************************
-Nix.
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+   $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+\end{tabular}
 
-%******************************************************************************************************
-\subsection{Das kleine Ein-mal-Neun}
-%******************************************************************************************************
-Nix.
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\bullet$ & $\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+   $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+\end{tabular}
 
-%******************************************************************************************************
-\subsection{Besonderheiten}
-%******************************************************************************************************
-Nix.
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\bullet$ & $\bullet$ & $\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+   $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+\end{tabular} $\cdots$
 
-%******************************************************************************************************
-\subsection{Zweitteilung geometrisch}
-%******************************************************************************************************
-Nix.
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$\\
+   \hline
+   $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$\\
+   \hline
+\end{tabular}
 
+Dann schließen wir die volle Packung und nehmen eine weitere leere hinzu:
+
+\begin{tabular}{|cc|}
+   \hline
+   $\phantom\bullet$&$\phantom\bullet$\\
+   \hline
+\end{tabular}
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+   $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+\end{tabular}
+
+\begin{tabular}{|cc|}
+   \hline
+   $\phantom\bullet$&$\phantom\bullet$\\
+   \hline
+\end{tabular}
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\bullet$ & $\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+   $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+\end{tabular}
+
+\begin{tabular}{|cc|}
+   \hline
+   $\phantom\bullet$&$\phantom\bullet$\\
+   \hline
+\end{tabular}
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\bullet$ & $\bullet$ & $\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+   $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+   \hline
+\end{tabular} $\cdots$
+
+\begin{tabular}{|cc|}
+   \hline
+   $\phantom\bullet$&$\phantom\bullet$\\
+   \hline
+\end{tabular}
+\begin{tabular}{|c|c|c|c|c|}
+   \hline
+   $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$\\
+   \hline
+   $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$\\
+   \hline
+\end{tabular}
+
+Und dann wieder von vorne
+
+\begin{tabular}{|cc|}
+   \hline
+   $\phantom\bullet$&$\phantom\bullet$\\
+   \hline
+\end{tabular}
+\begin{tabular}{|cc|}
+\hline
+$\phantom\bullet$&$\phantom\bullet$\\
+\hline
+\end{tabular}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+\hline
+$\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+\hline
+\end{tabular}
+
+\begin{tabular}{|cc|}
+   \hline
+   $\phantom\bullet$&$\phantom\bullet$\\
+   \hline
+\end{tabular}
+\begin{tabular}{|cc|}
+\hline
+$\phantom\bullet$&$\phantom\bullet$\\
+\hline
+\end{tabular}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$\bullet$ & $\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+\hline
+$\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+\hline
+\end{tabular}
+
+\begin{tabular}{|cc|}
+   \hline
+   $\phantom\bullet$&$\phantom\bullet$\\
+   \hline
+\end{tabular}
+\begin{tabular}{|cc|}
+\hline
+$\phantom\bullet$&$\phantom\bullet$\\
+\hline
+\end{tabular}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$\bullet$ & $\bullet$ & $\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+\hline
+$\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$ & $\phantom\bullet$\\
+\hline
+\end{tabular} $\cdots$
+
+\begin{tabular}{|cc|}
+   \hline
+   $\phantom\bullet$&$\phantom\bullet$\\
+   \hline
+\end{tabular}
+\begin{tabular}{|cc|}
+\hline
+$\phantom\bullet$&$\phantom\bullet$\\
+\hline
+\end{tabular}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$\\
+\hline
+$\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$\\
+\hline
+\end{tabular}
+ 
 \begin{backup}
    (Zur Zeit nicht benötigter Inhalt)
 \end{backup}
