@@ -263,7 +263,7 @@ Ringe, Gruppen, Moduln, Kategorien, Funktoren, additive Funktoren, \textbf{Ab}-K
 %******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.1%20Homologische%20Algebra/v5.1.1.1.3%20Additiver%20Funktor%20Hom}
 }
 
 %******************************************************************************************************
@@ -274,16 +274,21 @@ Siehe auch in den folgenden Videos:\\
 v5.1.1.1 (Höher) Homologische Algebra - Moduln\\
 \url{https://youtu.be/JY43_07kNmA}
 \\
-v5.1.1.1.2 (Höher) Homologische Algebra - Ring-Darstellung = Modul\\
-\url{https://youtu.be/FBQAdljFVF4}
+v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
+\url{https://youtu.be/sIaKt-Wxlog}
+\\
+v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
+\url{https://youtu.be/Ojf5LQGeyOU}
+\\
+v5.0.1.6.1.4 (Höher) Kategorien - Abelsche - Additiver Funktor\\
+\url{https://youtu.be/zSP_a2RvoYE}
 
 %******************************************************************************************************
 \subsection*{Quellen}
 %******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Darstellung_(Gruppe)}\\
-\url{https://de.wikipedia.org/wiki/Polynomring}\\
-\url{https://de.wikipedia.org/wiki/Monoidring}
+\url{https://en.wikipedia.org/wiki/Preadditive_category}\\
+\url{https://en.wikipedia.org/wiki/Module_homomorphism#Module_structures_on_Hom}
 
 %******************************************************************************************************
 \subsection*{Buch}
@@ -344,10 +349,115 @@ Das Video hierzu ist zu finden unter
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Po}
+\subsection{Gruppen-Struktur auf Hom-Mengen}
 %******************************************************************************************************
-Die folgende 
+Die Hom-Mengen bestehen aus Funktionen mit Zielmenge eine Gruppe. Damit können wir auf der Menge dieser Funktionen eine Addition "`komponentenweise"' definieren:
+\begin{equation}\label{addition}
+   (f+g)(x) := f(x)+g(x).
+\end{equation}
 
+Da die $0$-Funktion ein $R$-Modul-Homomorphismus ist, und da mit $f, g$ auch $f+g$ und das wie folgt definierte $-f$ selbst $R$-Modul-Homomorphismen sind, können wir prüfen, ob es sich um eine Gruppe handelt.
+\begin{equation}\label{inverses}
+   (-f)(x) := -(f(x)).
+\end{equation}
+
+Und in der Tat:
+
+\noindent\fbox{%
+   \parbox{\textwidth}{%
+      $\Hom_R(X,Y)$ ist eine abelsche Gruppe.
+   }%
+}
+
+Der Beweis ist sehr einfach.
+
+%******************************************************************************************************
+\subsection{$R$-Mod ist \textbf{Ab}-Kategorie}
+%******************************************************************************************************
+\begin{equation}\label{bilinearKomponentenweise}
+   ((f+g) \circ h)(x) = (f+g)(h(x)) = f(h(x)) + g(h(x)) = (f \circ h)(x) + (g \circ h)(x),
+\end{equation}
+und so
+\begin{equation}\label{bilinear}
+   (f+g) \circ h = f \circ h + g \circ h.
+\end{equation}
+Die entsprechenden Gleichungen für die Verknüpfung von der anderen Seite gehen entsprechend.
+
+%******************************************************************************************************
+\subsection{Hom-Funktoren sind additiv}
+%******************************************************************************************************
+Damit sind die Funktoren $\Hom_R(X,\_)$ und $\Hom_R(\_,Y)$ Funktoren von $R$-Mod nach \textbf{Ab}, das heißt, sie sind Funktoren zwischen \textbf{Ab}-Kategorien. Zum Glück sind sie additiv.
+
+Wir müssen zeigen, dass
+\begin{equation}\label{additiv}
+   F(f+g) = F(f)+F(g)
+\end{equation}
+ist. Dazu schauen wir uns zunächst an, wie ein Hom-Funktor auf Morphismen wirkt. Sei dazu ein Morphismus $h \colon X \to Y$ gegeben. Dann
+\begin{alignat}{7}\label{homFunktor}
+   &\Hom(W,h) := \Hom(W,\_)(h) &&: &&\Hom(W,X) &&\to         &&\Hom(W,Y)\\
+   &                           &&  &&f         &&\mapsto     && h \circ f
+\end{alignat}
+Die Forderung \eqref{additiv} wird damit zu
+\begin{equation}\label{verknuepfungAdditiv}
+   h \circ( f + g ) = h \circ f + h \circ g,
+\end{equation}
+was nichts anderes als \eqref{bilinear} ist.
+
+\noindent\fbox{%
+   \parbox{\textwidth}{%
+      Die Bilinearität der Addition bezüglich der Verknüpfung ist das selbe wie die Additivität der Hom-Funktoren.
+   }%
+}
+
+Dieser Beweis gilt offenbar ganz allgemein in \textbf{Ab}-Kategorien.
+
+%******************************************************************************************************
+\subsection{Modul-Struktur auf Hom-Mengen}
+%******************************************************************************************************
+Damit $\Hom( X, Y )$ ein $R$-Modul ist muss zusätzlich für alle $r \in R$ eine Skalar-Multiplikation definiert werden. Dies wieder punktweise:
+\begin{equation}\label{definitionMultiplikation}
+   (rf)(x) := r(f(x)).
+\end{equation}
+Dies muss wieder ein $R$-Modul-Homomorphismus sein. Die Regeln für die Addition bilden kein Problem. Bei der Multiplikation haben wir jedoch:
+\begin{equation}\label{multiplikationBedingung}
+   (rf)(sx) \text{ müsste gleich sein zu } s (rf)(x).
+\end{equation}
+Dies geht im allgemeinen nur, wenn
+\begin{equation}\label{key}
+   sr = rs.
+\end{equation}
+Bei nicht-kommutativen Ringen ist dies nicht der Fall: 
+
+\noindent\fbox{%
+   \parbox{\textwidth}{%
+      $\Hom( X, Y )$ ist in der Regel kein $R$-Modul.
+   }%
+}
+
+Da die Elemente von $R$ aber mit Elementen aus $\Z$ vertauschen ist $\Hom( X, Y )$ ein $\Z$-Modul, was nicht anderes als eine abelsche Gruppe ist, und das wissen wir schon.
+
+\noindent\fbox{%
+   \parbox{\textwidth}{%
+      $\Hom( X, Y )$ ein $\Z$-Modul
+   }%
+}
+
+
+Da die Elemente von $R$ mit allen Elementen aus seinem Zentrum $Z(R)$ kommutieren (dies ist ja gerade die Definition des Zentrums) gilt darüber hinaus:
+
+\noindent\fbox{%
+   \parbox{\textwidth}{%
+      $\Hom( X, Y )$ ein $Z(R)$-Modul
+   }%
+}
+
+Und damit auch:
+
+\noindent\fbox{%
+   \parbox{\textwidth}{%
+      Ist $R$ kommutativ, so ist $\Hom( X, Y )$ ein $R$-Modul
+   }%
+}
 
 \begin{backup}
 %******************************************************************************************************
@@ -410,7 +520,9 @@ Die folgende
     $\vec x, \vec y$                    & Elemente eines Moduls, wenn wir sie von den Skalaren abheben wollen. \\
                                         & Entspricht in etwa Vektoren\\
     $\vec r$                            & Element von $R^n$\\
-    $\phi$                              & Gruppen-Homomorphismus
+    $\phi$                              & Gruppen-Homomorphismus\\
+    $Z(R)$                              & Zentrum des Rings $R$\\
+    $\Hom(X,Y)$                         & Menge/Gruppe der $R$-Homomorphismen von $X$ nach $Y$
     
 \end{tabular}
 
