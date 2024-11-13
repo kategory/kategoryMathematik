@@ -1,0 +1,425 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v1.7.6.5 Winkel vs Seitenlänge.tex                                                               *
+%                                                                                                  *
+% Copyright (C) 2024 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v1.7.6.5 Winkel vs Seitenlänge is part of kategoryMathematik.                                    *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{empheq}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Satz}
+\myTheorem{Theorem}
+\myTheorem{Example}
+\myTheorem{Remark}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Mittel) Geometrie\\[1cm]
+\textbf{v1.7.6.5 Winkel vs Seitenlänge}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2024 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Zur längeren Seite gehört immer der größere Gegenwinkel.
+
+Der Winkel ist definiert als Länge des Bogens mit einem Radius von 1. Der Winkel ist in einer Ecke eines Punktes. Der Kreismittelpunkt des Bogens ist dieser Punkt. Der Bogen entfernt vom Punkt, in gewisser Weise dem Punkt "`gegenüber"'.
+
+Hier stellt sich die Frage, wo ist der Winkel? Wo liegt er, wo ist er lokalisiert?
+
+Aber zurück zum Bogen. Da wo der ist, ist je nachdem wie groß das Dreieck ist, ist in etwa auch eine Seite. Die Seite gegenüber dem Punkt, welcher der Kreismittelpunkt des Bogens des Winkels ist.
+
+Also Winkel-Bögen und Seiten gehören örtlich zusammen und sie gehören zum Punkt gegenüber. Deswegen nennen wir sie gleich: Punkt $A$ zu Winkel $\alpha$ zur Seite $a$. Genauso $B, \beta, b$ und $C, \gamma, c$. Die Seite ist quasi eine Annäherung an den Winkel.
+
+Bezeichnen wir die Seiten nach Größe geordnet $a \le b \le c$ so gilt $\alpha \le \beta \le \gamma$.
+
+Anders ausgesagt:
+\begin{equation}\label{vergleich}
+   a \le b \Leftrightarrow \alpha \le \beta.
+\end{equation}
+
+Das gilt auch für Gleichheit:
+\begin{equation}\label{gleich}
+   a = b \Leftrightarrow \alpha = \beta.
+\end{equation}
+
+In Prosa: die größte Seite und der größte Winkel gehören zusammen, so wie die kleinste Seite und der kleinste Winkel. Gleiche Seiten und Winkel treten immer zusammen auf.
+
+Letzteres gilt sowohl für $2$ als auch für $3$ gleiche Seiten/Winkel.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Koordinaten-System, Satz des Pythagoras, Abstand im Koordinatensystem, Rechnen mit Buchstaben, Skalarprodukt, Rechnen mit Strecken
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+{\tiny
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v1%20Mittel/v1.7%20Klasse%207%20und%208/v1.7.6.4.3.5%20Senkrecht}
+}
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\
+\\
+v1.7.6.4.2 (Mittel) Geometrie - Satz des Pythagoras\\
+\url{https://youtu.be/mTMOtXfUQzQ}\\
+\\
+v1.7.6.4.3 (Mittel) Geometrie - Abstand im Koordinatensystem\\
+\url{https://youtu.be/HEdolewfn78}
+\\
+\\v1.7.6.4.3.2 (Mittel) Abstand Gerade vom Nullpunkt
+\url{https://youtu.be/_qN6Z-a72ok}
+\\
+\\v1.7.6.4.3.3 (Mittel) Geometrie - Skalarprodukt
+\url{https://youtu.be/PMYHObLI54Q}
+\\
+\\v1.7.6.4.3.4 (Mittel) Geometrie - Rechnen mit Strecken
+\url{https://youtu.be/hYRLizedcVM}
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\\
+\url{https://de.wikipedia.org/wiki/Orthogonalit%C3%A4t}\\
+\url{https://de.wikipedia.org/wiki/Satz_des_Pythagoras}\\
+\url{https://de.wikipedia.org/wiki/Euklidischer_Abstand}\\
+\url{https://de.wikipedia.org/wiki/Skalarprodukt}\\
+\url{https://www.schuelerhilfe.de/online-lernen/1-mathematik/719-skalarprodukt}\\
+\url{https://de.wikipedia.org/wiki/Scheitelpunkt}
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+
+"`KomplettWissen Mathematik Gymnasium Klasse 5-10"'\\
+Klett Lerntraining bei PONS\\
+978-3-12-926097-5 (ISBN)\\
+{\tiny
+   \url{https://www.lehmanns.de/shop/schulbuch-lexikon-woerterbuch/35031626-9783129260975-komplettwissen-mathematik-gymnasium-klasse-5-10
+   }
+}\\
+\\
+"`Grundlagen der ebenen Geometrie"'
+Hendrik Kasten, Denis Vogel\\
+Springer Berlin\\
+978-3-662-57620-5 (ISBN)\\
+{\tiny
+   \url{
+      https://www.lehmanns.de/shop/mathematik-informatik/43394438-9783662576205-grundlagen-der-ebenen-geometrie
+   }
+}
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der 
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben 
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird, 
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der 
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben 
+(zu finden im selben Git-Projekt). 
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter 
+{\tiny
+   \url{upps}
+}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{v1.7.6.5 Winkel vs Seitenlänge}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{Das Konzept Senkrecht}
+%******************************************************************************************************
+Wir stellen hier 5 äquivalente Definitionen des Begriffs Senkrecht vor. Zunächst ist jede Definition 
+
+
+\begin{itemize}
+   \item Definition Winkel als Länge eines Bogens
+   \item Winkel gegenüber eines Punktes a < b < c und das selbe mit Winkeln, mit alpha und die Punkte A,B,C, deswegen auch die Benennung.
+   \item Frage: wo wir ein Winkel lokalisiert? Im Punkt? Da haben wir 4 Winkel.
+   \item Der Bogen hat Kreismittelpunkt und den Bogen.
+   \item Das entspricht Punkt und Seite
+   \item Seite als Annäherung an den Winkel
+   \item Seitenanteil als Annäherung an den Winkel
+   \item Beispiel 3x60, 180 + 2x0, 2x90+0, 3-4-5 Dreieck (Gegenüberstellung der echten Winkel als Anteil von 180)
+\end{itemize}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{TODO:}
+%                                                                                                     *
+%******************************************************************************************************
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+
+   \bibitem[Klett2016]{Klett}
+      Klett Lerntraining, \emph{Komplett Wissen Mathematik Gymnasium 5-10},
+      Klett Lerntraining, 978-3-12-926097-5 (ISBN)
+      
+   \bibitem[KastenVogel2018]{Kasten}
+       Hendrik Kasten, Denis Vogel , \emph{Grundlagen der ebenen Geometrie},
+      2018 Springer Berlin, 978-3-662-57620-5 (ISBN)
+
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $\vec a,\vec b, \vec c, \cdots$               &Seiten\\
+    $a_x,a_y$                   &Koordinatenversätze der Seite $a$\\
+    $|a|$                       &Länge der Seite $a$\\
+    $m$                         &Steigung der Gerade\\
+    $q$                         &Achsenabschnitt der Gerade\\
+    $x, y$                      &Koordinatenachsen\\
+    $A, B, C, \cdots$          &Punkte\\
+    $A_x, A_y$                 &Koordinaten des Punktes $A$\\
+    $\overrightarrow{AB}$      &gerichtete Strecke von $A$ nach $B$\\
+    $\perp$                    &Senkrecht
+\end{tabular}
+
+\end{document}
