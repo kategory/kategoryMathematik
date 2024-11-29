@@ -67,6 +67,10 @@
 
 \usepackage{leftindex}
 
+\usepackage{xcolor}
+\pagecolor{black}
+\color{white}
+
 %-----------------------------------------------------------------------------------------------------*
 % theorem:                                                                                            *
 %-----------------------------------------------------------------------------------------------------*
@@ -227,7 +231,13 @@ Copyright (C) 2024 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 
 \subsection*{Inhalt}
-Familien, Indexschreibweise, Zeilen- oder Spalten-Vektoren, $n$-Tupel sind alles nur andere 
+Das Axiom von der Vereinigung garantiert, dass die Vereinigung einer Menge von Mengen wieder eine Menge ist. Das gilt auch für den Schnitt einer Menge von Mengen. Das Konzept lässt sich auf eine Klasse von Mengen und auf (Klassen-) Familien von Mengen ausdehnen.
+
+Für Familien gibt es ökonomische Schreibweisen.
+
+Die Details der Definitionen zeigen eine wichtige Dualität zwischen dem Existenz- und dem All-Quantor. 
+
+Die leere Menge birgt eine Überraschung: der Schnitt der leeren Menge (oder einer leeren Familie) ist das komplette Universum, die Klasse aller Mengen. 
 
 \subsection*{Präsentiert}
 Von Jörg Kunze
@@ -238,26 +248,27 @@ Mengen, Vereinigung, Schnitt, Funktion, Familie, Indexschreibweise.
 \subsection*{Text}
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v3%20Bachelor/v3.0%20Anfang/v3.0.2.0.5%20Relationen%20und%20Funktionen%20-%20Schnitt%2C%20Vereinigung}
 }
 
 \subsection*{Meine Videos}
 Siehe auch in den folgenden Videos:\\
 \\
-v3.0.2.0.1 (Bachelor) Relationen und Funktionen - Surjektiv, injektiv, bijektiv\\
-\url{https://youtu.be/8YFNEWZBpWc}\\
+v3.0.1.2.3 (Bachelor) Die Axiome - Klassen Lehre\\
+\url{https://youtu.be/2heuG7w-rnQ}\\
 \\
-v3.0.2 (Bachelor) Relationen und Funktionen\\
-\url{https://youtu.be/qjhNZXFAYEM}
+v3.0.1.2.5 (Bachelor) Die Axiome - Mengen konstruieren\\
+\url{https://youtu.be/LkWDcR5EHp4}\\
+\\
+v3.0.2.0.4 (Bachelor) Relationen und Funktionen - Familie, Index, Tupel\\
+\url{https://youtu.be/4itUFcN2Mak}
 
 \subsection*{Quellen}
 Siehe auch in den folgenden Seiten:\\
 \url{https://de.wikipedia.org/wiki/Familie_(Mathematik)}\\
-\url{https://de.wikipedia.org/wiki/Tupel}\\
-\url{https://de.wikipedia.org/wiki/Matrix_(Mathematik)}\\
 \url{https://de.wikipedia.org/wiki/Indexmenge_(Mathematik)}\\
-\url{https://de.wikipedia.org/wiki/Vektor}\\
-\url{https://de.wikipedia.org/wiki/Tiefstellungr}
+\url{https://de.wikipedia.org/wiki/Mengenlehre#Schnittmenge}\\
+\url{https://de.wikipedia.org/wiki/Mengenlehre#Vereinigungsmenge}
 
 \subsection*{Buch}
 Grundlage ist folgendes Buch:\\
@@ -297,10 +308,122 @@ Das Video hierzu ist zu finden unter
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Konstante Tiefstellung, Hochstellung}
+\subsection{Menge von Mengen - mit und ohne Index}
 %******************************************************************************************************
-Wir reden hier nur über rechte Tiefstel
+Eine Menge von Mengen können wir auf zwei Arten gegeben haben: als eine Klasse $M$, dessen Elemente die Mengen sind, von denen wir reden. Oder als Familie $(m_i)_{i \in I}$, wo $I$ eine Klasse ist. (Erinnerung: Klassen können Mengen oder echte Klassen sein.) Zwischen diesen beiden Sichtweisen können wir einfach hin und her schalten:
+\begin{alignat}{4}
+   &I &&:= M \text{ und } m_i := i \text{ (Indizierung durch sich selbst) }\\
+   &M &&:= \{ m_i \mid i \in I \}.
+\end{alignat}
 
+Beachte, dass die Funktion $m \colon I \to M$ nicht injektiv sein muss. Dass heißt, die Mengen aus $M$ können mehrfach vorkommen. Das ist aber für Vereinigung und Schnitt nicht relevant, es ändert nichts am Ergebnis der Schnitt- oder Vereinigungsmenge.
+
+Beachte auch, dass eine eventuelle Anordnung von $I$ keine Rolle spielt. Ist \zb $I = \N$, so haben wir eine Reihenfolge, wir haben eine Folge von Mengen. Diese Ordnung spielt für die Schnitt- oder Vereinigungsmenge keine Rolle. Dies ist anders, wenn wir später Summen von Zahlenfolgen definieren.
+
+Es ist auch egal, wie groß $I$ oder $M$ sind. Sie können endlich, so groß wie $\N$, größer als $\N$ oder gar echte Klassen sein.
+
+%******************************************************************************************************
+\subsection{Vereinigung/Schnitt}
+%******************************************************************************************************
+Wenn $M = \{m \mid \phi( m )\}$, setzen wir:
+\begin{alignat}{4}\label{Definition}
+   &{\color{red} \bigcup} M &&:= \{ x \mid {\color{red}\exists} &&m \colon (\phi(m) {\color{red}\land} x \in m) \}\\
+   &{\color{red} \bigcap} M &&:= \{ x \mid {\color{red}\forall} &&m \colon (\phi(m) {\color{red}\Rightarrow} x \in m) \}
+\end{alignat}
+Im Falle, dass $M$ eine Menge ist, haben wir $\phi(m) := m \in M$ und somit:
+\begin{alignat}{4}\label{DefinitionMenge}
+   &{\color{red} \bigcup} M &&:= \{ x \mid {\color{red}\exists} &&m \colon (m \in M {\color{red}\land} x \in m) \}\\
+   &{\color{red} \bigcap} M &&:= \{ x \mid {\color{red}\forall} &&m \colon (m \in M {\color{red}\Rightarrow} x \in m) \}
+\end{alignat}
+
+Hier sehen wir eine wichtige Dualität von $\exists \land$ und $\forall \Rightarrow$.
+
+Eine Vorstellung ist, dass wir die zweite Ebene der Mengenklammern weglassen. Dann entfernen wir Doppelte und bei Schnitt behalten wir nur die Elemente, die in allen vorkommen:
+\begin{alignat}{4}
+   &{\color{red} \bigcup} &&\{ \{ 1, 2, 3 \}, \{ 1, 3 \}, \{ 1, 3, 4, 5 \} \} && = \{ 1, 2, &&\,3, 4, 5 \}\\
+   &{\color{red} \bigcap} &&\{ \{ 1, 2, 3 \}, \{ 1, 3 \}, \{ 1, 3, 4, 5 \} \} && = \{ 1,    &&\,3 \}
+\end{alignat}
+
+Haben wir die Menge der Mengen in Familien-/Index-Schreibweise vorliegen schreiben wir
+\begin{alignat}{4}\label{Index}
+   &{\color{red} \bigcup_{\color{black}i \in I}} m_i := {\color{red} \bigcup} &&\{ m_i \mid i \in I \}\\
+   &{\color{red} \bigcap_{\color{black}i \in I}} m_i := {\color{red} \bigcap} &&\{ m_i \mid i \in I \}
+\end{alignat}
+
+Eine Zwischenschreibweise ist
+\begin{alignat}{4}\label{Zwischen}
+   &{\color{red} \bigcup_{\color{black} m \in M}} m := {\color{red} \bigcup} &&M\\
+   &{\color{red} \bigcap_{\color{black} m \in M}} m := {\color{red} \bigcap} &&M.
+\end{alignat}
+
+%******************************************************************************************************
+\subsection{Index-Klasse muss NICHT Menge sein}
+%******************************************************************************************************
+Weder $M$ noch $I$ müssen Mengen sein. Alles funktioniert prima auch für echte Klassen. Die Elemente von $M$ und die $m_i$ müssen aber Mengen sein, da echte Klassen nicht irgendwo drin sein können.
+
+%******************************************************************************************************
+\subsection{Wann benutzen wir was}
+%******************************************************************************************************
+In der Regel erhalten wir in dem Kontext, in dem wir arbeiten die eine oder andere Schreibweise auf natürliche Weise. 
+
+Einige finden die originale aus den Axiomen stammende Schreibweise \refeq{Definition} skurril. Diese Menschen führen dann "`künstlich"' einen Index ein. Das geht immer, da wir die Mengen mit ihren eigenen Elementen indizieren können. Diese Indizierung hat dann aber überhaupt keine Bedeutung und dient nur der Rechtfertigung der angeblich angenehmeren Schreibweise.
+
+Die Zwischenschreibweise ist eine Art Kompromiss. Hier wird immerhin kein künstlicher Index eingeführt. Hier wird optisch sichtbar gemacht, dass es die Mengen in $M$ sind, die wir vereinigen. Dass wir aber in Wirklichkeit $3$ Ebenen haben ($M$, die Elemente von $M$ als zu vereinigende Mengen und die Elemente der Elemente von $M$) wird auch hier nicht gezeigt.
+
+%******************************************************************************************************
+\subsection{Gegenläufigkeit der Definition}
+%******************************************************************************************************
+Intuitiv ist Vereinigung größer als Schnitt. In der Tat gilt
+\begin{equation}\label{SchnittKleinerVereinigung}
+   \bigcap M \subseteq \bigcup M.
+\end{equation}
+
+Intuitiv ist $\exists$ kleiner als $\forall$. Bei $\exists$ reicht ja einer, bei $\forall$ muss es für alle gelten. (Dass die leere Wahrheit diese Intuition stört, ignorieren wir kurz für diesen Abschnitt.)
+
+Dies empfinde (zumindest ich) als gegenläufig. Die Erklärung: Für den Schnitt fordern wir mehr. Und je mehr wir fordern desto weniger Kandidaten erfüllen alle Forderungen.
+
+Es gibt beim Schnitt auch eine (andere) Gegenläufigkeit, die bei der Vereinigung aber eine Mitläufigkeit ist.
+\begin{alignat}{4}\label{leere}
+   &M \subseteq N \Rightarrow \bigcup M {\color{red} \subseteq} \bigcup N\\
+   &M \subseteq N \Rightarrow \bigcap M {\color{red} \supseteq} \bigcap N.
+\end{alignat}
+Wir sagen $\bigcup$ ist monoton steigen und $\bigcap$ ist monoton fallend.
+
+%******************************************************************************************************
+\subsection{Das Verhalten der leeren Menge als Element}
+%******************************************************************************************************
+Bei der Vereinigung ist $\emptyset$ neutral und beim Schnitt desaströs:
+\begin{alignat}{4}\label{leere}
+   &{\color{red} \bigcup} (M \cup \{\emptyset\}) &&={\color{red} \bigcup} M\\
+   &{\color{red} \bigcap} (M \cup \{\emptyset\}) &&=\emptyset.
+\end{alignat}
+
+%******************************************************************************************************
+\subsection{Das Verhalten der leeren Menge als $M$ oder als Index}
+%******************************************************************************************************
+\begin{alignat}{4}\label{DefinitionMitLeererMenge}
+   &{\color{red} \bigcup} M &&:= \{ x \mid {\color{red}\exists} &&m \colon (m \in \emptyset {\color{red}\land} x \in m) \}\\
+   &{\color{red} \bigcap} M &&:= \{ x \mid {\color{red}\forall} &&m \colon (m \in \emptyset {\color{red}\Rightarrow} x \in m) \}
+\end{alignat}
+
+Da $m \in \emptyset$ nie wahr ist haben wir:
+\begin{alignat}{4}\label{NieUndImmerWahr}
+   &m \in \emptyset {\color{red}\land}       &&x \in m \quad &&\text{ist {\color{red}nie }}   &&\text{wahr}\\
+   &m \in \emptyset {\color{red}\Rightarrow} &&x \in m \quad &&\text{ist {\color{red}immer }} &&\text{wahr}.
+\end{alignat}
+Somit haben wir
+\begin{alignat}{4}\label{LeererMenge}
+   &{\color{red} \bigcup} \emptyset &&= {\color{red} \emptyset}\\
+   &{\color{red} \bigcap} \emptyset &&= {\color{red} V}
+\end{alignat}
+Wobei $V := \{x \mid x = x\}$ die Klasse aller Mengen ist, also eine echte Klasse. Dies zeigt, dass der Schnitt nicht immer eine Menge ist. Ein Umstand, den ich bei Axiom 6.4' vergessen habe. Dies ist ein Extremfall der oben erwähnten Monotonie.
+
+Für Indexe sehen diese Gleichungen so aus:
+\begin{alignat}{4}\label{LeererIndex}
+   &{\color{red} \bigcup_{\color{black}i \in \emptyset}} m_i = {\color{red} \emptyset}\\
+   &{\color{red} \bigcap_{\color{black}i \in \emptyset}} m_i = {\color{red} V}.
+\end{alignat}
+ 
 \begin{backup}
 %******************************************************************************************************
 %                                                                                                     *
