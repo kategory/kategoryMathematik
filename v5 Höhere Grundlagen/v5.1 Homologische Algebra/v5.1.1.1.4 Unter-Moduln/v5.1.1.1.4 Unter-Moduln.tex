@@ -65,6 +65,9 @@
 \usepackage{tikz-cd}
 \usetikzlibrary{babel}
 
+\usepackage[only,llbracket,rrbracket]{stmaryrd}
+
+
 %-----------------------------------------------------------------------------------------------------*
 % theorem:                                                                                            *
 %-----------------------------------------------------------------------------------------------------*
@@ -236,9 +239,24 @@ Copyright (C) 2024 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 \subsection*{Inhalt}
 %******************************************************************************************************
-Die Hom-Funktoren in der der Kategorie der $R$-Moduln sind additiv.
+Ein Unter-Modul ist eine Teilmenge, die abgeschlossen bezüglich der Modul-Operationen ist, also eine Unter-Abelsche-Gruppe, in der die Skalarmultiplikation mit Elementen aus dem Ring in der Unter-Gruppe bleibt.
 
+Kategorisch und äquivalent ist es das Ziel eines Epi-Morphismus.
 
+Ein Ring und seine Ideale sind selber Unter-Module.
+
+Ausgehend von einem Ideal und eine Modul, können wir die Menge aller Vielfachen von Modul- mit Ideal-Elementen bilden. Dies ist ein Unter-Modul. Intuitiv entsteht es durch ausdünnen. Eine Situation, die es so bei Vektorräumen nicht gibt.
+
+Aus einer Teilmenge eines Moduls können wir die Menge aller endlichen Linearkombinationen mit Koeffizienten aus dem Ring bilden. Dies ist ein Unter-Modul.
+
+Eine Basis gibt es aber nicht immer und es gibt allerlei Phänomene, wie das $\Z$-Modul $\Q$ zeigt.    
+
+Den Beweis, dass $\Q$ kein minimales Erzeugendensystem hat, habe ich aus math.stackexchange.com von Camilo Arosemena Serrato. Vielen Dank dahin.
+{\tiny
+   \url{
+      https://math.stackexchange.com/questions/487820/additive-group-of-rationals-has-no-minimal-generating-set
+   }
+}
 
 %******************************************************************************************************
 \subsection*{Präsentiert}
@@ -248,7 +266,7 @@ Von Jörg Kunze
 %******************************************************************************************************
 \subsection*{Voraussetzungen}
 %******************************************************************************************************
-Ringe, Gruppen, Moduln, Kategorien, Funktoren, additive Funktoren, \textbf{Ab}-Kategorien
+Ringe, Gruppen, Moduln, Kategorien, Vektorräume, Unter-Gruppen
 
 %******************************************************************************************************
 \subsection*{Text}
@@ -341,8 +359,88 @@ Das Video hierzu ist zu finden unter
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Gruppen-Struktur auf Hom-Mengen}
+\subsection{Definition Unter-Modul}
 %******************************************************************************************************
+\begin{Definition}{Unter-Modul}
+   Sei $R$ ein Ring mit $1$ und $M$ ein $R$-Modul. Sei $N \subseteq M$ eine Teilmenge der Elemente von $M$. Ist diese abgeschlossen gegenüber den Ringoperationen ($0,1,+,-,\cdot$), so ist es ein \textbf{Unter-Modul}.
+\end{Definition}
+
+Kategorischer und leichter auf andere Situationen zu verallgemeinern ist folgende äquivalente Definition:
+\begin{Definition}{Unter-Modul kategorisch}
+   Sei $R$ ein Ring mit $1$ und $M,N$ seien $R$-Moduln. Sei $i \colon N \to M$ ein $r$-Modul-Homomorphismus. Sei weiter $i$ mono. Mit anderen Worten ist $i$ linkskürzbar in folgendem Sinne: für alle $f,g \colon L \ to N$ gilt $i \circ f = i \circ g \Rightarrow f = g$. $i' \colon N' \to M$ ist äquivalent zu $i$, wenn es einen Isomorphismus $h \colon N \to N'$ gibt mit $i = i' \circ h$. Die Äquivalenzklassen dazu heißen \textbf{Unter-Moduln}.
+\end{Definition}
+Das Bild eines solchen $i$ ist das Unter-Modul gemäß der oberen Definition passend zur Äquivalenzklasse $\llbracket i \rrbracket$ der unteren Definition.
+
+%******************************************************************************************************
+\subsection{Ideale als Unter-Moduln}
+%******************************************************************************************************
+Sei $R$ ein Ring mit $1$ und $I$ ein Ideal von $R$. Dann ist $I$ ein $R$-Modul. Insbesondere ist auch $R$ ein $R$-Modul. Das ein Teil vom Skalarbereich ein Modul zu eben diesem Skalarbereich ist, gibt es bei Vektorräumen nicht.
+
+Sei $M$ ein $R$-Modul und $I$ wie oben ein Ideal von $R$. 
+\begin{Definition}{Ideal mal Modul}
+   \begin{equation}\label{IdealMalModul}
+      IM := \{ im \mid i \in I \land m \in M\}.
+   \end{equation}
+\end{Definition}
+$IM$ ist $R$-Unter-Modul von  $M$. $IM$ ist auch (und im Allgemeinen eine echte) Teilmenge von $M$. Aber, falls $I \ne \{0\}$, dann $IM$ steckt alle Richtungen von $M$ ab (ein intuitiver Begriff) in folgendem exakten Sinne:
+\begin{equation}\label{abstecken}
+   \forall m \in M \exists r  \in R \colon rm \in IM.
+\end{equation} 
+Wir müssen ja nur für $r$ ein $i \ne 0$ aus $I$ wählen.
+
+Diese Intuition hat eine Schwäche darin, dass es durchaus Ideale geben kann, die nicht alle Richtungen innerhalb des Rings abdecken. Nehmen wird \zb $\Z^2$ als  \emph{Ring} mit komponentenweiser Addition und Multiplikation. Dann ist $\{ (x, 0) \mid x \in \Z \}$ ein Ideal. Aus diesem kommen wir durch Multiplikation mit Elementen aus $\Z^2$ nicht raus. Das ist ja gerade die Definition von Ideal.
+
+%******************************************************************************************************
+\subsection{Generierte Unter-Moduln}
+%******************************************************************************************************
+Sei $R$ ein Ring mit $1$. Se $M$ ein $R$-Modul und $G \subseteq M$ irgendeine Teilmenge von $M$.
+\begin{Definition}{Generiertes Unter-Modul}
+   \begin{equation}\label{GeneriertesUnterModul}
+      \langle G \rangle := \{ r_1g_1 +  \cdots r_ng_n \mid g_i \in G \land r_i \in R \land n \in \N \}.
+   \end{equation}
+   Also die Menge aller \textbf{endlichen} Linearkombinationen von Elementen aus $G$ mit Koeffizienten aus dem Ring. Die leere Summe hat dabei den Wert $0$. 
+\end{Definition}
+Ein generiertes Unter-Modul ist ein $R$-Unter-Modul, was bewiesen werden muss.
+
+WICHTIG: es sind nur \emph{endliche} Summen erlaubt. Unendlichen Summen kann so ohne weiteres kein Wert in $M$ zugeordnet werden.
+
+%******************************************************************************************************
+\subsection{Es gibt nicht immer eine Basis}
+%******************************************************************************************************
+Wir können zu jedem $R$-Modul $M$ eine Menge $G$ finden, die $M$ generiert: wir nehmen einfach ganz ineffizient $G := M$.
+
+Betrachten wir das $\Z$-Modul $\zz{n}$. Hier gilt für jedes $x \in \zz{n}$, dass $nz = 0$. Also gibt es hier keine linear unabhängigen Elemente. Jedenfalls nicht im üblichen Sinne.
+
+Betrachten wir das $\Z$-Modul $\Q$. Sei $q \in \Q$. Dann ist $q/2$ nicht in $\langle \{q\}\rangle$. Also generiert $\{q\}$ nicht $\Q$. Seien nun $q_1, \cdots, q_n$ Elemente von $\Q$. Sei $s$ der kleinste gemeinsame Nenner dieser Brüche. Dann kann $\frac{1}{2s}$ nicht durch Linearkombinationen dieser $q_i$ dargestellt werden. Es kann also kein endliche generierende Mengen geben.
+
+Sei $G \subseteq \Q$ eine generierende Mengen. Solche Mengen gibt es, wie \zb $G =\Q$ zeigt. Sei $g \in G$. Für jedes $n \in \N, n>0$ lässt sich $g/n$ mit Hilfe der Generatoren darstellen: Wir müssen beachten, dass dazu eventuell $g$ selber benötigt wird.
+\begin{equation}\label{gDurchN}
+   \frac{g}{n} = r_ng + \sum_i r_{n,i}g_i. 
+\end{equation}
+Daraus folgt, dass sich $g$ immer unter Verwendung eines beliebigen Vielfachen von $g$ darstellen lässt:
+\begin{equation}\label{gMalN}
+   g = nr_ng + \sum_i nr_{n,i}g_i,
+\end{equation}
+und, die Zahlen $(1-r_nn)g$ lassen sich ohne die Verwendung von $g$ darstellen:
+\begin{equation}\label{gMinusRN}
+   (1-nr_n)g =  \sum_i nr_{n,i}g_i.
+\end{equation}
+Nun starten wir mit $n = 2$ (es geht aber auch jede andere ganze Zahl größer $0$)
+\begin{equation}\label{g2}
+   (1-2r_2)g =  \sum_i 2r_{2,i}g_i.
+\end{equation}
+Wir wissen also, wir können $(1-2r_2)g$ durch einen Ausdruck ohne $g$ ersetzen. Nun drücken wir $g$ unter Verwendung des $(1-2r_2)$-fachen von $g$ aus mit $n = (1-2r_2) =: m$ 
+\begin{equation}\label{g}
+   g = mr_mg + \sum_j mr_{m,j}g_j = r_m(1-2r_2)g + \sum_j mr_{m,j}g_j = \sum_i 2r_mr_{2,i}g_i + \sum_j mr_{m,j}g_j.
+\end{equation}
+
+Sei $p$ ein Zahl. Betrachte die Generator-Menge $G_p$:
+\begin{equation}\label{p}
+   G_p := \{\frac{1}{p^n} \mid n \in \N \}
+\end{equation}
+Dies ist nicht ganz $\Q$ und somit ein Unter-$\Z$-Modul. Aus $G_p$ können wir beliebig viele Elemente entfernen, solange wir zu jedem $\frac{1}{p^n}$ ein $\frac{1}{p^n}$ mit $m > n$ haben, was drinne bleibt. 
+
+Die beiden letzten Beispiele zeigen, dass es Generierenden-Systeme gibt, die kein minimales Untersystem haben, welches dasselbe Modul generiert.
 
 \begin{backup}
 %******************************************************************************************************
