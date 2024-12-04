@@ -236,9 +236,7 @@ Copyright (C) 2024 Kategory GmbH \& Co. KG
 %                                                                                                     *
 %******************************************************************************************************
 
-%******************************************************************************************************
 \subsection*{Inhalt}
-%******************************************************************************************************
 Ein Unter-Modul ist eine Teilmenge, die abgeschlossen bezüglich der Modul-Operationen ist, also eine Unter-Abelsche-Gruppe, in der die Skalarmultiplikation mit Elementen aus dem Ring in der Unter-Gruppe bleibt.
 
 Kategorisch und äquivalent ist es das Ziel eines Epi-Morphismus.
@@ -258,51 +256,35 @@ Den Beweis, dass $\Q$ kein minimales Erzeugendensystem hat, habe ich aus math.st
    }
 }
 
-%******************************************************************************************************
 \subsection*{Präsentiert}
-%******************************************************************************************************
 Von Jörg Kunze
 
-%******************************************************************************************************
 \subsection*{Voraussetzungen}
-%******************************************************************************************************
 Ringe, Gruppen, Moduln, Kategorien, Vektorräume, Unter-Gruppen
 
-%******************************************************************************************************
 \subsection*{Text}
-%******************************************************************************************************
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.1%20Homologische%20Algebra/v5.1.1.1.3%20Additiver%20Funktor%20Hom}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.1%20Homologische%20Algebra/v5.1.1.1.4%20Unter-Moduln}
 }
 
-%******************************************************************************************************
 \subsection*{Meine Videos}
-%******************************************************************************************************
 Siehe auch in den folgenden Videos:\\
 \\
 v5.1.1.1 (Höher) Homologische Algebra - Moduln\\
-\url{https://youtu.be/JY43_07kNmA}
+\url{https://youtu.be/JY43_07kNmA}\\
 \\
-v5.0.1.0.2 (Höher) Kategorien - Kategorien\\
-\url{https://youtu.be/sIaKt-Wxlog}
-\\
-v5.0.1.0.3 (Höher) Kategorien - Funktoren\\
-\url{https://youtu.be/Ojf5LQGeyOU}
-\\
-v5.0.1.6.1.4 (Höher) Kategorien - Abelsche - Additiver Funktor\\
-\url{https://youtu.be/zSP_a2RvoYE}
+v5.0.1.0.5 (Höher) Kategorien - Mono Epi Null\\
+\url{https://youtu.be/n4-qZJK_sH0}
 
-%******************************************************************************************************
 \subsection*{Quellen}
-%******************************************************************************************************
 Siehe auch in den folgenden Seiten:\\
-\url{https://en.wikipedia.org/wiki/Preadditive_category}\\
-\url{https://en.wikipedia.org/wiki/Module_homomorphism#Module_structures_on_Hom}
+\url{https://de.wikipedia.org/wiki/Modul_(Mathematik)}\\
+\url{https://de.wikipedia.org/wiki/Untermodul}\\
+\url{https://math.stackexchange.com/questions/487820/additive-group-of-rationals-has-no-minimal-generating-set}\\
+\url{https://de.wikipedia.org/wiki/Ideal_(Ringtheorie)}
 
-%******************************************************************************************************
 \subsection*{Buch}
-%******************************************************************************************************
 Grundlage ist folgendes Buch:\\
 "`An Introduction to Homological Algebra"'\\
 Joseph J. Rotman\\
@@ -330,9 +312,7 @@ Springer-Verlag \\
 {\tiny
    \url{https://www.lehmanns.de/shop/mathematik-informatik/7416782-9783540344926-algebre}}
 
-%******************************************************************************************************
 \subsection*{Lizenz}
-%******************************************************************************************************
 Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der
 GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben
 und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
@@ -345,6 +325,7 @@ Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text
 (zu finden im selben Git-Projekt).
 Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
 
+%******************************************************************************************************
 \subsection*{Das Video}
 %******************************************************************************************************
 Das Video hierzu ist zu finden unter
@@ -413,6 +394,12 @@ Betrachten wir das $\Z$-Modul $\zz{n}$. Hier gilt für jedes $x \in \zz{n}$, das
 
 Betrachten wir das $\Z$-Modul $\Q$. Sei $q \in \Q$. Dann ist $q/2$ nicht in $\langle \{q\}\rangle$. Also generiert $\{q\}$ nicht $\Q$. Seien nun $q_1, \cdots, q_n$ Elemente von $\Q$. Sei $s$ der kleinste gemeinsame Nenner dieser Brüche. Dann kann $\frac{1}{2s}$ nicht durch Linearkombinationen dieser $q_i$ dargestellt werden. Es kann also kein endliche generierende Mengen geben.
 
+Auf der anderen Seite sind je zwei Generatoren linear abhängig. Seien $p_1/q_1, p_2/q_2$ zwei Generatoren dann gilt
+\begin{equation}\label{linearAbhaengig}
+   p_2q_1\frac{p_1}{q_1} - p_1q_2\frac{p_2}{q_2} = 0.
+\end{equation}
+
+
 Sei $G \subseteq \Q$ eine generierende Mengen. Solche Mengen gibt es, wie \zb $G =\Q$ zeigt. Sei $g \in G$. Für jedes $n \in \N, n>0$ lässt sich $g/n$ mit Hilfe der Generatoren darstellen: Wir müssen beachten, dass dazu eventuell $g$ selber benötigt wird.
 \begin{equation}\label{gDurchN}
    \frac{g}{n} = r_ng + \sum_i r_{n,i}g_i. 
@@ -441,6 +428,7 @@ Sei $p$ ein Zahl. Betrachte die Generator-Menge $G_p$:
 Dies ist nicht ganz $\Q$ und somit ein Unter-$\Z$-Modul. Aus $G_p$ können wir beliebig viele Elemente entfernen, solange wir zu jedem $\frac{1}{p^n}$ ein $\frac{1}{p^n}$ mit $m > n$ haben, was drinne bleibt. 
 
 Die beiden letzten Beispiele zeigen, dass es Generierenden-Systeme gibt, die kein minimales Untersystem haben, welches dasselbe Modul generiert.
+
 
 \begin{backup}
 %******************************************************************************************************
@@ -495,7 +483,7 @@ Die beiden letzten Beispiele zeigen, dass es Generierenden-Systeme gibt, die kei
 
 \begin{tabular}{ll}
     $R$                                 & Ein kommutativer Ring mit Eins\\
-    $G$                                 & Eine Gruppe, nicht notwendig abelsch\\
+    $G$                                 & Ein Generierendensystem\\
     $\asterisk$                         & Verknüpfung der Gruppe $G$\\
     $n\Z$                               & Das Ideal aller Vielfachen von $n$ in $\Z$\\
     $\zz{n}$                            & Der Restklassenring modulo $n$\\
@@ -505,7 +493,9 @@ Die beiden letzten Beispiele zeigen, dass es Generierenden-Systeme gibt, die kei
     $\vec r$                            & Element von $R^n$\\
     $\phi$                              & Gruppen-Homomorphismus\\
     $Z(R)$                              & Zentrum des Rings $R$\\
-    $\Hom(X,Y)$                         & Menge/Gruppe der $R$-Homomorphismen von $X$ nach $Y$
+    $\Hom(X,Y)$                         & Menge/Gruppe der $R$-Homomorphismen von $X$ nach $Y$\\
+    $IM$                                & $= \{ im \mid i \in I \land m\in M \}$\\
+    $\langle G \rangle$                 & Der von den Elementen aus $G$ generierte Modul
     
 \end{tabular}
 
