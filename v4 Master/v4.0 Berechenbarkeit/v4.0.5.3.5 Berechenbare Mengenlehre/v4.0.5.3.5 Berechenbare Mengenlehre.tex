@@ -231,7 +231,15 @@ Copyright (C) 2024 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 
 \subsection*{Inhalt}
-Entscheidbar ist eine Teilmenge der Menge der natürlichen Zahlen, wenn es eine totale $\mu$-rekursive 
+Berechenbare Mengenlehre (ein Begriff von mir) ist die übliche einfache Mengenlehre beschränkt auf die Menge der berechenbaren Mengen.
+
+Wir untersuchen drei Arten berechenbarer Mengen: primitiv-rekursive, entscheidbare und listbare (rekursiv aufzählbare).
+
+Es stellt sich heraus, dass primitiv-rekursive und entscheidbare Mengen je für sich eine boolesche Algebra sind, d.~h. sie sind abgeschlossen bezüglich Vereinigung, Schnitt und Komplement.
+
+Die listbaren Mengen sind nicht abgeschlossen gegenüber dem Komplement. Somit sind diese bloß ein distributiver Verband. 
+
+Die hinzunehmenden Einschränkungen (zu wenig Mengen oder keine boolesche Algebra) sind groß, wenn wir so etwas wie, nur rechentechnisch erreichbare Mengen existieren, erreichen wollen. 
 
 \subsection*{Präsentiert}
 Von Jörg Kunze
@@ -242,21 +250,23 @@ Berechenbare Funktionen, Alphabet
 \subsection*{Text}
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v4%20Master/v4.0%20Berechenbarkeit/v4.0.5.3.4%20Entscheidbar%2C%20rekursiv%20aufz%C3%A4hlbar}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v4%20Master/v4.0%20Berechenbarkeit/v4.0.5.3.5%20Berechenbare%20Mengenlehre}
 }
 
 \subsection*{Meine Videos}
 Siehe auch in den folgenden Videos:\\
 \\
-v4.0.2 (Master) Berechenbarkeit - Alphabete und Sprachen\\
-\url{https://youtu.be/cwlU8m9ldbA}\\
+v4.0.5.3.4 (Master) Berechenbarkeit - Entscheidbar, rekursiv aufzählbar\\
+\url{https://youtu.be/X8kMHx3Zed8}\\
 \\
 v4.0.4 (Master) Berechenbarkeit - Berechenbare Funktionen\\
 \url{https://youtu.be/tARmHFIP32o}
 
 \subsection*{Quellen}
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Entscheidbarkeit}\\
+\url{https://de.wikipedia.org/wiki/Boolesche_Algebra}\\
+\url{https://de.wikipedia.org/wiki/Verband_(Mathematik)}\\
+\url{https://de.wikipedia.org/wiki/Distributiver_Verband}
 
 \subsection*{Buch}
 Grundlage ist folgendes Buch:\\
@@ -300,8 +310,124 @@ Das Video hierzu ist zu finden unter
 %******************************************************************************************************
 
 %******************************************************************************************************
+\subsection{Boolesche Algebra}
+%******************************************************************************************************
+Wir betrachten die Menge der natürlichen Zahlen $\N .= \{ 0, 1, 2, 3, \cdots \}$. Die Potenzmenge von $\N$ ist die Menge aller Teilmengen $\PP(\N)$. Gemeint sind alle Teilmengen im Sinne von ZFC. Also
+\begin{equation}\label{Potenzmenge}
+   \PP(\N) := \{ x \mid x \subseteq \N \}.
+\end{equation}
+Diese Menge ist geordnet durch $\subseteq$, hat ein Minimum $\emptyset$ und ein Maximum $\N$. In dieser Ordnungsstruktur gibt es Operatoren (Verknüpfungen) $\cap, \cup, \overline{\phantom{x}}, \rightarrow, \times, \sqcup$. Dabei ist $\overline{\phantom{x}}$ das Komplement
+\begin{equation}\label{Komplement}
+   \overline{X} := \{ y \in \N \mid y \notin X\}. 
+\end{equation}
+$\rightarrow$ ist die Implikation, in der Kategorientheorie später auch Exponential genannt,
+\begin{equation}\label{Implikation}
+   X \rightarrow Y := \{ z \mid z \notin X \lor z \in Y\} = \{ z \mid z \in X \Rightarrow z \in Y\} = \overline{X} \cup Y.
+\end{equation}
+Für diese gilt übrigens die wichtige Beziehung (, die hier nicht relevant ist, aber ich liebe sie,)
+\begin{equation}\label{key}
+   (x \cap y ) \subseteq z \Leftrightarrow x \subseteq (y \rightarrow z). 
+\end{equation}
+$\times$ ist das kartesische Produkt und $\sqcup$ die disjunkte Vereinigung
+\begin{equation}\label{disjunkteVereinigung}
+   X \sqcup Y := \{ (x,0) \mid x \in X\} \cup \{ (y,1) \mid y \in Y\} = X \times \{0\} \cup Y \times \{1\}.
+\end{equation} 
+
+Damit wird $\PP(\N)$ zu einer \textbf{Booleschen Algebra}.
+
+%******************************************************************************************************
+\subsection{Arten von Mengen}
+%******************************************************************************************************
+Liste der Arten von Mengen, die wir betrachten
+\begin{itemize}
+   \item Entscheidbar durch primitiv-rekursive Funktionen.
+   \item Entscheidbar
+   \item Listbar (= rekursiv aufzählbar)
+\end{itemize}
+
+Frage: Welche davon sind bezüglich welcher Operationen abgeschlossen?
+
+%******************************************************************************************************
+\subsection{Primitiv-rekursiv}
+%******************************************************************************************************
+Schrittweise durchhangeln:
+
+{\color{red}Grundsätzlich arbeiteten wir und hier Schritt für Schritt durch und erzeugen einen immer größer werdenden Katalog von Funktionen, auf die wir dann im Weiteren aufbauen können. Dies gemacht zu haben, setzen wir hier voraus.}
+
+Seien $X, Y$ zwei primitiv-rekursive Mengen mit den primitiv-rekursiven Funktionen $x \colon X \to \{0, 1\}$ und $y \colon Y \to \{0, 1\}$mit
+\begin{equation}\label{pr}
+   a \in X \Leftrightarrow x(a) = 1.
+\end{equation} 
+und entsprechend für $Y$.
+Wir wissen bereits, dass $+1$, Mal, Plus, Minus, Modulo und ähnliche Funktionen primitiv-rekursiv sind. Primitiv-rekursive Funktionen können verknüpft werden um wieder primitiv-rekursive Funktionen zu erhalten.
+\begin{equation}\label{pSchnitt}
+   x \cdot y
+\end{equation}
+ist offenbar eine charakteristische Funktion von $X \cap Y$.
+\begin{equation}\label{pVereinigung}
+   x + y - x \cdot y
+\end{equation}
+ist offenbar eine charakteristische Funktion von $X \cup Y$.
+
+Die durch Rekursion definierte Funktion $c$ mit $c(0) := 1$ und $c(n+1) := 0$ ist offensichtlich primitiv-rekursiv. Sie hat $c(0) := 1 \land c(1) := 0$ dreht also $0$ und $1$ um.
+
+Damit ist
+\begin{equation}\label{pKomplement}
+   c\circ x
+\end{equation}
+die charakteristische Funktion von $\overline X$.
+
+Die anderen Operatoren gehen ähnlich.
+
+{\color{red}Die primitiv-rekursiven Mengen bilden eine boolesche Unteralgebra von $\PP(\N)$.} 
+
+%******************************************************************************************************
 \subsection{Entscheidbar}
 %******************************************************************************************************
+Für entscheidbare Mengen geht das ganz ähnlich. Nur, dass wir hier Programme haben, die für jeden Input halten und wir daraus neue schaffen müssen, die wieder für jeden Input halten.
+
+Z.~B. für $X \cap Y$ mit den beiden Programmen $x,y$ können wir folgendes Programm bilden:
+\begin{lstlisting}
+   function( n ) {
+      if( x(n) && y(n) ) return 1;
+      else return 0;
+   }
+\end{lstlisting}
+Da $x$ und $y$ halten und wir keine weitere Schleife benutzen, hält auch dieses Programm.
+
+{\color{red}Die entscheidbaren Mengen bilden eine boolesche Unteralgebra von $\PP(\N)$.} 
+
+%******************************************************************************************************
+\subsection{Listbar}
+%******************************************************************************************************
+Wenn es listbare Mengen gibt, die nicht entscheidbar sind, ist das Komplement nicht listbar. Diesen Zusammenhang haben wir schon bewiesen in v4.0.5.3.4 (Master) Berechenbarkeit - Entscheidbar, rekursiv aufzählbar, im Video \url{https://youtu.be/X8kMHx3Zed8}. Das es listbare nicht entscheidbare Mengen gibt haben wir noch nicht bewiesen, aber es gibt sie. Z.~B. die Menge der beweisbaren Sätze.
+
+D.~h., dass die Menge der listbaren Mengen NICHT abgeschlossen bezüglich der Operatoren $\overline{\phantom{x}}$ und $\rightarrow$ ist. 
+
+{\color{red}Die listbaren Mengen bilden KEINE boolesche Algebra.} 
+
+Bezüglich welcher Operatoren ist die Menge der listbaren Mengen abgeschlossen? Antwort:
+\begin{equation}\label{listbareOperatoren}
+   \cap, \cup, \times, \sqcup
+\end{equation}
+Um das zu beweisen, müssen wir aus den Programmen für $X$ und $Y$ die entsprechenden Programme schnitzen, was recht einfach ist.
+
+Die Existenz von $\cap$ und $\cup$ macht die Menge der listbaren Mengen zu einem Verband. Und da diese beiden Operationen auf Mengen distributiv sind gilt immerhin:
+
+{\color{red}Die listbaren Mengen bilden einen distributiven Verband.}
+
+%******************************************************************************************************
+\subsection{Philosophie}
+%******************************************************************************************************
+Wir könnten an ZFC zweifeln und sagen, dass Mengen, die rechentechnisch/algorithmisch nicht erreichbar sind, gar nicht existieren.
+
+Wenn wir uns auf die primitiv rekursiven beschränken haben wir ein nettes abgeschlossenes System, in der aber viele entscheidbare Mengen fehlen.
+
+Wenn wir die entscheidbaren nehmen, haben wir das Problem, dass wir bei einigen Programmen nicht wissen, ob diese halten oder nicht. Außerdem gibt es interessante Mengen, wie die Menge der beweisbaren Sätze, die darin nicht enthalten sind.
+
+Wenn wir alle listbaren nehmen, haben wir keine boolesche Algebra mehr.
+
+Wenn das die Alternativen sind, bleibe ich bei ZFC.
 
 \begin{backup}
 %******************************************************************************************************
@@ -353,6 +479,7 @@ Tafel:
 
 \begin{tabular}{ll}
     $\N$                    & Die Menge der natürlichen Zahlen (mit Null): $\{ 0, 1, 2, 3, \cdots \}$\\
+    $\PP(M)$                & Potenzmenge von $M$\\
     $n, k, l, s, i, x_i, q$ & Natürliche Zahlen\\
     $A( k, n )$             & Ackermannfunktion\\
     $f, g, h$               & Funktionen\\
