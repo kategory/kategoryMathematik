@@ -237,35 +237,28 @@ Copyright (C) 2024 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 
 \subsection*{Inhalt}
-Ein Unter-Modul ist eine Teilmenge, die abgeschlossen bezüglich der Modul-Operationen ist, also eine Unter-Abelsche-Gruppe, in der die Skalarmultiplikation mit Elementen aus dem Ring in der Unter-Gruppe bleibt.
+Ist eine Äquivalenz-Relation kompatibel zu den Operationen eines Moduls, so bilden deren Äquivalenz-Klassen selber einen Modul. Diesen nennen wir den Quotienten-Modul. Die Äquivalenz-Klasse der $0$ ist ein Untermodul.
 
-Kategorisch und äquivalent ist es das Ziel eines Epi-Morphismus.
+Umgekehrt definiert jeder Unter-Modul eine kompatible Äquivalenz-Relation.
 
-Ein Ring und seine Ideale sind selber Unter-Module.
+Die Projektion auf den Quotienten-Modul ist surjektiv. Umgekehrt bilden die Fasern jedes surjektiven Modul-Homomorphismus eine kompatible Äquivalenz-Relation. Der zugehörige Quotienten-Modul ist isomorph zu dem Ziel-Modul.
 
-Ausgehend von einem Ideal und eine Modul, können wir die Menge aller Vielfachen von Modul- mit Ideal-Elementen bilden. Dies ist ein Unter-Modul. Intuitiv entsteht es durch ausdünnen. Eine Situation, die es so bei Vektorräumen nicht gibt.
+Damit haben wir eine (bis auf Isomorphie) 1:1 Zuordnung von kompatible Äquivalenz-Relationen, Unter-Moduln und surjektiven Modul-Homomorphismen.
 
-Aus einer Teilmenge eines Moduls können wir die Menge aller endlichen Linearkombinationen mit Koeffizienten aus dem Ring bilden. Dies ist ein Unter-Modul.
+Da nicht jeder Epimorphismus surjektiv ist (siehe: $\Z \to \Q$) ist dieses Konzept stärker als Epi.
 
-Eine Basis gibt es aber nicht immer und es gibt allerlei Phänomene, wie das $\Z$-Modul $\Q$ zeigt.    
-
-Den Beweis, dass $\Q$ kein minimales Erzeugendensystem hat, habe ich aus math.stackexchange.com von Camilo Arosemena Serrato. Vielen Dank dahin.
-{\tiny
-   \url{
-      https://math.stackexchange.com/questions/487820/additive-group-of-rationals-has-no-minimal-generating-set
-   }
-}
+Bei der Quotienten-Bildung kann es zu Aufwickelungen kommen. Da sowohl der Ausgangs-Modul und sogar der Ring selber über Wickelungen verfügen kann, ist die Situation im Allgemeinen unübersichtlich. Die Untersuchung dieser Phänomene ist ein Ziel der homologischen Algebra.
 
 \subsection*{Präsentiert}
 Von Jörg Kunze
 
 \subsection*{Voraussetzungen}
-Ringe, Gruppen, Moduln, Kategorien, Vektorräume, Unter-Gruppen
+Ringe, Gruppen, Moduln, Kategorien, Vektorräume, Unter-Gruppen, Äquivalenz-Relationen, Quotienten in Gruppen und Vektorräumen
 
 \subsection*{Text}
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.1%20Homologische%20Algebra/v5.1.1.1.4%20Unter-Moduln}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.1%20Homologische%20Algebra/v5.1.1.1.4.5%20Quotienten-Moduln}
 }
 
 \subsection*{Meine Videos}
@@ -274,15 +267,16 @@ Siehe auch in den folgenden Videos:\\
 v5.1.1.1 (Höher) Homologische Algebra - Moduln\\
 \url{https://youtu.be/JY43_07kNmA}\\
 \\
+v5.1.1.1.4 (Höher) Homologische Algebra - Unter-Moduln\\
+\url{https://youtu.be/4g2TgQx7JkI}\\
+\\
 v5.0.1.0.5 (Höher) Kategorien - Mono Epi Null\\
 \url{https://youtu.be/n4-qZJK_sH0}
 
 \subsection*{Quellen}
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Modul_(Mathematik)}\\
-\url{https://de.wikipedia.org/wiki/Untermodul}\\
-\url{https://math.stackexchange.com/questions/487820/additive-group-of-rationals-has-no-minimal-generating-set}\\
-\url{https://de.wikipedia.org/wiki/Ideal_(Ringtheorie)}
+\url{https://de.wikipedia.org/wiki/Quotientenmodul}\\
+\url{https://ncatlab.org/nlab/show/quotient+module}
 
 \subsection*{Buch}
 Grundlage ist folgendes Buch:\\
@@ -339,25 +333,134 @@ Das Video hierzu ist zu finden unter
 %                                                                                                     *
 %******************************************************************************************************
 
-
-
-kompatible Relation, Unter-Modul, Epimorphismen: beweis, dass dies das selbe ist. Aufwickeln durch Teilen durch ein Ideal
-
-
-
+%******************************************************************************************************
+\subsection{Modul-kompatible Äquivalenz-Relationen}
+%******************************************************************************************************
+Sei $R$ ein Ring mit $1$ und $M$ ein $R$-Modul. Sei $\sim$ eine Äquivalenz-Relation auf $M$.
+\begin{Definition}{Modul-kompatibel}
+   Die Äquivalenz-Relation $\sim$ auf dem $R$-Modul $M$ ist \textbf{Modul-kompatibel}, falls sie mit der Modulstruktur in folgendem Sinne verträglich ist. Für alle $x_1, x_2, y \in M$ und $r \in R$
+   \begin{alignat}{6}
+      &x_1 \sim x_2 \Rightarrow &&y &&+      &&x_1 \sim y &&+       &&x_2 \\
+      &x_1 \sim x_2 \Rightarrow &&       &&-      &&x_1 \sim        &&-       &&x_2 \\
+      &x_1 \sim x_2 \Rightarrow &&r      &&\cdot  &&x_1 \sim r      && \cdot  &&x_2 
+   \end{alignat}
+\end{Definition}
+Beachte: die Null-ären Operatoren $0$ und $1$ müssen hier nicht berücksichtigt werden, weil in ihnen keine variablen Elemente vorkommen, die zu irgendetwas äquivalent sein müssten.
 
 %******************************************************************************************************
-\subsection{Definition Unter-Modul}
+\subsection{Äquivalenz-Relationen vs Unter-Moduln}
 %******************************************************************************************************
-\begin{Definition}{Unter-Modul}
-   Sei $R$ ein Ring mit $1$ und $M$ ein $R$-Modul. Sei $N \subseteq M$ eine Teilmenge der Elemente von $M$. Ist diese abgeschlossen gegenüber den Ringoperationen ($0,1,+,-,\cdot$), so ist es ein \textbf{Unter-Modul}.
-\end{Definition}
+\begin{Satz}{Modul-kompatible Äquivalenz-Relation ist Unter-Modul}
+   Sei $\sim$ eine modul-kompatible Äquivalenz-Relation. Dann ist
+   \begin{equation}\label{UnterModulZuRelation}
+      N := \{ x \mid x \sim 0\}
+   \end{equation}
+   Unter-Modul.
+\end{Satz}
+\begin{proof}
+   Wir müssen die Abgeschlossenheit von $N$ gegenüber den Operatoren zeigen. Seinen dazu $x, y \in N$ also $x \sim 0$ und $y \sim 0$. Damit haben wir 
+   \begin{equation}\label{abgeschlossenPlus}
+      x + y \sim x \ + 0 = x \sim 0.
+   \end{equation}
+   Und damit $x + y \in N$.
+   $0 \in N$ da $0 \sim 0$, da $\sim$ als Äquivalenz-Relation reflexiv ist. 
+   \begin{equation}\label{abgeschlossenMinus}
+      - x \sim - 0 = 0.
+   \end{equation}
+   Und schließlich
+   \begin{equation}\label{abgeschlossenMal}
+      r \cdot x \sim r \cdot 0 = 0.
+   \end{equation}
+\end{proof}
 
-Kategorischer und leichter auf andere Situationen zu verallgemeinern ist folgende äquivalente Definition:
-\begin{Definition}{Unter-Modul kategorisch}
-   Sei $R$ ein Ring mit $1$ und $M,N$ seien $R$-Moduln. Sei $i \colon N \to M$ ein $r$-Modul-Homomorphismus. Sei weiter $i$ mono. Mit anderen Worten ist $i$ linkskürzbar in folgendem Sinne: für alle $f,g \colon L \ to N$ gilt $i \circ f = i \circ g \Rightarrow f = g$. $i' \colon N' \to M$ ist äquivalent zu $i$, wenn es einen Isomorphismus $h \colon N \to N'$ gibt mit $i = i' \circ h$. Die Äquivalenzklassen dazu heißen \textbf{Unter-Moduln}.
-\end{Definition}
-Das Bild eines solchen $i$ ist das Unter-Modul gemäß der oberen Definition passend zur Äquivalenzklasse $\llbracket i \rrbracket$ der unteren Definition.
+\begin{Satz}{Unter-Modul ist modul-kompatible Äquivalenz-Relation}
+   Sei $N$ ein Unter-Modul. Dann ist
+   \begin{equation}\label{RelationZuUnterModul}
+      x \sim y :\Leftrightarrow x-y \in N
+   \end{equation}
+   eine modul-kompatible Äquivalenz-Relation.
+\end{Satz}
+\begin{proof}
+   Für die Eigenschaften einer Äquivalenz-Relation benötigen wir nur die Unter-Gruppen-Eigenschaften. Die Modul-Eingenschaften brauchen wir für die Kompatibilität mit der Skalar-Multiplikation.
+   
+   \emph{Reflexiv:} $x - x = 0 \in N$.
+   
+   \emph{Symmetrisch:} $x - y = -(y - x) \in N$.
+   
+   \emph{Transitiv:} $x - z = (x - y) + (y - z) \in N$.
+
+   $+$: $(y + x_1) - (y + x_2) = x_1 - x_2 \in N$.
+   
+   $-$: $(-x_1) - (-x_2) = -(x_1 - x_2) \in N$.
+   
+   $\cdot$: $rx_1 - rx_2 = r(x_1 - x_2) \in N$.
+\end{proof}
+
+VORSICHT: Nicht alle Unter-Gruppen von $M$ sind auch Unter-Moduln. Die Multiplikation mit Elementen aus $R$ können die Gruppen-Elemente auch drehen. In den Beweisen oben sehen wir, dass die Kompatibilität der Skalarmultiplikation dem Distributiv-Gesetz und der Abgeschlossenheit entspricht.
+
+{\color{red}Damit haben wir eine 1:1-Beziehung zwischen Unter-Moduln und modul-kompatiblen Äquivalenz-Relationen.}
+
+%******************************************************************************************************
+\subsection{Ausschließlich Unter-Moduln produzieren Quotienten-Moduln}
+%******************************************************************************************************
+\begin{Satz}{Ausschließlich Unter-Moduln produzieren Quotienten-Moduln}
+Sei $M$ ein $R$-Modul und $N$ eine Unter-\textbf{Gruppe}. Sei $M/N$ ein $R$-Modul. Dann ist $N$ sogar Unter-$R$-Modul.
+\end{Satz}
+\begin{proof}
+   Wir müssen die Abgeschlossenheit gegenüber der Skalar-Multiplikation mit Elementen aus $R$ zeigen. Seien dazu $n \in N$ und $r \in R$ beliebig. Da $M/N$ ein $R$-Modul ist, ist (in $M/N$)
+   \begin{equation}\label{UnterModul}
+      0 = r \cdot 0 = r \cdot \llbracket 0 \rrbracket = r \cdot \llbracket n \rrbracket =  \llbracket r \cdot n \rrbracket.
+   \end{equation}
+   Daraus folgt $r \cdot n \in N$.
+\end{proof}
+
+%******************************************************************************************************
+\subsection{Projektion}
+%******************************************************************************************************
+Die Projektion
+\begin{alignat}{6}
+   &p \colon &&M &&\to &&M/N\\
+   &         &&m &&\mapsto &&\llbracket m \rrbracket
+\end{alignat}
+ist ein $R$-Modul-Homomorphismus, was gezeigt werden muss. Dieser ist surjektiv, da jedes Element von $M/N$ von der Form $\llbracket m \rrbracket$ und damit Bild von $m$ ist.
+
+%******************************************************************************************************
+\subsection{Surjektiv}
+%******************************************************************************************************
+Sei $f \colon M \to L$ ein surjektiver $R$-Modul-Homomorphismus. Die Fasern von $f$, also die Urbilder  der $\{l\}$ für $l \in L$ sind Äquivalenz-Klassen. Zwei Elemente in $M$ sind äquivalent, wenn sie das selbe Bild in $L$ haben.
+\begin{Satz}{Fasern einer Surjektion ergeben modul-verträgliche Äquivalenz-Relation}
+   Mit den Bezeichnungen von oben erzeugen die Fasern eines surjektiven $R$-Modul-Homomorphismus eine modul-verträgliche Äquivalenz-Relation.
+\end{Satz}
+\begin{proof}
+   Sei $x_1 \sim x_2$ also $f(x_1) = f(x_2)$ und $y \in M$ beliebig.
+   \begin{alignat}{6}
+      &f(y + x_1) &&= f(y) + f(x_1) &&= f(y) + f(x_2) ) &&= f(y + x_2)\\
+      &f(-x_1)    &&= -f(x_1)       &&= -f(x_2)         &&= f(-x_2)\\
+      &f(rx_1)    &&= rf(x_1)       &&= rf(x_2)         &&= f(rx_2)
+   \end{alignat}
+\end{proof}
+
+Ähnlich wie bei Gruppen können wir zeigen
+\begin{Satz}{Ziel eines surjektiven Morphismus ist isomorph zu Quotient}
+   Der Quotient der durch die Fasern eines surjektiven $R$-Modul-Homomorphismus $f$ erzeugten Äquivalenz-Relation ist isomorph zum Ziel (Codomain) von $f$.
+\end{Satz}
+
+{\color{red}Damit haben wir (bis auf Isomorphie) eine 1:1-Beziehung zwischen Unter-Moduln, modul-kompatiblen Äquivalenz-Relationen und surjektiven $R$-Modul-Homomorphismen.}
+
+%******************************************************************************************************
+\subsection{Quotienten-Projektion ist stärker als epi}
+%******************************************************************************************************
+Da nicht alle $R$-Modul-Epimorphismen surjektiv sind (siehe den $\Z$-Modul-Homomorphismus $\Z \to \Q$), aber alle Surjektionen epi sind, ist die Eigenschaft, Quotienten-Projektion zu sein, stärker als epi.
+
+%******************************************************************************************************
+\subsection{Aufwickeln von Moduln}
+%******************************************************************************************************
+Sei $I$ ein echtes Ideal von $R$, also $0 \subsetneq I \subsetneq R$. Sei $M$ ein $R$-Modul. Wir betrachten den Unter-Modul $IM = \{im \mid i \in I \land m \in M\}$. Damit bilden wir den Quotienten $M/IM$.
+
+...
+
+Wenn $I$ Elemente aus $\Z$ enthält (genauer Elemente der Form $n\cdot 1$, wo $n \in \Z$ und $1 \in R$), sagen wir $z$, haben wir sogar $l + l + \cdots + l = 0$, mit $z$ mal das $l$ in der Summe. Und das auch dann, wenn dies in $M$ nicht der Fall war. Das empfinde ich als Aufwickeln eines Moduls.  
+
 
 
 
@@ -419,9 +522,9 @@ Das Bild eines solchen $i$ ist das Unter-Modul gemäß der oberen Definition pas
     $n\Z$                               & Das Ideal aller Vielfachen von $n$ in $\Z$\\
     $\zz{n}$                            & Der Restklassenring modulo $n$\\
     $\K$                                & Ein Körper\\
-    $\vec x, \vec y$                    & Elemente eines Moduls, wenn wir sie von den Skalaren abheben wollen. \\
+    $x, y$                    & Elemente eines Moduls, wenn wir sie von den Skalaren abheben wollen. \\
                                         & Entspricht in etwa Vektoren\\
-    $\vec r$                            & Element von $R^n$\\
+    $r$                            & Element von $R^n$\\
     $\phi$                              & Gruppen-Homomorphismus\\
     $Z(R)$                              & Zentrum des Rings $R$\\
     $\Hom(X,Y)$                         & Menge/Gruppe der $R$-Homomorphismen von $X$ nach $Y$\\
