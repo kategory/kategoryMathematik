@@ -254,25 +254,29 @@ Ringe, Moduln, Kategorien, \textbf{Ab}-Kategorie, Produkt, Koprodukt, Null-Objek
 \subsection*{Text}
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.1%20Homologische%20Algebra/v5.1.1.1.4.5%20Quotienten-Moduln}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v5%20H%C3%B6here%20Grundlagen/v5.1%20Homologische%20Algebra/v5.1.1.1.5%20R-Mod%20ist%20additiv}
 }
 
 \subsection*{Meine Videos}
 Siehe auch in den folgenden Videos:\\
 \\
-v5.1.1.1 (Höher) Homologische Algebra - Moduln\\
-\url{https://youtu.be/JY43_07kNmA}\\
-\\
-v5.1.1.1.4 (Höher) Homologische Algebra - Unter-Moduln\\
-\url{https://youtu.be/4g2TgQx7JkI}\\
+v5.1.1.1.3 (Höher) Homologische Algebra - Additiver Funktor Hom\\
+\url{https://youtu.be/Xog_6hrbmx0}\\
 \\
 v5.0.1.0.5 (Höher) Kategorien - Mono Epi Null\\
 \url{https://youtu.be/n4-qZJK_sH0}
+\\
+v5.1.1.1 (Höher) Homologische Algebra - Moduln\\
+\url{https://youtu.be/JY43_07kNmA}\\
 
 \subsection*{Quellen}
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Quotientenmodul}\\
-\url{https://ncatlab.org/nlab/show/quotient+module}
+\url{https://ncatlab.org/nlab/show/additive+category}\\
+\url{https://en.wikipedia.org/wiki/Additive_category}\\
+\url{https://de.wikipedia.org/wiki/Produkt_und_Koprodukt}\\
+\url{https://en.wikipedia.org/wiki/Biproduct}\\
+\url{https://ncatlab.org/nlab/show/biproduct}\\
+\url{https://de.wikipedia.org/wiki/Anfangsobjekt,_Endobjekt_und_Nullobjekt}
 
 \subsection*{Buch}
 Grundlage ist folgendes Buch:\\
@@ -330,10 +334,116 @@ Das Video hierzu ist zu finden unter
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Modul-kompatible Äquivalenz-Relationen}
+\subsection{Axiome}
 %******************************************************************************************************
-Sei $R$ ein Ring mit $1$ und $M$ ein $R$-Modul. Sei $\sim$ eine Äquivalenz-Relation auf $M$.
+Sei $\CC$ eine Kategorie. Dann benennen wir folgende Liste von 6 Axiomen (AK steht für Ab, additive, oder abelsche Kategorie):
+\begin{itemize}
+   \item \textbf{AK1:} $\Hom(X,Y)$ ist ablesche Gruppe 
+   \item \textbf{AK2:} $(f + f')g = fg + f'g$ und $g(f + f') = gf + gf'$
+   \item \textbf{AK3:} $\exists$ Null-Objekt
+   \item \textbf{AK4:} $\exists$ endliche Ko/Produkte
+   \item \textbf{AK5:} Jeder Hom hat Ko/Kern
+   \item \textbf{AK6:} $\CC$ ist ko/normal (mono=Kern,epi=Kokern)
+\end{itemize}
 
+Eine Kategorie nennen wir \textbf{Ab}-Kategorie, wenn sie AK1 und AK2 erfüllt. Wir nennen sie \textbf{additiv}, wenn sie zusätzlich AK3 und AK4 erfüllt. Schließlich nennen wir sie \textbf{abelsch}, wenn sie alle 6 Axiome erfüllt.
+
+Wir wissen bereits, dass $R$-Mod eine \textbf{Ab}-Kategorie ist (siehe v5.1.1.1.3 (Höher) Homologische Algebra - Additiver Funktor Hom).
+
+%******************************************************************************************************
+\subsection{$R$-Mod ist additiv}
+%******************************************************************************************************
+AK3: Sei $\{0\}$ eine abelsche Gruppe mit genau einem Element. Dieses Element ist das neutrale Element. Alle Gruppen mit genau einem Element sind isomorph. Wir statten diese Gruppe nun mit einer Skalarmultiplikation mit Elementen aus $R$ aus mit $r \cdot 0 := 0$. Zu dieser Festlegung werden wir durch die Axiome für $R$-Moduln gezwungen. Es ist leicht zu zeigen, dass $\{0\}$ dadurch zu einem $R$-Modul wird.
+
+Ein Null-Objekt ist gleichzeitig Anfangs- wie End-Objekt (initial und terminal). D.~h. 
+\begin{alignat}{7}
+   &\forall X &&\in \CC &&\quad \exists! p &&\colon X &&\to 0\\
+   &\forall Y &&\in \CC &&\quad \exists! i &&\colon 0 &&\to Y
+\end{alignat}
+Wenn wir die Null-Morphismen so bezeichnen,
+\begin{alignat}{7}
+   &0_{X,Y} \colon &&X &&\to     &&\, Y\\
+   &               &&x &&\mapsto &&\, 0,
+\end{alignat}
+dann sind $p := 0_{X,0}$ und $i := 0_{0,Y}$ die gesuchten einzigen Homomorphismen.
+
+AK4: Wir definieren
+\begin{equation}\label{DirekteSumme}
+   X \oplus Y := \{(x,y) \mid x \in X \land y \in Y\}.
+\end{equation}
+Die $R$-Modul-Struktur ergibt sich durch komponentenweise Festlegung:
+\begin{alignat}{7}
+   &(x_1,y_1) + (x_2,y_2) &&:= (x_1 + x_2, y_1 + y_2)\\
+   &r(x,y) &&:= (rx,ry)\\
+   &0 &&:= (0, 0)
+\end{alignat}
+Die Modul-Axiome sind leicht zu sehen.
+
+%******************************************************************************************************
+\subsection{Produkt}
+%******************************************************************************************************
+Zu $X \oplus Y$ haben wir die \textbf{Projektionen}
+\begin{alignat}{3}
+   &p_X(x,y) &&:= x\\
+   &p_Y(x,y) &&:= y.
+\end{alignat}
+$X \oplus Y, p_X, p_Y$ ist ein Produkt.
+\begin{proof}
+   Seien $f_X \colon W \to X$ und $f_Y \colon W \to Y$, zwei $R$-Modul-Homomorphismen. 
+   Ein $h \colon W \to X \oplus  Y$ besteht aus zwei Morphismen $h(w) = (h_X(w), h_Y(w))$. Damit
+   $f_X = p_X \circ h$ und $f_Y = p_Y \circ h$ gilt, muss, wegen $p_X \circ h = h_X$ und $p_Y \circ h = h_Y$, gelten, dass $h_X = f_X$ und $h_Y = f_Y$. Damit ist Existenz und Eindeutigkeit des gesuchten $h$ gezeigt.
+   Also
+   \begin{alignat}{3}
+      &h \colon &&W \to &&X \oplus Y\\
+      &         &&w \mapsto && (f_X(w), f_Y(w))
+   \end{alignat}
+\end{proof}
+
+%******************************************************************************************************
+\subsection{Koprodukt}
+%******************************************************************************************************
+Zu $X \oplus Y$ haben wir die \textbf{Injektionen}
+\begin{alignat}{3}
+   &i_X(x) &&:= (x, 0)\\
+   &i_Y(y) &&:= (0, y).
+\end{alignat}
+$X \oplus Y, i_X, i_Y$ ist ein Koprodukt.
+\begin{proof}
+   Hier müssen wir zu zwei $g_X \colon X \to Z$ und $g_Y \colon Y \to Z$ genau ein $h \colon X \oplus  Y \to Z$ finden mit $g_X = h \circ i_X$ und $g_Y = h \circ i_Y$. Dies wird durch
+   \begin{alignat}{3}
+      &h \colon &&X \oplus Y &&\to Z\\
+      &         &&(x,y) \mapsto && g_X(x) + g_Y(y)
+   \end{alignat}
+   bewerkstelligt. Die Nachweise, dass es sich um einen $R$-Mod-Hom handelt, dass die Gleichungen erfüllt werden und dass es eindeutig ist, müssen erbracht werden.
+\end{proof}
+
+{\color{red} Hier wird die additive Struktur der $R$-Moduln benötigt. Dies ist bei dem Produkt nicht nötig.}
+
+%******************************************************************************************************
+\subsection{Additiv}
+%******************************************************************************************************
+Damit haben wir insgesamt gezeigt, dass die Kategorie der $R$-Moduln die Axiome AK1, AK2, AK3 und AK4 erfüllt. \textbf{$R$-Mod ist additiv}.
+
+%******************************************************************************************************
+\subsection{Biprodukt}
+%******************************************************************************************************
+Dass $X \oplus Y$ sowohl im Produkt als auch im Koprodukt vorkommt ist kein Zufall, denn in allen additiven Kategorien gilt, dass jedes Produktobjekt auch Koproduktobjekt und umgekehrt ist. Produkt und Koprodukt zusammen erfüllen in allen additiven Kategorien darüber hinaus die Biprodukt-Gleichungen:
+\begin{alignat}{3}
+   &p_X \circ i_X &&= \id_X\\
+   &p_Y \circ i_Y &&= \id_Y\\
+   &i_X \circ p_X + i_Y \circ p_Y &&= \id_{X \oplus Y}.
+\end{alignat}
+Den Beweis finden wir \zb in \cite{MacLane} im Kapitel "`Abelian Categories"' und dort im Abschnitt "`2. Additive Categories"'.
+
+Wir können das hier aber auch für den Fall von $R$-Mod direkt zeigen. Z.~B. für die 3. Gleichung:
+\begin{alignat}{3}
+   &(i_X \circ p_X &&+ i_Y \circ p_Y)(x,y) &&=\\ 
+   &(i_X \circ p_X)(x,y) &&+ (i_Y \circ p_Y)(x,y) &&=\\ 
+   &i_X( p_X(x,y) ) &&+ i_Y( p_Y(x,y)) &&=\\ 
+   &i_X(x)  &&+ i_Y(y) &&=\\ 
+   &( x,0)  &&+ ( 0,y) &&=\\ 
+   &(x,y)
+\end{alignat}
 
 \begin{backup}
 %******************************************************************************************************
