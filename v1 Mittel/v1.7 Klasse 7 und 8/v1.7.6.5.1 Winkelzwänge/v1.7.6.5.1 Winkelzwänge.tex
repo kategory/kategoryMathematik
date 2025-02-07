@@ -1,0 +1,441 @@
+%******************************************************** -*-LaTeX-*- ******************************
+%                                                                                                  *
+% v1.7.6.5.1 Winkelzwänge.tex                                                                      *
+%                                                                                                  *
+% Copyright (C) 2025 Kategory GmbH \& Co. KG (joerg.kunze@kategory.de)                             *
+%                                                                                                  *
+% v1.7.6.5.1 Winkelzwänge is part of kategoryMathematik.                                           *
+%                                                                                                  *
+% kategoryMathematik is free software: you can redistribute it and/or modify                       *
+% it under the terms of the GNU General Public License as published by                             *
+% the Free Software Foundation, either version 3 of the License, or                                *
+% (at your option) any later version.                                                              *
+%                                                                                                  *
+% kategoryMathematik is distributed in the hope that it will be useful,                            *
+% but WITHOUT ANY WARRANTY; without even the implied warranty of                                   *
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                    *
+% GNU General Public License for more details.                                                     *
+%                                                                                                  *
+% You should have received a copy of the GNU General Public License                                *
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.                            *
+%                                                                                                  *
+%***************************************************************************************************
+
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper]{book}
+
+%-----------------------------------------------------------------------------------------------------*
+% package:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{mathabx}
+
+\usepackage{a4wide} % a little bit smaller margins
+
+\usepackage{empheq}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{sidecap}
+\usepackage{comment}
+\usepackage{tcolorbox}
+\usepackage{collect}
+
+\usepackage{upgreek}
+
+% \usepackage{diagrams}
+
+\usepackage[german]{babel}
+\usepackage[none]{hyphenat}
+\emergencystretch=4em
+
+\usepackage[utf8]{inputenc} % to be able to use äöü as characters in text
+\usepackage[T1]{fontenc} % to be able to use äöü in lables
+\usepackage{lmodern}     % to avoid pixelation introduced by fontenc
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+
+%-----------------------------------------------------------------------------------------------------*
+% theorem:                                                                                            *
+%-----------------------------------------------------------------------------------------------------*
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+
+\newcommand{\myTheorem}[1]{%
+  \newtheorem{jk#1}[theorem]{#1}
+  \newenvironment{#1}[1]{%
+    \expandafter\begin{jk#1} \expandafter\label{#1:##1}\textbf{(##1):}
+  }{%
+    \expandafter\end{jk#1}
+  }
+}
+
+\myTheorem{Definition}
+\myTheorem{Proposition}
+\myTheorem{Satz}
+\myTheorem{Theorem}
+\myTheorem{Example}
+\myTheorem{Remark}
+
+\definecollection{jkjkFrage}
+\newtheorem{jkFrage}[theorem]{Frage}
+\newenvironment{Frage}[1]{%
+  \expandafter\begin{jkFrage} \expandafter\label{Frage:#1}\textbf{(#1):}
+  \begin{collect}{jkjkFrage}{}{}
+    \item \ref{Frage:#1} #1
+  \end{collect}
+}{%
+  \expandafter\end{jkFrage}
+}
+
+\newcommand{\myRef}[2]{[#1 \ref{#1:#2}, ``#2'']}
+
+\renewcommand{\proofname}{Beweis}
+
+%-----------------------------------------------------------------------------------------------------*
+% operator:                                                                                           *
+%-----------------------------------------------------------------------------------------------------*
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Hom}{Hom}
+
+\DeclareMathOperator{\sub}{sub}
+\DeclareMathOperator{\blk}{blk}
+\DeclareMathOperator{\minimal}{minimal}
+\DeclareMathOperator{\maximal}{maximal}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\ttfamily\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single
+}
+
+\setcounter{MaxMatrixCols}{20}
+
+%******************************************************************************************************
+%                                                                                                     *
+% definition:                                                                                         *
+%                                                                                                     *
+%******************************************************************************************************
+\newcommand{\R}{\ensuremath{\mathbb{ R }}}
+\newcommand{\Q}{\ensuremath{\mathbb{ Q }}}
+\newcommand{\Z}{\ensuremath{\mathbb{ Z }}}
+\newcommand{\N}{\ensuremath{\mathbb{ N }}}
+\newcommand{\C}{\ensuremath{\mathbb{ C }}}
+\newcommand{\A}{\ensuremath{\mathbb{ A }}}
+\newcommand{\F}{\ensuremath{\mathbb{ F }}}
+\newcommand{\K}{\ensuremath{\mathbb{ K }}}
+\newcommand{\Pb}{\ensuremath{\mathbb{ P }}}
+
+\newcommand{\M}{\ensuremath{\mathcal{ M }}}
+\newcommand{\V}{\ensuremath{\mathcal{ V }}}
+
+\newcommand{\AAA}{\ensuremath{\mathcal{ A }}}
+\newcommand{\BB}{\ensuremath{\mathcal{ B }}}
+\newcommand{\CC}{\ensuremath{\mathcal{ C }}}
+\newcommand{\EE}{\ensuremath{\mathcal{ E }}}
+\newcommand{\KK}{\ensuremath{\mathcal{ K }}}
+\newcommand{\MM}{\ensuremath{\mathcal{ M }}}
+\newcommand{\PP}{\ensuremath{\mathcal{ P }}}
+\newcommand{\ZZ}{\ensuremath{\mathcal{ Z }}}
+
+\newcommand{\imporant}[1]{ \textcolor{red}{\textbf{#1}} }
+
+\newcommand{\bb}[1]{\mathbf{#1}}
+\newcommand{\balpha}{\boldsymbol{\upalpha}}
+\newcommand{\bbeta}{\boldsymbol{\upbeta}}
+\newcommand{\bgamma}{\boldsymbol{\upgamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bmu}{\boldsymbol{\upmu}}
+
+\newcommand{\z}[1]{\Z_{#1}}
+\newcommand{\e}[1]{\z{#1}^*}
+\newcommand{\q}[1]{(\e{#1})^2}
+
+\excludecomment{book}
+\excludecomment{example}
+\excludecomment{backup}
+
+\begin{document}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{titlepage}
+%                                                                                                     *
+%******************************************************************************************************
+% \vspace*{\fill}
+\centering
+{\huge
+(Mittel) Geometrie\\[1cm]
+\textbf{v1.7.6.5.1 Winkelzwänge}
+}\\[1cm]
+
+\textbf{Kategory GmbH \& Co. KG}\\
+Präsentiert von Jörg Kunze\\
+Copyright (C) 2025 Kategory GmbH \& Co. KG
+
+\end{titlepage}
+
+%\clearpage
+%\setcounter{page}{2}
+%
+%\tableofcontents
+
+\newpage
+
+%******************************************************************************************************
+%                                                                                                     *
+\section*{Beschreibung}
+%                                                                                                     *
+%******************************************************************************************************
+
+
+%******************************************************************************************************
+\subsection*{Inhalt}
+%******************************************************************************************************
+Wir wissen nun, was senkrecht heißt. Wir haben mehrere äquivalente Definitionen von senkrecht, 90 Grad.
+
+Wir nennen einen Winkel stumpf, wenn er größer, und spitz, wenn er kleiner als 90 Grad ist. Wir nennen ihn zusätzlich ultra-spitz, wenn er kleiner als 60 Grad ist.
+
+Da wir immer drei Winkel im Dreieck haben und die Summe immer 180 Grad ist gibt es eine Reihe von Zwängen, denen die Winkel eines Dreiecks unterliegen.
+
+Auf der anderen Seite, gibt es zu je 3 Zahlen größer 0, deren Summe 180 ist, Dreiecke mit diesen 3 Zahlen als Winkel.
+
+%******************************************************************************************************
+\subsection*{Präsentiert}
+%******************************************************************************************************
+Von Jörg Kunze
+
+%******************************************************************************************************
+\subsection*{Voraussetzungen}
+%******************************************************************************************************
+Punkte, Strecken, Dreiecke, Winkel, Winkelsumme im Dreieck
+
+%******************************************************************************************************
+\subsection*{Text}
+%******************************************************************************************************
+Der Begleittext als PDF und als LaTeX findet sich unter
+{\tiny
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v1%20Mittel/v1.7%20Klasse%207%20und%208/v1.7.6.5%20Winkel%20vs%20Seitenl%C3%A4nge}
+}
+
+%******************************************************************************************************
+\subsection*{Meine Videos}
+%******************************************************************************************************
+Siehe auch in den folgenden Videos:\\
+\\
+v1.7.6.0.1 (Mittel) Geometrie - Punkt, Gerade, Ebene, Kreis, Winkel\\
+\url{https://youtu.be/sM064kyF67Y}\\
+\\
+v1.7.6.2 (Mittel) Geometrie - Winkelsummen - Winkelsummen im Dreieck ist 180\\
+\url{https://youtu.be/ERo4638IY68}\\
+\\
+\\v1.7.6.3 (Mittel) Geometrie - Besondere Dreiecke
+\url{https://youtu.be/TrUNSDnTISs}
+\\
+\\v1.7.6.4.3.5 (Mittel) Geometrie - Senkrecht
+\url{https://youtu.be/3e7ScXE-qBQ}\\
+\\
+\\v1.7.6.5 (Mittel) Geometrie - Winkel vs Seitenlänge
+\url{https://youtu.be/64glnLLQMp4}
+
+%******************************************************************************************************
+\subsection*{Quellen}
+%******************************************************************************************************
+Siehe auch in den folgenden Seiten:\\
+\url{https://de.wikipedia.org/wiki/Winkel#Arten_von_Winkeln}\\
+\url{https://de.wikipedia.org/wiki/Stumpfer_Winkel}\\
+\url{https://de.wikipedia.org/wiki/Dreieck}\\
+\url{https://de.schubu.org/p305/die-winkelsumme}
+
+%******************************************************************************************************
+\subsection*{Buch}
+%******************************************************************************************************
+Grundlage ist folgendes Buch:\\
+
+"`KomplettWissen Mathematik Gymnasium Klasse 5-10"'\\
+Klett Lerntraining bei PONS\\
+978-3-12-926097-5 (ISBN)\\
+{\tiny
+   \url{https://www.lehmanns.de/shop/schulbuch-lexikon-woerterbuch/35031626-9783129260975-komplettwissen-mathematik-gymnasium-klasse-5-10
+   }
+}\\
+\\
+"`Grundlagen der ebenen Geometrie"'
+Hendrik Kasten, Denis Vogel\\
+Springer Berlin\\
+978-3-662-57620-5 (ISBN)\\
+{\tiny
+   \url{
+      https://www.lehmanns.de/shop/mathematik-informatik/43394438-9783662576205-grundlagen-der-ebenen-geometrie
+   }
+}
+
+%******************************************************************************************************
+\subsection*{Lizenz}
+%******************************************************************************************************
+Dieser Text und das Video sind freie Software. Sie können es unter den Bedingungen der 
+GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben 
+und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+Die Veröffentlichung von Text und Video erfolgt in der Hoffnung, dass es Ihnen von Nutzen sein wird, 
+aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder der 
+VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.
+
+Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben 
+(zu finden im selben Git-Projekt). 
+Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
+
+\subsection*{Das Video}
+%******************************************************************************************************
+Das Video hierzu ist zu finden unter 
+{\tiny
+   \url{upps}
+}
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{v1.7.6.5.1 Winkelzwänge}
+%                                                                                                     *
+%******************************************************************************************************
+
+%******************************************************************************************************
+\subsection{Senkrecht, spitz, stumpf}
+%******************************************************************************************************
+Ein Winkel heißt
+\begin{itemize}
+   \item stumpf, wenn er $> 90$
+   \item recht, wenn er $= 90$
+   \item spitz, wenn er $< 90$
+   \item ultra-spitz, wenn er $< 60$
+\end{itemize}
+ist. Ein ultra-spitzer Winkel ist also auch spitz. Den Begriff ultra-spitz habe ich selber erfunden und keine Alternative gefunden.
+
+%******************************************************************************************************
+\subsection{Zwänge}
+%******************************************************************************************************
+Für die 3 Winkel eines beliebigen Dreiecks gilt:
+\begin{itemize}
+   \item Jeder $< 180$
+   \item Die Summe von je zwei $< 180$
+   \item Höchstens einer $> 90$ (höchsten ein stumpfer)
+   \item Höchstens einer $= 90$ (höchsten ein rechter)
+   \item Höchstens zwei $> 60$
+   \item Höchstens zwei $< 60$ (höchsten zwei ultra-spitze)
+\end{itemize}
+
+%******************************************************************************************************
+\subsection{Zwänge im rechtwinkligen Dreieck}
+%******************************************************************************************************
+Für die 2 weiteren Winkel eines beliebigen rechtwinkligen Dreiecks gilt darüber hinaus:
+\begin{itemize}
+   \item Jeder $< 90$ (keine stumpfen)
+   \item Kein $= 90$ (nur ein rechter)
+   \item Höchstens ein $> 45$
+   \item Höchstens ein $< 45$ 
+\end{itemize}
+
+%******************************************************************************************************
+\subsection{Winkel berechnen}
+%******************************************************************************************************
+Wenn zwei Winkel bekannt sind, können wir den dritten berechnen. 
+\begin{equation}\label{berechnen}
+   w_3 = 180 - (w_1+w_2).
+\end{equation}
+
+Im rechtwinkligen können wir, wenn einer bekannt ist, den anderen berechnen, denn die Summe der beiden weiteren Winkel muss 90 sein.
+\begin{equation}\label{berechnenRecht}
+   w_2 = 90 - w_1.
+\end{equation}
+
+%******************************************************************************************************
+\subsection{Konstruktion}
+%******************************************************************************************************
+Wenn die Summe von 3 Zahlen, die größer als 0 sind, 180 ergibt, gibt es auch ein Dreieck mit diesen Zahlen als Winkel. Beweis über ein Diagramm mit Parallelen. 
+
+%******************************************************************************************************
+%                                                                                                     *
+\section{TODO:}
+%                                                                                                     *
+%******************************************************************************************************
+\begin{backup}
+    (Zur Zeit nicht benötigter Inhalt)
+\end{backup}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{thebibliography}{9}
+%                                                                                                     *
+%******************************************************************************************************
+
+   \bibitem[Klett2016]{Klett}
+      Klett Lerntraining, \emph{Komplett Wissen Mathematik Gymnasium 5-10},
+      Klett Lerntraining, 978-3-12-926097-5 (ISBN)
+      
+   \bibitem[KastenVogel2018]{Kasten}
+       Hendrik Kasten, Denis Vogel , \emph{Grundlagen der ebenen Geometrie},
+      2018 Springer Berlin, 978-3-662-57620-5 (ISBN)
+
+\end{thebibliography}
+
+%******************************************************************************************************
+%                                                                                                     *
+\begin{large}
+    \centerline{\textsc{Symbolverzeichnis}}
+\end{large}
+%                                                                                                     *
+%******************************************************************************************************
+\bigskip
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{tabular}{ll}
+    $\vec a,\vec b, \vec c, \cdots$               &Seiten\\
+    $a_x,a_y$                   &Koordinatenversätze der Seite $a$\\
+    $|a|$                       &Länge der Seite $a$\\
+    $m$                         &Steigung der Gerade\\
+    $q$                         &Achsenabschnitt der Gerade\\
+    $x, y$                      &Koordinatenachsen\\
+    $A, B, C, \cdots$          &Punkte\\
+    $A_x, A_y$                 &Koordinaten des Punktes $A$\\
+    $\overrightarrow{AB}$      &gerichtete Strecke von $A$ nach $B$\\
+    $\perp$                    &Senkrecht
+\end{tabular}
+
+\end{document}
