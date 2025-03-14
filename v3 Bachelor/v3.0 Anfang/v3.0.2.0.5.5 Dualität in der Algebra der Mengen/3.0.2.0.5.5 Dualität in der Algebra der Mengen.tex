@@ -231,7 +231,15 @@ Copyright (C) 2025 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 
 \subsection*{Inhalt}
-Das Axi
+Wenn wir uns in der Mengenlehre auf ein "`Universum"' beschränken und damit der Komplement-Operator aus einer Menge wieder eine Menge macht, erhalten eine Selbst-Dualität.
+
+Das Universum ist hier ganz locker als irgendeine Menge zu sehen, ohne dass wir besondere Abgeschlossenheitseigenschaften fordern würden.
+
+Der Komplement-Operator wird dann relativ zu dieser Menge definiert: das Komplement einer Teilmenge des Universums ist dann die Menge aller Elemente aus dem Universum, die nicht in der Ausgangsmenge drinne sind.
+
+Dann sind die leere Menge und das Universum sowie Vereinigung und Schnitt dual zueinander: drehen wir in einer gültigen Formel alles um, erhalten wir erneut eine gültige Formel: Formelfabrik.
+
+Da wir hier Aussagen über Formeln machen, statt über mathematische Objekte, betreiben wir dabei in Wirklichkeit Meta-Mathematik.
 
 \subsection*{Präsentiert}
 Von Jörg Kunze
@@ -242,7 +250,7 @@ Mengen, Vereinigung, Schnitt, Funktion, Familie, Indexschreibweise.
 \subsection*{Text}
 Der Begleittext als PDF und als LaTeX findet sich unter
 {\tiny
-   \url{https://github.com/kategory/kategoryMathematik/tree/main/v3%20Bachelor/v3.0%20Anfang/v3.0.2.0.5%20Relationen%20und%20Funktionen%20-%20Schnitt%2C%20Vereinigung}
+   \url{https://github.com/kategory/kategoryMathematik/tree/main/v3%20Bachelor/v3.0%20Anfang/v3.0.2.0.5.5%20Dualit%C3%A4t%20in%20der%20Algebra%20der%20Mengen}
 }
 
 \subsection*{Meine Videos}
@@ -253,16 +261,11 @@ v3.0.1.2.3 (Bachelor) Die Axiome - Klassen Lehre\\
 \\
 v3.0.1.2.5 (Bachelor) Die Axiome - Mengen konstruieren\\
 \url{https://youtu.be/LkWDcR5EHp4}\\
-\\
-v3.0.2.0.4 (Bachelor) Relationen und Funktionen - Familie, Index, Tupel\\
-\url{https://youtu.be/4itUFcN2Mak}
 
 \subsection*{Quellen}
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Familie_(Mathematik)}\\
-\url{https://de.wikipedia.org/wiki/Indexmenge_(Mathematik)}\\
-\url{https://de.wikipedia.org/wiki/Mengenlehre#Schnittmenge}\\
-\url{https://de.wikipedia.org/wiki/Mengenlehre#Vereinigungsmenge}
+\url{https://de.wikipedia.org/wiki/Dualit%C3%A4t_(Verbandstheorie)}\\
+\url{https://de.wikipedia.org/wiki/Mengenlehre}
 
 \subsection*{Buch}
 Grundlage ist folgendes Buch:\\
@@ -302,10 +305,134 @@ Das Video hierzu ist zu finden unter
 %******************************************************************************************************
 
 %******************************************************************************************************
-\subsection{Menge}
+\subsection{Universum}
 %******************************************************************************************************
-Eine Menge v
+Hier arbeiten wir mit einem sehr einfachen (billigen) Universum $U$. Wir betrachten alle Teilmengen von $U$ also die Potenzmenge $\PP(U)$. Wir verlangen für diesen Abschnitt keinerlei zusätzliche Abgeschlossenheitseigenschaften. So muss $U$ \zb nicht notwendig abgeschlossen gegenüber Produktbildungen $X \times Y$ sein.
+
+Ab jetzt und bis zum Ende von Sektion "`3.0.2.0.5.5 Dualität in der Algebra der Mengen"' sei eine Menge $U$ beliebig und fest vorgegeben.
  
+%******************************************************************************************************
+\subsection{Komplement}
+%******************************************************************************************************
+\begin{Definition}{Komplement}
+   Wenn $T$ eine Klasse ist, dann ist deren \textbf{Komplement} definiert als folgende Klasse:
+   \begin{equation}\label{KomplementFormel}
+      T^c := \{ x \mid x \notin T \}.
+   \end{equation}
+   $ T^c $ ist in der Regel keine Menge, auch dann nicht wenn $T$ eine ist.
+\end{Definition}
+
+\begin{Definition}{relatives Komplement}
+   Wenn $A$ eine Teilmenge von $U$ ist, dann ist deren \textbf{relatives Komplement} definiert als folgende Teilmenge von $U$:
+   \begin{equation}\label{KomplementRelativFormel}
+      \overline{A} := \{ x \in U \mid x \notin A \}.
+   \end{equation}
+   $ \overline{A} $ ist nach dem Aussonderungsaxiom eine Menge.
+\end{Definition}
+
+Es gilt klarerweise: $ \overline{A} $ ist Teilmenge von $U$ und ist damit selber in unserem Universum.
+\begin{equation}
+   \overline{A} \subseteq U.
+\end{equation}
+
+Eigentlich müssten wir in der Schreibweise $ \overline{A} $ noch das $U$ irgendwo unterbringen. Das macht aber alle Formeln blöde unübersichtlich und da $U$ fest ist, verzichten wir darauf.
+
+Die Schreibweisen $\overline{A}, A^c$ werden beide mal für das Komplement und mal für das relative Komplement verwendet. Die hier getroffene Festlegung ist keinesfalls universell.
+
+Es gilt:
+\begin{equation}\label{Alles}
+   A \cup \overline{A} = U.
+\end{equation}
+
+Eine für das Folgende wichtige Erkenntnis ist
+\begin{equation}\label{ALle}
+   \{\overline A \mid A \subseteq U \} = \{A \mid A \subseteq U \}
+\end{equation}
+oder umgangssprachlich: Wenn die Variable $A$ über alle Teilmengen von $U$ "`läuft"', dann läuft auch der Ausdruck $\overline A$ über alle Teilmengen von $U$. Die Menge in \ref{ALle} ist natürlich nichts  anderes als $\PP( U )$. 
+
+%******************************************************************************************************
+\subsection{Duale Ausdrücke}
+%******************************************************************************************************
+Es gilt:
+\begin{alignat}{5}
+   &\overline{ \overline{A} } &&= A\\
+   &\overline{ \emptyset    } &&= U\\
+   &\overline{ U            } &&= \emptyset\\
+   &\overline{ A \cup B     } &&= \overline A \cap \overline B\\
+   &\overline{ A \cap B     } &&= \overline A \cup \overline B
+\end{alignat}
+sowie
+\begin{equation}\label{dualSubset}
+   A \subseteq B \Rightarrow \overline B \subseteq \overline A.
+\end{equation}
+
+Die Beweise sind einfach. Als Beispiel nehmen wir $\overline{ A \cap B     } = \overline A \cup \overline B$:
+\begin{alignat}{5}
+   &\overline{ A \cap B     }\\
+   &&&= \{x \in U \mid x \notin A \cap B \} \\
+   &&&= \{x \in U \mid \lnot (x \in A \cap B) \} \\
+   &&&= \{x \in U \mid \lnot (x \in A \land x \in B) \} \\
+   &&&= \{x \in U \mid (\lnot x \in A) \lor (\lnot x \in B) \} \\
+   &&&= \{x \in U \mid (x \notin A) \lor ( x \notin B) \} \\
+   &&&= \{x \in U \mid x \notin A \} \cup \{x \in U \mid   x \notin B \} \\
+   &&&= \overline A \cup \overline  B
+\end{alignat}
+
+Wir sehen in diesem Beweis schön eine Korrespondenz zwischen mengentheoretischen und logischen Ausdrücken, eine Korrespondenz, die ein eigenes Video verdient hat.
+
+%******************************************************************************************************
+\subsection{Formelfabrik}
+%******************************************************************************************************
+Die obigen Umformungen lassen sich auch rekursiv auf komplexere Ausdrücke anwenden. Haben wir dann Formeln der Art 
+\begin{alignat}{5}
+   &\Phi( A,B,C, ...) &&=         &&\, \Psi( A, B, C, ... ) \text{ oder }\\
+   &\Phi( A,B,C, ...) &&\subseteq &&\, \Psi( A, B, C, ... ),
+\end{alignat}
+so gelten auch die Formeln
+\begin{alignat}{5}
+   &\overline\Phi( \overline A,\overline B,\overline C, ...) &&=         &&\, \overline \Psi( \overline A, \overline B, \overline C, ... ) \text{ oder }\\
+   &\overline\Psi( \overline A,\overline B,\overline C, ...) &&\subseteq &&\, \overline \Phi( \overline A, \overline B, \overline C, ... ).
+\end{alignat}
+
+$\overline\Phi$ entsteht durch die Transformation
+\begin{alignat}{5}
+   &\emptyset &&\rightarrow U\\
+   &U         &&\rightarrow \emptyset\\
+   &\cap      &&\rightarrow \cup\\
+   &\cup      &&\rightarrow \cap
+\end{alignat}
+
+Gilt \zb für drei bestimmte Mengen $A \subseteq (B \cap \overline  C)$ so gilt automatisch auch $(\overline B \cap C)  \subseteq \overline A$.
+
+%******************************************************************************************************
+\subsection{Allgemeingültige Formeln}
+%******************************************************************************************************
+Wir betrachten nun Formeln, die für alle Mengen gelten, also allgemeingültige Formeln. Wie \zb
+\begin{equation}\label{Dist}
+   A \cap (B \cup C) = (A \cap B) \cup (A \cap C).
+\end{equation}
+Hier ist ja eigentlich gemeint
+\begin{equation}\label{DistForall}
+   \forall A, B, C  \in U \colon A \cap (B \cup C) = (A \cap B) \cup (A \cap C).
+\end{equation}
+Wenn wir das Dual bilden
+\begin{equation}\label{DistDual}
+   \overline A \cup (\overline B \cap \overline C) = (\overline A \cup \overline B) \cap (\overline A \cup \overline C),
+\end{equation}
+so "`laufen"' $\overline A, \overline B, \overline C$ wieder über alle Teilmengen von $U$ und es gilt somit
+\begin{equation}\label{Distcup}
+   A \cup (B \cap C) = (A \cup B) \cap (A \cup C),
+\end{equation}
+
+Bei allgemeingültigen Formeln können wir uns bei der Dualisierung also auf $\cap, \cup, \subseteq, \emptyset$ und $U$ beschränken, die Variablen können wir unberührt lassen.
+
+%******************************************************************************************************
+\subsection{Meta-Mathematik}
+%******************************************************************************************************
+Bei der Formelfabrik arbeiten wir nicht mit Mengen sondern mit Formeln, also Zeichenketten. Der Satz "`allgemeingültige mengentheoretische Aussagen bleiben bei Dualisierung wahr"' ist eine Satz über Sätze. Irgendwie wenden wir hier mathematische Methoden auf unser Geschriebenes an.
+
+Das liegt alles außerhalb von ZFC und ist damit Meta-Mathematik. Diese präzise innerhalb von ZFC zu formulieren ist Aufgabe der mathematischen Logik. 
+
 \begin{backup}
 %******************************************************************************************************
 %                                                                                                     *
