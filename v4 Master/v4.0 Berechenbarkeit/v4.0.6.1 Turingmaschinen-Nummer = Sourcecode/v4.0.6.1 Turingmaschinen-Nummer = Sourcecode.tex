@@ -231,9 +231,19 @@ Copyright (C) 2024 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 
 \subsection*{Inhalt}
-Berechenbare Mengenlehre (ein Begriff von mir) ist die übliche einfache Mengenlehre beschränkt auf die Menge der berechenbaren Mengen.
+Da Turing-Maschinen endliche Tupel von endliche  Mengen sind, können sie als Zahl codiert werden, und das so, dass aus der Zahl die Turing-Maschine wieder eindeutig rekonstruiert werden kann. Diese Turing-Maschinen-Nummer (descriptor number) ist wie der Sourcecode eines Programms. Der Sourcecode ist ein String (Zeichen-Kette), der das Programm repräsentiert.
 
+Aus der Nummer / dem Sourcecode kann die Turing-Maschine / das Programm eindeutig rekonstruiert werden. 
 
+Ob eine Zahl / ein String die Nummer / der Sourcecode einer Turing-Maschine / eines Programms ist, ist entscheidbar.
+
+Mit diesem Werkzeug können wir nun Turing-Maschinen und Programme rekursiv aufzählen.
+
+Der Datentyp der Nummer / des Sourcecodes ist mit Bedacht so gewählt, dass es der Datentyp der Ein- und Ausgabe-Parameter unserer Turing-Maschinen / Programme ist.
+
+Damit können wir nun Turing-Maschinen / Programme mit Hilfe von Turing-Maschinen / Programmen bearbeiten.
+
+Wir können nun (und erst jetzt) die Frage stellen: Ist das Prädikat "`die Maschine x hält bei Inout y"' entscheidbar?
 
 \subsection*{Präsentiert}
 Von Jörg Kunze
