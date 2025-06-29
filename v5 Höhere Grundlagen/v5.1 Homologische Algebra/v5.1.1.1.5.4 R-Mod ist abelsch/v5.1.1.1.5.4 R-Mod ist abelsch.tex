@@ -237,13 +237,15 @@ Copyright (C) 2025 Kategory GmbH \& Co. KG
 %******************************************************************************************************
 
 \subsection*{Inhalt}
-Wir können bei $R$-Modulen den Kern und den Kokern ganz "`normal"' wie bei Gruppen und Vektorräumen 
+Damit sich uns die Kategorie der $R$-Moduln als abelsch erweist, müssen wir noch das Axiom AK6 zeigen: Die Kategorie ist normal. D.h. alle Epi's und alle Mono's sind normal. D.h. jeder Epi ist ein Kokern und jeder Mono ist ein Kern.
 
-\subsection*{Text}
-Der Begleittext als PDF und als LaTeX findet sich unter
-{\tiny
-   \url{}
-}
+Umgekehrt gilt das übrigens immer: jeder Kern ist Mono und jeder Kokern Epi.
+
+Zum Beweis nutzen wir die in $R$-Mod vorhandene $(E,M)$-Faktorisierung (Epi-Mono-Faktorisierung): Jeder Morphismus $f$ lässt sich als $f = me$ schreiben. Bei $R$-Mod ist das Objekt zwischen $e$ und $m$ genau das Bild des Homomorphismuses.
+
+Für dieses Bild gilt: Bild = Ker Koker = Koker Ker.
+
+Damit beweisen wir schließlich das jeder Mono und jeder Epi normal ist.
 
 \subsection*{Meine Videos}
 Siehe auch in den folgenden Videos:\\
@@ -251,15 +253,23 @@ Siehe auch in den folgenden Videos:\\
 v5.0.1.6.1.2 (Höher) Kategorien - Abelsche - Kern, Kokern\\
 \url{https://youtu.be/Oet-arXLeOg}\\
 \\
+v5.1.1.1.4 (Höher) Homologische Algebra - Unter-Moduln\\
+\url{https://youtu.be/4g2TgQx7JkI}\\
+\\
+v5.1.1.1.4.5 (Höher) Homologische Algebra - Quotienten-Moduln\\
+\url{https://youtu.be/IomDICJyHdI}\\
+\\
 v5.1.1.1.5 (Höher) Homologische Algebra - R-Mod ist additiv\\
 \url{https://youtu.be/aASaOqcjPgQ}\\
 
 \subsection*{Quellen}
 Siehe auch in den folgenden Seiten:\\
-\url{https://de.wikipedia.org/wiki/Kern_(Algebra)}\\
-\url{https://de.wikipedia.org/wiki/Differenzkern}\\
-\url{https://de.wikipedia.org/wiki/Differenzkokern}\\
-\url{https://de.wikipedia.org/wiki/Modulhomomorphismus}
+\url{https://de.wikipedia.org/wiki/Abelsche_Kategorie}\\
+\url{https://en.wikipedia.org/wiki/Abelian_category}\\
+\url{https://en.wikipedia.org/wiki/Normal_morphism}\\
+\url{https://en.wikipedia.org/wiki/Category_of_modules}\\
+\url{}\\
+\url{}\\
 
 \subsection*{Buch}
 Grundlage ist folgendes Buch:\\
@@ -301,14 +311,6 @@ VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU Genera
 Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Text erhalten haben
 (zu finden im selben Git-Projekt).
 Falls nicht, siehe \url{http://www.gnu.org/licenses/}.
-
-%******************************************************************************************************
-\subsection*{Das Video}
-%******************************************************************************************************
-Das Video hierzu ist zu finden unter
-{\tiny
-   \url{uups}
-}
 
 %******************************************************************************************************
 %                                                                                                     *
